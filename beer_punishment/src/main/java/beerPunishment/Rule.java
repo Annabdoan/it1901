@@ -1,4 +1,4 @@
-package main.java.beerPunishment;
+package beerPunishment;
 
 public class Rule {
 
@@ -20,7 +20,7 @@ public class Rule {
         return punishmentValue;
     }
 
-    @overide
+
     public String toString() {
         return "[description=" + description + ", punishmentValue=" + punishmentValue + "]";
     }

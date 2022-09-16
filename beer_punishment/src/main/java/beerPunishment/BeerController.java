@@ -12,7 +12,7 @@ import javafx.scene.control.ListView;
 
 public class BeerController {
 
-    private BeerLogic beerLogic;
+    private BeerMain beermain;
 
    // public BeerController() {
      //   BeerLogic = new BeerLogic(0.0, 0.0, 0.0);

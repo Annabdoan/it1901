@@ -1,4 +1,4 @@
-package main.java.beerPunishment;
+package beerPunishment;
 
 import java.io.File;
 import java.io.FileNotFoundException;

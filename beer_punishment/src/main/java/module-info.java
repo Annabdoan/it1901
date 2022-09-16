@@ -1,6 +1,6 @@
-module app {
+module beerPunishment {
     requires javafx.controls;
     requires javafx.fxml;
 
-    opens app to javafx.graphics, javafx.fxml;
+    opens beerPunishment to javafx.graphics, javafx.fxml;
 }

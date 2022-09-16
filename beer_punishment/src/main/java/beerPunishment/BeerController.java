@@ -14,9 +14,9 @@ public class BeerController {
 
     private BeerLogic beerLogic;
 
-    public BeerController() {
-        BeerLogic = new BeerLogic(0.0, 0.0, 0.0);
-    }
+   // public BeerController() {
+     //   BeerLogic = new BeerLogic(0.0, 0.0, 0.0);
+   // }
 
 
 }

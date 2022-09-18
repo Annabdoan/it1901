@@ -13,15 +13,16 @@ import java.io.IOException;
  */
 public class BeerApp extends Application {
 
+
+
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Beer.fxml"));
-        Parent parent = fxmlLoader.load();
-        stage.setScene(new Scene(parent));
-        stage.show();
+    public void start(final Stage primaryStage) throws Exception {
+        primaryStage.setTitle("Ølstraff");
+        primaryStage.setScene(new Scene(FXMLLoader.load(BeerApp.class.getResource("Beer.fxml"))));
+        primaryStage.show();
     }
 
     public static void main(String[] args) {
-        launch();
+        BeerApp.launch(args);
     }
 }

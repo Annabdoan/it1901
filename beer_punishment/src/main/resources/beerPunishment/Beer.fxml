@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane fx:id="Anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="Anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="beerPunishment.BeerController">
    <children>
       <GridPane fx:id="Grid" layoutX="1.0" prefHeight="400.0" prefWidth="600.0">
         <columnConstraints>
@@ -27,7 +27,7 @@
                   <Font name="Arial Bold" size="30.0" />
                </font>
             </Text>
-            <ListView fx:id="RuleView" prefHeight="214.0" prefWidth="300.0" GridPane.rowIndex="2" />
+            <ListView fx:id="ruleView" prefHeight="214.0" prefWidth="300.0" GridPane.rowIndex="2" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gjeldende Regler " textAlignment="CENTER" wrappingWidth="300.21630859375" GridPane.rowIndex="1">
                <font>
                   <Font name="Arial" size="20.0" />

@@ -15,6 +15,7 @@ public class FileHandler {
 
         List<Rule> rules = new ArrayList<>();
 
+
         try(Scanner scanner = new Scanner(getFile(filename))) {
             while (scanner.hasNextLine()){
                 try {

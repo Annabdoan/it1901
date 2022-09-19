@@ -20,7 +20,7 @@ public class BeerMainTest {
    @BeforeEach
    public void setUp() {
        beermain = new BeerMain();
-       rule = new Rule("Kommergit sent", 1);
+       rule = new Rule("Kommer sent", 1);
    }
 
     @Test

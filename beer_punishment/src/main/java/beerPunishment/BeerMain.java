@@ -13,4 +13,8 @@ public class BeerMain {
     public List<Rule> getRules() {
         return new ArrayList<>(this.rules);
     }
+
+    public void addRule(Rule rule) {
+        this.rules.add(rule);
+    }
 }

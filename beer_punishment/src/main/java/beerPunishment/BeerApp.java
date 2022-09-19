@@ -18,11 +18,11 @@ public class BeerApp extends Application {
     @Override
     public void start(final Stage primaryStage) throws Exception {
         primaryStage.setTitle("Ølstraff");
-        primaryStage.setScene(new Scene(FXMLLoader.load(BeerApp.class.getResource("Beer.fxml"))));
+        primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("Beer.fxml"))));
         primaryStage.show();
     }
 
     public static void main(String[] args) {
-        BeerApp.launch(args);
+        launch(args);
     }
 }

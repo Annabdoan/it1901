@@ -18,3 +18,6 @@ Selve kodingsprosjektet ligger i mappen beer_punishment.
 
 # Testing 
 Testfilene til prosjektet kan finnes i mappen test på samme nivå som main. I tillegg til testefilene har vi implementert Jacoco for å visualisere testdekningsgraden vår. Jacoco kan kjøres ved å bruke kommandoen "mvn verify".  Deretter kan v man isualisere dette ved å laste ned filen index.html som ligger under target/site/jacoco.  
+
+# Bilde av tenkt UI
+![alt text](./beer_punishment/UI.jpg)

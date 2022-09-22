@@ -17,4 +17,4 @@ Til delinnlevering 1 velger vi å kun implementere oversikt over gjeldende regle
 Selve kodingsprosjektet ligger i mappen beer_punishment.
 
 # Testing 
-Testfilene til prosjektet kan finnes i mappen test på samme nivå som main. I tillegg til testefilene har vi implementert Jacoco for å visualisere testdekningsgraden vår. Dette kan visualiseres ved å laste ned filen index.html som ligger under target/site/jacoco.  
+Testfilene til prosjektet kan finnes i mappen test på samme nivå som main. I tillegg til testefilene har vi implementert Jacoco for å visualisere testdekningsgraden vår. Jacoco kan kjøres ved å bruke kommandoen "mvn verify".  Deretter kan v man isualisere dette ved å laste ned filen index.html som ligger under target/site/jacoco.  

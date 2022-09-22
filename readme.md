@@ -1,7 +1,23 @@
-# Group gr2231 repository 
- 
-Welcome to IT1901 Fall 2022 course 
- 
-Good luck! 
+# Group gr2231 repository
 
-"En README.md-fil på rotnivå i kodelageret skal beskrive innholdet, spesielt hvilken mappe inni kodelageret som utgjør kodingsprosjektet."
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2022/gr2231/gr2231)
+
+Dette prosjektet er besvarelsen til gruppe 31 i faget ITP1901.
+
+# Beskrivelse av innhold
+Appen vår er et øl-straffesystem for grupper. <br />
+Appen skal implementere følgende funksjoner: 
+* Oversikt over gjeldende regler. 
+* Mulighet for å lage en ny regel. 
+* Oversikt over gruppemedlemers regelbrudd.  
+
+<br />
+Til delinnlevering 1 velger vi å kun implementere oversikt over gjeldende regler. 
+<br />
+Selve kodingsprosjektet ligger i mappen beer_punishment.
+
+# Testing 
+Testfilene til prosjektet kan finnes i mappen test på samme nivå som main. I tillegg til testefilene har vi implementert Jacoco for å visualisere testdekningsgraden vår. Jacoco kan kjøres ved å bruke kommandoen "mvn verify".  Deretter kan v man isualisere dette ved å laste ned filen index.html som ligger under target/site/jacoco.  
+
+# Bilde av tenkt UI
+![alt text](./beer_punishment/UI.jpg)

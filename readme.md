@@ -14,4 +14,7 @@ Appen skal implementere følgende funksjoner:
 <br />
 Til delinnlevering 1 velger vi å kun implementere oversikt over gjeldende regler. 
 <br />
-Selve kodingsprosjektet ligger i mappen beer_punishment. 
+Selve kodingsprosjektet ligger i mappen beer_punishment.
+
+# Testing 
+Testfilene til prosjektet kan finnes i mappen test på samme nivå som main. I tillegg til testefilene har vi implementert Jacoco for å visualisere testdekningsgraden vår. Dette kan visualiseres ved å laste ned filen index.html som ligger under target/site/jacoco.  

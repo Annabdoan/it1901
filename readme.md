@@ -2,8 +2,16 @@
 
 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2022/gr2231/gr2231)
 
-Welcome to IT1901 Fall 2022 course 
- 
-Good luck! 
+Dette prosjektet er besvarelsen til gruppe 31 i faget ITP1901.
 
-"En README.md-fil på rotnivå i kodelageret skal beskrive innholdet, spesielt hvilken mappe inni kodelageret som utgjør kodingsprosjektet."
+# Beskrivelse av innhold
+Appen vår er et øl-straffesystem for grupper. <br />
+Appen skal implementere følgende funksjoner: 
+* Oversikt over gjeldende regler. 
+* Mulighet for å lage en ny regel. 
+* Oversikt over gruppemedlemers regelbrudd.  
+
+<br />
+Til delinnlevering 1 velger vi å kun implementere oversikt over gjeldende regler. 
+<br />
+Selve kodingsprosjektet ligger i mappen beer_punishment. 

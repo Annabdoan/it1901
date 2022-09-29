@@ -1,4 +1,6 @@
-package beerPunishment;
+package beerPunishment.json;
+
+import beerPunishment.core.Rule;
 
 import java.io.File;
 import java.io.FileNotFoundException;

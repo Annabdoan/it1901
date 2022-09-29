@@ -1,4 +1,4 @@
-package beerPunishment;
+package beerPunishment.core;
 
 public class Rule {
 

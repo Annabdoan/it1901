@@ -1,7 +1,11 @@
-package beerPunishment;
+package beerPunishment.ui;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import beerPunishment.json.FileHandler;
+import beerPunishment.core.BeerMain;
+import beerPunishment.core.Rule;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 

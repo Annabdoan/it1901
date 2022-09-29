@@ -1,4 +1,4 @@
-package beerPunishment;
+package beerPunishment.ui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

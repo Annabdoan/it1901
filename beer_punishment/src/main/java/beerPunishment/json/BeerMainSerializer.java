@@ -9,11 +9,6 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
-import beerPunishment.core.Rule;
-import beerPunishment.core.BeerMain;
-import beerPunishment.core.Rule;
-
-
 public class BeerMainSerializer extends JsonSerializer<BeerMain>{
     /*
     format:

@@ -14,7 +14,7 @@ import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
 
 
-public class BeerMainSerializer extends JsonSerializer <BeerMain>{
+public class BeerMainSerializer extends JsonSerializer<BeerMain>{
     /*
     format:
     {
@@ -22,8 +22,8 @@ public class BeerMainSerializer extends JsonSerializer <BeerMain>{
     }
      */
 
-    @java.lang.Override
-    public void serialize(Beermain list, JsonGenerator jGen, SerializerProvider serializerProvider) throws IOException {
+    @Override
+    public void serialize(BeerMain list, JsonGenerator jGen, SerializerProvider serializerProvider) throws IOException {
         jGen.writeStartObject(); //generate the start
         jGen.writeArrayFieldStart("items");
         for (Rule rule : list) {

@@ -1,6 +1,7 @@
 package beerPunishment.json;
 
 import beerPunishment.core.Rule;
+import beerPunishment.core.BeerMain;
 
 import java.io.IOException;
 
@@ -10,23 +11,27 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import beerPunishment.core.Rule;
 import beerPunishment.core.BeerMain;
+import beerPunishment.core.Rule;
 
 
-public class BeerMainSerializer extends JsonSerializer <Rule>{
+public class BeerMainSerializer extends JsonSerializer <BeerMain>{
     /*
     format:
     {
         "items": [ ... ],
     }
      */
-    public void serialize(BeerMain list, JsonGenerator jGen, SerializerProvider serializerProvider) throws IOException {
+
+    @java.lang.Override
+    public void serialize(Beermain list, JsonGenerator jGen, SerializerProvider serializerProvider) throws IOException {
         jGen.writeStartObject(); //generate the start
         jGen.writeArrayFieldStart("items");
         for (Rule rule : list) {
-
+            jGen.writeObject(rule);
         }
-        jGen.writeStringField("rule", rule.getDescription());
-        jGen.writeIntegerField("value", rule.getPunishmentValue()); //dobbeltsjekk om integer
+        jGen.writeEndArray();
         jGen.writeEndObject(); //gir sluttkurven
     }
+
+
 }

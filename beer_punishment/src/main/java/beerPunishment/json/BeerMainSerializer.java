@@ -34,4 +34,5 @@ public class BeerMainSerializer extends JsonSerializer<BeerMain>{
     }
 
 
+
 }

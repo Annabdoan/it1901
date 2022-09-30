@@ -19,7 +19,7 @@ public class RuleSerializer extends JsonSerializer <Rule>{
     public void serialize(Rule rule, JsonGenerator jGen, SerializerProvider serializerProvider) throws IOException{
         jGen.writeStartObject(); //generate the start
         jGen.writeStringField("rule", rule.getDescription());
-        jGen.writeIntegerField("value", rule.getPunishmentValue()); //dobbeltsjekk om integer
+        jGen.writeNumberField("value", rule.getPunishmentValue()); //dobbeltsjekk om integer
         jGen.writeEndObject(); //gir sluttkurven
     }
 }

@@ -7,7 +7,9 @@ import beerPunishment.json.FileHandler;
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 
 public class BeerController {
 
@@ -17,6 +19,8 @@ public class BeerController {
 
     @FXML
     private ListView<String> ruleView;
+    public TextField newRuleTextInput;
+    public Button newRuleButton;
 
 
     @FXML
@@ -33,6 +37,11 @@ public class BeerController {
         } catch (Exception e) {
             throw new IllegalArgumentException("Invalid filename");
         }
+
+    }
+
+    @FXML
+    public void makeNewRule() {
 
     }
 }

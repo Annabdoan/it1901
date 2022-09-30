@@ -13,15 +13,18 @@ public class Rule {
 
 
     public String getDescription() {
+
         return description;
     }
 
     public int getPunishmentValue() {
+
         return punishmentValue;
     }
 
 
     public String toString() {
+
         return description + "\t\t\t" + punishmentValue ;
     }
 }

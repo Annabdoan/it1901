@@ -1,9 +1,11 @@
 package beerPunishment.core;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
-public class BeerMain {
+public class BeerMain implements Iterable<Rule>{
     
     private List<Rule> rules = new ArrayList<>();
 
@@ -17,4 +19,15 @@ public class BeerMain {
     public void addRule(Rule rule) {
         this.rules.add(rule);
     }
+
+    public void removeRule(Rule rule) {
+        this.rules.remove(rule);
+    }
+
+    @Override
+    public Iterator<Rule> iterator() {
+        return rules.iterator();
+    }
+
+
 }

@@ -9,25 +9,24 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
+//making the list of rule objects to json
 public class BeerMainSerializer extends JsonSerializer<BeerMain>{
     /*
     format:
     {
-        "items": [ ... ],
+        "rules": [ ... ],
     }
      */
 
     @Override
     public void serialize(BeerMain list, JsonGenerator jGen, SerializerProvider serializerProvider) throws IOException {
         jGen.writeStartObject(); //generate the start
-        jGen.writeArrayFieldStart("items");
+        jGen.writeArrayFieldStart("rules");
         for (Rule rule : list) {
             jGen.writeObject(rule);
         }
         jGen.writeEndArray();
         jGen.writeEndObject(); //gir sluttkurven
     }
-
-
 
 }

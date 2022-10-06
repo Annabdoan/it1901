@@ -11,6 +11,18 @@ public class Rule {
         this.punishmentValue = punishmentValue;
     }
 
+    public Rule(){
+
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPunishmentValue(int value) {
+        this.punishmentValue = value;
+    }
+
 
     public String getDescription() {
 
@@ -24,7 +36,7 @@ public class Rule {
 
 
     public String toString() {
-
-        return description + "\t\t\t" + punishmentValue ;
+        return String.format("[Rule rule=%s value=%s]", getDescription(), getPunishmentValue());
+        //return description + "\t\t\t" + punishmentValue ;
     }
 }

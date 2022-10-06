@@ -16,10 +16,12 @@ public class RuleSerializer extends JsonSerializer <Rule>{
         "value": int
     }
      */
+
+    //help us serialize rules
     public void serialize(Rule rule, JsonGenerator jGen, SerializerProvider serializerProvider) throws IOException{
-        jGen.writeStartObject(); //generate the start
+        jGen.writeStartObject(); //generate the start of the json object
         jGen.writeStringField("rule", rule.getDescription());
-        jGen.writeNumberField("value", rule.getPunishmentValue()); //dobbeltsjekk om integer
+        jGen.writeNumberField("value", rule.getPunishmentValue());
         jGen.writeEndObject(); //gir sluttkurven
     }
 }

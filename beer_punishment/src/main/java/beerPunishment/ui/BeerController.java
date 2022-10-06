@@ -1,5 +1,6 @@
 package beerPunishment.ui;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+
 
 public class BeerController {
 
@@ -22,11 +26,8 @@ public class BeerController {
     public TextField newRuleTextInput;
     public Button newRuleButton;
 
-
     @FXML
-    public void initialize() {
-        beermain = new BeerMain();
-        filehandler = new FileHandler();
+    private void updateListView() {
         List<String> rulestostring = new ArrayList<>();
         try {
             List<Rule> rules = filehandler.readRules(filename);
@@ -35,13 +36,37 @@ public class BeerController {
             }
             ruleView.getItems().setAll(rulestostring);
         } catch (Exception e) {
-            throw new IllegalArgumentException("Invalid filename");
+            showErrorMessage("Feil format på regel. Regel;antall øl");
         }
+    }
+    @FXML
+    private void showErrorMessage(String errorMessage) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("An error has occured");
+        alert.setContentText(errorMessage);
+        alert.showAndWait();
+    }
 
+    @FXML
+    public void initialize() {
+        beermain = new BeerMain();
+        filehandler = new FileHandler();
+        updateListView();
     }
 
     @FXML
     public void makeNewRule() {
+        try {
+            //Split the string in the text input in order to add a new rule.
+            String[] arrOfNewRuleTextInput = newRuleTextInput.getText().split(";");
+            Rule rule = new Rule(arrOfNewRuleTextInput[0], Integer.valueOf(arrOfNewRuleTextInput[1]));
+            filehandler.writeRule(filename,rule);
+            updateListView();
+        } catch (Exception e) {
+            showErrorMessage(e.getMessage());
+        }
 
     }
+
 }

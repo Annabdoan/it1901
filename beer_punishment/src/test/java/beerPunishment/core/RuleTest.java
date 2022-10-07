@@ -9,17 +9,28 @@ import org.junit.jupiter.api.Test;
 public class RuleTest {
 
     private Rule rule;
+    private Rule rule2;
 
     @BeforeEach
     public void setup() {
-        rule = new Rule("Ikke møtt opp", 2);
+        rule = new Rule("Ikke dukket opp", 2);
     }
 
     @Test
     public void testRuleConstructor() {
-        assertEquals(rule.getDescription(), "Ikke møtt opp");
+        assertEquals(rule.getDescription(), "Ikke dukket opp");
         assertEquals(rule.getPunishmentValue(), 2);
     }
+
+    @Test
+    public void testToString() {
+        String expected = "Ikke dukket opp\t\t\t2";
+        assertEquals(expected, rule.toString());
+    }
+
+
+
+
 
 
 

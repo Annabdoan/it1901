@@ -1,4 +1,4 @@
-package beerPunishment;
+package beerPunishment.ui;
 import org.testfx.framework.junit5.ApplicationTest;
 
 /**

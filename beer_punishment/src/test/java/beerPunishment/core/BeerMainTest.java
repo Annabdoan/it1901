@@ -25,4 +25,6 @@ public class BeerMainTest {
         assertEquals("Kommer sent", rule.getDescription());
     }
 
+
+
 }

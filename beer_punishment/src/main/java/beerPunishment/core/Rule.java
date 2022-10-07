@@ -5,7 +5,6 @@ public class Rule {
     private String description;
     private int punishmentValue;
 
-
     public Rule(String description, int punishmentValue) {
         this.description = description;
         this.punishmentValue = punishmentValue;

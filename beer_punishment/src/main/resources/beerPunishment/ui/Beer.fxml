@@ -77,8 +77,8 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <ChoiceBox prefWidth="150.0" />
-                              <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" />
+                              <ChoiceBox fx:id="ruleChoiceBox" prefWidth="150.0" />
+                              <ChoiceBox fx:id="personChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
                         <Button fx:id="newRuleButton1" mnemonicParsing="false" onAction="#makeNewRule" prefHeight="31.0" prefWidth="62.0" text="OK" GridPane.columnIndex="1" GridPane.rowIndex="4">

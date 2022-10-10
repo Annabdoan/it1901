@@ -51,6 +51,10 @@ public class BeerMain {
         return new HashMap<String, Integer>(punishmentStatus);
     }
 
+    public List<String> getUsernames() {
+        return new ArrayList<>(memberRuleViolations.keySet());
+    }
+
     public List<String> generatePunishmentStatusToString() {
         HashMap<String, Integer> punishmentStatus = generateMembersPunishments();
         List<String> punishmentToString = new ArrayList<>();

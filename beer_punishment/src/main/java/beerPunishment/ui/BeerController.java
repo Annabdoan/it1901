@@ -17,6 +17,8 @@ public class BeerController {
     private FileHandler filehandler;
     private String filename = "Rulelist";
 
+    private Rule rule;
+
     @FXML
     private ListView<String> ruleView;
     public TextField newRuleTextInput;
@@ -31,9 +33,18 @@ public class BeerController {
     public void initialize() {
         beermain = new BeerMain();
         filehandler = new FileHandler();
+        try {
+            List<Rule> rulesFromTxt = filehandler.readRules(filename);
+            for (Rule rule: rulesFromTxt) {
+                beermain.addRule(rule);
+            }
+        }catch (Exception e) {
+            showErrorMessage(e.getMessage());
+        }
         updateListView();
-        updateChoicebox();
+        updateRuleChoicebox();
         updateMemberView();
+        updatePersonChoicebox();
     }
 
     @FXML
@@ -50,7 +61,7 @@ public class BeerController {
         }
     }
 
-    private void updateChoicebox() {
+    private void updateRuleChoicebox() {
         List<String> ruleDescpritions = new ArrayList<>();
         try {
             List<Rule> rules = filehandler.readRules(filename);
@@ -60,6 +71,14 @@ public class BeerController {
             ruleChoiceBox.getItems().setAll(ruleDescpritions);
         } catch (Exception e) {
             showErrorMessage("Feil ved lesing fra fil");
+        }
+    }
+
+    private void updatePersonChoicebox() {
+        try {
+            personChoiceBox.getItems().setAll(beermain.getUsernames());
+        } catch (Exception e) {
+            showErrorMessage("Feil ved personChoicebox");
         }
     }
     @FXML
@@ -77,9 +96,10 @@ public class BeerController {
             //Split the string in the text input in order to add a new rule.
             String[] arrOfNewRuleTextInput = newRuleTextInput.getText().split(";");
             Rule rule = new Rule(arrOfNewRuleTextInput[0], Integer.valueOf(arrOfNewRuleTextInput[1]));
+            beermain.addRule(rule);
             filehandler.writeRule(filename,rule);
             updateListView();
-            updateChoicebox();
+            updateRuleChoicebox();
         } catch (Exception e) {
             showErrorMessage(e.getMessage());
         }
@@ -93,7 +113,14 @@ public class BeerController {
 
     @FXML
     public void punishMember() {
-
+        String chosenRule = ruleChoiceBox.getSelectionModel().getSelectedItem().toString();
+        String chosenMember = personChoiceBox.getSelectionModel().getSelectedItem().toString();
+        for (Rule rule: beermain.getRules()) {
+            if (rule.getDescription().equals(chosenRule)) {
+                beermain.punishMember(chosenMember,rule);
+            }
+        }
+        updateMemberView();
     }
 
     @FXML
@@ -102,7 +129,9 @@ public class BeerController {
         try {
             beermain.addMember(username);
             updateMemberView();
+            updatePersonChoicebox();
         }catch (IllegalArgumentException e) {
+            showErrorMessage(e.getMessage());
 
         }
     }

@@ -5,7 +5,6 @@ public class Rule {
     private String description;
     private int punishmentValue;
 
-
     public Rule(String description, int punishmentValue) {
         this.description = description;
         this.punishmentValue = punishmentValue;
@@ -22,6 +21,6 @@ public class Rule {
 
 
     public String toString() {
-        return description + "\t\t\t" + punishmentValue ;
+        return description + "\t\t\t\t\t\t" + punishmentValue ;
     }
 }

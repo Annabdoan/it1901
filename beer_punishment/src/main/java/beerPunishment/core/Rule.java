@@ -21,6 +21,6 @@ public class Rule {
 
 
     public String toString() {
-        return description + "\t\t\t" + punishmentValue ;
+        return description + "\t\t\t\t\t\t" + punishmentValue ;
     }
 }

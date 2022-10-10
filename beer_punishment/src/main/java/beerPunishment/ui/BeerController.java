@@ -23,7 +23,10 @@ public class BeerController {
     public Button newRuleButton;
     public ChoiceBox ruleChoiceBox;
     public ChoiceBox personChoiceBox;
-
+    public Button addMemberButton;
+    public Button punishButton;
+    public ListView punishmentStatusOverview;
+    public TextField addMemberText;
     @FXML
     public void initialize() {
         beermain = new BeerMain();
@@ -79,6 +82,16 @@ public class BeerController {
         } catch (Exception e) {
             showErrorMessage(e.getMessage());
         }
+
+    }
+
+    @FXML
+    public void punishMember() {
+
+    }
+
+    @FXML
+    public void addMember() {
 
     }
 

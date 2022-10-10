@@ -33,6 +33,7 @@ public class BeerController {
         filehandler = new FileHandler();
         updateListView();
         updateChoicebox();
+        updateMemberView();
     }
 
     @FXML
@@ -85,6 +86,11 @@ public class BeerController {
 
     }
 
+    private void updateMemberView() {
+        List<String> punishmentStatus = beermain.generatePunishmentStatusToString();
+        punishmentStatusOverview.getItems().setAll(punishmentStatus);
+    }
+
     @FXML
     public void punishMember() {
 
@@ -92,7 +98,13 @@ public class BeerController {
 
     @FXML
     public void addMember() {
+        String username = addMemberText.getText();
+        try {
+            beermain.addMember(username);
+            updateMemberView();
+        }catch (IllegalArgumentException e) {
 
+        }
     }
 
 }

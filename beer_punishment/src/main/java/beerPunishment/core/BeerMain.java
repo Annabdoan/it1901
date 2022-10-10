@@ -35,4 +35,32 @@ public class BeerMain {
         violations.add(rule);
         memberRuleViolations.put(username, violations);
     }
+    
+    private HashMap<String, Integer> generateMembersPunishments() {
+        HashMap<String, Integer> punishmentStatus = new HashMap<>();
+        for (String username:memberRuleViolations.keySet()
+             ) {
+            Integer totalpunishmemt = 0;
+            for (Rule rule: memberRuleViolations.get(username)
+                 ) {
+                totalpunishmemt += rule.getPunishmentValue();
+            }
+            punishmentStatus.put(username, totalpunishmemt);
+
+        }
+        return new HashMap<String, Integer>(punishmentStatus);
+    }
+
+    public List<String> generatePunishmentStatusToString() {
+        HashMap<String, Integer> punishmentStatus = generateMembersPunishments();
+        List<String> punishmentToString = new ArrayList<>();
+        for (String username: punishmentStatus.keySet()) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(username);
+            sb.append("\t\t\t\t\t");
+            sb.append(punishmentStatus.get(username));
+            punishmentToString.add(sb.toString());
+        }
+        return new ArrayList<>(punishmentToString);
+    }
 }

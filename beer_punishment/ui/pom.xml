@@ -25,11 +25,7 @@
         <artifactId>beer_punishment_json</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>it1901</groupId>
-            <artifactId>beer_punishment_core</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
         <dependency>
@@ -127,7 +123,7 @@
                 <!-- Default configuration for running -->
                 <!-- Usage: mvn javafx:run -->
                 <configuration>
-                    <mainClass>beerPunishment.ui/beerPunishment.ui.BeerApp</mainClass>
+                    <mainClass>beerPunishment.ui.BeerApp</mainClass>
                 </configuration>
             </plugin>
 

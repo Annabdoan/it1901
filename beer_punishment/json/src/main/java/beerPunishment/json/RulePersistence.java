@@ -75,4 +75,6 @@ public class RulePersistence {
     public Path getSaveFilePath() {
         return this.saveFilePath;
     }
+
+
 }

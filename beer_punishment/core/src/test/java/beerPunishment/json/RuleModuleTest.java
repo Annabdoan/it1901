@@ -21,7 +21,7 @@ public class RuleModuleTest {
     @BeforeAll
     public static void setUp(){
         mapper = new ObjectMapper();
-        mapper.registerModule(new RuleModule());
+       // mapper.registerModule(new RuleModule());
     }
 
     @Test

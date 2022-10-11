@@ -12,7 +12,6 @@ import beerPunishment.json.FileHandler;
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
 import beerPunishment.json.RulePersistence;
-import beerPunishment.json.RulePersistence1;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 

@@ -16,7 +16,7 @@ public class RuleModule extends SimpleModule {
     private static final String NAME = "RuleModule";
     private static final VersionUtil VERSION_UTIL = new VersionUtil() {};
 
-    public RuleModule(Set<RulePersistence1.RuleModelParts> parts) {
+    public RuleModule(Set<RulePersistence.RuleModelParts> parts) {
         super(NAME, VERSION_UTIL.version());
         addSerializer(Rule.class, new RuleSerializer());
         addSerializer(BeerMain.class, new BeerMainSerializer());
@@ -25,7 +25,7 @@ public class RuleModule extends SimpleModule {
     }
 
     public RuleModule() {
-        this(EnumSet.allOf(RulePersistence1.RuleModelParts.class));
+        this(EnumSet.allOf(RulePersistence.RuleModelParts.class));
     }
 
 

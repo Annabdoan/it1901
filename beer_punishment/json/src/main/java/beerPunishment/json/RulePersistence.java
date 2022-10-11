@@ -30,15 +30,15 @@ public class RulePersistence {
     public RulePersistence() {
         mapper = createObjectMapper();
     }
-    public static SimpleModule createJacksonModule(Set<RulePersistence1.RuleModelParts> parts) {
+    public static SimpleModule createJacksonModule(Set<RulePersistence.RuleModelParts> parts) {
         return new RuleModule(parts);
     }
-    public static ObjectMapper createObjectMapper(Set<RulePersistence1.RuleModelParts> parts) {
+    public static ObjectMapper createObjectMapper(Set<RulePersistence.RuleModelParts> parts) {
         return new ObjectMapper()
                 .registerModule(createJacksonModule(parts));
     }
     public static ObjectMapper createObjectMapper() {
-        return createObjectMapper(EnumSet.allOf(RulePersistence1.RuleModelParts.class));
+        return createObjectMapper(EnumSet.allOf(RulePersistence.RuleModelParts.class));
     }
 
     public Rule readRule(Reader reader) throws IOException {

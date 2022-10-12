@@ -5,24 +5,18 @@
 * BeerApp.java
 * BeerController.java
 * BeerMain.java
-* FileHandler.jave
+* FileHandler.java
 * Rule.java
 
+### At release 1 the app will consist of this scene
+![alt_text](uirelease1.png)
 
 
-APP:
-- Vi har laget et ølstraff-system (her kalt 'beerpunishment') som skal holde
-oversikt over regler og tilsvarende straff for å bryte disse.
-- Straff for å bryte reglene er oppgitt som antall øl.
-
-FUNKSJONALITET
-- I release1 har vi implementer funksjonalitet for å kunne lese fra fil. I vårt tilfelle er filen
-en oversikt over hvilke regler som gjelder og tilsvarende straff for å bryte disse.
-- Vi har implementert logikken til å kunne skrive inn nye regler til fil, men har ikke ordet UI
-for dette i release1.
+### Intended functionality for release 1:
+* We have created a beer punishment system that will keep an overview of rules and corresponding penalties for breaking them.
+* We have implemented functionality to be able to read from a file. In our case, the file is  an overview of which rules apply and corresponding penalties for breaking them.
+* We have implemented the logic to be able to write and read new rules to a file, but have not implemented the controller logic for this.
 
 
-# Bilde av tenkt UI
-![alt text](./beer_punishment/UI.jpg)
-
-
+### User story for release 1
+> 

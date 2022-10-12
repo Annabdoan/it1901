@@ -1,5 +1,6 @@
 package beerPunishment.ui;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,9 @@ import beerPunishment.json.RulePersistence;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 
 public class BeerController {
 

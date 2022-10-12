@@ -1,6 +1,6 @@
-module beer.punishment.ui {
-    requires beer.punishment.core;
-    requires beer.punishment.json;
+module beerPunishment.ui {
+    requires beerPunishment.core;
+    requires beerPunishment.json;
 
     requires javafx.graphics;
     requires javafx.fxml;

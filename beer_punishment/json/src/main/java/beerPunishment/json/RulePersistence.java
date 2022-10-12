@@ -24,6 +24,10 @@ public class RulePersistence {
         ruleFile = newFile("ruleFile.json");
     }
 
+    public void mockPrint() {
+        System.out.println("wahoo");
+    }
+
     public RuleModule createModule() {
         return new RuleModule();
     }

@@ -25,6 +25,11 @@
         <artifactId>beer_punishment_json</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>it1901</groupId>
+            <artifactId>beer_punishment_core</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
 
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->

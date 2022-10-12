@@ -37,19 +37,18 @@ public class BeerController {
     @FXML
     public void initialize() {
         beermain = new BeerMain();
-        filehandler = new FileHandler();
-        try {
+        /*try {
             List<Rule> rulesFromTxt = filehandler.readRules(filename);
             for (Rule rule: rulesFromTxt) {
                 beermain.addRule(rule);
             }
         }catch (Exception e) {
             showErrorMessage(e.getMessage());
-        }
-        updateListView();
-        updateRuleChoicebox();
-        updateMemberView();
-        updatePersonChoicebox();
+        }*/
+        //updateListView();
+        //updateRuleChoicebox();
+        //updateMemberView();
+        //updatePersonChoicebox();
     }
 
     @FXML

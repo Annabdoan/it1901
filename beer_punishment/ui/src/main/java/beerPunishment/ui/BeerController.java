@@ -1,7 +1,8 @@
 package beerPunishment.ui;
 
-import java.awt.*;
+//import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,18 +38,22 @@ public class BeerController {
     public TextField addMemberText;
     private File ruleFile = new File("ruleTest.json");
     @FXML
-    public void initialize() {
+    public void initialize() throws Exception{
         rulePersistence = new RulePersistence();
-        try {
-            //beermain = rulePersistence.readBeerMain(ruleFile);
-            //updateListView();
-            //updateRuleChoicebox();
-            //updateMemberView();
-            //updatePersonChoicebox();
+        beermain = new BeerMain();
+        System.out.println("h");
+        rulePersistence.mockPrint();
 
-        }catch (Exception e) {
-            showErrorMessage(e.getMessage());
+/*
+        try {
+            Rule rule2 = new Rule();
+            rulePersistence.createFile("test.json");
+        } catch (Exception e) {
+            beermain = new BeerMain();
+            System.out.println("Opprettet nytt beermainobjekt");
         }
+        */
+
     }
 
     @FXML

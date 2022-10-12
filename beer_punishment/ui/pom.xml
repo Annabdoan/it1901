@@ -4,12 +4,13 @@
     <groupId>it1901</groupId>
     <artifactId>beer_punishment_ui</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <parent>
         <groupId>it1901</groupId>
         <artifactId>beer_punishment</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>..</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <properties>
@@ -21,9 +22,10 @@
 
     <dependencies>
         <dependency>
-        <groupId>it1901</groupId>
-        <artifactId>beer_punishment_json</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+            <groupId>it1901</groupId>
+            <artifactId>beer_punishment_json</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>it1901</groupId>

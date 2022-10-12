@@ -34,7 +34,6 @@ This project is built up with maven, and if maven is not installed you can use g
 [Read more about the modules and the code](/beer_punishment/README.md)
 
 
-
 ### The plan
 The project is set to three releases.
 
@@ -50,5 +49,5 @@ Read more about it here: [Release 1](/docs/release1.md)
 ###### Sprint 2
 In this sprint we will continue to add more functionality. 
 TODO user stories to what we have implemented.
-
+Read more about it here: [Release 2](/docs/release2.md)
 

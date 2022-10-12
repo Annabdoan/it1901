@@ -2,9 +2,15 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>it1901</groupId>
-    <artifactId>beer_punishment</artifactId>
+    <artifactId>beer_punishment_ui</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>it1901</groupId>
+        <artifactId>beer_punishment</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>..</relativePath>
+    </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -14,6 +20,12 @@
     </properties>
 
     <dependencies>
+        <dependency>
+        <groupId>it1901</groupId>
+        <artifactId>beer_punishment_json</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
         <dependency>
@@ -29,7 +41,19 @@
         </dependency>
 
 
-        <!-- junit testing with jupiter -->
+
+
+        <!-- javafx -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>18.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>18.0.2</version>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -42,13 +66,31 @@
             <version>5.7.2</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <version>5.7.2</version>
+
+        <!-- test javafx with TextFX -->
+		<dependency>
+			<groupId>org.testfx</groupId>
+			<artifactId>testfx-core</artifactId>
+			<version>4.0.16-alpha</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.testfx</groupId>
+			<artifactId>testfx-junit5</artifactId>
+			<version>4.0.16-alpha</version>
+			<scope>test</scope>
+        </dependency>
+        <!--<dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <version>2.2</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>16-ea+5</version>
+        </dependency>-->
 
     </dependencies>
 
@@ -68,62 +110,23 @@
 		        <version>3.0.0-M5</version>
                 <configuration>
                     <skipTests>${skipTests}</skipTests>
+                <argLine>
+                    @{jaCoCoArgLine} --add-opens salarychecker.ui/salarychecker.ui=ALL-UNNAMED --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
+                </argLine>
                 </configuration>
 	        </plugin>
 
-            <!-- Run the checkstyle code quality tool -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.2</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.puppycrawl.tools</groupId>
-                        <artifactId>checkstyle</artifactId>
-                        <version>9.0</version>
-                    </dependency>
-                </dependencies>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.6</version>
+                <!-- Default configuration for running -->
+                <!-- Usage: mvn javafx:run -->
                 <configuration>
-                    <configLocation>google_checks.xml</configLocation>
-                    <encoding>UTF-8</encoding>
-                    <consoleOutput>true</consoleOutput>
-                    <failsOnError>true</failsOnError>
-                    <linkXRef>false</linkXRef>
+                    <mainClass>beerPunishment.ui.BeerApp</mainClass>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>checkstyle-check</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
 
-
-            <!-- Run the spotbugs code quality tool -->
-            <plugin>
-                <groupId>com.github.spotbugs</groupId>
-                <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.5.0.0</version>
-                <configuration>
-                    <xmlOutput>false</xmlOutput>
-                    <htmlOutput>true</htmlOutput>
-                    <excludeFilterFile>config/spotbugs/exclude.xml</excludeFilterFile>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>spotbugs-check</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- Run the Jacoco testcoverage tool -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -148,10 +151,4 @@
 
         </plugins>
     </build>
-
-    <modules>
-        <module>core</module>
-        <module>ui</module>
-        <module>json</module>
-    </modules>
 </project>

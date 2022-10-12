@@ -1,8 +1,6 @@
 <component name="libraryTable">
   <library name="lib">
-    <CLASSES>
-      <root url="file://$USER_HOME$/Downloads/javafx-sdk-19-3/lib" />
-    </CLASSES>
+    <CLASSES />
     <JAVADOC />
     <NATIVE>
       <root url="file://$USER_HOME$/Downloads/javafx-sdk-19-3/lib" />
@@ -16,6 +14,5 @@
       <root url="jar://$USER_HOME$/Downloads/javafx-sdk-19-3/lib/javafx.graphics.jar!/" />
       <root url="jar://$USER_HOME$/Downloads/javafx-sdk-19-3/lib/javafx.media.jar!/" />
     </SOURCES>
-    <jarDirectory url="file://$USER_HOME$/Downloads/javafx-sdk-19-3/lib" recursive="false" />
   </library>
 </component>

@@ -1,55 +1,70 @@
 package beerPunishment.json;
 
+import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
-import beerPunishment.core.RuleModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.EnumSet;
-import java.util.Set;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.io.FileReader;
-import java.io.FileWriter;
-import beerPunishment.json.RuleModule;
 
 
 public class RulePersistence {
     /**
      * Used to indicate what parts of a RuleModel to serialize.
      */
-    public enum RuleModelParts {
-        SETTINGS, LISTS, LIST_CONTENTS
-    }
 
-    private ObjectMapper mapper;
+    private ObjectMapper mapper = new ObjectMapper().registerModule(createModule());
     private Path filePath;
+    private String fileName;
+    private File ruleFile;
+    private BeerMain beerMain = new BeerMain();
 
     public RulePersistence() {
-        mapper = createObjectMapper();
-    }
-    public static SimpleModule createJacksonModule(Set<RulePersistence.RuleModelParts> parts) {
-        return new RuleModule(parts);
-    }
-    public static ObjectMapper createObjectMapper(Set<RulePersistence.RuleModelParts> parts) {
-        return new ObjectMapper()
-                .registerModule(createJacksonModule(parts));
-    }
-    public static ObjectMapper createObjectMapper() {
-        return createObjectMapper(EnumSet.allOf(RulePersistence.RuleModelParts.class));
+        ruleFile = newFile("ruleFile.json");
     }
 
-    public Rule readRule(Reader reader) throws IOException {
+    public RuleModule createModule() {
+        return new RuleModule();
+    }
+    public void createFile(String fileName) throws IOException {
+        this.ruleFile = newFile(fileName);
+        if (newFile(fileName).createNewFile()) {
+            //if true or false, file exist or not
+        } else {
+            beerMain.addRule(readRule(ruleFile));
+        }
+    }
+
+    public File newFile(String filename) {
+        return new File(filename);
+    }
+
+
+    public Rule readRule(File reader) throws IOException {
         return mapper.readValue(reader, Rule.class);
     }
 
-    public void writeRule(Rule rule, Writer writer) throws IOException {
-        mapper.writerWithDefaultPrettyPrinter().writeValue(writer, rule);
+    public BeerMain readBeerMain(File reader) throws IOException {
+        return mapper.readValue(reader, BeerMain.class);
     }
 
-    public void saveRule(Rule rule) throws IOException, IllegalStateException {
+
+    public void writeRule(BeerMain ruleList, String filename) throws IOException {
+        //File tempFile = newFile(filename);
+        /*for(Rule rule: ruleList.getRules()){
+            mapper.writeValue(tempFile, rule);
+        }*/
+        mapper.writeValue(ruleFile, ruleList);
+    }
+/*
+    public void writeRule(Rule rule, Writer writer) throws IOException {
+
+        mapper.writerWithDefaultPrettyPrinter().writeValue(writer, rule);
+    }
+*/
+
+ /*   public void saveRule(Rule rule) throws IOException, IllegalStateException {
         if (saveFilePath == null) {
             throw new IllegalStateException("Save file path is not set, yet");
         }
@@ -57,6 +72,7 @@ public class RulePersistence {
             writeRule(rule, writer);
         }
     }
+
     public Rule loadRule() throws IOException, IllegalStateException {
         if (filePath == null) {
             throw new IllegalStateException("Save file path is not set, yet");
@@ -65,16 +81,23 @@ public class RulePersistence {
             return readRule(reader);
         }
     }
+*/
 
-    private Path saveFilePath = null;
-
-    public void setSaveFile(String saveFile) {
-        this.saveFilePath = Paths.get(System.getProperty("user.home"), saveFile);
+    public static void main(String[] args) throws IOException {
+        RulePersistence rulepersistence = new RulePersistence();
+        String fileName = "ruleTest.json";
+        rulepersistence.createFile(fileName);
+        BeerMain ruleList = new BeerMain();
+        Rule rule1 = new Rule();
+        Rule rule2 = new Rule();
+        rule1.setDescription("Komme for sent");
+        rule1.setPunishmentValue(5);
+        rule2.setDescription("Maurice glemte snacks");
+        rule2.setPunishmentValue(8);
+        ruleList.addRule(rule1);
+        ruleList.addRule(rule2);
+        rulepersistence.writeRule(ruleList,fileName);
+        System.out.println(rulepersistence.readBeerMain(rulepersistence.ruleFile));
     }
-
-    public Path getSaveFilePath() {
-        return this.saveFilePath;
-    }
-
 
 }

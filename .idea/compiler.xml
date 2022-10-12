@@ -8,7 +8,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="beer_punishment_ui" />
         <module name="beer_punishment_json" />
-        <module name="beer_punishment" />
         <module name="beer_punishment_core" />
       </profile>
     </annotationProcessing>

@@ -19,6 +19,7 @@ public class BeerController {
 
     private BeerMain beermain;
     private FileHandler filehandler;
+    private RulePersistence rulePersistence;
     private String filename = "Rulelist.json";
 
     @FXML
@@ -31,11 +32,12 @@ public class BeerController {
     String sampleRuleListResource;
 
 
-
-  /*  @FXML
+    @FXML
     public void initialize() {
         beermain = new BeerMain();
         filehandler = new FileHandler();
+        rulePersistence = new RulePersistence();
+
         List<String> rulestostring = new ArrayList<>();
         try {
             List<Rule> rules = filehandler.readRules(filename);
@@ -47,52 +49,6 @@ public class BeerController {
             throw new IllegalArgumentException("Invalid filename");
         }
 
-    }*/
-    private RulePersistence rulePersistence = new RulePersistence();
-
-    private void initialize() throws IOException {
-        //setter opp data
-        Reader reader = null;
-        //try to read file from home folder first
-        if (userRuleListPath != null) {
-            try {
-                reader = new FileReader(Paths.get(System.getProperty("user.home"), userRuleListPath).toFile(), StandardCharsets.UTF_8);
-            } catch (IOException ioex) {
-                System.err.println("Fant ingen" + userRuleListPath + "på hjemmeområdet");
-            }
-        }
-        if (reader == null && sampleRuleListResource != null) {
-        /*    //try sample rule list resources instead
-            URL url = getClass().getResource(sampleRuleListResource);
-            if (url != null) {
-                try {
-                    reader = new InputStreamReader(url.openStream(), StandardCharsets.UTF_8);
-                } catch (IOException e) {
-                    System.err.println("Kunne ikke lese innebygget" + sampleRuleListResource);
-                }
-            } else {
-                System.err.println("Fant ikke innebygget" + sampleRuleListResource);
-            }*/
-        }
-        if (reader == null) {
-            //use embedded string
-           // reader = new StringReader(userRuleListPath);
-            rulePersistence.setSaveFile(filename);
-            Rule rule = new Rule("Komme sent",2);
-            rulePersistence.saveRule(rule);
-        }
     }
-/*
-    void autoSaveRuleList() {
-        if (userRuleListPath != null){
-            Path path = Paths.get(System.getProperty("user.home").userRuleListPath);
-            try (Writer writer = new FileWriter(path.toFile(), StandardCharsets.UTF_8)) {
-                rulePersistence.writeRuleList(ruleList, writer);
-            } catch (IOException e) {
-                System.err.println("Fikk ikke skrevet til rulelist.json på hjemmeområdet");
-            }
-        }
-
-    }*/
 
 }

@@ -29,5 +29,10 @@ public class BeerMain implements Iterable<Rule>{
         return rules.iterator();
     }
 
-
+    @Override
+    public String toString() {
+        return "BeerMain{" +
+                "rules=" + rules +
+                '}';
+    }
 }

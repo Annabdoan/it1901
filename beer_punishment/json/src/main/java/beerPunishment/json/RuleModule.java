@@ -4,7 +4,8 @@ package beerPunishment.json;
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.util.VersionUtil;
+import com.fasterxml.jackson.core.Version;
+// import com.fasterxml.jackson.core.util.VersionUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
@@ -14,19 +15,19 @@ import java.util.Set;
 //en modulen som kongiguerer et sett med serilizerse som
 public class RuleModule extends SimpleModule {
     private static final String NAME = "RuleModule";
-    private static final VersionUtil VERSION_UTIL = new VersionUtil() {};
+   // private static final VersionUtil VERSION_UTIL = new VersionUtil() {};
 
-    public RuleModule(Set<RulePersistence.RuleModelParts> parts) {
-        super(NAME, VERSION_UTIL.version());
+    public RuleModule() {
+        super(NAME, Version.unknownVersion());
         addSerializer(Rule.class, new RuleSerializer());
         addSerializer(BeerMain.class, new BeerMainSerializer());
         addDeserializer(Rule.class, new RuleDeserializer());
         addDeserializer(BeerMain.class, new BeerMainDeserializer());
     }
 
-    public RuleModule() {
-        this(EnumSet.allOf(RulePersistence.RuleModelParts.class));
-    }
+    // public RuleModule() {
+      //  this(EnumSet.allOf(RulePersistence.RuleModelParts.class));
+    //}
 
 
     public static void main(String[] args) {

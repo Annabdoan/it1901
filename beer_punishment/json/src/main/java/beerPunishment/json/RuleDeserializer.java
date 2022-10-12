@@ -7,7 +7,6 @@ import com.fasterxml.jackson.core.TreeNode;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.BigIntegerNode;
 import com.fasterxml.jackson.databind.node.NumericNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
@@ -17,7 +16,7 @@ import java.io.IOException;
 public class RuleDeserializer extends JsonDeserializer<Rule> {
 
     @Override
-    public Rule deserialize(JsonParser parser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+    public Rule deserialize(JsonParser parser, DeserializationContext deserializationContext) throws IOException, IOException {
         TreeNode treeNode = parser.getCodec().readTree(parser);
         return deserialize( (JsonNode) treeNode);
     }

@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import beerPunishment.core.Rule;
 
 
-public class RuleSerializer extends JsonSerializer <Rule>{
+public class RuleSerializer extends JsonSerializer<Rule> {
     /*
     format:
     {

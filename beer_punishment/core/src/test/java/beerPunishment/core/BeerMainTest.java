@@ -1,4 +1,4 @@
-package beerPunishment;
+package beerPunishment.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

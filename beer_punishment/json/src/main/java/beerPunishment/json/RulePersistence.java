@@ -51,10 +51,6 @@ public class RulePersistence {
 
 
     public void writeRule(BeerMain ruleList, String filename) throws IOException {
-        //File tempFile = newFile(filename);
-        /*for(Rule rule: ruleList.getRules()){
-            mapper.writeValue(tempFile, rule);
-        }*/
         mapper.writeValue(ruleFile, ruleList);
     }
 /*

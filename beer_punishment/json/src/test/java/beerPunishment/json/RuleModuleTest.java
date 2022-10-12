@@ -34,7 +34,7 @@ public class RuleModuleTest {
         list.addRule(rule2);
         try {
             assertEquals(
-        "{\"items\":[{\"rule\":\"Komme for sent\",\"value\":2},{\"rule\":\"Ikke gjort TODO\",\"value\":3}]}",
+        "{\"rules\":[{\"rule\":\"Komme for sent\",\"value\":2},{\"rule\":\"Ikke gjort TODO\",\"value\":3}]}",
                 mapper.writeValueAsString(list));
         }catch (JsonProcessingException e){
             fail();

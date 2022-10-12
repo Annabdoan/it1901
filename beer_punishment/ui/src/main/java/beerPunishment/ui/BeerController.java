@@ -1,6 +1,7 @@
 package beerPunishment.ui;
 
 import java.awt.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,37 +35,30 @@ public class BeerController {
     public Button punishButton;
     public ListView punishmentStatusOverview;
     public TextField addMemberText;
+    private File ruleFile = new File("ruleTest.json");
     @FXML
     public void initialize() {
-        beermain = new BeerMain();
-        /*try {
-            List<Rule> rulesFromTxt = filehandler.readRules(filename);
-            for (Rule rule: rulesFromTxt) {
-                beermain.addRule(rule);
-            }
+        rulePersistence = new RulePersistence();
+        try {
+            beermain = rulePersistence.readBeerMain(ruleFile);
+            //updateListView();
+            //updateRuleChoicebox();
+            //updateMemberView();
+            //updatePersonChoicebox();
+
         }catch (Exception e) {
             showErrorMessage(e.getMessage());
-        }*/
-        //updateListView();
-        //updateRuleChoicebox();
-        //updateMemberView();
-        //updatePersonChoicebox();
+        }
     }
 
     @FXML
     private void updateListView() {
-        rulePersistence = new RulePersistence();
-
-        List<String> rulestostring = new ArrayList<>();
-        try {
-            List<Rule> rules = filehandler.readRules(filename);
-            for (Rule rule : rules) {
-                rulestostring.add(rule.toString());
-            }
-            ruleView.getItems().setAll(rulestostring);
-        } catch (Exception e) {
-            showErrorMessage("Feil format på regel. Regel;antall øl");
+        List<Rule> rules = beermain.getRules();
+        List<String> rulesToString = new ArrayList<>();
+        for (Rule rule: rules) {
+            rulesToString.add(rule.toString());
         }
+        ruleView.getItems().setAll(rulesToString);
     }
 
     private void updateRuleChoicebox() {

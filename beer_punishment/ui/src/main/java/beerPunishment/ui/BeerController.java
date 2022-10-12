@@ -40,7 +40,7 @@ public class BeerController {
     public void initialize() {
         rulePersistence = new RulePersistence();
         try {
-            beermain = rulePersistence.readBeerMain(ruleFile);
+            //beermain = rulePersistence.readBeerMain(ruleFile);
             //updateListView();
             //updateRuleChoicebox();
             //updateMemberView();

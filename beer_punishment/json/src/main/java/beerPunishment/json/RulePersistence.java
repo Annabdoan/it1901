@@ -93,7 +93,9 @@ public class RulePersistence {
         ruleList.addRule(rule1);
         ruleList.addRule(rule2);
         rulepersistence.writeRule(ruleList,fileName);
-        System.out.println(rulepersistence.readBeerMain(rulepersistence.ruleFile));
+        BeerMain beerMain2 = rulepersistence.readBeerMain(rulepersistence.ruleFile);
+        beerMain2.addRule(new Rule("banne", 10));
+        System.out.println(beerMain2);
     }
 
 }

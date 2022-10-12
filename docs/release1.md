@@ -1,4 +1,14 @@
-Release1 - gr2231
+# Documentation for release 1 - gr2231
+## For release one the project consists of the following classes and resources:
+
+### Beer_punishment
+* BeerApp.java
+* BeerController.java
+* BeerMain.java
+* FileHandler.jave
+* Rule.java
+
+
 
 APP:
 - Vi har laget et ølstraff-system (her kalt 'beerpunishment') som skal holde

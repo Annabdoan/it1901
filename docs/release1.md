@@ -12,6 +12,7 @@ en oversikt over hvilke regler som gjelder og tilsvarende straff for å bryte di
 for dette i release1.
 
 
-
+# Bilde av tenkt UI
+![alt text](./beer_punishment/UI.jpg)
 
 

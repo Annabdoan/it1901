@@ -1,10 +1,9 @@
 
 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2022/gr2231/gr2231)
 
-
-Dette prosjektet er besvarelsen til gruppe 31 i faget ITP1901.
-
 # Beer Punishment
+This is the project in the subject ITP1901 by group 31. 
+
 This repo contains a multi-package, multi-module javafx project for a beer punishment system. This application is primarily meant for people who work in teams or groups.
 This app will provide a clear overview of what rules applies to the group/team, who has broken which rules and how many beers each individual has as punishment.
 You can read more about the project here [Beer Punishment](/beer_punishment/README.md).

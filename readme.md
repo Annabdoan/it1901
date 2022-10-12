@@ -23,7 +23,7 @@ This project is built up with maven, and if maven is not installed you can use g
 
 ### Organization of the code
 * [beer_punishment](README.md)
-    * [core](/core)
+    * [core](/beer_punishment/core)
 
 # Bilde av tenkt UI
 ![alt text](./beer_punishment/UI.jpg)

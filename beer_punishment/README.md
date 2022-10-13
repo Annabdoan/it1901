@@ -21,8 +21,8 @@ In this way, she can punish Maurice for his repeated mobile use.
 
 #### Userstory release 2
 ##### Story 3
-> Todo
-
+> Now that the group has a set of rules to follow, Sara can finally punish Maurice and give him the penalties he deserves.
+ She wants to display a list with the group members and how many penalties each member has. 
 
 
 

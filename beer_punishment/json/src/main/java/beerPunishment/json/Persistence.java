@@ -8,7 +8,7 @@ import java.io.*;
 
 
 
-public class RulePersistence {
+public class Persistence {
     /**
      * Used to indicate what parts of a RuleModel to serialize.
      */
@@ -17,7 +17,7 @@ public class RulePersistence {
     private File ruleFile;
     private BeerMain beerMain;
 
-    public RulePersistence() {
+    public Persistence() {
         ruleFile = newFile("ruleSaveFile.json");
     }
 
@@ -52,7 +52,7 @@ public class RulePersistence {
     }
 
     public static void main(String[] args) throws IOException {
-        RulePersistence rulepersistence = new RulePersistence();
+        Persistence rulepersistence = new Persistence();
         String fileName = "ruleTest.json";
         rulepersistence.createFile(fileName);
         BeerMain ruleList = new BeerMain();

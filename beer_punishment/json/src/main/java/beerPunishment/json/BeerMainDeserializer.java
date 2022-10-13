@@ -5,13 +5,11 @@ import beerPunishment.core.Rule;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.TreeNode;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,15 +44,6 @@ public class BeerMainDeserializer extends JsonDeserializer<BeerMain> {
                     }
                 }
             }
-            /*System.out.println(violationsNode.toString());
-            TypeReference<HashMap<String, List<Rule>>> typeRef = new TypeReference<HashMap<String, List<Rule>>>() {};
-            HashMap<String, List<Rule>> tempMap = mapper.readValue(violationsNode.toString(), HashMap.class);
-            return beerMainList;
-            String json = "{ \"color\" : \"Black\", \"type\" : \"BMW\" }";
-            HashMap<String, Object> map = mapper.readValue(json, new TypeReference<HashMap<String,Object>>(){});*/
-            //String json = violationsNode.toString();
-            //TypeReference<HashMap<String, List<Rule>>> typeRef = new TypeReference<HashMap<String, List<Rule>>>() {};
-            //HashMap<String, List<Rule>> userData = mapper.readValue(violationsNode, HashMap.class);
             JsonNode violationNode = objectNode.get("memberRuleViolations");
             HashMap<String, List<Rule>> tempMap = new HashMap<String, List<Rule>>();
             String key = "";
@@ -65,11 +54,9 @@ public class BeerMainDeserializer extends JsonDeserializer<BeerMain> {
                         key = elementNode.toString();
                         tempMap.put(key, new ArrayList<>());
                         i ++;
-                        //System.out.println(key);
                     }
                     else {
                         List<Rule> tempList = new ArrayList<>();
-                        //Rule rule = ruleDeserializer.deserialize(elementNode);
                         for (JsonNode temp: elementNode) {
                             Rule rule = ruleDeserializer.deserialize(temp);
                             if (rule != null){
@@ -77,7 +64,6 @@ public class BeerMainDeserializer extends JsonDeserializer<BeerMain> {
                             }
                         }
                         System.out.println(tempList);
-                        //System.out.println(rule);
                         tempMap.put(key, tempList);
                         i++;
                         }

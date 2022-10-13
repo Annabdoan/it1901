@@ -24,21 +24,19 @@ public class BeerMainSerializer extends JsonSerializer<BeerMain>{
 
     @Override
     public void serialize(BeerMain list, JsonGenerator jGen, SerializerProvider serializerProvider) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        jGen.writeStartObject(); //generate the start
+        jGen.writeStartObject(); //generate the start {
         jGen.writeArrayFieldStart("rules");
         for (Rule rule : list) {
             jGen.writeObject(rule);
         }
         jGen.writeEndArray();
-        //jGen.writeStringField("memberRuleViolations", mapper.writeValueAsString(list.getMemberRuleViolations()));
         jGen.writeArrayFieldStart("memberRuleViolations");
         for (Map.Entry<String, List<Rule>> violations : list.getMemberRuleViolations().entrySet()){
             jGen.writeObject(violations.getKey());
             jGen.writeObject(violations.getValue());
         }
         jGen.writeEndArray();
-        jGen.writeEndObject(); //gir sluttkurven
+        jGen.writeEndObject(); //generate end }
     }
 
 }

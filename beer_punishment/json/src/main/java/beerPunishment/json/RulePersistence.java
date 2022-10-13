@@ -58,31 +58,6 @@ public class RulePersistence {
     public void writeRule(BeerMain ruleList, String filename) throws IOException {
         mapper.writeValue(ruleFile, ruleList);
     }
-/*
-    public void writeRule(Rule rule, Writer writer) throws IOException {
-
-        mapper.writerWithDefaultPrettyPrinter().writeValue(writer, rule);
-    }
-*/
-
- /*   public void saveRule(Rule rule) throws IOException, IllegalStateException {
-        if (saveFilePath == null) {
-            throw new IllegalStateException("Save file path is not set, yet");
-        }
-        try (Writer writer = new FileWriter(saveFilePath.toFile(), StandardCharsets.UTF_8)) {
-            writeRule(rule, writer);
-        }
-    }
-
-    public Rule loadRule() throws IOException, IllegalStateException {
-        if (filePath == null) {
-            throw new IllegalStateException("Save file path is not set, yet");
-        }
-        try (Reader reader = new FileReader(filePath.toFile(), StandardCharsets.UTF_8)) {
-            return readRule(reader);
-        }
-    }
-*/
 
     public static void main(String[] args) throws IOException {
         RulePersistence rulepersistence = new RulePersistence();

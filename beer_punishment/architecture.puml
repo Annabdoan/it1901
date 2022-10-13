@@ -1,0 +1,9 @@
+@startuml
+class test {
+}
+
+abstract class test2 {
+}
+
+test->test2
+@enduml

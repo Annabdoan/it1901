@@ -58,6 +58,10 @@ public class BeerMain implements Iterable<Rule>{
         return new ArrayList<>(memberRuleViolations.keySet());
     }
 
+    public HashMap<String, List<Rule>> getMemberRuleViolations() {
+        return new HashMap<String, List<Rule>>(this.memberRuleViolations);
+    }
+
     public List<String> generatePunishmentStatusToString() {
         HashMap<String, Integer> punishmentStatus = generateMembersPunishments();
         List<String> punishmentToString = new ArrayList<>();

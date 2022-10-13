@@ -92,14 +92,16 @@ public class RulePersistence {
         Rule rule2 = new Rule();
         rule1.setDescription("Komme for sent");
         rule1.setPunishmentValue(5);
-        rule2.setDescription("Maurice glemte snacks");
+        rule2.setDescription("Maurice bannet");
         rule2.setPunishmentValue(8);
         ruleList.addRule(rule1);
         ruleList.addRule(rule2);
+        ruleList.addMember("Maurice");
+        ruleList.addMember("Anna");
+        ruleList.punishMember("Anna", rule2);
+        ruleList.punishMember("Anna", rule2);
+        ruleList.punishMember("Maurice", rule1);
         rulepersistence.writeRule(ruleList,fileName);
-        BeerMain beerMain2 = rulepersistence.readBeerMain(rulepersistence.ruleFile);
-        beerMain2.addRule(new Rule("banne", 10));
-        System.out.println(beerMain2);
     }
 
 }

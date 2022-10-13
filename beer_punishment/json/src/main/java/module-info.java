@@ -6,5 +6,7 @@ module beerPunishment.json {
     requires com.fasterxml.jackson.core;
     requires org.json;
 
+    opens beerPunishment.json;
+
     exports beerPunishment.json;
 }

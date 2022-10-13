@@ -12,18 +12,21 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="beer_punishment_json" />
+    <orderEntry type="library" name="Maven: com.googlecode.json-simple:json-simple:1.1.1" level="project" />
+    <orderEntry type="library" name="Maven: junit:junit:4.10" level="project" />
     <orderEntry type="module" module-name="beer_punishment_core" />
+    <orderEntry type="library" name="Maven: org.json:json:20190722" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.11.2" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.11.2" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.11.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:18.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:mac:18.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:18.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:mac:18.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:18.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:mac:18.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:18.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:mac:18.0.2" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:18.0.2" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:mac:18.0.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-api:5.7.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apiguardian:apiguardian-api:1.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.opentest4j:opentest4j:1.2.0" level="project" />
@@ -31,7 +34,7 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.7.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.7.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.testfx:testfx-core:4.0.16-alpha" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
+    <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.assertj:assertj-core:3.13.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.testfx:testfx-junit5:4.0.16-alpha" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-params:5.7.2" level="project" />

@@ -2,7 +2,7 @@ package beerPunishment.core;
 
 import java.util.*;
 
-public class BeerMain implements Iterable<Rule>{
+public class BeerMain implements Iterable<Rule> {
     
     private List<Rule> rules = new ArrayList<>();
     private HashMap<String, List<Rule>> memberRuleViolations = new HashMap<String, List<Rule>>();
@@ -58,6 +58,14 @@ public class BeerMain implements Iterable<Rule>{
         return new ArrayList<>(memberRuleViolations.keySet());
     }
 
+    public HashMap<String, List<Rule>> getMemberRuleViolations() {
+        return new HashMap<String, List<Rule>>(this.memberRuleViolations);
+    }
+
+    public void setMemberRuleViolations(HashMap<String, List<Rule>> memberRuleViolations) {
+        this.memberRuleViolations = memberRuleViolations;
+    }
+
     public List<String> generatePunishmentStatusToString() {
         HashMap<String, Integer> punishmentStatus = generateMembersPunishments();
         List<String> punishmentToString = new ArrayList<>();
@@ -76,10 +84,21 @@ public class BeerMain implements Iterable<Rule>{
         return rules.iterator();
     }
 
+
+
+    // Iterator
+    //public Iterator<Map.Entry<String, List<Rule>>> new_Iterator = memberRuleViolations.entrySet().iterator();
+    public Iterator<Map.Entry<String, List<Rule>>> violationIterator(){
+        return memberRuleViolations.entrySet().iterator();
+    }
+
+
+
     @Override
     public String toString() {
         return "BeerMain{" +
                 "rules=" + rules +
+                ", memberRuleViolations=" + memberRuleViolations +
                 '}';
     }
 }

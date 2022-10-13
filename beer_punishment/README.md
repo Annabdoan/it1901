@@ -21,8 +21,8 @@ In this way, she can punish Maurice for his repeated mobile use.
 
 #### Userstory release 2
 ##### Story 3
-> Todo
-
+> Now that the group has a set of rules to follow, Sara can finally punish Maurice and give him the penalties he deserves.
+ She wants to display a list with the group members and how many penalties each member has. 
 
 
 
@@ -30,24 +30,30 @@ In this way, she can punish Maurice for his repeated mobile use.
 ### Intented functionality at final release:
 
 
-#### Important to be able to see 
+#### What we can see
 * Overview of how many beer penalties individuals have.
 * Rules regarding violations that provide penalties.
 
-#### Important to be able to do
+#### Functionality
 * Enter a new rule violation
-  * What a rule
-  * What a person
-  * Any comment
+  * Which rule broken.
+  * Which person who broke the rule.
+  
 * Create a new rule.
+
+  * Description of rule.
+  * Punishment value; amount of beers. 
+  
 * Add new person.
-* Delete
-  * Person
-  * Rule
-  * Beer penalties
+* Delete-functionality 
+  * Delete members/people.
+  * Delete rules.
+  * Functionality to delete your punishments by paying them.
 
 
+###  Project Structure
 
+![alt_text](./plantUML.png)
 
 
 

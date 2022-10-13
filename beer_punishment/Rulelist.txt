@@ -1,2 +1,3 @@
-Komme for sent;2
-Ikke gjort TODO;1
+komme for sent;1
+Banne;5
+komme for sent;1

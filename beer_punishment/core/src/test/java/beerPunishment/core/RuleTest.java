@@ -24,7 +24,7 @@ public class RuleTest {
 
     @Test
     public void testToString() {
-        String expected = "Ikke dukket opp\t\t\t2";
+        String expected = "[Rule rule=Ikke dukket opp value=2]";
         assertEquals(expected, rule.toString());
     }
 

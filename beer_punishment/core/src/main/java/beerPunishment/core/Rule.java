@@ -6,9 +6,31 @@ public class Rule {
     private int punishmentValue;
 
     public Rule(String description, int punishmentValue) {
+        if(!isValidDescription(description)) {
+            throw new IllegalArgumentException("Invalid description.");
+        }
+        if (!isValidPunishmentValue(punishmentValue)) {
+            throw new IllegalArgumentException("Invalid punishmentvalue.");
+        }
         this.description = description;
         this.punishmentValue = punishmentValue;
     }
+
+    private static boolean isValidPunishmentValue(int punishmentValue) {
+        if (punishmentValue < 1) {
+            return false;
+        }
+        return true;
+    }
+
+    private static boolean isValidDescription(String description) {
+        if (description.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
+
 
     public Rule(){
 

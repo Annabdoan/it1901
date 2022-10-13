@@ -1,11 +1,28 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+skinparam componentStyle uml2
+component CORE {
+   package "core" {
+   }
+}
+component JSON {
+   package "json" {
+   }
+}
+component UI {
+   package "ui" {
+   }
+}
 
-autonumber
+component [JACKSON] #Strategy
+component [JavaFX] #Strategy
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+UI -[#blue]-> CORE
+UI -[#blue]-> JSON
+JSON -[#red]-> CORE
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+UI .[#red].> [JavaFX]
+UI .[#red].> [JACKSON]
+JSON .[#red].> [JACKSON]
+
+
 @enduml

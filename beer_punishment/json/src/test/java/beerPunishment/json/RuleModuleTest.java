@@ -24,7 +24,7 @@ public class RuleModuleTest {
         mapper.registerModule(new RuleModule());
     }
 
-    @Test
+   /* @Test
     public void testSerializers(){
 
         BeerMain list = new BeerMain();
@@ -40,6 +40,6 @@ public class RuleModuleTest {
             fail();
         }
 
-    }
+    }*/
 
 }

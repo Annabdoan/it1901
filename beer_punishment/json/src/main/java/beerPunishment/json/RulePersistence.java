@@ -5,6 +5,7 @@ import beerPunishment.core.Rule;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
+import java.nio.file.FileSystemLoopException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -101,7 +102,10 @@ public class RulePersistence {
         ruleList.punishMember("Anna", rule2);
         ruleList.punishMember("Anna", rule2);
         ruleList.punishMember("Maurice", rule1);
-        rulepersistence.writeRule(ruleList,fileName);
+        System.out.println(ruleList);
+        rulepersistence.writeRule(ruleList, fileName);
+        BeerMain beerMain3 = rulepersistence.readBeerMain(rulepersistence.ruleFile);
+        beerMain3.addMember("Lea");
+        System.out.println(beerMain3);
     }
-
 }

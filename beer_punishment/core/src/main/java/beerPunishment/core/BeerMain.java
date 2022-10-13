@@ -62,6 +62,10 @@ public class BeerMain implements Iterable<Rule>{
         return new HashMap<String, List<Rule>>(this.memberRuleViolations);
     }
 
+    public void setMemberRuleViolations(HashMap<String, List<Rule>> memberRuleViolations) {
+        this.memberRuleViolations = memberRuleViolations;
+    }
+
     public List<String> generatePunishmentStatusToString() {
         HashMap<String, Integer> punishmentStatus = generateMembersPunishments();
         List<String> punishmentToString = new ArrayList<>();
@@ -84,6 +88,7 @@ public class BeerMain implements Iterable<Rule>{
     public String toString() {
         return "BeerMain{" +
                 "rules=" + rules +
+                ", memberRuleViolations=" + memberRuleViolations +
                 '}';
     }
 }

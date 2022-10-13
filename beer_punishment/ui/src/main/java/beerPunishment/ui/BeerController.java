@@ -89,7 +89,7 @@ public class BeerController {
         List<Rule> rules = beermain.getRules();
         List<String> rulesToString = new ArrayList<>();
         for (Rule rule: rules) {
-            rulesToString.add(rule.toString());
+            rulesToString.add(rule.toStringDisplayFormat());
         }
         ruleView.getItems().setAll(rulesToString);
     }

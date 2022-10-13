@@ -24,7 +24,7 @@ public class RuleModuleTest {
         mapper.registerModule(new RuleModule());
     }
 
-   /* @Test
+    @Test
     public void testSerializers(){
 
         BeerMain list = new BeerMain();
@@ -34,12 +34,12 @@ public class RuleModuleTest {
         list.addRule(rule2);
         try {
             assertEquals(
-        "{\"rules\":[{\"rule\":\"Komme for sent\",\"value\":2},{\"rule\":\"Ikke gjort TODO\",\"value\":3}]}",
+                    "{\"rules\":[{\"rule\":\"Komme for sent\",\"value\":2},{\"rule\":\"Ikke gjort TODO\",\"value\":3}],\"memberRuleViolations\":[]}",
                 mapper.writeValueAsString(list));
         }catch (JsonProcessingException e){
             fail();
         }
 
-    }*/
+    }
 
 }

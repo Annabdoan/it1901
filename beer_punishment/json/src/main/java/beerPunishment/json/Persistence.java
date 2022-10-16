@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.*;
 
 
-
 public class Persistence {
     /**
      * Used to indicate what parts of a RuleModel to serialize.

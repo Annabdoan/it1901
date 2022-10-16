@@ -1,6 +1,7 @@
 package beerPunishment.ui;
 
 //import java.awt.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -39,6 +40,7 @@ public class BeerController {
     public ListView punishmentStatusOverview;
     public TextField addMemberText;
     private Path filePath;
+
     @FXML
     public void initialize() {
         persistence = new Persistence();
@@ -55,8 +57,7 @@ public class BeerController {
             try {
                 System.out.println("Jeg gikk inn her jeg");
                 persistence.createFile(filePath.toString());
-            }
-            catch (IOException ioe3) {
+            } catch (IOException ioe3) {
                 showErrorMessage("Noe feil skjedde i ioe3");
             }
 
@@ -88,7 +89,7 @@ public class BeerController {
     private void updateListView() {
         List<Rule> rules = beermain.getRules();
         List<String> rulesToString = new ArrayList<>();
-        for (Rule rule: rules) {
+        for (Rule rule : rules) {
             rulesToString.add(rule.toStringDisplayFormat());
         }
         ruleView.getItems().setAll(rulesToString);
@@ -113,6 +114,7 @@ public class BeerController {
             showErrorMessage("Feil ved personChoicebox");
         }
     }
+
     @FXML
     private void showErrorMessage(String errorMessage) {
         Alert alert = new Alert(AlertType.ERROR);
@@ -147,12 +149,12 @@ public class BeerController {
     public void punishMember() {
         String chosenRule = ruleChoiceBox.getSelectionModel().getSelectedItem().toString();
         String chosenMember = personChoiceBox.getSelectionModel().getSelectedItem().toString();
-        for (Rule rule: beermain.getRules()) {
+        for (Rule rule : beermain.getRules()) {
             if (rule.getDescription().equals(chosenRule)) {
-                beermain.punishMember(chosenMember,rule);
+                beermain.punishMember(chosenMember, rule);
                 try {
                     persistence.writeBeerMain(beermain, new File(filePath.toString()));
-                }catch (IOException punishMemberIOe) {
+                } catch (IOException punishMemberIOe) {
                     showErrorMessage("Failed to punish member");
                 }
             }
@@ -167,12 +169,12 @@ public class BeerController {
             beermain.addMember(username);
             try {
                 persistence.writeBeerMain(beermain, new File(filePath.toString()));
-            }catch (IOException addMemberIOe) {
+            } catch (IOException addMemberIOe) {
                 showErrorMessage("Failed to add member");
             }
             updateMemberView();
             updatePersonChoicebox();
-        }catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             showErrorMessage(e.getMessage());
 
         }

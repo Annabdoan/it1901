@@ -2,8 +2,12 @@ package beerPunishment.core;
 
 import java.util.*;
 
+/**
+ * A non-complete, but concrete class for todo lists without items.
+ * Can be used as placeholder for real TodoList instances.
+ */
 public class BeerMain implements Iterable<Rule> {
-    
+
     private List<Rule> rules = new ArrayList<>();
     private HashMap<String, List<Rule>> memberRuleViolations = new HashMap<String, List<Rule>>();
 
@@ -31,7 +35,7 @@ public class BeerMain implements Iterable<Rule> {
     }
 
     public void punishMember(String username, Rule rule) {
-        if (!memberRuleViolations.containsKey(username)){
+        if (!memberRuleViolations.containsKey(username)) {
             throw new IllegalArgumentException("Brukernavnet eksisterer ikke");
         }
         List<Rule> violations = memberRuleViolations.get(username);
@@ -41,10 +45,10 @@ public class BeerMain implements Iterable<Rule> {
 
     private HashMap<String, Integer> generateMembersPunishments() {
         HashMap<String, Integer> punishmentStatus = new HashMap<>();
-        for (String username:memberRuleViolations.keySet()
+        for (String username : memberRuleViolations.keySet()
         ) {
             Integer totalpunishmemt = 0;
-            for (Rule rule: memberRuleViolations.get(username)
+            for (Rule rule : memberRuleViolations.get(username)
             ) {
                 totalpunishmemt += rule.getPunishmentValue();
             }
@@ -69,7 +73,7 @@ public class BeerMain implements Iterable<Rule> {
     public List<String> generatePunishmentStatusToString() {
         HashMap<String, Integer> punishmentStatus = generateMembersPunishments();
         List<String> punishmentToString = new ArrayList<>();
-        for (String username: punishmentStatus.keySet()) {
+        for (String username : punishmentStatus.keySet()) {
             StringBuilder sb = new StringBuilder();
             sb.append(username);
             sb.append("\t\t\t\t\t");
@@ -85,13 +89,11 @@ public class BeerMain implements Iterable<Rule> {
     }
 
 
-
     // Iterator
     //public Iterator<Map.Entry<String, List<Rule>>> new_Iterator = memberRuleViolations.entrySet().iterator();
-    public Iterator<Map.Entry<String, List<Rule>>> violationIterator(){
+    public Iterator<Map.Entry<String, List<Rule>>> violationIterator() {
         return memberRuleViolations.entrySet().iterator();
     }
-
 
 
     @Override

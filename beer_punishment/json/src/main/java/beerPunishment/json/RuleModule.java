@@ -15,7 +15,7 @@ import java.util.Set;
 //en modulen som kongiguerer et sett med serilizerse som
 public class RuleModule extends SimpleModule {
     private static final String NAME = "RuleModule";
-   // private static final VersionUtil VERSION_UTIL = new VersionUtil() {};
+    // private static final VersionUtil VERSION_UTIL = new VersionUtil() {};
 
     public RuleModule() {
         super(NAME, Version.unknownVersion());
@@ -26,7 +26,7 @@ public class RuleModule extends SimpleModule {
     }
 
     // public RuleModule() {
-      //  this(EnumSet.allOf(RulePersistence.RuleModelParts.class));
+    //  this(EnumSet.allOf(RulePersistence.RuleModelParts.class));
     //}
 
 
@@ -44,10 +44,10 @@ public class RuleModule extends SimpleModule {
         try {
             String json = mapper.writeValueAsString(list);
             BeerMain beerMainList2 = mapper.readValue(json, BeerMain.class);
-            for (Rule rule: beerMainList2){
+            for (Rule rule : beerMainList2) {
                 System.out.println(rule);
             }
-        }catch (JsonProcessingException e){
+        } catch (JsonProcessingException e) {
             System.err.println("Virket ikke");
             e.printStackTrace();
         }

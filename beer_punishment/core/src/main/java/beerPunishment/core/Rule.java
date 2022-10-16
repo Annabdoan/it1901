@@ -6,7 +6,7 @@ public class Rule {
     private int punishmentValue;
 
     public Rule(String description, int punishmentValue) {
-        if(!isValidDescription(description)) {
+        if (!isValidDescription(description)) {
             throw new IllegalArgumentException("Invalid description.");
         }
         if (!isValidPunishmentValue(punishmentValue)) {
@@ -31,8 +31,7 @@ public class Rule {
     }
 
 
-
-    public Rule(){
+    public Rule() {
 
     }
 

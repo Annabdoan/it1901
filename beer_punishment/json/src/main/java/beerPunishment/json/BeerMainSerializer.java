@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
 
 //making the list of rule objects to json
-public class BeerMainSerializer extends JsonSerializer<BeerMain>{
+public class BeerMainSerializer extends JsonSerializer<BeerMain> {
     /*
     format:
     {
@@ -31,7 +31,7 @@ public class BeerMainSerializer extends JsonSerializer<BeerMain>{
         }
         jGen.writeEndArray();
         jGen.writeArrayFieldStart("memberRuleViolations");
-        for (Map.Entry<String, List<Rule>> violations : list.getMemberRuleViolations().entrySet()){
+        for (Map.Entry<String, List<Rule>> violations : list.getMemberRuleViolations().entrySet()) {
             jGen.writeObject(violations.getKey());
             jGen.writeObject(violations.getValue());
         }

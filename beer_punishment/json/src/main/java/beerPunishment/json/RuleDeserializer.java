@@ -18,18 +18,19 @@ public class RuleDeserializer extends JsonDeserializer<Rule> {
     @Override
     public Rule deserialize(JsonParser parser, DeserializationContext deserializationContext) throws IOException, IOException {
         TreeNode treeNode = parser.getCodec().readTree(parser);
-        return deserialize( (JsonNode) treeNode);
+        return deserialize((JsonNode) treeNode);
     }
+
     public Rule deserialize(JsonNode jsonNode) {
-        if (jsonNode instanceof ObjectNode){
+        if (jsonNode instanceof ObjectNode) {
             ObjectNode objectNode = (ObjectNode) jsonNode;
             Rule rule = new Rule();
             JsonNode textNode = objectNode.get("rule");
-            if (textNode instanceof TextNode){
+            if (textNode instanceof TextNode) {
                 rule.setDescription(((TextNode) textNode).asText());
             }
             JsonNode valueNode = objectNode.get("value");
-            if(valueNode instanceof NumericNode){
+            if (valueNode instanceof NumericNode) {
                 rule.setPunishmentValue(((NumericNode) valueNode).intValue());
             }
             return rule;

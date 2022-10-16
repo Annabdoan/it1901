@@ -1,6 +1,5 @@
 package beerPunishment.ui;
 
-//import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -8,7 +7,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import beerPunishment.json.FileHandler;
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
 import beerPunishment.json.Persistence;
@@ -22,11 +20,9 @@ import javafx.scene.control.Button;
 public class BeerController {
 
     private BeerMain beermain;
-    private FileHandler filehandler;
     private Persistence persistence;
     private String filename = "Rulelist.json";
 
-    private Rule rule;
 
     @FXML
     private ListView<String> ruleView;
@@ -59,24 +55,9 @@ public class BeerController {
             catch (IOException ioe3) {
                 showErrorMessage("Noe feil skjedde i ioe3");
             }
-
-            /*try {
-                new File(filePath.toString()).createNewFile();
-            }catch (IOException ioe2) {
-                showErrorMessage("feilet å lage ny fil");
-            }*/
             showErrorMessage("Feil ved initialize");
         }
 
-/*
-        try {
-            Rule rule2 = new Rule();
-            rulePersistence.createFile("test.json");
-        } catch (Exception e) {
-            beermain = new BeerMain();
-            System.out.println("Opprettet nytt beermainobjekt");
-        }
-        */
 
     }
 
@@ -177,5 +158,10 @@ public class BeerController {
 
         }
     }
+
+    public BeerMain getBeermain() {
+        return beermain;
+    }
+
 
 }

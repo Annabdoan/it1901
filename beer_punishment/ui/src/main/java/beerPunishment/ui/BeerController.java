@@ -1,6 +1,14 @@
 package beerPunishment.ui;
 
-//import java.awt.*;
+import beerPunishment.core.BeerMain;
+import beerPunishment.core.Rule;
+import beerPunishment.json.FileHandler;
+import beerPunishment.json.Persistence;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,17 +17,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import beerPunishment.json.FileHandler;
-import beerPunishment.core.BeerMain;
-import beerPunishment.core.Rule;
-import beerPunishment.json.Persistence;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
 
+
+/**
+ * Top-level controller.
+ */
 public class BeerController {
 
     private BeerMain beermain;
@@ -41,6 +44,9 @@ public class BeerController {
     public TextField addMemberText;
     private Path filePath;
 
+    /**
+     * Initialize.
+     */
     @FXML
     public void initialize() {
         persistence = new Persistence();
@@ -55,21 +61,15 @@ public class BeerController {
         } catch (IOException ioe) {
             beermain = new BeerMain();
             try {
-                System.out.println("Jeg gikk inn her jeg");
                 persistence.createFile(filePath.toString());
             } catch (IOException ioe3) {
                 showErrorMessage("Noe feil skjedde i ioe3");
             }
 
-            /*try {
-                new File(filePath.toString()).createNewFile();
-            }catch (IOException ioe2) {
-                showErrorMessage("feilet å lage ny fil");
-            }*/
             showErrorMessage("Feil ved initialize");
         }
 
-/*
+        /*
         try {
             Rule rule2 = new Rule();
             rulePersistence.createFile("test.json");
@@ -81,6 +81,11 @@ public class BeerController {
 
     }
 
+    /**
+     * Sets the filepath to and set name to the jsonfile.
+     *
+     * @param filename the filename to set
+     */
     private void setFilePath(String filename) {
         this.filePath = Paths.get(System.getProperty("user.home"), filename);
     }
@@ -115,6 +120,11 @@ public class BeerController {
         }
     }
 
+    /**
+     * Show error message.
+     *
+     * @param errorMessage The message to show in the error
+     */
     @FXML
     private void showErrorMessage(String errorMessage) {
         Alert alert = new Alert(AlertType.ERROR);
@@ -124,12 +134,16 @@ public class BeerController {
         alert.showAndWait();
     }
 
+    /**
+     * Make new rule.
+     */
     @FXML
     public void makeNewRule() {
         try {
             //Split the string in the text input in order to add a new rule.
             String[] arrOfNewRuleTextInput = newRuleTextInput.getText().split(";");
-            Rule rule = new Rule(arrOfNewRuleTextInput[0], Integer.valueOf(arrOfNewRuleTextInput[1]));
+            Rule rule = new Rule(arrOfNewRuleTextInput[0],
+                    Integer.valueOf(arrOfNewRuleTextInput[1]));
             beermain.addRule(rule);
             persistence.writeBeerMain(beermain, new File(filePath.toString()));
             updateListView();
@@ -145,6 +159,9 @@ public class BeerController {
         punishmentStatusOverview.getItems().setAll(punishmentStatus);
     }
 
+    /**
+     * Punish a member.
+     */
     @FXML
     public void punishMember() {
         String chosenRule = ruleChoiceBox.getSelectionModel().getSelectedItem().toString();
@@ -162,6 +179,9 @@ public class BeerController {
         updateMemberView();
     }
 
+    /**
+     * Add member.
+     */
     @FXML
     public void addMember() {
         String username = addMemberText.getText();
@@ -169,7 +189,7 @@ public class BeerController {
             beermain.addMember(username);
             try {
                 persistence.writeBeerMain(beermain, new File(filePath.toString()));
-            } catch (IOException addMemberIOe) {
+            } catch (IOException addMemberIoe) {
                 showErrorMessage("Failed to add member");
             }
             updateMemberView();

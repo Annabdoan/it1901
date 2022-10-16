@@ -1,10 +1,19 @@
 package beerPunishment.core;
 
+/**
+ * Rules in a rulelist in BeerMain
+ */
 public class Rule {
 
     private String description;
     private int punishmentValue;
 
+    /**
+     * Creates Rule with all relevant parameters.
+     *
+     * @param description     description of rule
+     * @param punishmentValue value of the punishment
+     */
     public Rule(String description, int punishmentValue) {
         if (!isValidDescription(description)) {
             throw new IllegalArgumentException("Invalid description.");
@@ -16,6 +25,11 @@ public class Rule {
         this.punishmentValue = punishmentValue;
     }
 
+    /**
+     * Checks if punishment is a negative value.
+     *
+     * @param punishmentValue value of the punishment
+     */
     private static boolean isValidPunishmentValue(int punishmentValue) {
         if (punishmentValue < 1) {
             return false;
@@ -23,6 +37,11 @@ public class Rule {
         return true;
     }
 
+    /**
+     * Checks if description is empty.
+     *
+     * @param description the description of the rule
+     */
     private static boolean isValidDescription(String description) {
         if (description.isEmpty()) {
             return false;
@@ -30,11 +49,16 @@ public class Rule {
         return true;
     }
 
-
+    /**
+     * Empty constructor needed for test.
+     */
     public Rule() {
 
     }
 
+    /**
+     * Set and get methods.
+     */
     public void setDescription(String description) {
         this.description = description;
     }

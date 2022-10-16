@@ -6,7 +6,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
 
-
+/**
+ * Class for persistence using jackson serializer and deserializer.
+ */
 public class Persistence {
     /**
      * Used to indicate what parts of a RuleModel to serialize.
@@ -28,6 +30,11 @@ public class Persistence {
         return new RuleModule();
     }
 
+    /**
+     * Creates a file.
+     *
+     * @param fileName the filename of the json-file
+     */
     public void createFile(String fileName) throws IOException {
         this.ruleFile = newFile(fileName);
         if (newFile(fileName).createNewFile()) {
@@ -37,15 +44,28 @@ public class Persistence {
         }
     }
 
+    /**
+     * Reads rules from file.
+     *
+     * @param file the filename of the json-file to read from
+     */
     public Rule readRule(File file) throws IOException {
         return mapper.readValue(file, Rule.class);
     }
 
+    /**
+     * Loads beermain-object from the saved file.
+     *
+     * @return the loaded BeerMain objects
+     */
     public BeerMain readBeerMain(File file) throws IOException {
         return mapper.readValue(file, BeerMain.class);
     }
 
-
+    /**
+     * Write beermain-object to the saved file.
+     *
+     */
     public void writeBeerMain(BeerMain beerMain, File file) throws IOException {
         mapper.writeValue(file, beerMain);
     }
@@ -54,13 +74,13 @@ public class Persistence {
         Persistence rulepersistence = new Persistence();
         String fileName = "ruleTest.json";
         rulepersistence.createFile(fileName);
-        BeerMain ruleList = new BeerMain();
         Rule rule1 = new Rule();
         Rule rule2 = new Rule();
         rule1.setDescription("Komme for sent");
         rule1.setPunishmentValue(5);
         rule2.setDescription("Maurice bannet");
         rule2.setPunishmentValue(8);
+        BeerMain ruleList = new BeerMain();
         ruleList.addRule(rule1);
         ruleList.addRule(rule2);
         ruleList.addMember("Maurice");

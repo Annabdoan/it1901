@@ -8,14 +8,17 @@ import com.fasterxml.jackson.core.TreeNode;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Class to Deserialize {@link BeerMain}.
+ */
 public class BeerMainDeserializer extends JsonDeserializer<BeerMain> {
 
     private RuleDeserializer ruleDeserializer = new RuleDeserializer();
@@ -23,12 +26,14 @@ public class BeerMainDeserializer extends JsonDeserializer<BeerMain> {
     /*
     format:
     {
-        {"rules": [ ... ],"memberRuleViolations:"{\"username\"[{"description":"...","punishmentValue":...}, ...]}}
+        {"rules": [ ... ],
+        "memberRuleViolations:"{\"username\"[{"description":"...","punishmentValue":...}, ...]}}
     }
      */
 
     @Override
-    public BeerMain deserialize(JsonParser parser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+    public BeerMain deserialize(JsonParser parser,
+                                DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         TreeNode treeNode = parser.getCodec().readTree(parser);
         if (treeNode instanceof ObjectNode) {

@@ -1,26 +1,16 @@
 package beerPunishment.ui;
 import beerPunishment.core.BeerMain;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import beerPunishment.core.Rule;
+import org.junit.jupiter.api.*;
 import org.testfx.framework.junit5.ApplicationTest;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.testfx.framework.junit5.ApplicationTest;
-import org.testfx.util.WaitForAsyncUtils;
+
 
 
 /**
@@ -29,31 +19,45 @@ import org.testfx.util.WaitForAsyncUtils;
 public class BeerAppTest extends ApplicationTest {
     private BeerController controller;
     private BeerMain beerMain;
+    private Rule rule1;
+    private Rule rule2;
+
+
 
     @Override
     public void start(final Stage stage) throws Exception {
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource("TodoModel_test.fxml"));
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource("Beer.fxml"));
         final Parent root = loader.load();
         this.controller = loader.getController();
         stage.setScene(new Scene(root));
         stage.show();
     }
 
-    private TodoPersistence todoPersistence = new TodoPersistence();
 
     @BeforeEach
-    public void setupItems() {
-        // same as in test-todolist.json (should perhaps read it instead)
-        try (Reader reader = new InputStreamReader(getClass().getResourceAsStream("test-todomodel.json"))) {
-            this.controller.setTodoModelAccess(new DirectTodoModelAccess(todoPersistence.readTodoModel(reader)));
-        } catch (IOException ioe) {
-            fail(ioe.getMessage());
-        }
+    public void setupBeerMain() {
+       beerMain = new BeerMain();
+       rule1 = new Rule("Banne", 4);
+       rule2 = new Rule("Glemme snacks", 5);
+       beerMain.addRule(rule1);
+       beerMain.addRule(rule2);
+       beerMain.addMember("Sara");
+       beerMain.addMember("Anna");
     }
 
+
+
     @Test
-    public void testController_initial() {
+    public void testSetUp() {
         assertNotNull(this.controller);
+        assertNotNull(this.beerMain);
+        assertNotNull(this.rule1);
+        assertNotNull(this.rule2);
     }
+
+
+
+
+
 
 }

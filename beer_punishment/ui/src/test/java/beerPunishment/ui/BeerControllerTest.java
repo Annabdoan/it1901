@@ -40,8 +40,6 @@ public class BeerControllerTest extends ApplicationTest {
         File file = new File(System.getProperty("user.home"),"Rulelist.json");
         clickOn("#newRuleTextInput").write("Komme for sent;5");
         clickOn("#newRuleButton");
-        System.out.println(this.controller.getBeermain().getRules());
-        System.out.println(file.getAbsolutePath());
         List<Rule> expectedList = new ArrayList<>(List.of(new Rule("Komme for sent", 5)));
         List<Rule> actualList = this.controller.getBeermain().getRules();
         assertEquals(expectedList.toString(), actualList.toString());

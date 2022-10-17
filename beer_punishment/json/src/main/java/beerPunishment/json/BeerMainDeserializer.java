@@ -40,7 +40,6 @@ public class BeerMainDeserializer extends JsonDeserializer<BeerMain> {
             JsonNode rulesNode = objectNode.get("rules");
             if (rulesNode instanceof ArrayNode) {
                 for (JsonNode elementNode : (ArrayNode) rulesNode) {
-                    System.out.println(elementNode);
                     Rule rule = ruleDeserializer.deserialize(elementNode);
                     if (rule != null) {
                         beerMainList.addRule(rule);
@@ -65,7 +64,6 @@ public class BeerMainDeserializer extends JsonDeserializer<BeerMain> {
                                 tempList.add(rule);
                             }
                         }
-                        System.out.println(tempList);
                         tempMap.put(key, tempList);
                         i++;
                     }

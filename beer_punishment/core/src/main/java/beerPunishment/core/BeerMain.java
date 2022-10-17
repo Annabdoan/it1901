@@ -110,7 +110,7 @@ public class BeerMain implements Iterable<Rule> {
     }
 
     public void setMemberRuleViolations(HashMap<String, List<Rule>> memberRuleViolations) {
-        this.memberRuleViolations = memberRuleViolations;
+        this.memberRuleViolations = new HashMap<>(memberRuleViolations);
     }
     /**
      * Makes a ToString out of the hashmap

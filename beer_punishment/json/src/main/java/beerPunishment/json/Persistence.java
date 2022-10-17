@@ -14,6 +14,7 @@ public class Persistence {
      * Used to indicate what parts of a RuleModel to serialize.
      */
 
+    private File ruleFile;
     private ObjectMapper mapper = new ObjectMapper().registerModule(createModule());
 
     public Persistence() {

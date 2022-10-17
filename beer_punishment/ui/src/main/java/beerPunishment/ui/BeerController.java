@@ -6,7 +6,6 @@ import beerPunishment.json.Persistence;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 
 import java.io.File;
@@ -31,11 +30,8 @@ public class BeerController {
     @FXML
     private ListView<String> ruleView;
     public TextField newRuleTextInput;
-    public Button newRuleButton;
     public ChoiceBox ruleChoiceBox;
     public ChoiceBox personChoiceBox;
-    public Button addMemberButton;
-    public Button punishButton;
     public ListView punishmentStatusOverview;
     public TextField addMemberText;
     private Path filePath;
@@ -64,16 +60,6 @@ public class BeerController {
 
             showErrorMessage("Feil ved initialize");
         }
-
-        /*
-        try {
-            Rule rule2 = new Rule();
-            rulePersistence.createFile("test.json");
-        } catch (Exception e) {
-            beermain = new BeerMain();
-            System.out.println("Opprettet nytt beermainobjekt");
-        }
-        */
 
     }
 

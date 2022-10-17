@@ -13,10 +13,40 @@ Note:
 This project is built up with maven, and if maven is not installed you can use gitpod.
 
 #### Runnning application with local access:
-1. Navigate to beer_punishment directory
-2. Install dependencies and run test
-3. Navigate to ui directory
-4. mvn javafx:run
+
+1. Navigate to beer_punishment directory.
+2. Create JAR files for the project.
+3. Deploy the packaged JAR file to the local repository. 
+4. Compile source code.
+4. Navigate to UI-module.
+5. Launch the application.
+
+>1. cd beer_punishment
+>2. mvn package
+>3. mvn clean install \
+#Tests can be skipped by using "mvn clean install -DskipTests"
+>4. mvn compile
+>4. cd ui
+>5. mvn javafx:run
+
+### JaCoCo-report for test coverage
+
+This project uses JaCoCo to measure and report test coverage. 
+Each module will have its own report. The reports are located in the modules respective target directories. 
+
+! This is to be done after instructions 1-4 in "Building and running the project" part. 
+
+#### Getting the JaCoCo-reports 
+
+1. Run the test.
+2. Navigate to the target directory in each module.
+3. Open the site folder.
+4. Open the index.html file in your browser. 
+
+>1. mvn verify
+>2. mvn jacoco:report
+>
+
 
 
 
@@ -27,8 +57,8 @@ This project is built up with maven, and if maven is not installed you can use g
     * [json](/beer_punishment/json)
       * [json-logic](/beer_punishment/json/src/main/java/beerPunishment/json)
     * [ui](/beer_punishment/ui)
-      * [javafx](/beer_punishment/ui/src/main/java/beerPunishment/ui)
-      * [javafx](/beer_punishment/ui/src/main/resources)
+      * [ui-logic](/beer_punishment/ui/src/main/java/beerPunishment/ui)
+      * [FXML](/beer_punishment/ui/src/main/resources)
 
 [Read more about the modules and the code](/beer_punishment/README.md)
 
@@ -37,16 +67,19 @@ This project is built up with maven, and if maven is not installed you can use g
 The project is set to three releases.
 
 ###### Sprint 1
-This sprint contains two user stories.
-User story 1:
-TODO KORT RECAP
+This sprint contains two user stories. 
 
-User story 2:
-TODO KORT RECAP
+User story 1: 
+>A member of the group wants to keep track of the rules which leeds to punishment.
+
+User story 2: 
+>A group wants one persons late comings to be punished. \
 Read more about it here: [Release 1](/docs/release1.md)
 
 ###### Sprint 2
-In this sprint we will continue to add more functionality. 
-TODO user stories to what we have implemented.
-Read more about it here: [Release 2](/docs/release2.md)
+In this sprint we will continue to add more functionality. The goal is to implement most of the wanted logic. 
 
+User story 3: 
+>The group wants to display a list with the group members and how many penalties each member has.
+
+Read more about it here: [Release 2](/docs/release2.md)

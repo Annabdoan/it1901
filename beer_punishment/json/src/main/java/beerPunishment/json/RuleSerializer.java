@@ -1,13 +1,16 @@
 package beerPunishment.json;
 
-
-import java.io.IOException;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import beerPunishment.core.Rule;
 
+import java.io.IOException;
 
+
+/**
+ * Class to serialize {@link Rule}.
+ */
 public class RuleSerializer extends JsonSerializer<Rule> {
     /*
     format:
@@ -17,8 +20,12 @@ public class RuleSerializer extends JsonSerializer<Rule> {
     }
      */
 
-    //help us serialize rules
-    public void serialize(Rule rule, JsonGenerator jGen, SerializerProvider serializerProvider) throws IOException{
+
+    /**
+     * Serialize Rules
+     */
+    public void serialize(Rule rule, JsonGenerator jGen,
+                          SerializerProvider serializerProvider) throws IOException {
         jGen.writeStartObject(); //generate the start of the json object
         jGen.writeStringField("rule", rule.getDescription());
         jGen.writeNumberField("value", rule.getPunishmentValue());

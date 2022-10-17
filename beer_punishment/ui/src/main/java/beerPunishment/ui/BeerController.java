@@ -2,7 +2,6 @@ package beerPunishment.ui;
 
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
-import beerPunishment.json.FileHandler;
 import beerPunishment.json.Persistence;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -26,7 +25,6 @@ import javafx.scene.control.TextField;
 public class BeerController {
 
     private BeerMain beermain;
-    private FileHandler filehandler;
     private Persistence persistence;
     private String filename = "Rulelist.json";
 

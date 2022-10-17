@@ -97,15 +97,11 @@ public class BeerController {
     }
 
     private void updateRuleChoicebox() {
-        List<String> ruleDescpritions = new ArrayList<>();
-        try {
-            for (Rule rule : beermain.getRules()) {
-                ruleDescpritions.add(rule.getDescription());
-            }
-            ruleChoiceBox.getItems().setAll(ruleDescpritions);
-        } catch (Exception e) {
-            showErrorMessage("Feil updateRuleChoiceBox");
+        List<String> ruleDescriptions = new ArrayList<>();
+        for (Rule rule : beermain.getRules()) {
+            ruleDescriptions.add(rule.getDescription());
         }
+        ruleChoiceBox.getItems().setAll(ruleDescriptions);
     }
 
     private void updatePersonChoicebox() {
@@ -149,7 +145,6 @@ public class BeerController {
         } catch (IOException IOe) {
             showErrorMessage(IOe.getMessage());
         }
-
 
     }
 

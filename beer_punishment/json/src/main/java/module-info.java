@@ -4,6 +4,9 @@ module beerPunishment.json {
     requires com.fasterxml.jackson.databind;
     requires com.fasterxml.jackson.annotation;
     requires com.fasterxml.jackson.core;
+    requires org.json;
+
+    opens beerPunishment.json;
 
     exports beerPunishment.json;
 }

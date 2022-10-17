@@ -12,7 +12,7 @@ This had been done for all classes that need translation to and from json-format
 
 
 ### Persistence:
-* RulePersistence &rarr; Stores information needed to write to/ read from json file. 
+* RulePersistence &rarr; Stores information needed to write and read to json file. 
 
 ### Module:
 * RuleModule &rarr; Keeps track of serializers and deserializers

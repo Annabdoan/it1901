@@ -3,7 +3,6 @@ package beerPunishment.json;
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.*;
 
 /**

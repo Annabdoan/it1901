@@ -139,14 +139,17 @@ public class BeerController {
             //Split the string in the text input in order to add a new rule.
             String[] arrOfNewRuleTextInput = newRuleTextInput.getText().split(";");
             Rule rule = new Rule(arrOfNewRuleTextInput[0],
-                    Integer.valueOf(arrOfNewRuleTextInput[1]));
+                    Integer.parseInt(arrOfNewRuleTextInput[1]));
             beermain.addRule(rule);
             persistence.writeBeerMain(beermain, new File(filePath.toString()));
             updateListView();
             updateRuleChoicebox();
-        } catch (Exception e) {
-            showErrorMessage("Feil i make new rule");
+        } catch (NumberFormatException Ne) {
+            showErrorMessage("Feil ved å gjøre om verdi til int.");
+        } catch (IOException IOe) {
+            showErrorMessage(IOe.getMessage());
         }
+
 
     }
 

@@ -26,7 +26,6 @@ public class BeerController {
 
     private BeerMain beermain;
     private Persistence persistence;
-    private String filename = "Rulelist.json";
 
 
     @FXML

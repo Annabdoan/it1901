@@ -159,7 +159,7 @@
 
     <modules>
         <module>core</module>
-        <module>ui</module>
         <module>json</module>
+        <module>ui</module>
     </modules>
 </project>

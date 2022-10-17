@@ -1,8 +1,14 @@
 package beerPunishment.ui;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
-import beerPunishment.json.FileHandler;
 import beerPunishment.json.Persistence;
 import java.io.File;
 import java.io.IOException;
@@ -23,13 +29,15 @@ import javafx.scene.control.TextField;
  */
 public class BeerController {
 
-    private final String filename = "Rulelist.json";
+    private BeerMain beermain;
+    private Persistence persistence;
+
+
+    @FXML
+    private ListView<String> ruleView;
     public TextField newRuleTextInput;
-    public Button newRuleButton;
     public ChoiceBox ruleChoiceBox;
     public ChoiceBox personChoiceBox;
-    public Button addMemberButton;
-    public Button punishButton;
     public ListView punishmentStatusOverview;
     public TextField addMemberText;
     private BeerMain beermain;
@@ -59,21 +67,10 @@ public class BeerController {
             try {
                 persistence.createFile(filePath.toString());
             } catch (IOException ioe3) {
-                showErrorMessage("Noe feil skjedde i ioe3");
+                //Do nothing
             }
-
-            showErrorMessage("Feil ved initialize");
+            //Do nothing
         }
-
-        /*
-        try {
-            Rule rule2 = new Rule();
-            rulePersistence.createFile("test.json");
-        } catch (Exception e) {
-            beermain = new BeerMain();
-            System.out.println("Opprettet nytt beermainobjekt");
-        }
-        */
 
     }
 
@@ -97,15 +94,11 @@ public class BeerController {
     }
 
     private void updateRuleChoicebox() {
-        List<String> ruleDescpritions = new ArrayList<>();
-        try {
-            for (Rule rule : beermain.getRules()) {
-                ruleDescpritions.add(rule.getDescription());
-            }
-            ruleChoiceBox.getItems().setAll(ruleDescpritions);
-        } catch (Exception e) {
-            showErrorMessage("Feil updateRuleChoiceBox");
+        List<String> ruleDescriptions = new ArrayList<>();
+        for (Rule rule : beermain.getRules()) {
+            ruleDescriptions.add(rule.getDescription());
         }
+        ruleChoiceBox.getItems().setAll(ruleDescriptions);
     }
 
     private void updatePersonChoicebox() {
@@ -138,13 +131,16 @@ public class BeerController {
         try {
             //Split the string in the text input in order to add a new rule.
             String[] arrOfNewRuleTextInput = newRuleTextInput.getText().split(";");
-            Rule rule = new Rule(arrOfNewRuleTextInput[0], Integer.valueOf(arrOfNewRuleTextInput[1]));
+            Rule rule = new Rule(arrOfNewRuleTextInput[0],
+                    Integer.parseInt(arrOfNewRuleTextInput[1]));
             beermain.addRule(rule);
             persistence.writeBeerMain(beermain, new File(filePath.toString()));
             updateListView();
             updateRuleChoicebox();
-        } catch (Exception e) {
-            showErrorMessage("Feil i make new rule");
+        } catch (NumberFormatException Ne) {
+            showErrorMessage("Feil ved å gjøre om verdi til int.");
+        } catch (IOException IOe) {
+            showErrorMessage(IOe.getMessage());
         }
 
     }
@@ -194,5 +190,10 @@ public class BeerController {
 
         }
     }
+
+    public BeerMain getBeermain() {
+        return beermain;
+    }
+
 
 }

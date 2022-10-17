@@ -33,7 +33,6 @@ public class BeerMainDeserializer extends JsonDeserializer<BeerMain> {
     @Override
     public BeerMain deserialize(JsonParser parser,
                                 DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
         TreeNode treeNode = parser.getCodec().readTree(parser);
         if (treeNode instanceof ObjectNode) {
             ObjectNode objectNode = (ObjectNode) treeNode;

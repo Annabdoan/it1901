@@ -62,10 +62,9 @@ public class BeerController {
             try {
                 persistence.createFile(filePath.toString());
             } catch (IOException ioe3) {
-                showErrorMessage("Noe feil skjedde i ioe3");
+                //Do nothing
             }
-
-            showErrorMessage("Feil ved initialize");
+            //Do nothing
         }
 
     }

@@ -4,19 +4,17 @@ import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
 import beerPunishment.json.FileHandler;
 import beerPunishment.json.Persistence;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 
@@ -25,15 +23,7 @@ import javafx.scene.control.TextField;
  */
 public class BeerController {
 
-    private BeerMain beermain;
-    private FileHandler filehandler;
-    private Persistence persistence;
-    private String filename = "Rulelist.json";
-
-    private Rule rule;
-
-    @FXML
-    private ListView<String> ruleView;
+    private final String filename = "Rulelist.json";
     public TextField newRuleTextInput;
     public Button newRuleButton;
     public ChoiceBox ruleChoiceBox;
@@ -42,6 +32,12 @@ public class BeerController {
     public Button punishButton;
     public ListView punishmentStatusOverview;
     public TextField addMemberText;
+    private BeerMain beermain;
+    private FileHandler filehandler;
+    private Persistence persistence;
+    private Rule rule;
+    @FXML
+    private ListView<String> ruleView;
     private Path filePath;
 
     /**
@@ -142,8 +138,7 @@ public class BeerController {
         try {
             //Split the string in the text input in order to add a new rule.
             String[] arrOfNewRuleTextInput = newRuleTextInput.getText().split(";");
-            Rule rule = new Rule(arrOfNewRuleTextInput[0],
-                    Integer.valueOf(arrOfNewRuleTextInput[1]));
+            Rule rule = new Rule(arrOfNewRuleTextInput[0], Integer.valueOf(arrOfNewRuleTextInput[1]));
             beermain.addRule(rule);
             persistence.writeBeerMain(beermain, new File(filePath.toString()));
             updateListView();
@@ -171,7 +166,7 @@ public class BeerController {
                 beermain.punishMember(chosenMember, rule);
                 try {
                     persistence.writeBeerMain(beermain, new File(filePath.toString()));
-                } catch (IOException punishMemberIOe) {
+                } catch (IOException punishMemberioe) {
                     showErrorMessage("Failed to punish member");
                 }
             }

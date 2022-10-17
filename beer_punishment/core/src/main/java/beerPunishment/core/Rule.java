@@ -1,7 +1,7 @@
 package beerPunishment.core;
 
 /**
- * Rules in a rulelist in BeerMain
+ * Rules in a rulelist in BeerMain.
  */
 public class Rule {
 

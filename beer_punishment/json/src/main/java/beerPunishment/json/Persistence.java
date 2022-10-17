@@ -3,7 +3,6 @@ package beerPunishment.json;
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.*;
 
 /**
@@ -64,12 +63,13 @@ public class Persistence {
 
     /**
      * Write beermain-object to the saved file.
-     *
      */
     public void writeBeerMain(BeerMain beerMain, File file) throws IOException {
         mapper.writeValue(file, beerMain);
     }
-
+    /**
+     * Main method.
+     */
     public static void main(String[] args) throws IOException {
         Persistence rulepersistence = new Persistence();
         String fileName = "ruleTest.json";

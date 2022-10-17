@@ -31,7 +31,9 @@ public class RuleModule extends SimpleModule {
     //  this(EnumSet.allOf(RulePersistence.RuleModelParts.class));
     //}
 
-
+    /**
+     * Main-method.
+     */
     public static void main(String[] args) {
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new RuleModule());

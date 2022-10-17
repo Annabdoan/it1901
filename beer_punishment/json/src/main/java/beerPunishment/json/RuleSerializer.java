@@ -1,10 +1,9 @@
 package beerPunishment.json;
 
+import beerPunishment.core.Rule;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import beerPunishment.core.Rule;
-
 import java.io.IOException;
 
 
@@ -22,7 +21,7 @@ public class RuleSerializer extends JsonSerializer<Rule> {
 
 
     /**
-     * Serialize Rules
+     * Serialize Rules.
      */
     public void serialize(Rule rule, JsonGenerator jGen,
                           SerializerProvider serializerProvider) throws IOException {

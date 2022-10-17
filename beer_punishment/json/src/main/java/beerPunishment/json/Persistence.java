@@ -40,7 +40,7 @@ public class Persistence {
         if (newFile(fileName).createNewFile()) {
             //if true or false, file exist or not
         } else {
-            beerMain.addRule(readRule(ruleFile));
+            throw new IOException("Error in creating file");
         }
     }
 

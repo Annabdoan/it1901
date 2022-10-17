@@ -43,7 +43,6 @@ public class BeerController {
         persistence = new Persistence();
         this.setFilePath("beersystem.json");
         try {
-            System.out.println(filePath.toString());
             beermain = persistence.readBeerMain(new File(filePath.toString()));
             updateMemberView();
             updatePersonChoicebox();

@@ -17,22 +17,22 @@ The group wants the system to keep track of rules for beer penalties. It's nice 
 ##### Story 2
 > Sara starts to get annoyed that Maurice is always on his mobile phone during the meetings, and wants mobile phone use to result in a beer penalty.
 Sara needs to create a function that can add new rules to the beer penalty system. 
-In this way, Maurice will be aware that mobile use is a rule breach.
+In this way, she can punish Maurice for his repeated mobile use.
 
 #### Userstory release 2
 ##### Story 3
-> Now that the group has a set of rules to follow, Sara wants to punish Maurice and give him the penalties he deserves.
- She wants to display a list of the group members and how many penalties each member has. 
+> Now that the group has a set of rules to follow, Sara can finally punish Maurice and give him the penalties he deserves.
+ She wants to display a list with the group members and how many penalties each member has. 
 
 
 
 
-### Intended functionality at final release:
+### Intented functionality at final release:
 
 
-#### UI
+#### What we can see
 * Overview of how many beer penalties individuals have.
-* Rules violations that provide penalties.
+* Rules regarding violations that provide penalties.
 
 #### Functionality
 * Enter a new rule violation
@@ -45,11 +45,10 @@ In this way, Maurice will be aware that mobile use is a rule breach.
   * Punishment value; amount of beers. 
   
 * Add new person.
-
 * Delete-functionality 
-  * Delete members.
+  * Delete members/people.
   * Delete rules.
-  * Delete punishments by paying them.
+  * Functionality to delete your punishments by paying them.
 
 
 ###  Project Structure

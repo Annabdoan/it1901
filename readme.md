@@ -5,17 +5,17 @@
 This is the project in the subject ITP1901 by group 31. 
 
 This repo contains a multi-package, multi-module javafx project for a beer punishment system. This application is primarily meant for people who work in teams or groups.
-This app will provide a clear overview of what rules applies to the group/team, who has broken which rules and how many beers each individual has as punishment.
-You can read more about the project here [Beer Punishment](/beer_punishment/README.md).
+This app will provide a clear overview of which rules apply to the group/team, who has broken which rules and how many beers each individual has as punishment.
+You can read more about the project here [Beer Punishment](./beer_punishment/README.md).
 
 ### Building and running the project
 Note:
-This project is built up with maven, and if maven is not installed you can use gitpod.
+This project is built up with maven. If you do not have Maven installed, you are free to use Gitpod. Click the Gitpod icon at the top of this file.
 
 #### Runnning application with local access:
 
 1. Navigate to beer_punishment directory.
-2. Create JAR files for the project.
+2. Create JAR/POM files for the project.
 3. Deploy the packaged JAR file to the local repository. 
 4. Compile source code.
 4. Navigate to UI-module.
@@ -39,32 +39,33 @@ Each module will have its own report. The reports are located in the modules res
 #### Getting the JaCoCo-reports 
 
 1. Run the test.
+2. Make the JaCoCo reports.
 2. Navigate to the target directory in each module.
 3. Open the site folder.
 4. Open the index.html file in your browser. 
 
 >1. mvn verify
 >2. mvn jacoco:report
->
+
 
 
 
 
 ### Organization of the code
-* [beer_punishment](/beer_punishment)
-    * [core](/beer_punishment/core)
-      * [domain-logic](/beer_punishment/core/src/main/java/beerPunishment/core)
-    * [json](/beer_punishment/json)
-      * [json-logic](/beer_punishment/json/src/main/java/beerPunishment/json)
-    * [ui](/beer_punishment/ui)
-      * [ui-logic](/beer_punishment/ui/src/main/java/beerPunishment/ui)
-      * [FXML](/beer_punishment/ui/src/main/resources)
+* [beer_punishment](./beer_punishment)
+    * [core](./beer_punishment/core)
+      * [domain-logic](./beer_punishment/core/src/main/java/beerPunishment/core)
+    * [json](./beer_punishment/json)
+      * [json-logic](./beer_punishment/json/src/main/java/beerPunishment/json)
+    * [ui](./beer_punishment/ui)
+      * [ui-logic](./beer_punishment/ui/src/main/java/beerPunishment/ui)
+      * [FXML](./beer_punishment/ui/src/main/resources)
 
-[Read more about the modules and the code](/beer_punishment/README.md)
+[Read more about the modules and the code](./beer_punishment/README.md)
 
 
 ### The plan
-The project is set to three releases.
+The project is set to three releases. Each release represents a sprint.
 
 ###### Sprint 1
 This sprint contains two user stories. 
@@ -73,13 +74,14 @@ User story 1:
 >A member of the group wants to keep track of the rules which leeds to punishment.
 
 User story 2: 
->A group wants one persons late comings to be punished. \
-Read more about it here: [Release 1](/docs/release1.md)
+>A group wants one persons late comings to be punished. 
+
+Read more about the user stories and documentation for sprint 1 here: [Release 1](./docs/release1.md)
 
 ###### Sprint 2
-In this sprint we will continue to add more functionality. The goal is to implement most of the wanted logic. 
+In this sprint we will continue to add more functionality. The goal is to implement most of the desired logic. 
 
 User story 3: 
 >The group wants to display a list with the group members and how many penalties each member has.
 
-Read more about it here: [Release 2](/docs/release2.md)
+Read more about the user stories and documentation for sprint 2 here: [Release 2](./docs/release2.md)

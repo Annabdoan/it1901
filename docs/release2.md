@@ -15,11 +15,11 @@ We realised along the way that we needed to communicate better, and each other w
 For the next sprint we will work on how we can better the communication through introducing the SCRUM standups in every meeting.
 This will make it easier for each member to have better control of what the other group members are working on, and will hopefully result in a more agile development.
 
-The group has been striving towards having two group meeting a week, which has been working well.
+The group have been striving towards having two group meeting a week, which has been working well.
 We have worked on having more specific issues, and it is easier to have an overview on what needs to be done before the next release.
 
 ### Methods for qulity ensurance of code:
-We intend to implement tests for all the modules, and use Jacoco for testing coverage above 90%.
+We intend to implement tests for all the modules, and used JaCoCo plugin to get test reports in order to check our test coverage.
 We have also implemented Checkstyle and Spotbugs to check the code quality.
 
 
@@ -36,7 +36,7 @@ We have also implemented Checkstyle and Spotbugs to check the code quality.
 * \+ BeerMainSerializer.java
 * \+ RuleDeserializer.java
 * \+ RuleSerializer.java
-* \+ RulePersostence.java
+* \+ RulePersistence.java
 * \+ RuleModule.java
 
 #### UI
@@ -46,10 +46,12 @@ We have also implemented Checkstyle and Spotbugs to check the code quality.
   ##### Resources:
     * Beer.fxml
 
-#### At release 1 the app will consist of this scene
+#### At release 2 the app will consist of this scene
+
+ Note &rarr; The rule needs to be written in the format "Rule description;punishment value". An example is shown in the picture below.
 ![alt_text](./uirelease2.png)
 
 ### User story for release 2:
 User Story 3 
->Now that the group has a set of rules to follow, Sara can finally punish Maurice and give him the penalties he deserves.
-She wants to display a list with the group members and how many penalties each member has.
+>Now that the group has a set of rules to follow, Sara wants to punish Maurice and give him the penalties he deserves.
+She wants to display a list of the group members and how many penalties each member has.

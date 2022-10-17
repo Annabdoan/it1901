@@ -11,7 +11,6 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONObject;
 
 //making the list of rule objects to json
 public class BeerMainSerializer extends JsonSerializer<BeerMain>{

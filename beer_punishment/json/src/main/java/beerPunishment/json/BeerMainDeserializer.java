@@ -8,14 +8,16 @@ import com.fasterxml.jackson.core.TreeNode;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import com.fasterxml.jackson.databind.node.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Class to Deserialize {@link BeerMain}.
+ */
 public class BeerMainDeserializer extends JsonDeserializer<BeerMain> {
 
     private RuleDeserializer ruleDeserializer = new RuleDeserializer();
@@ -23,23 +25,24 @@ public class BeerMainDeserializer extends JsonDeserializer<BeerMain> {
     /*
     format:
     {
-        {"rules": [ ... ],"memberRuleViolations:"{\"username\"[{"description":"...","punishmentValue":...}, ...]}}
+        {"rules": [ ... ],
+        "memberRuleViolations:"{\"username\"[{"description":"...","punishmentValue":...}, ...]}}
     }
      */
 
     @Override
-    public BeerMain deserialize(JsonParser parser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
+    public BeerMain deserialize(JsonParser parser,
+                                DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
         TreeNode treeNode = parser.getCodec().readTree(parser);
-        if (treeNode instanceof ObjectNode){
+        if (treeNode instanceof ObjectNode) {
             ObjectNode objectNode = (ObjectNode) treeNode;
             BeerMain beerMainList = new BeerMain();
             JsonNode rulesNode = objectNode.get("rules");
-            if (rulesNode instanceof ArrayNode){
-                for (JsonNode elementNode: (ArrayNode) rulesNode){
+            if (rulesNode instanceof ArrayNode) {
+                for (JsonNode elementNode : (ArrayNode) rulesNode) {
                     System.out.println(elementNode);
                     Rule rule = ruleDeserializer.deserialize(elementNode);
-                    if (rule != null){
+                    if (rule != null) {
                         beerMainList.addRule(rule);
                     }
                 }
@@ -47,31 +50,30 @@ public class BeerMainDeserializer extends JsonDeserializer<BeerMain> {
             JsonNode violationNode = objectNode.get("memberRuleViolations");
             HashMap<String, List<Rule>> tempMap = new HashMap<String, List<Rule>>();
             String key = "";
-            if (violationNode instanceof ArrayNode){
+            if (violationNode instanceof ArrayNode) {
                 int i = 0;
-                for (JsonNode elementNode: (ArrayNode) violationNode){
+                for (JsonNode elementNode : (ArrayNode) violationNode) {
                     if (i % 2 == 0) {
                         key = elementNode.toString();
                         tempMap.put(key, new ArrayList<>());
-                        i ++;
-                    }
-                    else {
+                        i++;
+                    } else {
                         List<Rule> tempList = new ArrayList<>();
-                        for (JsonNode temp: elementNode) {
+                        for (JsonNode temp : elementNode) {
                             Rule rule = ruleDeserializer.deserialize(temp);
-                            if (rule != null){
+                            if (rule != null) {
                                 tempList.add(rule);
                             }
                         }
                         System.out.println(tempList);
                         tempMap.put(key, tempList);
                         i++;
-                        }
                     }
-                beerMainList.setMemberRuleViolations(tempMap);
                 }
-            return beerMainList;
+                beerMainList.setMemberRuleViolations(tempMap);
             }
+            return beerMainList;
+        }
         return null;
     }
 }

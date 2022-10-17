@@ -7,10 +7,9 @@ import javafx.stage.Stage;
 
 
 /**
- * JavaFX App
+ * JavaFX App.
  */
 public class BeerApp extends Application {
-
 
 
     @Override

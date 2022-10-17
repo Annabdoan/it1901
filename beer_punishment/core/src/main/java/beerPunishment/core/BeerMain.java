@@ -112,6 +112,7 @@ public class BeerMain implements Iterable<Rule> {
     public void setMemberRuleViolations(HashMap<String, List<Rule>> memberRuleViolations) {
         this.memberRuleViolations = new HashMap<>(memberRuleViolations);
     }
+
     /**
      * Makes a ToString out of the hashmap
      */
@@ -125,19 +126,11 @@ public class BeerMain implements Iterable<Rule> {
             sb.append(punishmentStatus.get(entry.getKey()));
             punishmentToString.add(sb.toString());
         }
-        /*
-        for (String username : punishmentStatus.keySet()) {
-            StringBuilder sb = new StringBuilder();
-            sb.append(username);
-            sb.append("\t\t\t\t\t");
-            sb.append(punishmentStatus.get(username));
-            punishmentToString.add(sb.toString());
-        }*/
         return new ArrayList<>(punishmentToString);
     }
 
     /**
-     * Iterator to easilly move between objects in list.
+     * Iterator to easily move between objects in list.
      *
      * @return iterator of rules
      */

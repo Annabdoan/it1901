@@ -1,5 +1,12 @@
 package beerPunishment.ui;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
 import beerPunishment.json.Persistence;
@@ -179,5 +186,10 @@ public class BeerController {
 
         }
     }
+
+    public BeerMain getBeermain() {
+        return beermain;
+    }
+
 
 }

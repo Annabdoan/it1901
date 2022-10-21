@@ -17,15 +17,23 @@ public class JsonHandler {
     }
 
     public void writeToJson(BeerMain beerMain, String filename) throws IOException {
-        FileWriter fw = new FileWriter(getFilePath(filename));
-        gson.toJson(beerMain, fw);
-        fw.flush();
-        fw.close();
+        try {
+            FileWriter fw = new FileWriter(getFilePath(filename));
+            gson.toJson(beerMain, fw);
+            fw.flush();
+            fw.close();
+        }catch (IOException IOe ) {
+            throw new IOException("Feil ved skriving til fil");
+        }
     }
 
-    public BeerMain readFromJson(String filename) throws FileNotFoundException {
-        BeerMain beerMain = gson.fromJson(new FileReader(getFilePath(filename)), BeerMain.class);
-        return beerMain;
+    public BeerMain readFromJson(String filename) throws IOException {
+        try {
+            BeerMain beerMain = gson.fromJson(new FileReader(getFilePath(filename)), BeerMain.class);
+            return beerMain;
+        }catch (IOException IOe) {
+            throw new IOException("Feil ved lesing fra fil");
+        }
     }
 
 

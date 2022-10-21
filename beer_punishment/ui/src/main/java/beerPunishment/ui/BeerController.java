@@ -22,7 +22,6 @@ import javafx.scene.control.TextField;
 public class BeerController {
 
     private BeerMain beermain;
-    //private Persistence persistence;
 
 
     @FXML

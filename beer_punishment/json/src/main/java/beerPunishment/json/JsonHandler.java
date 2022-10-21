@@ -12,6 +12,11 @@ public class JsonHandler {
 
     Gson gson = new Gson();
 
+    /**
+     * Sets the filepath to and set name to the jsonfile.
+     *
+     * @param filename the filename to set
+     */
     public String getFilePath(String filename) {
         return System.getProperty("user.home") + filename;
     }
@@ -22,7 +27,7 @@ public class JsonHandler {
             gson.toJson(beerMain, fw);
             fw.flush();
             fw.close();
-        }catch (IOException IOe ) {
+        }catch (IOException io) {
             throw new IOException("Feil ved skriving til fil");
         }
     }
@@ -35,7 +40,5 @@ public class JsonHandler {
             throw new IOException("Feil ved lesing fra fil");
         }
     }
-
-
 }
 

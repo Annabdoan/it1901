@@ -10,5 +10,5 @@ module beerPunishment.json {
 
     opens beerPunishment.json to gson;
 
-    //exports beerPunishment.json;
+    exports beerPunishment.json;
 }

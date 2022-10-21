@@ -34,7 +34,7 @@ public class BeerController {
     public ChoiceBox personChoiceBox;
     public ListView punishmentStatusOverview;
     public TextField addMemberText;
-    private Path filePath;
+    private String fileName;
     private JsonHandler jsh;
 
     /**
@@ -44,7 +44,8 @@ public class BeerController {
     public void initialize() throws IOException {
         jsh = new JsonHandler();
         try {
-            beermain = jsh.readFromJson("/beerPunishment.json"); // Må bruke "\\" i stedet for "/" på windows
+            fileName = "/beerPunishment.json";
+            beermain = jsh.readFromJson(fileName); // Må bruke "\\" i stedet for "/" på windows
             updateMemberView();
             updatePersonChoicebox();
             updateListView();
@@ -106,7 +107,7 @@ public class BeerController {
             Rule rule = new Rule(arrOfNewRuleTextInput[0],
                     Integer.parseInt(arrOfNewRuleTextInput[1]));
             beermain.addRule(rule);
-            jsh.writeToJson(beermain, "/beerPunishment.json");
+            jsh.writeToJson(beermain, fileName);
             updateListView();
             updateRuleChoicebox();
         } catch (NumberFormatException Ne) {
@@ -136,7 +137,7 @@ public class BeerController {
             if (rule.getDescription().equals(chosenRule)) {
                 beermain.punishMember(chosenMember, rule);
                 try {
-                    jsh.writeToJson(beermain, "/beerPunishment.json");
+                    jsh.writeToJson(beermain, fileName);
                 } catch (IOException punishMemberioe) {
                     showErrorMessage("Failed to punish member");
                 }
@@ -154,16 +155,21 @@ public class BeerController {
     public void addMember() throws IOException {
         String username = addMemberText.getText();
         try {
-            try {
-                jsh.writeToJson(this.beermain, "/beerPunishment.json");
-                beermain.addMember(username);
-            } catch (IOException addMemberIoe) {
-                throw addMemberIoe;
-            }
+            beermain.addMember(username);
+            jsh.writeToJson(this.beermain, fileName);
             updateMemberView();
             updatePersonChoicebox();
         } catch (IllegalArgumentException | IOException e) {
             showErrorMessage(e.getMessage());
         }
+    }
+
+    //Should consider returning a copy of the object
+    public BeerMain getBeermain() {
+        return this.beermain;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }

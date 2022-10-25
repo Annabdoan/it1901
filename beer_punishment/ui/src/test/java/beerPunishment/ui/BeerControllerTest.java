@@ -67,14 +67,13 @@ public class BeerControllerTest extends ApplicationTest {
         BeerMain beerMain = this.controller.getBeermain();
         HashMap<String, List<Rule>> actualHashMap = beerMain.getMemberRuleViolations();
         List<Rule> expectedList = new ArrayList<>(List.of(new Rule("Komme for sent", 5)));
-        assertEquals(expectedList.toString(), actualHashMap.get("\"Maurice\"").toString());
+        assertEquals(expectedList.toString(), actualHashMap.get("Maurice").toString());
     }
 
 
     @AfterAll
     public static void reset() {
-        File file = new File(System.getProperty("user.home"),"beersystem.json");
+        File file = new File(System.getProperty("user.home"),"/beerPunishment.json");
         file.delete();
     }
-
 }

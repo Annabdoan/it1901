@@ -7,9 +7,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import beerPunishment.json.JsonHandler;
+import com.google.gson.Gson;
+
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
-import beerPunishment.json.Persistence;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
@@ -23,7 +25,6 @@ import javafx.scene.control.TextField;
 public class BeerController {
 
     private BeerMain beermain;
-    private Persistence persistence;
 
 
     @FXML
@@ -33,42 +34,27 @@ public class BeerController {
     public ChoiceBox personChoiceBox;
     public ListView punishmentStatusOverview;
     public TextField addMemberText;
-    private Path filePath;
+    private String fileName;
+    private JsonHandler jsh;
 
     /**
      * Initialize.
      */
     @FXML
-    public void initialize() {
-        persistence = new Persistence();
-        this.setFilePath("beersystem.json");
+    public void initialize() throws IOException {
+        jsh = new JsonHandler();
         try {
-            beermain = persistence.readBeerMain(new File(filePath.toString()));
+            fileName = "/beerPunishment.json";
+            beermain = jsh.readFromJson(fileName); // Må bruke "\\" i stedet for "/" på windows
             updateMemberView();
             updatePersonChoicebox();
             updateListView();
             updateRuleChoicebox();
         } catch (IOException ioe) {
             beermain = new BeerMain();
-            try {
-                persistence.createFile(filePath.toString());
-            } catch (IOException ioe3) {
-                //Do nothing
-            }
-            //Do nothing
         }
 
     }
-
-    /**
-     * Sets the filepath to and set name to the jsonfile.
-     *
-     * @param filename the filename to set
-     */
-    private void setFilePath(String filename) {
-        this.filePath = Paths.get(System.getProperty("user.home"), filename);
-    }
-
     @FXML
     private void updateListView() {
         List<Rule> rules = beermain.getRules();
@@ -114,13 +100,14 @@ public class BeerController {
      */
     @FXML
     public void makeNewRule() {
+
         try {
             //Split the string in the text input in order to add a new rule.
             String[] arrOfNewRuleTextInput = newRuleTextInput.getText().split(";");
             Rule rule = new Rule(arrOfNewRuleTextInput[0],
                     Integer.parseInt(arrOfNewRuleTextInput[1]));
             beermain.addRule(rule);
-            persistence.writeBeerMain(beermain, new File(filePath.toString()));
+            jsh.writeToJson(beermain, fileName);
             updateListView();
             updateRuleChoicebox();
         } catch (NumberFormatException Ne) {
@@ -128,6 +115,8 @@ public class BeerController {
         } catch (IOException IOe) {
             showErrorMessage(IOe.getMessage());
         }
+
+
 
     }
 
@@ -141,45 +130,46 @@ public class BeerController {
      */
     @FXML
     public void punishMember() {
+
         String chosenRule = ruleChoiceBox.getSelectionModel().getSelectedItem().toString();
         String chosenMember = personChoiceBox.getSelectionModel().getSelectedItem().toString();
         for (Rule rule : beermain.getRules()) {
             if (rule.getDescription().equals(chosenRule)) {
                 beermain.punishMember(chosenMember, rule);
                 try {
-                    persistence.writeBeerMain(beermain, new File(filePath.toString()));
+                    jsh.writeToJson(beermain, fileName);
                 } catch (IOException punishMemberioe) {
                     showErrorMessage("Failed to punish member");
                 }
             }
         }
         updateMemberView();
+
+
     }
 
     /**
      * Add member.
      */
     @FXML
-    public void addMember() {
+    public void addMember() throws IOException {
         String username = addMemberText.getText();
         try {
             beermain.addMember(username);
-            try {
-                persistence.writeBeerMain(beermain, new File(filePath.toString()));
-            } catch (IOException addMemberIoe) {
-                showErrorMessage("Failed to add member");
-            }
+            jsh.writeToJson(this.beermain, fileName);
             updateMemberView();
             updatePersonChoicebox();
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | IOException e) {
             showErrorMessage(e.getMessage());
-
         }
     }
 
+    //Should consider returning a copy of the object
     public BeerMain getBeermain() {
-        return beermain;
+        return this.beermain;
     }
 
-
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
 }

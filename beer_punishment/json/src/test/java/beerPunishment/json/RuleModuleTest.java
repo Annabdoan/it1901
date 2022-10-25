@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+// import com.fasterxml.jackson.core.JsonProcessingException;
+// import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +14,8 @@ import java.util.*;
 
 
 public class RuleModuleTest {
+/*
+
 
     //{"items":[{"rule":"Komme for sent","value":2},{"rule":"Ikke gjort TODO","value":3}]}
 
@@ -110,5 +112,5 @@ public class RuleModuleTest {
             fail();
         }
     }
-
+*/
 }

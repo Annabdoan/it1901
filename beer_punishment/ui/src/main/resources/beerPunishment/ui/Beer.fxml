@@ -158,9 +158,9 @@
                 <RowConstraints maxHeight="171.0" minHeight="10.0" prefHeight="123.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ChoiceBox fx:id="paymentRuleChoicebox" prefWidth="150.0" GridPane.rowIndex="2" />
-                  <ChoiceBox fx:id="paymentMemberChoicebox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Button fx:id="payButton" mnemonicParsing="false" onAction="#payViolation" text="Slett" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <ChoiceBox fx:id="paymentRuleChoiceBox" prefWidth="150.0" GridPane.rowIndex="2" />
+                  <ChoiceBox fx:id="paymentMemberChoiceBox" onAction="#updatePaymentRuleChoicebox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button fx:id="payButton" mnemonicParsing="false" onAction="#payViolation" text="Betal" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Straff" wrappingWidth="109.21630859375" GridPane.rowIndex="1">
                      <font>
                         <Font name="Arial" size="15.0" />

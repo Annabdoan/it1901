@@ -32,6 +32,8 @@ public class BeerController {
     public TextField newRuleTextInput;
     public ChoiceBox ruleChoiceBox;
     public ChoiceBox personChoiceBox;
+    public ChoiceBox paymentMemberChoiceBox;
+    public ChoiceBox paymentRuleChoiceBox;
     public ListView punishmentStatusOverview;
     public TextField addMemberText;
     public TextField deleteMemberText;
@@ -52,6 +54,8 @@ public class BeerController {
             updatePersonChoicebox();
             updateListView();
             updateRuleChoicebox();
+            updatePersonChoicebox();
+            updatePaymentPersonChoicebox();
         } catch (IOException ioe) {
             beermain = new BeerMain();
         }
@@ -155,8 +159,7 @@ public class BeerController {
             }
         }
         updateMemberView();
-
-
+        updatePaymentRuleChoicebox();
     }
 
     /**
@@ -170,6 +173,7 @@ public class BeerController {
             jsh.writeToJson(this.beermain, fileName);
             updateMemberView();
             updatePersonChoicebox();
+            updatePaymentPersonChoicebox();
         } catch (IllegalArgumentException | IOException e) {
             showErrorMessage(e.getMessage());
         }
@@ -183,10 +187,56 @@ public class BeerController {
             jsh.writeToJson(this.beermain, fileName);
             updateMemberView();
             updatePersonChoicebox();
+            updatePaymentPersonChoicebox();
         } catch (IllegalArgumentException | IOException e) {
             showErrorMessage(e.getMessage());
         }
     }
+
+    @FXML
+    public void payViolation() {
+        String chosenRule = paymentRuleChoiceBox.getSelectionModel().getSelectedItem().toString();
+        String chosenMember = paymentMemberChoiceBox.getSelectionModel().getSelectedItem().toString();
+        for (Rule rule : beermain.getRules()) {
+            if (rule.getDescription().equals(chosenRule)) {
+                beermain.removePunishment(chosenMember, rule);
+                try {
+                    jsh.writeToJson(beermain, fileName);
+                } catch (IOException punishMemberioe) {
+                    showErrorMessage("Failed to punish member");
+                }
+            }
+        }
+        updateMemberView();
+        updatePaymentRuleChoicebox();
+    }
+
+    @FXML
+    private void updatePaymentRuleChoicebox() {
+        List<String> ruleDescriptions = new ArrayList<>();
+        if (paymentMemberChoiceBox.getSelectionModel().getSelectedItem() == null) {
+            System.out.println("Ingen person valgt i choicebox");
+        }else {
+            List<Rule> rules = beermain.getMemberViolations(paymentMemberChoiceBox.getSelectionModel().getSelectedItem().toString());
+            for (Rule rule : rules) {
+                ruleDescriptions.add(rule.getDescription());
+            }
+            paymentRuleChoiceBox.getItems().setAll(ruleDescriptions);
+        }
+
+    }
+
+    private void updatePaymentPersonChoicebox() {
+        try {
+            paymentMemberChoiceBox.getItems().setAll(beermain.getUsernames());
+        } catch (Exception e) {
+            showErrorMessage("Feil ved personChoicebox");
+        }
+    }
+
+
+
+
 
     //Should consider returning a copy of the object
     public BeerMain getBeermain() {

@@ -34,6 +34,8 @@ public class BeerController {
     public ChoiceBox personChoiceBox;
     public ListView punishmentStatusOverview;
     public TextField addMemberText;
+    public TextField deleteMemberText;
+    public Button deleteMemberButton;
     private String fileName;
     private JsonHandler jsh;
 
@@ -162,6 +164,11 @@ public class BeerController {
         } catch (IllegalArgumentException | IOException e) {
             showErrorMessage(e.getMessage());
         }
+    }
+
+    @FXML
+    public void deleteMember() {
+
     }
 
     //Should consider returning a copy of the object

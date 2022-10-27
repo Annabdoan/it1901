@@ -43,6 +43,19 @@ public class BeerMain implements Iterable<Rule> {
         this.rules.remove(rule);
     }
 
+    public void removeRuleUsingDescription(String description) {
+        Rule empty = null;
+        for (Rule rule: rules){
+            if (rule.getDescription().equals(description)){
+                empty = rule;
+            }
+        }
+        if (empty == null) {
+            throw new IllegalArgumentException("Regel eksisterer ikke");
+        }
+        rules.remove(empty);
+    }
+
     /**
      * Method for adding members.
      *

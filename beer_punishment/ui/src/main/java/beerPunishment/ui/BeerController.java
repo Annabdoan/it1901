@@ -168,7 +168,15 @@ public class BeerController {
 
     @FXML
     public void deleteMember() {
-
+        String username = deleteMemberText.getText();
+        try {
+            beermain.deleteMember(username);
+            jsh.writeToJson(this.beermain, fileName);
+            updateMemberView();
+            updatePersonChoicebox();
+        } catch (IllegalArgumentException | IOException e) {
+            showErrorMessage(e.getMessage());
+        }
     }
 
     //Should consider returning a copy of the object

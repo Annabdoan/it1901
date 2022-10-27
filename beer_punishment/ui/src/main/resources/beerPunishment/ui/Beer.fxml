@@ -133,7 +133,10 @@
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Slett medlem" wrappingWidth="219.21630859375" />
                   <TextField fx:id="deleteMemberText" promptText="Brukernavn" GridPane.rowIndex="1" />
-                  <Button fx:id="deleteMemberButton" mnemonicParsing="false" onAction="#deleteMember" text="Slett" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#deleteMember" text="Slett" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Slett regel" wrappingWidth="222.21630859375" GridPane.rowIndex="2" />
+                  <TextField fx:id="deleteRuleText" promptText="Regel" GridPane.rowIndex="3" />
+                  <Button fx:id="deleteRuleButton" mnemonicParsing="false" onAction="#deleteRule" text="Slett" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
             </children>

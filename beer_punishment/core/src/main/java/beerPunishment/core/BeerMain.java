@@ -89,6 +89,33 @@ public class BeerMain implements Iterable<Rule> {
         memberRuleViolations.put(username, violations);
     }
 
+    public void removePunishment(String username, Rule rule) {
+        if (!memberRuleViolations.containsKey(username)) {
+            throw new IllegalArgumentException("Brukernavnet eksisterer ikke");
+        }
+        int sizeBefore = memberRuleViolations.get(username).size();
+        for (Rule tempRule : memberRuleViolations.get(username)) {
+            if (rule.getDescription().equals(tempRule.getDescription())) {
+                List<Rule> tempList = memberRuleViolations.get(username);
+                tempList.remove(tempRule);
+                memberRuleViolations.put(username, tempList);
+                break;
+            }
+        }
+        int sizeAfter = memberRuleViolations.get(username).size();
+        if (sizeBefore == sizeAfter) {
+            throw new IllegalArgumentException("Du har ikke brutt denne regelen");
+        }
+
+    }
+
+    public List<Rule> getMemberViolations (String username) {
+        if (!memberRuleViolations.containsKey(username)) {
+            throw new IllegalArgumentException("Brukernavn finnes ikke");
+        }
+        return new ArrayList<>(memberRuleViolations.get(username));
+    }
+
     private HashMap<String, Integer> generateMembersPunishments() {
         HashMap<String, Integer> punishmentStatus = new HashMap<>();
         for (Map.Entry<String, List<Rule>> entry : memberRuleViolations.entrySet()) {

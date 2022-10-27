@@ -34,6 +34,8 @@ public class BeerController {
     public ChoiceBox personChoiceBox;
     public ListView punishmentStatusOverview;
     public TextField addMemberText;
+    public TextField deleteMemberText;
+    public Button deleteMemberButton;
     private String fileName;
     private JsonHandler jsh;
 
@@ -156,6 +158,19 @@ public class BeerController {
         String username = addMemberText.getText();
         try {
             beermain.addMember(username);
+            jsh.writeToJson(this.beermain, fileName);
+            updateMemberView();
+            updatePersonChoicebox();
+        } catch (IllegalArgumentException | IOException e) {
+            showErrorMessage(e.getMessage());
+        }
+    }
+
+    @FXML
+    public void deleteMember() {
+        String username = deleteMemberText.getText();
+        try {
+            beermain.deleteMember(username);
             jsh.writeToJson(this.beermain, fileName);
             updateMemberView();
             updatePersonChoicebox();

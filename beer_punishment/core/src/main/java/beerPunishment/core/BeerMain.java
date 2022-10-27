@@ -51,6 +51,12 @@ public class BeerMain implements Iterable<Rule> {
         }
         memberRuleViolations.put(username, new ArrayList<>());
     }
+    public void deleteMember(String username){
+        if (!memberRuleViolations.containsKey(username)) {
+            throw new IllegalArgumentException("Brukernavn eksisterer ikke");
+        }
+        memberRuleViolations.remove(username);
+    }
 
     /**
      * Method for punishing members.

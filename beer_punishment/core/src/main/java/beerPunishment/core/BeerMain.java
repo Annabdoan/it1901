@@ -8,8 +8,8 @@ import java.util.*;
  */
 public class BeerMain implements Iterable<Rule> {
 
-    private List<Rule> rules = new ArrayList<>();
-    private HashMap<String, List<Rule>> memberRuleViolations = new HashMap<String, List<Rule>>();
+    private Collection<Rule> rules = new ArrayList<>();
+    private HashMap<String, Collection<Rule>> memberRuleViolations = new HashMap<>();
 
 
     public BeerMain() {
@@ -20,7 +20,7 @@ public class BeerMain implements Iterable<Rule> {
      *
      * @return the rules
      */
-    public List<Rule> getRules() {
+    public Collection<Rule> getRules() {
         return new ArrayList<>(this.rules);
     }
 
@@ -30,6 +30,11 @@ public class BeerMain implements Iterable<Rule> {
      * @param rule the rule
      */
     public void addRule(Rule rule) {
+        for (Rule r1: this.rules) {
+            if (r1.getDescription().equalsIgnoreCase(rule.getDescription())) {
+                throw new IllegalArgumentException("Ikke lov å lage samme regel to ganger");
+            }
+        }
         this.rules.add(rule);
     }
 
@@ -37,7 +42,23 @@ public class BeerMain implements Iterable<Rule> {
      * Removes already existing User.
      */
     public void removeRule(Rule rule) {
+        if (!rules.contains(rule)) {
+            throw new IllegalArgumentException("Regelen eksisterer ikke");
+        }
         this.rules.remove(rule);
+    }
+
+    public void removeRuleUsingDescription(String description) {
+        Rule empty = null;
+        for (Rule rule: rules){
+            if (rule.getDescription().equals(description)){
+                empty = rule;
+            }
+        }
+        if (empty == null) {
+            throw new IllegalArgumentException("Regel eksisterer ikke");
+        }
+        rules.remove(empty);
     }
 
     /**
@@ -51,6 +72,12 @@ public class BeerMain implements Iterable<Rule> {
         }
         memberRuleViolations.put(username, new ArrayList<>());
     }
+    public void deleteMember(String username){
+        if (!memberRuleViolations.containsKey(username)) {
+            throw new IllegalArgumentException("Brukernavn eksisterer ikke");
+        }
+        memberRuleViolations.remove(username);
+    }
 
     /**
      * Method for punishing members.
@@ -62,14 +89,41 @@ public class BeerMain implements Iterable<Rule> {
         if (!memberRuleViolations.containsKey(username)) {
             throw new IllegalArgumentException("Brukernavnet eksisterer ikke");
         }
-        List<Rule> violations = memberRuleViolations.get(username);
+        Collection<Rule> violations = memberRuleViolations.get(username);
         violations.add(rule);
         memberRuleViolations.put(username, violations);
     }
 
+    public void removePunishment(String username, Rule rule) {
+        if (!memberRuleViolations.containsKey(username)) {
+            throw new IllegalArgumentException("Brukernavnet eksisterer ikke");
+        }
+        int sizeBefore = memberRuleViolations.get(username).size();
+        for (Rule tempRule : memberRuleViolations.get(username)) {
+            if (rule.getDescription().equals(tempRule.getDescription())) {
+                Collection<Rule> tempList = memberRuleViolations.get(username);
+                tempList.remove(tempRule);
+                memberRuleViolations.put(username, tempList);
+                break;
+            }
+        }
+        int sizeAfter = memberRuleViolations.get(username).size();
+        if (sizeBefore == sizeAfter) {
+            throw new IllegalArgumentException("Du har ikke brutt denne regelen");
+        }
+
+    }
+
+    public Collection<Rule> getMemberViolations (String username) {
+        if (!memberRuleViolations.containsKey(username)) {
+            throw new IllegalArgumentException("Brukernavn finnes ikke");
+        }
+        return new ArrayList<>(memberRuleViolations.get(username));
+    }
+
     private HashMap<String, Integer> generateMembersPunishments() {
         HashMap<String, Integer> punishmentStatus = new HashMap<>();
-        for (Map.Entry<String, List<Rule>> entry : memberRuleViolations.entrySet()) {
+        for (Map.Entry<String, Collection<Rule>> entry : memberRuleViolations.entrySet()) {
             Integer totalpunishmemt = 0;
             for (Rule rule : memberRuleViolations.get(entry.getKey())
             ) {
@@ -96,7 +150,7 @@ public class BeerMain implements Iterable<Rule> {
      *
      * @return the members.
      */
-    public List<String> getUsernames() {
+    public Collection<String> getUsernames() {
         return new ArrayList<>(memberRuleViolations.keySet());
     }
 
@@ -105,21 +159,21 @@ public class BeerMain implements Iterable<Rule> {
      *
      * @return the hashmap of members and what rules they have broken.
      */
-    public HashMap<String, List<Rule>> getMemberRuleViolations() {
-        return new HashMap<String, List<Rule>>(this.memberRuleViolations);
+    public HashMap<String, Collection<Rule>> getMemberRuleViolations() {
+        return new HashMap<String, Collection<Rule>>(this.memberRuleViolations);
     }
 
-    public void setMemberRuleViolations(HashMap<String, List<Rule>> memberRuleViolations) {
+    public void setMemberRuleViolations(HashMap<String, Collection<Rule>> memberRuleViolations) {
         this.memberRuleViolations = new HashMap<>(memberRuleViolations);
     }
 
     /**
      * Makes a ToString out of the hashmap.
      */
-    public List<String> generatePunishmentStatusToString() {
+    public Collection<String> generatePunishmentStatusToString() {
         HashMap<String, Integer> punishmentStatus = generateMembersPunishments();
-        List<String> punishmentToString = new ArrayList<>();
-        for (Map.Entry<String, List<Rule>> entry : memberRuleViolations.entrySet()) {
+        Collection<String> punishmentToString = new ArrayList<>();
+        for (Map.Entry<String, Collection<Rule>> entry : memberRuleViolations.entrySet()) {
             StringBuilder sb = new StringBuilder();
             sb.append(entry.getKey());
             sb.append("\t\t\t\t\t");
@@ -148,7 +202,7 @@ public class BeerMain implements Iterable<Rule> {
      *
      * @return iterator of members and their violations
      */
-    public Iterator<Map.Entry<String, List<Rule>>> violationIterator() {
+    public Iterator<Map.Entry<String, Collection<Rule>>> violationIterator() {
         return memberRuleViolations.entrySet().iterator();
     }
 

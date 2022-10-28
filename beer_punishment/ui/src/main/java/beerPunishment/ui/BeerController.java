@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import beerPunishment.json.JsonHandler;
@@ -63,8 +64,8 @@ public class BeerController {
     }
     @FXML
     private void updateListView() {
-        List<Rule> rules = beermain.getRules();
-        List<String> rulesToString = new ArrayList<>();
+        Collection<Rule> rules = beermain.getRules();
+        Collection<String> rulesToString = new ArrayList<>();
         for (Rule rule : rules) {
             rulesToString.add(rule.toStringDisplayFormat());
         }
@@ -72,7 +73,7 @@ public class BeerController {
     }
 
     private void updateRuleChoicebox() {
-        List<String> ruleDescriptions = new ArrayList<>();
+        Collection<String> ruleDescriptions = new ArrayList<>();
         for (Rule rule : beermain.getRules()) {
             ruleDescriptions.add(rule.getDescription());
         }
@@ -136,7 +137,7 @@ public class BeerController {
     }
 
     private void updateMemberView() {
-        List<String> punishmentStatus = beermain.generatePunishmentStatusToString();
+        Collection<String> punishmentStatus = beermain.generatePunishmentStatusToString();
         punishmentStatusOverview.getItems().setAll(punishmentStatus);
     }
 
@@ -213,11 +214,11 @@ public class BeerController {
 
     @FXML
     private void updatePaymentRuleChoicebox() {
-        List<String> ruleDescriptions = new ArrayList<>();
+        Collection<String> ruleDescriptions = new ArrayList<>();
         if (paymentMemberChoiceBox.getSelectionModel().getSelectedItem() == null) {
             System.out.println("Ingen person valgt i choicebox");
         }else {
-            List<Rule> rules = beermain.getMemberViolations(paymentMemberChoiceBox.getSelectionModel().getSelectedItem().toString());
+            Collection<Rule> rules = beermain.getMemberViolations(paymentMemberChoiceBox.getSelectionModel().getSelectedItem().toString());
             for (Rule rule : rules) {
                 ruleDescriptions.add(rule.getDescription());
             }

@@ -70,7 +70,16 @@ public class BeerControllerTest extends ApplicationTest {
         Collection<Rule> expectedList = new ArrayList<>(List.of(new Rule("Komme for sent", 5)));
         assertEquals(expectedList.toString(), actualHashMap.get("Maurice").toString());
     }
-
+    @Test
+    public void testDeleteMember() {
+        testAddMember();
+        String deleteMemberText = "Maurice";
+        clickOn("#deleteMemberText").write(deleteMemberText);
+        clickOn("#deleteMemberButton");
+        Collection<String> expectedMembers =new ArrayList<>(List.of());
+        Collection<String> actualMemberList = this.controller.getBeermain().getUsernames();
+        assertEquals(expectedMembers, actualMemberList);
+    }
 
     @AfterAll
     public static void reset() {

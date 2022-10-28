@@ -30,6 +30,11 @@ public class BeerMain implements Iterable<Rule> {
      * @param rule the rule
      */
     public void addRule(Rule rule) {
+        for (Rule r1: this.rules) {
+            if (r1.getDescription().equalsIgnoreCase(rule.getDescription())) {
+                throw new IllegalArgumentException("Ikke lov å lage samme regel to ganger");
+            }
+        }
         this.rules.add(rule);
     }
 

@@ -118,7 +118,7 @@ public class BeerController {
             updateRuleChoicebox();
         } catch (NumberFormatException Ne) {
             showErrorMessage("Feil ved å gjøre om verdi til int.");
-        } catch (IOException IOe) {
+        } catch (IOException | IllegalArgumentException IOe) {
             showErrorMessage(IOe.getMessage());
         }
     }

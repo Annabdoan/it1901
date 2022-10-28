@@ -45,7 +45,7 @@ public class BeerController {
      * Initialize.
      */
     @FXML
-    public void initialize() throws IOException {
+    public void initialize() {
         jsh = new JsonHandler();
         try {
             fileName = "/beerPunishment.json";
@@ -166,7 +166,7 @@ public class BeerController {
      * Add member.
      */
     @FXML
-    public void addMember() throws IOException {
+    public void addMember() {
         String username = addMemberText.getText();
         try {
             beermain.addMember(username);

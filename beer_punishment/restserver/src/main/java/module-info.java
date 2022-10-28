@@ -10,9 +10,9 @@ module beerPunishment.restserver {
     requires beerPunishment.core;
 
 
-    opens beerPunishment.restserver to spring.beans, spring.web, spring.context;
+    opens beerPunishment.restserver to spring.web, spring.context;
 
-    exports beerPunishment.restserver to spring.beans, spring.boot;
+    exports beerPunishment.restserver to spring.boot;
 
 
 

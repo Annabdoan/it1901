@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>it1901</groupId>
     <artifactId>beer_punishment</artifactId>
@@ -11,7 +12,9 @@
         <maven.compiler.source>16</maven.compiler.source>
         <maven.compiler.target>16</maven.compiler.target>
         <skipTests>false</skipTests>
+        <spring.version>2.5.6</spring.version>
     </properties>
+
 
     <dependencies>
         <!--
@@ -21,7 +24,6 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
             <version>2.11.2</version>
-
         </dependency>
          https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
         <dependency>
@@ -29,14 +31,11 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.11.2</version>
         </dependency> -->
-
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.8.5</version>
         </dependency>
-
-
         <!-- junit testing with jupiter -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -61,12 +60,25 @@
             <artifactId>json</artifactId>
             <version>20190722</version>
         </dependency>
+
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-parent</artifactId>
-            <version>1.3.2.RELEASE</version>
-            <scope>import</scope>
-            <type>pom</type>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -82,11 +94,12 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-        		<artifactId>maven-surefire-plugin</artifactId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M7</version>
                 <configuration>
                     <skipTests>${skipTests}</skipTests>
                 </configuration>
-	        </plugin>
+            </plugin>
 
             <!-- Run the checkstyle code quality tool -->
             <plugin>
@@ -166,12 +179,21 @@
                 </executions>
             </plugin>
 
+            <!-- Spritngboot -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.version}</version>
+            </plugin>
+
         </plugins>
     </build>
 
     <modules>
         <module>core</module>
         <module>json</module>
+        <module>restserver</module>
         <module>ui</module>
     </modules>
 </project>
+

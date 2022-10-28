@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="beer_punishment:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/beer_punishment_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="beer_punishment/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="beer_punishment" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

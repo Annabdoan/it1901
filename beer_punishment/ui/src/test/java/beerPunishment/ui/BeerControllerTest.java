@@ -15,6 +15,7 @@ import beerPunishment.core.Rule;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -40,8 +41,8 @@ public class BeerControllerTest extends ApplicationTest {
         File file = new File(System.getProperty("user.home"),"Rulelist.json");
         clickOn("#newRuleTextInput").write("Komme for sent;5");
         clickOn("#newRuleButton");
-        List<Rule> expectedList = new ArrayList<>(List.of(new Rule("Komme for sent", 5)));
-        List<Rule> actualList = this.controller.getBeermain().getRules();
+        Collection<Rule> expectedList = new ArrayList<>(List.of(new Rule("Komme for sent", 5)));
+        Collection<Rule> actualList = this.controller.getBeermain().getRules();
         assertEquals(expectedList.toString(), actualList.toString());
     }
 
@@ -50,9 +51,9 @@ public class BeerControllerTest extends ApplicationTest {
         String newMemberText = "Maurice";
         clickOn("#addMemberText").write(newMemberText);
         clickOn("#addMemberButton");
-        String expectedMembers = "Maurice";
-        List<String> actualMemberList = this.controller.getBeermain().getUsernames();
-        assertEquals(expectedMembers, actualMemberList.get(0));
+        Collection<String> expectedMembers =new ArrayList<>(List.of("Maurice"));
+        Collection<String> actualMemberList = this.controller.getBeermain().getUsernames();
+        assertEquals(expectedMembers, actualMemberList);
     }
 
     @Test
@@ -65,8 +66,8 @@ public class BeerControllerTest extends ApplicationTest {
         type(KeyCode.ENTER);
         clickOn("#punishButton");
         BeerMain beerMain = this.controller.getBeermain();
-        HashMap<String, List<Rule>> actualHashMap = beerMain.getMemberRuleViolations();
-        List<Rule> expectedList = new ArrayList<>(List.of(new Rule("Komme for sent", 5)));
+        HashMap<String, Collection<Rule>> actualHashMap = beerMain.getMemberRuleViolations();
+        Collection<Rule> expectedList = new ArrayList<>(List.of(new Rule("Komme for sent", 5)));
         assertEquals(expectedList.toString(), actualHashMap.get("Maurice").toString());
     }
 

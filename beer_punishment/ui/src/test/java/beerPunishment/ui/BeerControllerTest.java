@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+import javafx.scene.control.Alert;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.MethodOrderer;
@@ -12,9 +13,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
+import org.junit.rules.ExpectedException;
 import org.testfx.framework.junit5.ApplicationTest;
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
+import org.testfx.matcher.control.LabeledMatchers;
 
 
 import java.io.File;
@@ -48,6 +51,10 @@ public class BeerControllerTest extends ApplicationTest {
         Collection<Rule> expectedList = new ArrayList<>(List.of(new Rule("Komme for sent", 5)));
         Collection<Rule> actualList = this.controller.getBeermain().getRules();
         assertEquals(expectedList.toString(), actualList.toString());
+        clickOn("#newRuleTextInput").write("Komme for sent;-5");
+        clickOn("#newRuleButton");
+        clickOn(LabeledMatchers.hasText("OK"));
+
     }
     @Order(2)
     @Test
@@ -101,6 +108,10 @@ public class BeerControllerTest extends ApplicationTest {
         Collection<String> expectedMembers =new ArrayList<>(List.of());
         Collection<String> actualMemberList = this.controller.getBeermain().getUsernames();
         assertEquals(expectedMembers, actualMemberList);
+        String deleteFalseMemberText = "Sara";
+        clickOn("#deleteMemberText").write(deleteMemberText);
+        clickOn("#deleteMemberButton");
+        clickOn(LabeledMatchers.hasText("OK"));
     }
     @Order(6)
     @Test
@@ -113,6 +124,10 @@ public class BeerControllerTest extends ApplicationTest {
         assertEquals(expectedList.toString(), actualList.toString());
     }
 
+    @Test
+    public void testShowErrorMessage() {
+
+    }
     @AfterAll
     public static void reset() {
         File file = new File(System.getProperty("user.home"),"/beerPunishment.json");

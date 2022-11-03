@@ -38,6 +38,11 @@ public class TestController {
         return beerMain.getRules();
     }
 
+    @GetMapping("ruletest")
+    public Rule rule(){
+        return new Rule("Komme for sent", 5);
+    }
+
     @GetMapping("/memberRuleViolations")
     public HashMap<String, Collection<Rule>> getMemberRuleViolations() {
         beerMain.addMember("Lea");

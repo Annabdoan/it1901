@@ -167,6 +167,10 @@ public class BeerMain implements Iterable<Rule> {
         this.memberRuleViolations = new HashMap<>(memberRuleViolations);
     }
 
+    private void setRules(Collection<Rule> rules) {
+        this.rules = rules;
+    }
+
     /**
      * Makes a ToString out of the hashmap.
      */
@@ -191,6 +195,16 @@ public class BeerMain implements Iterable<Rule> {
     @Override
     public Iterator<Rule> iterator() {
         return rules.iterator();
+    }
+
+    /**
+     * Method for copying fields from a BeerMain into this BeerMain
+     *
+     * @param bm the BeerMain that is copied
+     */
+    public void copy(BeerMain bm) {
+        this.setMemberRuleViolations(bm.getMemberRuleViolations());
+        this.setRules(bm.getRules());
     }
 
 

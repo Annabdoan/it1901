@@ -235,13 +235,10 @@ public class BeerController {
         }
     }
 
-
-
-
-
-    //Should consider returning a copy of the object
     public BeerMain getBeermain() {
-        return this.beermain;
+        BeerMain beerMainCopy = new BeerMain();
+        beerMainCopy.copy(this.beermain);
+        return beerMainCopy;
     }
 
     public void setFileName(String fileName) {

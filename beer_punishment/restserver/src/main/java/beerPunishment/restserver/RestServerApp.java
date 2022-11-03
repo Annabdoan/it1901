@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 
-
+//Application contains the start-method for the server application.
 
 @SpringBootApplication
 public class RestServerApp {

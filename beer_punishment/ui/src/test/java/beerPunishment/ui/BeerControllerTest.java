@@ -74,7 +74,7 @@ public class BeerControllerTest extends ApplicationTest {
         Collection<Rule> expectedList = new ArrayList<>(List.of(new Rule("Komme for sent", 5)));
         assertEquals(expectedList.toString(), actualHashMap.get("Maurice").toString());
     }
-   /* @Order(4)
+    @Order(4)
     @Test
     public void testPayViolation() {
         clickOn("#paymentMemberChoiceBox");
@@ -91,7 +91,7 @@ public class BeerControllerTest extends ApplicationTest {
         HashMap<String, Collection<Rule>> actualHashMapRule = beerMain.getMemberRuleViolations();
         Collection<Rule> expectedList = new ArrayList<>(List.of());
         assertEquals(expectedList.toString(), actualHashMapRule.get("Maurice").toString());
-    }*/
+    }
     @Order(5)
     @Test
     public void testDeleteMember() {

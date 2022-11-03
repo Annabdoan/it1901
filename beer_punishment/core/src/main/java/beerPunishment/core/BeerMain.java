@@ -121,7 +121,7 @@ public class BeerMain implements Iterable<Rule> {
         return new ArrayList<>(memberRuleViolations.get(username));
     }
 
-    private HashMap<String, Integer> generateMembersPunishments() {
+    public HashMap<String, Integer> generateMembersPunishments() {
         HashMap<String, Integer> punishmentStatus = new HashMap<>();
         for (Map.Entry<String, Collection<Rule>> entry : memberRuleViolations.entrySet()) {
             Integer totalpunishmemt = 0;

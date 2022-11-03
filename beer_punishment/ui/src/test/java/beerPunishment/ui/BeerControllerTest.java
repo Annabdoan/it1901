@@ -6,6 +6,10 @@ import javafx.scene.Scene;
 
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
@@ -21,6 +25,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class BeerControllerTest extends ApplicationTest {
 
     private BeerController controller;
@@ -34,7 +39,7 @@ public class BeerControllerTest extends ApplicationTest {
         stage.setScene(new Scene(root));
         stage.show();
     }
-
+    @Order(1)
     @Test
     public void testAddRule() {
         File file = new File(System.getProperty("user.home"),"Rulelist.json");
@@ -44,7 +49,7 @@ public class BeerControllerTest extends ApplicationTest {
         Collection<Rule> actualList = this.controller.getBeermain().getRules();
         assertEquals(expectedList.toString(), actualList.toString());
     }
-
+    @Order(2)
     @Test
     public void testAddMember() {
         String newMemberText = "Maurice";
@@ -54,7 +59,7 @@ public class BeerControllerTest extends ApplicationTest {
         Collection<String> actualMemberList = this.controller.getBeermain().getUsernames();
         assertEquals(expectedMembers, actualMemberList);
     }
-
+    @Order(3)
     @Test
     public void testPunishMember() {
         clickOn("#ruleChoiceBox");
@@ -69,11 +74,27 @@ public class BeerControllerTest extends ApplicationTest {
         Collection<Rule> expectedList = new ArrayList<>(List.of(new Rule("Komme for sent", 5)));
         assertEquals(expectedList.toString(), actualHashMap.get("Maurice").toString());
     }
+   /* @Order(4)
+    @Test
+    public void testPayViolation() {
+        clickOn("#paymentMemberChoiceBox");
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        clickOn("#paymentRuleChoiceBox");
+        type(KeyCode.DOWN);
+        type(KeyCode.ENTER);
+        clickOn("#payButton");
+        BeerMain beerMain = this.controller.getBeermain();
+        HashMap<String, Integer> actualHashMapInt = beerMain.generateMembersPunishments();
+        String expected = "0";
+        assertEquals(expected, actualHashMapInt.get("Maurice").toString());
+        HashMap<String, Collection<Rule>> actualHashMapRule = beerMain.getMemberRuleViolations();
+        Collection<Rule> expectedList = new ArrayList<>(List.of());
+        assertEquals(expectedList.toString(), actualHashMapRule.get("Maurice").toString());
+    }*/
+    @Order(5)
     @Test
     public void testDeleteMember() {
-        testAddMember();
-        //testDeleteMember kjører før addMember (uavhengig av hvor i koden den ligger) derfor må et member
-        // legges til først
         String deleteMemberText = "Maurice";
         clickOn("#deleteMemberText").write(deleteMemberText);
         clickOn("#deleteMemberButton");
@@ -81,6 +102,7 @@ public class BeerControllerTest extends ApplicationTest {
         Collection<String> actualMemberList = this.controller.getBeermain().getUsernames();
         assertEquals(expectedMembers, actualMemberList);
     }
+    @Order(6)
     @Test
     public void testDeleteRule() {
         File file = new File(System.getProperty("user.home"),"Rulelist.json");

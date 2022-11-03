@@ -15,6 +15,8 @@ public class BeerMain implements Iterable<Rule> {
     public BeerMain() {
     }
 
+
+
     /**
      * Access method for rules.
      *

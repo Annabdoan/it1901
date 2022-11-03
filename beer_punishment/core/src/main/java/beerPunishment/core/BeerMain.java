@@ -31,7 +31,7 @@ public class BeerMain implements Iterable<Rule> {
      */
     public void addRule(Rule rule) {
         for (Rule r1: this.rules) {
-            if (r1.getDescription().equalsIgnoreCase(rule.getDescription())) {
+            if (r1.equals(rule)) {
                 throw new IllegalArgumentException("Ikke lov å lage samme regel to ganger");
             }
         }

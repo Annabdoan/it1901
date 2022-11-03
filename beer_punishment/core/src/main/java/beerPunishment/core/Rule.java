@@ -76,6 +76,9 @@ public class Rule {
         return punishmentValue;
     }
 
+    public Boolean equals(Rule r2) {
+        return r2.getDescription().equalsIgnoreCase(this.getDescription());
+    }
 
     public String toString() {
         return String.format("[Rule rule=%s value=%s]", getDescription(), getPunishmentValue());

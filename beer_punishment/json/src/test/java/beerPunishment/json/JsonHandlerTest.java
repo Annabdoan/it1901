@@ -41,7 +41,7 @@ public class JsonHandlerTest {
             fail(e.getMessage());
         }
     }
-
+/*
     @Test
     public void testReadFromJson() {
         try {
@@ -50,6 +50,8 @@ public class JsonHandlerTest {
             fail(e.getMessage());
         }
     }
+
+ */
 
     @Test
     public void testEditJsonFile () {

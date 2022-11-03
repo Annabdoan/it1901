@@ -21,7 +21,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 public class BeerControllerTest extends ApplicationTest {
 
     private BeerController controller;
@@ -73,12 +72,23 @@ public class BeerControllerTest extends ApplicationTest {
     @Test
     public void testDeleteMember() {
         testAddMember();
+        //testDeleteMember kjører før addMember (uavhengig av hvor i koden den ligger) derfor må et member
+        // legges til først
         String deleteMemberText = "Maurice";
         clickOn("#deleteMemberText").write(deleteMemberText);
         clickOn("#deleteMemberButton");
         Collection<String> expectedMembers =new ArrayList<>(List.of());
         Collection<String> actualMemberList = this.controller.getBeermain().getUsernames();
         assertEquals(expectedMembers, actualMemberList);
+    }
+    @Test
+    public void testDeleteRule() {
+        File file = new File(System.getProperty("user.home"),"Rulelist.json");
+        clickOn("#deleteRuleText").write("Komme for sent");
+        clickOn("#deleteRuleButton");
+        Collection<Rule> expectedList = new ArrayList<>(List.of());
+        Collection<Rule> actualList = this.controller.getBeermain().getRules();
+        assertEquals(expectedList.toString(), actualList.toString());
     }
 
     @AfterAll

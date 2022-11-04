@@ -33,36 +33,36 @@ public class TestController {
 
     @GetMapping(path = "beerMain")
     public BeerMain getBeerMain() {
-        return beerMain;
+        return this.beerMain;
     }
 
 
     @GetMapping(path = "rules")
     public Collection<Rule>  getRules() {
-        return beerMain.getRules();
+        return this.beerMain.getRules();
     }
 
     @GetMapping("/memberRuleViolations")
     public HashMap<String, Collection<Rule>> getMemberRuleViolations() {
-        return new HashMap<>(beerMain.getMemberRuleViolations());
+        return new HashMap<>(this.beerMain.getMemberRuleViolations());
 
     }
 
     @GetMapping("/members")
     public Collection<String> getMembers() {
-        return beerMain.getUsernames();
+        return this.beerMain.getUsernames();
     }
 
 
     @PostMapping(path = "/addRule")
     public void addRule(@RequestParam("description") String ruleDescription, @RequestParam("value") int value) {
         this.rule = new Rule(ruleDescription,value);
-        beerMain.addRule(rule);
+        this.beerMain.addRule(rule);
     }
 
     @PostMapping(path = "/addMember")
     public void addMember(@RequestParam("name") String name) {
-        beerMain.addMember(name);
+        this.beerMain.addMember(name);
     }
 
     @PutMapping(path="punishMember")
@@ -70,18 +70,25 @@ public class TestController {
                              @RequestParam("description") String ruleDescription,
                              @RequestParam("value") int value){
         this.rule = new Rule(ruleDescription,value);
-        beerMain.punishMember(member,this.rule);
+        this.beerMain.punishMember(member,this.rule);
     }
 
 
     @DeleteMapping(path = "removeRule")
     public void removeRule(@RequestParam("rule") String ruleDescription){
-        beerMain.removeRuleUsingDescription(ruleDescription);
+        this.beerMain.removeRuleUsingDescription(ruleDescription);
     }
 
     @DeleteMapping(path = "deleteMember")
     public void deleteMember(@RequestParam("member") String member) {
-        beerMain.deleteMember(member);
+        this.beerMain.deleteMember(member);
     }
 
+    @DeleteMapping(path = "payPunishment")
+    public void payPunishment(@RequestParam("member") String member,
+                              @RequestParam("description") String ruleDescription,
+                              @RequestParam("value") int value) {
+        this.rule = new Rule(ruleDescription, value);
+        this.beerMain.removePunishment(member, rule);
+    }
 }

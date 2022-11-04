@@ -51,7 +51,7 @@
                             </rowConstraints>
                             <children>
                                 <TextField fx:id="newRuleTextInput" prefHeight="53.0" prefWidth="231.0" promptText="Beskrivelse av regel; antall øl" GridPane.rowIndex="1" />
-                                <Button fx:id="newRuleButton" mnemonicParsing="false" onAction="#makeNewRule" prefHeight="28.0" prefWidth="82.0" text="OK" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                <Button fx:id="newRuleButton" mnemonicParsing="false" onAction="#makeNewRule" prefHeight="28.0" prefWidth="82.0" text="Legg til" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                     <font>
                                         <Font name="Arial" size="13.0" />
                                     </font>
@@ -79,7 +79,7 @@
                                         <ChoiceBox fx:id="personChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" />
                                     </children>
                                 </GridPane>
-                                <Button fx:id="punishButton" mnemonicParsing="false" onAction="#punishMember" prefHeight="25.0" prefWidth="73.0" text="OK" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                <Button fx:id="punishButton" mnemonicParsing="false" onAction="#punishMember" prefHeight="25.0" prefWidth="73.0" text="Straff" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                     <font>
                                         <Font name="Arial" size="13.0" />
                                     </font>
@@ -106,7 +106,7 @@
                                     </font>
                                 </Text>
                                 <TextField fx:id="addMemberText" prefHeight="32.0" prefWidth="231.0" promptText="Brukernavn" GridPane.rowIndex="3" />
-                                <Button fx:id="addMemberButton" mnemonicParsing="false" onAction="#addMember" prefHeight="26.0" prefWidth="77.0" text="OK" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                <Button fx:id="addMemberButton" mnemonicParsing="false" onAction="#addMember" prefHeight="26.0" prefWidth="77.0" text="Legg til" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                             </children>
                         </GridPane>
                     </children>

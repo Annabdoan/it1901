@@ -109,7 +109,7 @@ public class BeerControllerTest extends ApplicationTest {
         Collection<String> actualMemberList = this.controller.getBeermain().getUsernames();
         assertEquals(expectedMembers, actualMemberList);
         String deleteFalseMemberText = "Sara";
-        clickOn("#deleteMemberText").write(deleteMemberText);
+        clickOn("#deleteMemberText").write(deleteFalseMemberText);
         clickOn("#deleteMemberButton");
         clickOn(LabeledMatchers.hasText("OK"));
     }

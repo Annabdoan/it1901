@@ -1,8 +1,5 @@
 package beerPunishment.core;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class BeerMainTest {
@@ -38,6 +37,10 @@ public class BeerMainTest {
         beermain.removeRule(tempRule);
         expectedRules.remove(tempRule);
         assertEquals(expectedRules, beermain.getRules(), "Rulelist should now consist of only rule and not tempRule");
+        Exception exception = assertThrows(Exception.class, () -> beermain.removeRule(tempRule));
+        assertEquals("Regelen eksisterer ikke", exception.getMessage());
+        Exception exception2 = assertThrows(Exception.class, () -> beermain.addRule(rule));
+        assertEquals("Ikke lov å lage samme regel to ganger", exception2.getMessage());
     }
 
     @Test
@@ -66,6 +69,9 @@ public class BeerMainTest {
         assertEquals(usernames, beermain.getUsernames(), "The usernames should be Test and Test2");
         String expectedToString = "BeerMain{rules=[[Rule rule=Kommer sent value=1]], memberRuleViolations={Test=[[Rule rule=Kommer sent value=1]], Test2=[]}}";
         assertEquals(expectedToString, beermain.toString(), "toString should match expected toString");
+        beermain.deleteMember("Test");
+        Collection<String> usernames2 = new ArrayList<>(List.of("Test2"));
+        assertEquals(usernames2, beermain.getUsernames(), "The usernames should be Test2");
     }
 
     @Test
@@ -78,6 +84,29 @@ public class BeerMainTest {
         assertEquals(expectedMap, beermain.getMemberRuleViolations(), "Should not be able to manipulate list of rules.");
     }
 
+    @Test
+    public void testRemovePunishment() {
+        HashMap<String, Collection<Rule>> expectedMap = new HashMap<>();
+        expectedMap.put("Test", new ArrayList<>());
+        beermain.addMember("Lea");
+        beermain.punishMember("Lea", rule);
+        beermain.removePunishment("Lea", rule);
+        ArrayList<String> expected = new ArrayList<String>();
+        assertEquals(expected, beermain.getMemberViolations("Lea"));
+        Exception exception = assertThrows(Exception.class, () -> beermain.removePunishment("Lea", rule));
+        assertEquals("Du har ikke brutt denne regelen", exception.getMessage());
+        Exception exception2 = assertThrows(Exception.class, () -> beermain.removePunishment("Sara", rule));
+        assertEquals("Brukernavnet eksisterer ikke", exception2.getMessage());
+    }
+
+    @Test
+    public void testRemoveRuleUsingDescription() {
+       beermain.removeRuleUsingDescription("Kommer sent");
+       Collection<Rule> expectedRules = new ArrayList<>(List.of());
+       assertEquals(expectedRules, beermain.getRules(), "Rulelist should now be empty");
+       Exception exception = assertThrows(Exception.class, () -> beermain.removeRuleUsingDescription("Banne"));
+       assertEquals("Regel eksisterer ikke", exception.getMessage());
+    }
 
 
 }

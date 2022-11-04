@@ -94,7 +94,7 @@ public class BeerController {
      * @param errorMessage The message to show in the error
      */
     @FXML
-    private void showErrorMessage(String errorMessage) {
+    public void showErrorMessage(String errorMessage) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText("An error has occured");

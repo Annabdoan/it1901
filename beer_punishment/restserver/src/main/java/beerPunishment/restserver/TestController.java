@@ -73,10 +73,15 @@ public class TestController {
         beerMain.punishMember(member,this.rule);
     }
 
-/*
+
     @DeleteMapping(path = "removeRule")
-    public void removeMember(@RequestParam("rule") String ruleDescription){
+    public void removeRule(@RequestParam("rule") String ruleDescription){
         beerMain.removeRuleUsingDescription(ruleDescription);
     }
-*/
+
+    @DeleteMapping(path = "deleteMember")
+    public void deleteMember(@RequestParam("member") String member) {
+        beerMain.deleteMember(member);
+    }
+
 }

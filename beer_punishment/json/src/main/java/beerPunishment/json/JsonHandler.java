@@ -2,6 +2,7 @@ package beerPunishment.json;
 
 import beerPunishment.core.BeerMain;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -10,7 +11,8 @@ import java.io.IOException;
 
 public class JsonHandler {
 
-    Gson gson = new Gson();
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
 
     /**
      * Sets the filepath to and set name to the jsonfile.
@@ -20,6 +22,7 @@ public class JsonHandler {
     public String getFilePath(String filename) {
         return System.getProperty("user.home") + filename;
     }
+
 
     public void writeToJson(BeerMain beerMain, String filename) throws IOException {
         try {
@@ -40,5 +43,6 @@ public class JsonHandler {
             throw new IOException("Feil ved lesing fra fil");
         }
     }
+
 }
 

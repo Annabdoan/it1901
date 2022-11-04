@@ -55,24 +55,17 @@ public class TestController {
         return beerMain.getRules();
     }
 
-    /*
-
     @GetMapping("/memberRuleViolations")
     public HashMap<String, Collection<Rule>> getMemberRuleViolations() {
-        return beerMain.getMemberRuleViolations();
+        return new HashMap<>(beerMain.getMemberRuleViolations());
+
     }
 
     @GetMapping("/members")
     public Collection<String> getMembers() {
-       Collection<String> members = new ArrayList<>();
-       beerMain2.addMember("Sara");
-       beerMain2.addMember("Maurice");
-       beerMain2.addMember("Anna");
-       for (String key : beerMain2.getMemberRuleViolations().keySet()) {
-           members.add(key);
-       }
-        return members;
-    }*/
+        return beerMain.getUsernames();
+    }
+
 
     @PostMapping(path = "/addRule")
     public void addRule(@RequestParam("description") String ruleDescription, @RequestParam("value") int value) {
@@ -95,7 +88,6 @@ public class TestController {
 
 
 
-    //@PutMapping("")
 
     //@DeleteMapping("")
 }

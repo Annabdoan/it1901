@@ -37,6 +37,10 @@ public class BeerMainTest {
         beermain.removeRule(tempRule);
         expectedRules.remove(tempRule);
         assertEquals(expectedRules, beermain.getRules(), "Rulelist should now consist of only rule and not tempRule");
+        Exception exception = assertThrows(Exception.class, () -> beermain.removeRule(tempRule));
+        assertEquals("Regelen eksisterer ikke", exception.getMessage());
+        Exception exception2 = assertThrows(Exception.class, () -> beermain.addRule(rule));
+        assertEquals("Ikke lov å lage samme regel to ganger", exception2.getMessage());
     }
 
     @Test
@@ -100,6 +104,8 @@ public class BeerMainTest {
        beermain.removeRuleUsingDescription("Kommer sent");
        Collection<Rule> expectedRules = new ArrayList<>(List.of());
        assertEquals(expectedRules, beermain.getRules(), "Rulelist should now be empty");
+       Exception exception = assertThrows(Exception.class, () -> beermain.removeRuleUsingDescription("Banne"));
+       assertEquals("Regel eksisterer ikke", exception.getMessage());
     }
 
 

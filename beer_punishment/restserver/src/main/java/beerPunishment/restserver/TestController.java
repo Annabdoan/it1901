@@ -34,8 +34,11 @@ public class TestController {
 
 
     private BeerMain beerMain = new BeerMain();
+
     //beermain = jsh.readFromJson(fileName);
     //Skal lese fra JSON filen.
+
+    private Rule rule = new Rule();
 
 
     private BeerMain beerMain2 = new BeerMain();
@@ -45,6 +48,8 @@ public class TestController {
     public BeerMain getBeerMain() {
         return beerMain;
     }
+
+
 
     /*@GetMapping(path = "rules")
     public Collection<Rule>  getRules() {
@@ -74,15 +79,18 @@ public class TestController {
         return members;
     }*/
 
-    @PostMapping
-    public void addRule(@RequestBody Rule rule2) {
-        beerMain.addRule(rule2);
+    @PostMapping(path = "/addRule")
+    public void addRule(@RequestParam("description") String ruleName, @RequestParam("value") int value) {
+        this.rule = new Rule(ruleName,value);
+        beerMain.addRule(rule);
     }
 
-    @PutMapping(path = "/addMember")
-    public void addMember(@RequestParam("name") String name) {
+    @PostMapping(path = "/addMember")
+    public void addMember(@RequestBody BeerMain beerMain, @RequestParam("name") String name) {
         beerMain.addMember(name);
     }
+
+
 
 
     //@PutMapping("")

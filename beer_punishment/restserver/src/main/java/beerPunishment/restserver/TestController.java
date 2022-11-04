@@ -50,17 +50,12 @@ public class TestController {
     }
 
 
-
-    /*@GetMapping(path = "rules")
+    @GetMapping(path = "rules")
     public Collection<Rule>  getRules() {
-        //hente ut beermain objektet vårt
         return beerMain.getRules();
     }
 
-    @GetMapping("/ruletest")
-    public Rule rule(){
-        return new Rule("Komme for sent", 5);
-    }
+    /*
 
     @GetMapping("/memberRuleViolations")
     public HashMap<String, Collection<Rule>> getMemberRuleViolations() {
@@ -80,16 +75,23 @@ public class TestController {
     }*/
 
     @PostMapping(path = "/addRule")
-    public void addRule(@RequestParam("description") String ruleName, @RequestParam("value") int value) {
-        this.rule = new Rule(ruleName,value);
+    public void addRule(@RequestParam("description") String ruleDescription, @RequestParam("value") int value) {
+        this.rule = new Rule(ruleDescription,value);
         beerMain.addRule(rule);
     }
 
     @PostMapping(path = "/addMember")
-    public void addMember(@RequestBody BeerMain beerMain, @RequestParam("name") String name) {
+    public void addMember(@RequestParam("name") String name) {
         beerMain.addMember(name);
     }
 
+    @PutMapping(path="punishMember")
+    public void punishMember(@RequestParam("member") String member,
+                             @RequestParam("description") String ruleDescription,
+                             @RequestParam("value") int value){
+        this.rule = new Rule(ruleDescription,value);
+        beerMain.punishMember(member,this.rule);
+    }
 
 
 

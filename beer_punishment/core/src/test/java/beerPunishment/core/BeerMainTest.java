@@ -95,6 +95,12 @@ public class BeerMainTest {
         assertEquals("Brukernavnet eksisterer ikke", exception2.getMessage());
     }
 
+    @Test
+    public void testRemoveRuleUsingDescription() {
+       beermain.removeRuleUsingDescription("Kommer sent");
+       Collection<Rule> expectedRules = new ArrayList<>(List.of());
+       assertEquals(expectedRules, beermain.getRules(), "Rulelist should now be empty");
+    }
 
 
 }

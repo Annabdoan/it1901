@@ -172,6 +172,31 @@ public class BeerMainRemoteAccess {
 
 
 
+    /**
+     * Removes the TodoList with the given name from the underlying TodoModel. ENDRE DENNE!!!!!
+     *
+     * @param ruleDescription the rule to remove
+     */
+    public void removeRule(String ruleDescription) {
+        Gson gson = new Gson();
+        try {
+            HttpRequest request = HttpRequest.newBuilder(beerMainPath("removeRule"))
+                    .header(ACCEPT_HEADER, APPLICATION_JSON)
+                    .DELETE()
+                    .build();
+            final HttpResponse<String> response =
+                    HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+            String responseString = response.body();
+
+            Boolean removed = gson.fromJson(responseString, Boolean.class);
+            if (removed != null) {
+                beerMain.removeRuleUsingDescription(ruleDescription);
+            }
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 
 

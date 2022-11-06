@@ -15,14 +15,7 @@ import java.util.HashMap;
 @RestController
 //@RequestMapping(TestController.BEER_PUNISHMENT_SERVICE_PATH)
 public class BeerMainRestController {
-
-
-
-    private BeerMain beerMain = new BeerMain();
-
-    //beermain = jsh.readFromJson(fileName);
-    //Skal lese fra JSON filen.
-
+    private BeerMain beerMain = BeerMainService.createBeerMain();
     private Rule rule = new Rule();
 
 

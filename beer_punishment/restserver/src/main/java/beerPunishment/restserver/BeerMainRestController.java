@@ -3,14 +3,9 @@ package beerPunishment.restserver;
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
 
-import beerPunishment.json.JsonHandler;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -19,7 +14,7 @@ import java.util.HashMap;
 
 @RestController
 //@RequestMapping(TestController.BEER_PUNISHMENT_SERVICE_PATH)
-public class TestController {
+public class BeerMainRestController {
 
 
 

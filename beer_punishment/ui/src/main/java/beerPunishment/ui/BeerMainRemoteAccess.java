@@ -159,7 +159,8 @@ public class BeerMainRemoteAccess {
             HttpRequest request = HttpRequest.newBuilder(beerMainPath("punishMember"))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .header(CONTENT_TYPE_HEADER, APPLICATION_JSON)
-                    .PUT(BodyPublishers.ofString("?member=" + member + "&description="+description + "&value=" + value))
+                    .PUT(BodyPublishers.ofString("?member=" + member +
+                            "&description="+description + "&value=" + value))
                     .build();
             final HttpResponse<String> response =
                     HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
@@ -220,6 +221,26 @@ public class BeerMainRemoteAccess {
     }
 
 
+    public void payPunishment(String member, String description, int value) {
+        Gson gson = new Gson();
+        Rule rule = new Rule(description,value);
+        try {
+            HttpRequest request = HttpRequest.newBuilder(beerMainPath("payPunishment"))
+                    .header(ACCEPT_HEADER, APPLICATION_JSON)
+                    .DELETE()
+                    .build();
+            final HttpResponse<String> response =
+                    HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+            String responseString = response.body();
+
+            Boolean removed = gson.fromJson(responseString, Boolean.class);
+            if (removed != null) {
+                beerMain.removePunishment(member,rule);
+            }
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 }

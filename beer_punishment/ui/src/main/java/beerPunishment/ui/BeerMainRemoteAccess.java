@@ -12,6 +12,7 @@ import java.net.http.HttpClient;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
@@ -75,6 +76,28 @@ public class BeerMainRemoteAccess {
         }
         return null;
     }
+
+    public HashMap<String, Collection<Rule>> getMemberRuleViolations() {
+        Gson gson = new Gson();
+        if (beerMain == null) {
+            HttpRequest request = HttpRequest.newBuilder(path.resolve("memberRuleViolations"))
+                    .header(ACCEPT_HEADER, APPLICATION_JSON)
+                    .GET()
+                    .build();
+            try {
+                final HttpResponse<String> response =
+                        HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+                Type memberRuleViolationsType = new TypeToken<ArrayList<Rule>>(){}.getType();
+                HashMap<String, Collection<Rule>> memberRuleViolations = gson.fromJson(response.body(), memberRuleViolationsType);
+                return memberRuleViolations;
+            } catch (IOException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return null;
+    }
+
+
 
 
 

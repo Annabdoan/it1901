@@ -199,6 +199,25 @@ public class BeerMainRemoteAccess {
 
 
 
+    public void deleteMember(String member) {
+        Gson gson = new Gson();
+        try {
+            HttpRequest request = HttpRequest.newBuilder(beerMainPath("deleteMember"))
+                    .header(ACCEPT_HEADER, APPLICATION_JSON)
+                    .DELETE()
+                    .build();
+            final HttpResponse<String> response =
+                    HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+            String responseString = response.body();
+
+            Boolean removed = gson.fromJson(responseString, Boolean.class);
+            if (removed != null) {
+                beerMain.deleteMember(member);
+            }
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 

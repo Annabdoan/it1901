@@ -1,18 +1,11 @@
 package beerPunishment.ui;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import beerPunishment.json.JsonHandler;
-import com.google.gson.Gson;
-
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
+import beerPunishment.json.JsonHandler;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
@@ -62,6 +55,7 @@ public class BeerController {
         }
 
     }
+
     @FXML
     private void updateListView() {
         Collection<Rule> rules = beermain.getRules();
@@ -117,15 +111,20 @@ public class BeerController {
             jsh.writeToJson(beermain, fileName);
             updateListView();
             updateRuleChoicebox();
-        } catch (NumberFormatException Ne) {
+        } catch (NumberFormatException ne) {
             showErrorMessage("Feil ved å gjøre om verdi til int.");
-        } catch (IOException | IllegalArgumentException IOe) {
-            showErrorMessage(IOe.getMessage());
+        } catch (IOException | IllegalArgumentException ioe) {
+            showErrorMessage(ioe.getMessage());
         }
     }
+
+    /**
+     * Make delete rule.
+     */
     @FXML
     public void deleteRule() {
         String description = deleteRuleText.getText();
+
         try {
             beermain.removeRuleUsingDescription(description);
             jsh.writeToJson(this.beermain, fileName);
@@ -146,7 +145,6 @@ public class BeerController {
      */
     @FXML
     public void punishMember() {
-
         String chosenRule = ruleChoiceBox.getSelectionModel().getSelectedItem().toString();
         String chosenMember = personChoiceBox.getSelectionModel().getSelectedItem().toString();
         for (Rule rule : beermain.getRules()) {
@@ -180,6 +178,9 @@ public class BeerController {
         }
     }
 
+    /**
+     * Delete member.
+     */
     @FXML
     public void deleteMember() {
         String username = deleteMemberText.getText();
@@ -194,6 +195,9 @@ public class BeerController {
         }
     }
 
+    /**
+     * Pay violation.
+     */
     @FXML
     public void payViolation() {
         String chosenRule = paymentRuleChoiceBox.getSelectionModel().getSelectedItem().toString();
@@ -212,12 +216,15 @@ public class BeerController {
         updatePaymentRuleChoicebox();
     }
 
+    /**
+     * Update choicebox for rule in pay violation.
+     */
     @FXML
     private void updatePaymentRuleChoicebox() {
         Collection<String> ruleDescriptions = new ArrayList<>();
         if (paymentMemberChoiceBox.getSelectionModel().getSelectedItem() == null) {
             System.out.println("Ingen person valgt i choicebox");
-        }else {
+        } else {
             Collection<Rule> rules = beermain.getMemberViolations(paymentMemberChoiceBox.getSelectionModel().getSelectedItem().toString());
             for (Rule rule : rules) {
                 ruleDescriptions.add(rule.getDescription());
@@ -227,6 +234,9 @@ public class BeerController {
 
     }
 
+    /**
+     * Update choicebox for member in pay violation.
+     */
     private void updatePaymentPersonChoicebox() {
         try {
             paymentMemberChoiceBox.getItems().setAll(beermain.getUsernames());
@@ -235,6 +245,11 @@ public class BeerController {
         }
     }
 
+    /**
+     * Method for returning a copy of beermain.
+     *
+     * @return copy of the BeerMain object in the controller
+     */
     public BeerMain getBeermain() {
         BeerMain beerMainCopy = new BeerMain();
         beerMainCopy.copy(this.beermain);

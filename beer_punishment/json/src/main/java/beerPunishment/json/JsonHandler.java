@@ -22,21 +22,36 @@ public class JsonHandler {
     }
 
     public void writeToJson(BeerMain beerMain, String filename) throws IOException {
+        FileWriter fw = null;
         try {
-            FileWriter fw = new FileWriter(getFilePath(filename));
+            fw = new FileWriter(getFilePath(filename));
             gson.toJson(beerMain, fw);
-            fw.flush();
-            fw.close();
-        }catch (IOException io) {
+        } catch (IOException io) {
             throw new IOException("Feil ved skriving til fil");
         }
-    }
+        finally {
+            if (fw != null) {
+                try {
+                    fw.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    fw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        }
+
 
     public BeerMain readFromJson(String filename) throws IOException {
         try {
             BeerMain beerMain = gson.fromJson(new FileReader(getFilePath(filename)), BeerMain.class);
             return beerMain;
         }catch (IOException IOe) {
+            IOe.printStackTrace();
             throw new IOException("Feil ved lesing fra fil");
         }
     }

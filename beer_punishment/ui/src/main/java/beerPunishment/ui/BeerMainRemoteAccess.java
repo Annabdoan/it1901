@@ -16,7 +16,7 @@ import java.security.URIParameter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-
+import java.net.http.HttpRequest.BodyPublishers;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 
@@ -108,7 +108,9 @@ public class BeerMainRemoteAccess {
         return path.resolve(UriParam(name));
     }
 
-
+    /**
+     * Sends a POST-request ....
+     */
     public void addRule(String description, int value) {
         Gson gson = new Gson();
         try {
@@ -126,7 +128,6 @@ public class BeerMainRemoteAccess {
             throw new RuntimeException(e);
         }
     }
-
 
     public void addMember(String name) {
         Gson gson = new Gson();
@@ -146,6 +147,28 @@ public class BeerMainRemoteAccess {
         }
     }
 
+    /**
+     * Sends a PUT-request and updates the attribute of the user.
+     *
+     * @param member the member to punish,................
+     */
+    private void punishMember(String member, String description, int value) {
+        Gson gson = new Gson();
+        String ruleValue = String.valueOf(value);
+        try {
+            HttpRequest request = HttpRequest.newBuilder(beerMainPath("punishMember"))
+                    .header(ACCEPT_HEADER, APPLICATION_JSON)
+                    .header(CONTENT_TYPE_HEADER, APPLICATION_JSON)
+                    .PUT(BodyPublishers.ofString("?member=" + member + "&description="+description + "&value=" + value))
+                    .build();
+            final HttpResponse<String> response =
+                    HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+            String responseString = response.body(); // SJEKK
+
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 

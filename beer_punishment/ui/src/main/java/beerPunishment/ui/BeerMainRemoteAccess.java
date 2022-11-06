@@ -128,6 +128,23 @@ public class BeerMainRemoteAccess {
     }
 
 
+    public void addMember(String name) {
+        Gson gson = new Gson();
+        try {
+            HttpRequest request = HttpRequest.newBuilder(
+                            beerMainPath("addMember"))
+                    .header(ACCEPT_HEADER, APPLICATION_JSON)
+                    .header(CONTENT_TYPE_HEADER, APPLICATION_FORM_URLENCODED)
+                    .POST(HttpRequest.BodyPublishers.ofString("?name=" + name))
+                    .build();
+            final HttpResponse<String> response =
+                    HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+            String responseString = response.body();
+            //Skal vi gjøre noe med denne responsen?
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 

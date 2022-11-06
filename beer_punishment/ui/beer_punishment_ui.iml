@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="web" name="Web">
+      <configuration>
+        <webroots />
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
+        </sourceRoots>
+      </configuration>
+    </facet>
+    <facet type="Spring" name="Spring">
+      <configuration />
+    </facet>
+  </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_16">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
@@ -17,13 +31,13 @@
     <orderEntry type="module" module-name="beer_punishment_core" />
     <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.5" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:18.0.2" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:mac:18.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:win:18.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:18.0.2" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:mac:18.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:win:18.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:18.0.2" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:mac:18.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:win:18.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:18.0.2" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:mac:18.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:win:18.0.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-api:5.7.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apiguardian:apiguardian-api:1.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.opentest4j:opentest4j:1.2.0" level="project" />

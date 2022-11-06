@@ -6,10 +6,13 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpClient;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.URIParameter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -96,6 +99,37 @@ public class BeerMainRemoteAccess {
         }
         return null;
     }
+
+    private String UriParam(String s) {
+        return URLEncoder.encode(s, StandardCharsets.UTF_8);
+    }
+
+    private URI beerMainPath(String name) {
+        return path.resolve(UriParam(name));
+    }
+
+
+    public void addRule(String description, int value) {
+        Gson gson = new Gson();
+        try {
+            HttpRequest request = HttpRequest.newBuilder(
+                            beerMainPath("addRule"))
+                    .header(ACCEPT_HEADER, APPLICATION_JSON)
+                    .header(CONTENT_TYPE_HEADER, APPLICATION_FORM_URLENCODED)
+                    .POST(HttpRequest.BodyPublishers.ofString("?description=" + description + "&value=" + value))
+                    .build();
+            final HttpResponse<String> response =
+                    HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+            String responseString = response.body();
+            //Skal vi gjøre noe med denne responsen?
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+
 
 
 

@@ -60,7 +60,6 @@ public class BeerController {
         } catch (IOException ioe) {
             beermain = new BeerMain();
         }
-
     }
     @FXML
     private void updateListView() {

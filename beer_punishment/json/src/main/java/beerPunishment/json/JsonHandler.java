@@ -3,10 +3,10 @@ package beerPunishment.json;
 import beerPunishment.core.BeerMain;
 import com.google.gson.Gson;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class JsonHandler {
 
@@ -22,14 +22,14 @@ public class JsonHandler {
     }
 
     public void writeToJson(BeerMain beerMain, String filename) throws IOException {
-        FileWriter fw = null;
+        OutputStreamWriter fw = null; //to ensure reliance on default encoding
         try {
-            fw = new FileWriter(getFilePath(filename));
+            fw = new OutputStreamWriter(new FileOutputStream(getFilePath(filename)), "UTF-8");
             gson.toJson(beerMain, fw);
         } catch (IOException io) {
             throw new IOException("Feil ved skriving til fil");
         }
-        finally {
+        finally { //to secure against potential leak
             if (fw != null) {
                 try {
                     fw.flush();
@@ -43,16 +43,27 @@ public class JsonHandler {
                 }
             }
         }
-        }
+    }
 
 
     public BeerMain readFromJson(String filename) throws IOException {
+        InputStreamReader isr = null;
         try {
-            BeerMain beerMain = gson.fromJson(new FileReader(getFilePath(filename)), BeerMain.class);
+            FileInputStream fis = new FileInputStream(getFilePath(filename));
+            isr = new InputStreamReader(fis, StandardCharsets.UTF_8); //reliance on default encoding
+            BeerMain beerMain = gson.fromJson(isr, BeerMain.class);
             return beerMain;
-        }catch (IOException IOe) {
+        } catch (IOException IOe) {
             IOe.printStackTrace();
             throw new IOException("Feil ved lesing fra fil");
+        } finally { //to secure against potential leak
+            if (isr != null) {
+                try {
+                    isr.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

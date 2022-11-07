@@ -11,7 +11,8 @@ import java.io.IOException;
  */
 public class JsonHandler {
 
-    Gson gson = new Gson();
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
 
     /**
      * Sets the filepath to and set name to the jsonfile.
@@ -29,13 +30,26 @@ public class JsonHandler {
      * @param filename name of the file
      */
     public void writeToJson(BeerMain beerMain, String filename) throws IOException {
+        OutputStreamWriter fw = null; //to ensure reliance on default encoding
         try {
-            FileWriter fw = new FileWriter(getFilePath(filename));
+            fw = new OutputStreamWriter(new FileOutputStream(getFilePath(filename)), "UTF-8");
             gson.toJson(beerMain, fw);
-            fw.flush();
-            fw.close();
         } catch (IOException io) {
             throw new IOException("Feil ved skriving til fil");
+        }
+        finally { //to secure against potential leak
+            if (fw != null) {
+                try {
+                    fw.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    fw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -45,12 +59,25 @@ public class JsonHandler {
      * @param filename the filename to read from
      */
     public BeerMain readFromJson(String filename) throws IOException {
+        InputStreamReader isr = null;
         try {
-            BeerMain beerMain = gson.fromJson(new FileReader(getFilePath(filename)), BeerMain.class);
+            FileInputStream fis = new FileInputStream(getFilePath(filename));
+            isr = new InputStreamReader(fis, StandardCharsets.UTF_8); //reliance on default encoding
+            BeerMain beerMain = gson.fromJson(isr, BeerMain.class);
             return beerMain;
-        } catch (IOException ioe) {
+        } catch (IOException IOe) {
+            IOe.printStackTrace();
             throw new IOException("Feil ved lesing fra fil");
+        } finally { //to secure against potential leak
+            if (isr != null) {
+                try {
+                    isr.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
+
 }
 

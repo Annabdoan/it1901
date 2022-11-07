@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/beer_punishment/beer_punishment.iml" filepath="$PROJECT_DIR$/beer_punishment/beer_punishment.iml" />
       <module fileurl="file://$PROJECT_DIR$/beer_punishment/core/beer_punishment_core.iml" filepath="$PROJECT_DIR$/beer_punishment/core/beer_punishment_core.iml" />
       <module fileurl="file://$PROJECT_DIR$/beer_punishment/json/beer_punishment_json.iml" filepath="$PROJECT_DIR$/beer_punishment/json/beer_punishment_json.iml" />
+      <module fileurl="file://$PROJECT_DIR$/beer_punishment/restserver/beer_punishment_restserver.iml" filepath="$PROJECT_DIR$/beer_punishment/restserver/beer_punishment_restserver.iml" />
       <module fileurl="file://$PROJECT_DIR$/beer_punishment/ui/beer_punishment_ui.iml" filepath="$PROJECT_DIR$/beer_punishment/ui/beer_punishment_ui.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/gr2231.iml" filepath="$PROJECT_DIR$/.idea/gr2231.iml" />
     </modules>

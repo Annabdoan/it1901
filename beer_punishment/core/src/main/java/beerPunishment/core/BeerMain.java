@@ -15,6 +15,8 @@ public class BeerMain implements Iterable<Rule> {
     public BeerMain() {
     }
 
+
+
     /**
      * Access method for rules.
      *
@@ -177,7 +179,7 @@ public class BeerMain implements Iterable<Rule> {
      * @return the hashmap of members and what rules they have broken.
      */
     public HashMap<String, Collection<Rule>> getMemberRuleViolations() {
-        return new HashMap<String, Collection<Rule>>(this.memberRuleViolations);
+        return new HashMap<>(this.memberRuleViolations);
     }
 
     public void setMemberRuleViolations(HashMap<String, Collection<Rule>> memberRuleViolations) {

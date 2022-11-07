@@ -1,17 +1,19 @@
 package beerPunishment.restserver;
 
+import beerPunishment.json.JsonHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-//import org.springframework.context.annotation.Bean;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
 
 
+//scanBasePackages={"beerPunishment.core.BeerMain"}
 
-
-@SpringBootApplication
+@SpringBootApplication(exclude = {JacksonAutoConfiguration.class})
 public class RestServerApp {
+
+
+
     public static void main(String[] args) {
         SpringApplication.run(RestServerApp.class, args);
     }

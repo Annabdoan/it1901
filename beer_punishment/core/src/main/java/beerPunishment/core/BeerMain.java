@@ -32,7 +32,7 @@ public class BeerMain implements Iterable<Rule> {
      * @param rule the rule
      */
     public void addRule(Rule rule) {
-        for (Rule r1: this.rules) {
+        for (Rule r1 : this.rules) {
             if (r1.equals(rule)) {
                 throw new IllegalArgumentException("Ikke lov å lage samme regel to ganger");
             }
@@ -50,10 +50,15 @@ public class BeerMain implements Iterable<Rule> {
         this.rules.remove(rule);
     }
 
+    /**
+     * Method for removing rules using the description.
+     *
+     * @param description of the rule being deleted
+     */
     public void removeRuleUsingDescription(String description) {
         Rule empty = null;
-        for (Rule rule: rules){
-            if (rule.getDescription().equals(description)){
+        for (Rule rule : rules) {
+            if (rule.getDescription().equals(description)) {
                 empty = rule;
             }
         }
@@ -74,7 +79,13 @@ public class BeerMain implements Iterable<Rule> {
         }
         memberRuleViolations.put(username, new ArrayList<>());
     }
-    public void deleteMember(String username){
+
+    /**
+     * Method for deleting existing members.
+     *
+     * @param username of the member to delete
+     */
+    public void deleteMember(String username) {
         if (!memberRuleViolations.containsKey(username)) {
             throw new IllegalArgumentException("Brukernavn eksisterer ikke");
         }
@@ -96,6 +107,12 @@ public class BeerMain implements Iterable<Rule> {
         memberRuleViolations.put(username, violations);
     }
 
+    /**
+     * Method for removing punishment from a member.
+     *
+     * @param username the name the member
+     * @param rule     the rule that the member has broken and that is getting removed
+     */
     public void removePunishment(String username, Rule rule) {
         if (!memberRuleViolations.containsKey(username)) {
             throw new IllegalArgumentException("Brukernavnet eksisterer ikke");
@@ -116,13 +133,24 @@ public class BeerMain implements Iterable<Rule> {
 
     }
 
-    public Collection<Rule> getMemberViolations (String username) {
+    /**
+     * Method for getting a list of a users violations.
+     *
+     * @param username the name the member to punish
+     * @return ArrayList of the given members violations
+     */
+    public Collection<Rule> getMemberViolations(String username) {
         if (!memberRuleViolations.containsKey(username)) {
             throw new IllegalArgumentException("Brukernavn finnes ikke");
         }
         return new ArrayList<>(memberRuleViolations.get(username));
     }
 
+    /**
+     * Makes a hashmap out of the list of given punishment status, member and number of penalties.
+     *
+     * @return hashmap of member with the associated number of penalties.
+     */
     public HashMap<String, Integer> generateMembersPunishments() {
         HashMap<String, Integer> punishmentStatus = new HashMap<>();
         for (Map.Entry<String, Collection<Rule>> entry : memberRuleViolations.entrySet()) {
@@ -133,17 +161,6 @@ public class BeerMain implements Iterable<Rule> {
             }
             punishmentStatus.put(entry.getKey(), totalpunishmemt);
         }
-        /*
-        for (String username : memberRuleViolations.keySet()
-        ) {
-            Integer totalpunishmemt = 0;
-            for (Rule rule : memberRuleViolations.get(username)
-            ) {
-                totalpunishmemt += rule.getPunishmentValue();
-            }
-            punishmentStatus.put(username, totalpunishmemt);
-
-        }*/
         return new HashMap<String, Integer>(punishmentStatus);
     }
 
@@ -174,7 +191,9 @@ public class BeerMain implements Iterable<Rule> {
     }
 
     /**
-     * Makes a ToString out of the hashmap.
+     * Makes a ToString out of the list of given punishment status.
+     *
+     * @return ArrayList of ToSting punishment status.
      */
     public Collection<String> generatePunishmentStatusToString() {
         HashMap<String, Integer> punishmentStatus = generateMembersPunishments();
@@ -200,7 +219,7 @@ public class BeerMain implements Iterable<Rule> {
     }
 
     /**
-     * Method for copying fields from a BeerMain into this BeerMain
+     * Method for copying fields from a BeerMain into this BeerMain.
      *
      * @param bm the BeerMain that is copied
      */

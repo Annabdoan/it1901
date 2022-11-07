@@ -2,13 +2,13 @@ package beerPunishment.json;
 
 import beerPunishment.core.BeerMain;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
-
+/**
+ * A class for writing and reading from json file.
+ */
 public class JsonHandler {
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -23,7 +23,12 @@ public class JsonHandler {
         return System.getProperty("user.home") + filename;
     }
 
-
+    /**
+     * Writes to JSON.
+     *
+     * @param beerMain the object being written to file
+     * @param filename name of the file
+     */
     public void writeToJson(BeerMain beerMain, String filename) throws IOException {
         OutputStreamWriter fw = null; //to ensure reliance on default encoding
         try {
@@ -48,7 +53,11 @@ public class JsonHandler {
         }
     }
 
-
+    /**
+     * Reads from JSON file and makes it a BeerMain object.
+     *
+     * @param filename the filename to read from
+     */
     public BeerMain readFromJson(String filename) throws IOException {
         InputStreamReader isr = null;
         try {

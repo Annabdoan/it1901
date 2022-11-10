@@ -55,7 +55,11 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
 
     @Override
     public void punishMember(String member, String description, int value) {
-
+        beerMain = getBeermain();
+        Rule rule = new Rule(description, value);
+        beerMain.addRule(rule);
+        beerMain.punishMember(member, rule);
+        writeBeerMainToJson(beerMain);
     }
 
     @Override

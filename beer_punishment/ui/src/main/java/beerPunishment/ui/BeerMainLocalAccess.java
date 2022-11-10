@@ -71,7 +71,9 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
 
     @Override
     public void deleteMember(String member) {
-
+        beerMain = getBeermain();
+        beerMain.deleteMember(member);
+        writeBeerMainToJson(beerMain);
     }
 
     @Override

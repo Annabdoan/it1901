@@ -31,8 +31,8 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     @Override
     public BeerMain getBeermain() {
         try {
-            this.beerMain = jsh.readFromJson("/beerPunishment.json");
-            return this.beerMain;
+            beerMain = jsh.readFromJson("/beerPunishment.json");
+            return beerMain;
         }catch (IOException ioe){
             return new BeerMain();
         }
@@ -40,15 +40,17 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
 
     @Override
     public void addRule(String description, int value) {
-        this.rule = new Rule(description, value);
-        this.beerMain = getBeermain();
+        rule = new Rule(description, value);
+        beerMain = getBeermain();
         beerMain.addRule(rule);
         writeBeerMainToJson(beerMain);
     }
 
     @Override
     public void addMember(String name) {
-
+        beerMain = getBeermain();
+        beerMain.addMember(name);
+        writeBeerMainToJson(beerMain);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package beerPunishment.ui;
 import beerPunishment.core.BeerMain;
+import beerPunishment.json.JsonHandler;
 import com.google.gson.Gson;
 import beerPunishment.core.Rule;
 import com.google.gson.reflect.TypeToken;
@@ -38,6 +39,8 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
     }
 
     private BeerMain beerMain = new BeerMain();
+
+    private JsonHandler jsh;
 
     public static Boolean pingServer(URI baseURI ) {
 
@@ -90,19 +93,24 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
     /**
      * Sends a POST-request ....
      */
-    public void addRule(String description, int value) {
-        Gson gson = new Gson();
+    public BeerMain addRule(BeerMain beermain, String description, int value) {
         try {
             HttpRequest request = HttpRequest.newBuilder(
-                            beerMainPath("addRule"))
+                            beerMainPath("rules"))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .header(CONTENT_TYPE_HEADER, APPLICATION_FORM_URLENCODED)
                     .POST(HttpRequest.BodyPublishers.ofString("?description=" + description + "&value=" + value))
                     .build();
             final HttpResponse<String> response =
                     HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-            String responseString = response.body();
-            //Skal vi gjøre noe med denne responsen?
+            System.out.println(response.body());
+            if (response.body() != null) {
+                BeerMain beerMain2 = getBeermain();
+                beerMain2.addRule(new Rule(description, value));
+                return beerMain2;
+            } else {
+                return beermain;
+            }
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }

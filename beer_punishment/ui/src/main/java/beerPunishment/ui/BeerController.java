@@ -44,7 +44,7 @@ public class BeerController {
         //Her skal det bestemmes over local access eller remote access.
         //Tester ut med Local for å sjekke at det funker.
         iBeerMainAccess = new BeerMainLocalAccess();
-        iBeerMainAccess.getBeermain();
+        this.beermain = iBeerMainAccess.getBeermain();
         updateMemberView();
         updatePersonChoicebox();
         updateListView();

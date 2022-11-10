@@ -37,16 +37,6 @@ public class BeerMainRestController {
     }
 
 
-    @GetMapping(path = "rules")
-    public Collection<Rule>  getRules() {
-        return this.beerMain.getRules();
-    }
-
-    @GetMapping("/memberRuleViolations")
-    public HashMap<String, Collection<Rule>> getMemberRuleViolations() {
-        return new HashMap<>(this.beerMain.getMemberRuleViolations());
-
-    }
 
     @GetMapping("/members")
     public Collection<String> getMembers() {

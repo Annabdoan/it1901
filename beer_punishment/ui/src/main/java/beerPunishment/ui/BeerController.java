@@ -183,13 +183,12 @@ public class BeerController {
     public void deleteMember() {
         String username = deleteMemberText.getText();
         try {
-            beermain.deleteMember(username);
-            iBeerMainAccess.deleteMember(username);
+            beermain = iBeerMainAccess.deleteMember(beermain, username);
             updateMemberView();
             updatePersonChoicebox();
             updatePaymentPersonChoicebox();
-        } catch (IllegalArgumentException | IOException e) {
-            showErrorMessage(e.getMessage());
+        } catch (IllegalArgumentException iae) {
+            showErrorMessage(iae.getMessage());
         }
     }
 

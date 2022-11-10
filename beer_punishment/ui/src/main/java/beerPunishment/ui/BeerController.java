@@ -168,8 +168,7 @@ public class BeerController {
         String username = addMemberText.getText();
         try {
             beermain.addMember(username);
-            //Metoder
-            jsh.writeToJson(this.beermain, fileName);
+            iBeerMainAccess.addMember(username);
             updateMemberView();
             updatePersonChoicebox();
             updatePaymentPersonChoicebox();

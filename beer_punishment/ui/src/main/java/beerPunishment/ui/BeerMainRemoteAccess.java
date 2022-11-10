@@ -175,8 +175,7 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
      *
      * @param ruleDescription the rule to remove
      */
-    public void removeRule(String ruleDescription) {
-        Gson gson = new Gson();
+    public BeerMain removeRule(BeerMain beerMain, String ruleDescription) {
         try {
             HttpRequest request = HttpRequest.newBuilder(beerMainPath("removeRule"))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
@@ -184,11 +183,13 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
                     .build();
             final HttpResponse<String> response =
                     HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-            String responseString = response.body();
-
-            Boolean removed = gson.fromJson(responseString, Boolean.class);
-            if (removed != null) {
-                beerMain.removeRuleUsingDescription(ruleDescription);
+            System.out.println(response.body());
+            if (response.body() != null) {
+                BeerMain beerMain2 = getBeermain();
+                beerMain2.removeRuleUsingDescription(ruleDescription);
+                return beerMain2;
+            } else {
+                return beerMain;
             }
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);

@@ -100,14 +100,15 @@ public class BeerController {
      */
     @FXML
     public void makeNewRule() {
-
         try {
             //Split the string in the text input in order to add a new rule.
             String[] arrOfNewRuleTextInput = newRuleTextInput.getText().split(";");
-            Rule rule = new Rule(arrOfNewRuleTextInput[0],
-                    Integer.parseInt(arrOfNewRuleTextInput[1]));
+            String description = arrOfNewRuleTextInput[0];
+            int value = Integer.parseInt(arrOfNewRuleTextInput[1]);
+
+            Rule rule = new Rule(description, value);
             beermain.addRule(rule);
-            jsh.writeToJson(beermain, fileName);
+            iBeerMainAccess.addRule(description, value);
             updateListView();
             updateRuleChoicebox();
         } catch (NumberFormatException ne) {

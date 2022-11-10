@@ -2,7 +2,6 @@ package beerPunishment.ui;
 
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
-import beerPunishment.json.JsonHandler;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;

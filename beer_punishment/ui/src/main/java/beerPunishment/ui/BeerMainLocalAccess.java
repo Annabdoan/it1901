@@ -110,10 +110,16 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     }
 
     @Override
-    public void payPunishment(BeerMain beerMain, String member, String description, int value) throws IOException {
-        beerMain = getBeermain();
-        Rule rule = new Rule(description, value);
-        beerMain.removePunishment(member, rule);
-        writeBeerMainToJson(beerMain);
+    public BeerMain payPunishment(BeerMain beerMain, String member, String description, int value) {
+        try{
+            BeerMain beerMain2 = getBeermain();
+            Rule rule = new Rule(description, value);
+            beerMain2.removePunishment(member, rule);
+            writeBeerMainToJson(beerMain2);
+            return beerMain2;
+        }catch (IOException ioe){
+            System.out.println("Could not delete punishment");
+            return beerMain;
+        }
     }
 }

@@ -64,7 +64,9 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
 
     @Override
     public void removeRule(String ruleDescription) {
-
+        beerMain = getBeermain();
+        beerMain.removeRuleUsingDescription(ruleDescription);
+        writeBeerMainToJson(beerMain);
     }
 
     @Override

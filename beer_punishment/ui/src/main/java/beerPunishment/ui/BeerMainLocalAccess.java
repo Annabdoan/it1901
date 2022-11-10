@@ -19,6 +19,14 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     private JsonHandler jsh;
     private Rule rule;
 
+    private void writeBeerMainToJson(BeerMain beerMain){
+        try {
+            jsh.writeToJson(beerMain, "/beerPunishment.json");
+
+        }catch (IOException ioe){
+            System.out.println(ioe.getMessage());
+        }
+    }
 
     @Override
     public BeerMain getBeermain() {
@@ -32,7 +40,10 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
 
     @Override
     public void addRule(String description, int value) {
-
+        this.rule = new Rule(description, value);
+        this.beerMain = getBeermain();
+        beerMain.addRule(rule);
+        writeBeerMainToJson(beerMain);
     }
 
     @Override

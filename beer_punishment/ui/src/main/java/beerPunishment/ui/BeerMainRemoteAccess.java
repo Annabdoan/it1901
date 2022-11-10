@@ -93,7 +93,7 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
     /**
      * Sends a POST-request ....
      */
-    public BeerMain addRule(BeerMain beermain, String description, int value) {
+    public BeerMain addRule(BeerMain beerMain, String description, int value) {
         try {
             HttpRequest request = HttpRequest.newBuilder(
                             beerMainPath("rules"))
@@ -109,15 +109,14 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
                 beerMain2.addRule(new Rule(description, value));
                 return beerMain2;
             } else {
-                return beermain;
+                return beerMain;
             }
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void addMember(String name) {
-        Gson gson = new Gson();
+    public BeerMain addMember(BeerMain beerMain, String name) {
         try {
             HttpRequest request = HttpRequest.newBuilder(
                             beerMainPath("addMember"))
@@ -127,8 +126,14 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
                     .build();
             final HttpResponse<String> response =
                     HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-            String responseString = response.body();
-            //Skal vi gjøre noe med denne responsen?
+            System.out.println(response.body());
+            if (response.body() != null) {
+                BeerMain beerMain2 = getBeermain();
+                beerMain2.addMember(name);
+                return beerMain2;
+            } else {
+                return beerMain;
+            }
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }

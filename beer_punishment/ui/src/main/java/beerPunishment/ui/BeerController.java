@@ -114,14 +114,13 @@ public class BeerController {
             int value = Integer.parseInt(arrOfNewRuleTextInput[1]);
 
             Rule rule = new Rule(description, value);
-            beermain.addRule(rule); //endre
-            iBeerMainAccess.addRule(description, value);
+            beermain = iBeerMainAccess.addRule(beermain, description, value);
             updateListView();
             updateRuleChoicebox();
         } catch (NumberFormatException ne) {
             showErrorMessage("Feil ved å gjøre om verdi til int.");
-        } catch (IOException | IllegalArgumentException ioe) {
-            showErrorMessage(ioe.getMessage());
+        } catch (IllegalArgumentException iae) {
+            showErrorMessage(iae.getMessage());
         }
     }
 

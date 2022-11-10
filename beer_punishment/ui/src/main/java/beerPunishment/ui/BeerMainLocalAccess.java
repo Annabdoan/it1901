@@ -9,6 +9,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,6 +31,7 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
 
     @Override
     public BeerMain getBeermain() {
+        jsh = new JsonHandler();
         try {
             beerMain = jsh.readFromJson("/beerPunishment.json");
             return beerMain;

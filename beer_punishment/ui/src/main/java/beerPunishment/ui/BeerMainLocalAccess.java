@@ -69,7 +69,7 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     }
 
     @Override
-    public BeerMain punishMember(BeerMain beerMain, String member, String description, int value) throws IOException {
+    public BeerMain punishMember(BeerMain beerMain, String member, String description, int value) {
         try{
             BeerMain beerMain2 = getBeermain();
             Rule rule = new Rule(description, value);
@@ -84,10 +84,16 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     }
 
     @Override
-    public void removeRule(BeerMain beerMain, String ruleDescription) throws IOException {
-        beerMain = getBeermain();
-        beerMain.removeRuleUsingDescription(ruleDescription);
-        writeBeerMainToJson(beerMain);
+    public BeerMain removeRule(BeerMain beerMain, String ruleDescription) {
+        try{
+            BeerMain beerMain2 = getBeermain();
+            beerMain2.removeRuleUsingDescription(ruleDescription);
+            writeBeerMainToJson(beerMain2);
+            return beerMain2;
+        }catch (IOException ioe){
+            System.out.println("Could not remove rule");
+            return beerMain;
+        }
     }
 
     @Override

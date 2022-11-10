@@ -185,7 +185,7 @@ public class BeerController {
         String username = deleteMemberText.getText();
         try {
             beermain.deleteMember(username);
-            jsh.writeToJson(this.beermain, fileName);
+            iBeerMainAccess.deleteMember(username);
             updateMemberView();
             updatePersonChoicebox();
             updatePaymentPersonChoicebox();

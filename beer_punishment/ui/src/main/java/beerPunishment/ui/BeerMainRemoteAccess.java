@@ -198,8 +198,8 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
 
 
 
-    public void deleteMember(String member) {
-        Gson gson = new Gson();
+    public BeerMain deleteMember(BeerMain beerMain, String member) {
+
         try {
             HttpRequest request = HttpRequest.newBuilder(beerMainPath("deleteMember"))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
@@ -207,11 +207,12 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
                     .build();
             final HttpResponse<String> response =
                     HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-            String responseString = response.body();
-
-            Boolean removed = gson.fromJson(responseString, Boolean.class);
-            if (removed != null) {
-                beerMain.deleteMember(member);
+            if (response.body() != null) {
+                BeerMain beerMain2 = getBeermain();
+                beerMain2.deleteMember(member);
+                return beerMain2;
+            } else {
+                return beerMain;
             }
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);

@@ -144,9 +144,7 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
      *
      * @param member the member to punish,................
      */
-    public void punishMember(String member, String description, int value) {
-        Gson gson = new Gson();
-        String ruleValue = String.valueOf(value);
+    public BeerMain punishMember(BeerMain beerMain, String member, String description, int value) {
         try {
             HttpRequest request = HttpRequest.newBuilder(beerMainPath("punishMember"))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
@@ -156,8 +154,15 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
                     .build();
             final HttpResponse<String> response =
                     HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-            String responseString = response.body(); // SJEKK
-
+            System.out.println(response.body());
+            if (response.body() != null) {
+                Rule rule = new Rule(description, value);
+                BeerMain beerMain2 = getBeermain();
+                beerMain2.punishMember(member, rule);
+                return beerMain2;
+            } else {
+                return beerMain;
+            }
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }

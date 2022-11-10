@@ -28,7 +28,7 @@ public interface IBeerMainAccess {
     /**
      * Punish a member.
      */
-    void punishMember(String member, String description, int value) throws IOException;
+    void punishMember(String member, String description, int value) throws IOException; // ende voids
 
     void removeRule(String ruleDescription) throws IOException;
 

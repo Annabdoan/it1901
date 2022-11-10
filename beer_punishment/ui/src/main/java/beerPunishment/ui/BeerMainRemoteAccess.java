@@ -20,7 +20,7 @@ import java.net.http.HttpRequest.BodyPublishers;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 
-public class BeerMainRemoteAccess {
+public class BeerMainRemoteAccess implements IBeerMainAccess {
 
     private final URI path;
 
@@ -39,30 +39,47 @@ public class BeerMainRemoteAccess {
 
     private BeerMain beerMain = new BeerMain();
 
+    public static Boolean pingServer(URI baseURI ) {
 
-
-    public BeerMain getBeerMain() {
-        Gson gson = new Gson();
-        if (beerMain == null) {
-            HttpRequest request = HttpRequest.newBuilder(path.resolve("beerMain"))
-                    .header(ACCEPT_HEADER, APPLICATION_JSON)
-                    .GET()
-                    .build();
-            try {
-                final HttpResponse<String> response =
-                        HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-                this.beerMain = gson.fromJson(response.body(), BeerMain.class);
-            } catch (IOException | InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-
+        HttpRequest request = HttpRequest.newBuilder( baseURI.resolve("ping"))
+                .header(ACCEPT_HEADER, APPLICATION_JSON)
+                .GET()
+                .build();
+        try {
+            final HttpResponse<String> response =
+                    HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println("Successfully pinged server");
+            return response.body().equals("pong");
+        } catch (IOException | InterruptedException e) {
+            System.out.println("Could not find server");
+            return false;
         }
-        return beerMain;
+
+    }
+
+
+
+    public BeerMain getBeermain() {
+        Gson gson = new Gson();
+        HttpRequest request = HttpRequest.newBuilder(path.resolve("beerMain"))
+                .header(ACCEPT_HEADER, APPLICATION_JSON)
+                .GET()
+                .build();
+        try {
+            final HttpResponse<String> response =
+                    HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+            //DEBUG
+            System.out.println(response.body());
+            BeerMain bm = gson.fromJson(response.body(), BeerMain.class);
+            return bm;
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Collection<Rule> getRules() {
         Gson gson = new Gson();
-        if (beerMain == null) {
+
             HttpRequest request = HttpRequest.newBuilder(path.resolve("rules"))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .GET()
@@ -76,13 +93,11 @@ public class BeerMainRemoteAccess {
             } catch (IOException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
-        }
-        return null;
+
     }
 
     public HashMap<String, Collection<Rule>> getMemberRuleViolations() {
         Gson gson = new Gson();
-        if (beerMain == null) {
             HttpRequest request = HttpRequest.newBuilder(path.resolve("memberRuleViolations"))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .GET()
@@ -96,8 +111,6 @@ public class BeerMainRemoteAccess {
             } catch (IOException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
-        }
-        return null;
     }
 
     private String UriParam(String s) {
@@ -107,6 +120,7 @@ public class BeerMainRemoteAccess {
     private URI beerMainPath(String name) {
         return path.resolve(UriParam(name));
     }
+
 
     /**
      * Sends a POST-request ....
@@ -152,7 +166,7 @@ public class BeerMainRemoteAccess {
      *
      * @param member the member to punish,................
      */
-    private void punishMember(String member, String description, int value) {
+    public void punishMember(String member, String description, int value) {
         Gson gson = new Gson();
         String ruleValue = String.valueOf(value);
         try {

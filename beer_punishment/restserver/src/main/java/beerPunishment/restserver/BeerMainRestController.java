@@ -24,7 +24,7 @@ public class BeerMainRestController {
 
     private void writeToJson() {
         try {
-            jsh.writeToJson(this.beerMain, "/beerPunishment.json");
+            jsh.writeToJson(this.beerMain, "/beerPunishmentRemote.json");
         }catch (IOException IOE) {
             System.out.println("Error while writing to file");
         }
@@ -53,19 +53,19 @@ public class BeerMainRestController {
         return this.beerMain.getUsernames();
     }
 
+    @PostMapping(path = "/members")
+    public void addMember(@RequestParam("name") String name) {
+        this.beerMain.addMember(name);
+        writeToJson();
+    }
 
-    @PostMapping(path = "/addRule")
+    @PostMapping(path = "rules")
     public void addRule(@RequestParam("description") String ruleDescription, @RequestParam("value") int value) {
         this.rule = new Rule(ruleDescription,value);
         this.beerMain.addRule(rule);
         writeToJson();
     }
 
-    @PostMapping(path = "/addMember")
-    public void addMember(@RequestParam("name") String name) {
-        this.beerMain.addMember(name);
-        writeToJson();
-    }
 
     @PutMapping(path="punishMember")
     public void punishMember(@RequestParam("member") String member,
@@ -97,4 +97,10 @@ public class BeerMainRestController {
         this.beerMain.removePunishment(member, rule);
         writeToJson();
     }
+
+    @GetMapping(path = "/ping")
+    public String ping() {
+        return "pong";
+    }
+
 }

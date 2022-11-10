@@ -3,6 +3,7 @@ package beerPunishment.ui;
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
 import javafx.fxml.FXML;
@@ -18,6 +19,8 @@ import javafx.scene.control.TextField;
 public class BeerController {
 
     private BeerMain beermain;
+
+    public static final URI defaultURI = URI.create("http://localhost:8080");
 
 
     @FXML
@@ -42,8 +45,13 @@ public class BeerController {
     @FXML
     public void initialize() {
         //Her skal det bestemmes over local access eller remote access.
-        //Tester ut med Local for å sjekke at det funker.
-        iBeerMainAccess = new BeerMainLocalAccess();
+        //Tester ut med Local for å sjekke at det funker
+        /*
+        iBeerMainAccess = BeerMainRemoteAccess.pingServer(defaultURI)
+                ? (IBeerMainAccess) new BeerMainRemoteAccess(defaultURI)
+                : new BeerMainLocalAccess();
+        */
+        iBeerMainAccess = new BeerMainRemoteAccess(defaultURI);
         this.beermain = iBeerMainAccess.getBeermain();
         updateMemberView();
         updatePersonChoicebox();
@@ -106,7 +114,7 @@ public class BeerController {
             int value = Integer.parseInt(arrOfNewRuleTextInput[1]);
 
             Rule rule = new Rule(description, value);
-            beermain.addRule(rule);
+            beermain.addRule(rule); //endre
             iBeerMainAccess.addRule(description, value);
             updateListView();
             updateRuleChoicebox();

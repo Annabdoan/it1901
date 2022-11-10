@@ -30,7 +30,7 @@ public interface IBeerMainAccess {
      */
     BeerMain punishMember(BeerMain beerMain, String member, String description, int value) throws IOException; // ende voids
 
-    BeerMain removeRule(BeerMain beerMain, tring ruleDescription) throws IOException;
+    BeerMain removeRule(BeerMain beerMain, String ruleDescription) throws IOException;
 
 
     BeerMain deleteMember(BeerMain beerMain, String member) throws IOException;

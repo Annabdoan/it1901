@@ -41,22 +41,28 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     }
 
     @Override
-    public void addRule(String description, int value) throws IOException {
-        rule = new Rule(description, value);
-        beerMain = getBeermain();
-        beerMain.addRule(rule);
-        writeBeerMainToJson(beerMain);
+    public BeerMain addRule(BeerMain beerMain, String description, int value) {
+        try {
+            rule = new Rule(description, value);
+            BeerMain beerMain2 = getBeermain();
+            beerMain2.addRule(rule);
+            writeBeerMainToJson(beerMain2);
+            return beerMain2;
+        }catch (IOException ioe) {
+            return beerMain;
+        }
+
     }
 
     @Override
-    public void addMember(String name) throws IOException {
+    public void addMember(BeerMain beerMain, String name) throws IOException {
         beerMain = getBeermain();
         beerMain.addMember(name);
         writeBeerMainToJson(beerMain);
     }
 
     @Override
-    public void punishMember(String member, String description, int value) throws IOException {
+    public void punishMember(BeerMain beerMain, String member, String description, int value) throws IOException {
         beerMain = getBeermain();
         Rule rule = new Rule(description, value);
         beerMain.punishMember(member, rule);
@@ -64,21 +70,21 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     }
 
     @Override
-    public void removeRule(String ruleDescription) throws IOException {
+    public void removeRule(BeerMain beerMain, String ruleDescription) throws IOException {
         beerMain = getBeermain();
         beerMain.removeRuleUsingDescription(ruleDescription);
         writeBeerMainToJson(beerMain);
     }
 
     @Override
-    public void deleteMember(String member) throws IOException {
+    public void deleteMember(BeerMain beerMain, String member) throws IOException {
         beerMain = getBeermain();
         beerMain.deleteMember(member);
         writeBeerMainToJson(beerMain);
     }
 
     @Override
-    public void payPunishment(String member, String description, int value) throws IOException {
+    public void payPunishment(BeerMain beerMain, String member, String description, int value) throws IOException {
         beerMain = getBeermain();
         Rule rule = new Rule(description, value);
         beerMain.removePunishment(member, rule);

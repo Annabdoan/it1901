@@ -17,25 +17,25 @@ public interface IBeerMainAccess {
     /**
      * Make new rule.
      */
-    void addRule();
+    void addRule(String description, int value);
 
 
     /**
      * Add member.
      */
-    void addMember();
+    void addMember(String name);
 
     /**
      * Punish a member.
      */
-    void punishMember();
+    void punishMember(String member, String description, int value);
 
-    void removeRule();
+    void removeRule(String ruleDescription);
 
 
-    void deleteMember();
+    void deleteMember(String member);
 
-    void payPunishment();
+    void payPunishment(String member, String description, int value);
 
 
 }

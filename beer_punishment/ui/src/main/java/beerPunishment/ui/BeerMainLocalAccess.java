@@ -59,7 +59,6 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     public void punishMember(String member, String description, int value) throws IOException {
         beerMain = getBeermain();
         Rule rule = new Rule(description, value);
-        beerMain.addRule(rule);
         beerMain.punishMember(member, rule);
         writeBeerMainToJson(beerMain);
     }

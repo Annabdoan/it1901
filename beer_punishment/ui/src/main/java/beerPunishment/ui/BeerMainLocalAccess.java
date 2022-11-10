@@ -49,20 +49,27 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
             writeBeerMainToJson(beerMain2);
             return beerMain2;
         }catch (IOException ioe) {
+            System.out.println("Could not add rule");
             return beerMain;
         }
 
     }
 
     @Override
-    public void addMember(BeerMain beerMain, String name) throws IOException {
-        beerMain = getBeermain();
-        beerMain.addMember(name);
-        writeBeerMainToJson(beerMain);
+    public BeerMain addMember(BeerMain beerMain, String name) {
+        try{
+            BeerMain beerMain2 = getBeermain();
+            beerMain2.addMember(name);
+            writeBeerMainToJson(beerMain2);
+            return beerMain2;
+        }catch(IOException ioe){
+            System.out.println("Could not add member");
+            return beerMain;
+        }
     }
 
     @Override
-    public void punishMember(BeerMain beerMain, String member, String description, int value) throws IOException {
+    public BeerMain punishMember(BeerMain beerMain, String member, String description, int value) throws IOException {
         beerMain = getBeermain();
         Rule rule = new Rule(description, value);
         beerMain.punishMember(member, rule);

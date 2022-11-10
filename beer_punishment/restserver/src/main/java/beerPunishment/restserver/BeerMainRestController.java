@@ -30,29 +30,32 @@ public class BeerMainRestController {
         }
     }
 
-
     @GetMapping(path = "beerMain")
     public BeerMain getBeerMain() {
         return this.beerMain;
     }
 
 
-
-    @GetMapping("/members")
-    public Collection<String> getMembers() {
-        return this.beerMain.getUsernames();
-    }
-
-    @PostMapping(path = "/members")
+    @PostMapping(path = "members")
     public void addMember(@RequestParam("name") String name) {
         this.beerMain.addMember(name);
         writeToJson();
     }
 
+    @DeleteMapping(path = "members")
+    public void deleteMember(@RequestParam("member") String member) {
+        this.beerMain.deleteMember(member);
+        writeToJson();
+    }
     @PostMapping(path = "rules")
     public void addRule(@RequestParam("description") String ruleDescription, @RequestParam("value") int value) {
         this.rule = new Rule(ruleDescription,value);
         this.beerMain.addRule(rule);
+        writeToJson();
+    }
+    @DeleteMapping(path = "rules")
+    public void removeRule(@RequestParam("rule") String ruleDescription){
+        this.beerMain.removeRuleUsingDescription(ruleDescription);
         writeToJson();
     }
 
@@ -67,17 +70,7 @@ public class BeerMainRestController {
     }
 
 
-    @DeleteMapping(path = "removeRule")
-    public void removeRule(@RequestParam("rule") String ruleDescription){
-        this.beerMain.removeRuleUsingDescription(ruleDescription);
-        writeToJson();
-    }
 
-    @DeleteMapping(path = "deleteMember")
-    public void deleteMember(@RequestParam("member") String member) {
-        this.beerMain.deleteMember(member);
-        writeToJson();
-    }
 
     @DeleteMapping(path = "payPunishment")
     public void payPunishment(@RequestParam("member") String member,
@@ -88,7 +81,7 @@ public class BeerMainRestController {
         writeToJson();
     }
 
-    @GetMapping(path = "/ping")
+    @GetMapping(path = "ping")
     public String ping() {
         return "pong";
     }

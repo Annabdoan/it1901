@@ -2,7 +2,6 @@ package beerPunishment.ui;
 
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
-import beerPunishment.json.JsonHandler;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,26 +32,26 @@ public class BeerController {
     public TextField deleteMemberText;
     public TextField deleteRuleText;
     private String fileName;
-    private JsonHandler jsh;
+
+
+    private IBeerMainAccess iBeerMainAccess;
 
     /**
      * Initialize.
      */
     @FXML
     public void initialize() {
-        jsh = new JsonHandler();
-        try {
-            fileName = "/beerPunishment.json";
-            beermain = jsh.readFromJson(fileName); // Må bruke "\\" i stedet for "/" på windows
-            updateMemberView();
-            updatePersonChoicebox();
-            updateListView();
-            updateRuleChoicebox();
-            updatePersonChoicebox();
-            updatePaymentPersonChoicebox();
-        } catch (IOException ioe) {
-            beermain = new BeerMain();
-        }
+        //Her skal det bestemmes over local access eller remote access.
+        //Tester ut med Local for å sjekke at det funker.
+        iBeerMainAccess = new BeerMainLocalAccess();
+        this.beermain = iBeerMainAccess.getBeermain();
+        updateMemberView();
+        updatePersonChoicebox();
+        updateListView();
+        updateRuleChoicebox();
+        updatePersonChoicebox();
+        updatePaymentPersonChoicebox();
+
     }
 
     @FXML
@@ -100,14 +99,15 @@ public class BeerController {
      */
     @FXML
     public void makeNewRule() {
-
         try {
             //Split the string in the text input in order to add a new rule.
             String[] arrOfNewRuleTextInput = newRuleTextInput.getText().split(";");
-            Rule rule = new Rule(arrOfNewRuleTextInput[0],
-                    Integer.parseInt(arrOfNewRuleTextInput[1]));
+            String description = arrOfNewRuleTextInput[0];
+            int value = Integer.parseInt(arrOfNewRuleTextInput[1]);
+
+            Rule rule = new Rule(description, value);
             beermain.addRule(rule);
-            jsh.writeToJson(beermain, fileName);
+            iBeerMainAccess.addRule(description, value);
             updateListView();
             updateRuleChoicebox();
         } catch (NumberFormatException ne) {
@@ -123,10 +123,9 @@ public class BeerController {
     @FXML
     public void deleteRule() {
         String description = deleteRuleText.getText();
-
         try {
             beermain.removeRuleUsingDescription(description);
-            jsh.writeToJson(this.beermain, fileName);
+            iBeerMainAccess.removeRule(description);
             updateRuleChoicebox();
             updateListView();
         } catch (IllegalArgumentException | IOException e) {
@@ -150,7 +149,7 @@ public class BeerController {
             if (rule.getDescription().equals(chosenRule)) {
                 beermain.punishMember(chosenMember, rule);
                 try {
-                    jsh.writeToJson(beermain, fileName);
+                    iBeerMainAccess.punishMember(chosenMember, rule.getDescription(), rule.getPunishmentValue());
                 } catch (IOException punishMemberioe) {
                     showErrorMessage("Failed to punish member");
                 }
@@ -168,8 +167,7 @@ public class BeerController {
         String username = addMemberText.getText();
         try {
             beermain.addMember(username);
-            //Metoder
-            jsh.writeToJson(this.beermain, fileName);
+            iBeerMainAccess.addMember(username);
             updateMemberView();
             updatePersonChoicebox();
             updatePaymentPersonChoicebox();
@@ -186,7 +184,7 @@ public class BeerController {
         String username = deleteMemberText.getText();
         try {
             beermain.deleteMember(username);
-            jsh.writeToJson(this.beermain, fileName);
+            iBeerMainAccess.deleteMember(username);
             updateMemberView();
             updatePersonChoicebox();
             updatePaymentPersonChoicebox();
@@ -206,7 +204,7 @@ public class BeerController {
             if (rule.getDescription().equals(chosenRule)) {
                 beermain.removePunishment(chosenMember, rule);
                 try {
-                    jsh.writeToJson(beermain, fileName);
+                    iBeerMainAccess.payPunishment(chosenMember, rule.getDescription(), rule.getPunishmentValue());
                 } catch (IOException punishMemberioe) {
                     showErrorMessage("Failed to punish member");
                 }

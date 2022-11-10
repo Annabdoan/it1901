@@ -2,9 +2,10 @@ package beerPunishment.json;
 
 import beerPunishment.core.BeerMain;
 import com.google.gson.Gson;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import com.google.gson.GsonBuilder;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 /**
  * A class for writing and reading from json file.
@@ -66,7 +67,7 @@ public class JsonHandler {
             BeerMain beerMain = gson.fromJson(isr, BeerMain.class);
             return beerMain;
         } catch (IOException IOe) {
-            IOe.printStackTrace();
+            //IOe.printStackTrace();
             throw new IOException("Feil ved lesing fra fil");
         } finally { //to secure against potential leak
             if (isr != null) {

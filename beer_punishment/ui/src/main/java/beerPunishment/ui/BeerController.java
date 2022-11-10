@@ -167,13 +167,12 @@ public class BeerController {
     public void addMember() {
         String username = addMemberText.getText();
         try {
-            beermain.addMember(username);
-            iBeerMainAccess.addMember(username);
+            beermain = iBeerMainAccess.addMember(beermain, username);
             updateMemberView();
             updatePersonChoicebox();
             updatePaymentPersonChoicebox();
-        } catch (IllegalArgumentException | IOException e) {
-            showErrorMessage(e.getMessage());
+        } catch (IllegalArgumentException iae) {
+            showErrorMessage(iae.getMessage());
         }
     }
 

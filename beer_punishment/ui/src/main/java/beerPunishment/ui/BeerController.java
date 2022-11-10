@@ -150,7 +150,7 @@ public class BeerController {
             if (rule.getDescription().equals(chosenRule)) {
                 beermain.punishMember(chosenMember, rule);
                 try {
-                    jsh.writeToJson(beermain, fileName);
+                    iBeerMainAccess.punishMember(chosenMember, chosenRule, rule.getPunishmentValue());
                 } catch (IOException punishMemberioe) {
                     showErrorMessage("Failed to punish member");
                 }

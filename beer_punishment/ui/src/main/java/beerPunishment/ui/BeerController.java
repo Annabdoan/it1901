@@ -124,10 +124,9 @@ public class BeerController {
     @FXML
     public void deleteRule() {
         String description = deleteRuleText.getText();
-
         try {
             beermain.removeRuleUsingDescription(description);
-            jsh.writeToJson(this.beermain, fileName);
+            iBeerMainAccess.removeRule(description);
             updateRuleChoicebox();
             updateListView();
         } catch (IllegalArgumentException | IOException e) {

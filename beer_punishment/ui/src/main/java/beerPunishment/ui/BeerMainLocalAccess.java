@@ -70,10 +70,17 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
 
     @Override
     public BeerMain punishMember(BeerMain beerMain, String member, String description, int value) throws IOException {
-        beerMain = getBeermain();
-        Rule rule = new Rule(description, value);
-        beerMain.punishMember(member, rule);
-        writeBeerMainToJson(beerMain);
+        try{
+            BeerMain beerMain2 = getBeermain();
+            Rule rule = new Rule(description, value);
+            beerMain2.punishMember(member, rule);
+            writeBeerMainToJson(beerMain2);
+            return beerMain2;
+        }catch(IOException ioe){
+            System.out.println("Could not punish member");
+            return beerMain;
+        }
+
     }
 
     @Override

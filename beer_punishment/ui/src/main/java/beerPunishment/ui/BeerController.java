@@ -33,26 +33,26 @@ public class BeerController {
     public TextField deleteMemberText;
     public TextField deleteRuleText;
     private String fileName;
-    private JsonHandler jsh;
+
+
+    private IBeerMainAccess iBeerMainAccess;
 
     /**
      * Initialize.
      */
     @FXML
     public void initialize() {
-        jsh = new JsonHandler();
-        try {
-            fileName = "/beerPunishment.json";
-            beermain = jsh.readFromJson(fileName); // Må bruke "\\" i stedet for "/" på windows
-            updateMemberView();
-            updatePersonChoicebox();
-            updateListView();
-            updateRuleChoicebox();
-            updatePersonChoicebox();
-            updatePaymentPersonChoicebox();
-        } catch (IOException ioe) {
-            beermain = new BeerMain();
-        }
+        //Her skal det bestemmes over local access eller remote access.
+        //Tester ut med Local for å sjekke at det funker.
+        iBeerMainAccess = new BeerMainLocalAccess();
+        iBeerMainAccess.getBeermain();
+        updateMemberView();
+        updatePersonChoicebox();
+        updateListView();
+        updateRuleChoicebox();
+        updatePersonChoicebox();
+        updatePaymentPersonChoicebox();
+
     }
 
     @FXML

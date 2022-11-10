@@ -19,12 +19,12 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     private JsonHandler jsh;
     private Rule rule;
 
-    private void writeBeerMainToJson(BeerMain beerMain){
+    private void writeBeerMainToJson(BeerMain beerMain) throws IOException {
         try {
             jsh.writeToJson(beerMain, "/beerPunishment.json");
 
         }catch (IOException ioe){
-            System.out.println(ioe.getMessage());
+            throw new IOException("Feil ved skriving til fil.");
         }
     }
 
@@ -39,7 +39,7 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     }
 
     @Override
-    public void addRule(String description, int value) {
+    public void addRule(String description, int value) throws IOException {
         rule = new Rule(description, value);
         beerMain = getBeermain();
         beerMain.addRule(rule);
@@ -47,14 +47,14 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     }
 
     @Override
-    public void addMember(String name) {
+    public void addMember(String name) throws IOException {
         beerMain = getBeermain();
         beerMain.addMember(name);
         writeBeerMainToJson(beerMain);
     }
 
     @Override
-    public void punishMember(String member, String description, int value) {
+    public void punishMember(String member, String description, int value) throws IOException {
         beerMain = getBeermain();
         Rule rule = new Rule(description, value);
         beerMain.addRule(rule);
@@ -63,21 +63,21 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     }
 
     @Override
-    public void removeRule(String ruleDescription) {
+    public void removeRule(String ruleDescription) throws IOException {
         beerMain = getBeermain();
         beerMain.removeRuleUsingDescription(ruleDescription);
         writeBeerMainToJson(beerMain);
     }
 
     @Override
-    public void deleteMember(String member) {
+    public void deleteMember(String member) throws IOException {
         beerMain = getBeermain();
         beerMain.deleteMember(member);
         writeBeerMainToJson(beerMain);
     }
 
     @Override
-    public void payPunishment(String member, String description, int value) {
+    public void payPunishment(String member, String description, int value) throws IOException {
         beerMain = getBeermain();
         Rule rule = new Rule(description, value);
         beerMain.removePunishment(member, rule);

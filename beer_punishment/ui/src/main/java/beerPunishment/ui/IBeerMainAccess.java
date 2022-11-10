@@ -11,48 +11,31 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public interface IBeerMainAccess {
-    void updateListView();
 
-    void updateRuleChoicebox();
-
-    void updatePersonChoicebox();
-
-    /**
-     * Show error message.
-     *
-     * @param errorMessage The message to show in the error
-     */
-
-    void showErrorMessage(String errorMessage);
+    BeerMain getBeermain();
 
     /**
      * Make new rule.
      */
-    void makeNewRule();
+    void addRule();
 
-    void deleteRule();
-
-    void updateMemberView();
-
-    /**
-     * Punish a member.
-     */
-    void punishMember();
 
     /**
      * Add member.
      */
     void addMember();
 
+    /**
+     * Punish a member.
+     */
+    void punishMember();
+
+    void removeRule();
+
+
     void deleteMember();
 
-    void payViolation();
+    void payPunishment();
 
-    void updatePaymentRuleChoicebox();
 
-    void updatePaymentPersonChoicebox();
-
-    BeerMain getBeermain();
-
-    void setFileName(String fileName);
 }

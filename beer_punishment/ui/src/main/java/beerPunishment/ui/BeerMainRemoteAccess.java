@@ -207,6 +207,8 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
                     .build();
             final HttpResponse<String> response =
                     HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+
+            System.out.println(response.body());
             if (response.body() != null) {
                 BeerMain beerMain2 = getBeermain();
                 beerMain2.deleteMember(member);
@@ -220,8 +222,7 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
     }
 
 
-    public void payPunishment(String member, String description, int value) {
-        Gson gson = new Gson();
+    public BeerMain payPunishment(BeerMain beerMain, String member, String description, int value) {
         Rule rule = new Rule(description,value);
         try {
             HttpRequest request = HttpRequest.newBuilder(beerMainPath("payPunishment"))
@@ -230,11 +231,14 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
                     .build();
             final HttpResponse<String> response =
                     HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-            String responseString = response.body();
 
-            Boolean removed = gson.fromJson(responseString, Boolean.class);
-            if (removed != null) {
-                beerMain.removePunishment(member,rule);
+            System.out.println(response.body());
+            if (response.body() != null) {
+                BeerMain beerMain2 = getBeermain();
+                beerMain2.removePunishment(member, rule);
+                return beerMain2;
+            } else {
+                return beerMain;
             }
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);

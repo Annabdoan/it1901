@@ -17,25 +17,25 @@ public interface IBeerMainAccess {
     /**
      * Make new rule.
      */
-    BeerMain addRule(BeerMain beerMain, String description, int value) throws IOException;
+    BeerMain addRule(BeerMain beerMain, String description, int value);
 
 
     /**
      * Add member.
      */
-    BeerMain addMember(BeerMain beerMain, String name) throws IOException;
+    BeerMain addMember(BeerMain beerMain, String name);
 
     /**
      * Punish a member.
      */
-    BeerMain punishMember(BeerMain beerMain, String member, String description, int value) throws IOException; // ende voids
+    BeerMain punishMember(BeerMain beerMain, String member, String description, int value);
 
-    BeerMain removeRule(BeerMain beerMain, String ruleDescription) throws IOException;
+    BeerMain removeRule(BeerMain beerMain, String ruleDescription);
 
 
-    BeerMain deleteMember(BeerMain beerMain, String member) throws IOException;
+    BeerMain deleteMember(BeerMain beerMain, String member);
 
-    BeerMain payPunishment(BeerMain beerMain, String member, String description, int value) throws IOException;
+    BeerMain payPunishment(BeerMain beerMain, String member, String description, int value);
 
 
 }

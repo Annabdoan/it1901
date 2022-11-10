@@ -131,12 +131,11 @@ public class BeerController {
     public void deleteRule() {
         String description = deleteRuleText.getText();
         try {
-            beermain.removeRuleUsingDescription(description);
-            iBeerMainAccess.removeRule(description);
+            beermain = iBeerMainAccess.removeRule(beermain, description);
             updateRuleChoicebox();
             updateListView();
-        } catch (IllegalArgumentException | IOException e) {
-            showErrorMessage(e.getMessage());
+        } catch (IllegalArgumentException iae) {
+            showErrorMessage(iae.getMessage());
         }
     }
 

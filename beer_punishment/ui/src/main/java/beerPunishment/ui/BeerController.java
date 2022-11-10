@@ -153,12 +153,7 @@ public class BeerController {
         String chosenMember = personChoiceBox.getSelectionModel().getSelectedItem().toString();
         for (Rule rule : beermain.getRules()) {
             if (rule.getDescription().equals(chosenRule)) {
-                beermain.punishMember(chosenMember, rule);
-                try {
-                    iBeerMainAccess.punishMember(chosenMember, rule.getDescription(), rule.getPunishmentValue());
-                } catch (IOException punishMemberioe) {
-                    showErrorMessage("Failed to punish member");
-                }
+                beermain = iBeerMainAccess.punishMember(beermain, chosenMember, rule.getDescription(), rule.getPunishmentValue());
             }
         }
         updateMemberView();

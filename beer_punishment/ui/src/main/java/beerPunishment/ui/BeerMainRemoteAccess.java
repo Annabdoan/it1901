@@ -77,41 +77,6 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
         }
     }
 
-    public Collection<Rule> getRules() {
-        Gson gson = new Gson();
-
-            HttpRequest request = HttpRequest.newBuilder(path.resolve("rules"))
-                    .header(ACCEPT_HEADER, APPLICATION_JSON)
-                    .GET()
-                    .build();
-            try {
-                final HttpResponse<String> response =
-                        HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-                Type rulesCollectionType = new TypeToken<ArrayList<Rule>>(){}.getType();
-                Collection<Rule> rules = gson.fromJson(response.body(), rulesCollectionType);
-                return rules;
-            } catch (IOException | InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-
-    }
-
-    public HashMap<String, Collection<Rule>> getMemberRuleViolations() {
-        Gson gson = new Gson();
-            HttpRequest request = HttpRequest.newBuilder(path.resolve("memberRuleViolations"))
-                    .header(ACCEPT_HEADER, APPLICATION_JSON)
-                    .GET()
-                    .build();
-            try {
-                final HttpResponse<String> response =
-                        HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-                Type memberRuleViolationsType = new TypeToken<ArrayList<Rule>>(){}.getType();
-                HashMap<String, Collection<Rule>> memberRuleViolations = gson.fromJson(response.body(), memberRuleViolationsType);
-                return memberRuleViolations;
-            } catch (IOException | InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-    }
 
     private String UriParam(String s) {
         return URLEncoder.encode(s, StandardCharsets.UTF_8);

@@ -97,10 +97,16 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     }
 
     @Override
-    public void deleteMember(BeerMain beerMain, String member) throws IOException {
-        beerMain = getBeermain();
-        beerMain.deleteMember(member);
-        writeBeerMainToJson(beerMain);
+    public BeerMain deleteMember(BeerMain beerMain, String member) {
+        try {
+            BeerMain beerMain2 = getBeermain();
+            beerMain2.deleteMember(member);
+            writeBeerMainToJson(beerMain2);
+            return beerMain2;
+        }catch(IOException ioe){
+            System.out.println("Could not delete member");
+            return beerMain;
+        }
     }
 
     @Override

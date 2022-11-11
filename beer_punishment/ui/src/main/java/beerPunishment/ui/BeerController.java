@@ -44,14 +44,9 @@ public class BeerController {
      */
     @FXML
     public void initialize() {
-        //Her skal det bestemmes over local access eller remote access.
-        //Tester ut med Local for å sjekke at det funker
-        /*
         iBeerMainAccess = BeerMainRemoteAccess.pingServer(defaultURI)
                 ? (IBeerMainAccess) new BeerMainRemoteAccess(defaultURI)
                 : new BeerMainLocalAccess();
-        */
-        iBeerMainAccess = new BeerMainRemoteAccess(defaultURI);
         this.beermain = iBeerMainAccess.getBeermain();
         updateMemberView();
         updatePersonChoicebox();

@@ -28,7 +28,9 @@ public class BeerMainRestController {
 
     @GetMapping(path = "beerMain")
     public BeerMain getBeerMain() {
-        return this.beerMain;
+        BeerMain beerMainCopy = new BeerMain();
+        beerMainCopy.copy(this.beerMain);
+        return beerMainCopy;
     }
 
 

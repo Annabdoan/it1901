@@ -234,12 +234,16 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
 
 
     public BeerMain payPunishment(BeerMain beerMain, String member, String description, int value) {
+        String putMappingPath = "/payPunishment?";
+        String key1 = "member=";
+        String descriptionPath = "&description=";
+        String valuePath = "&value=";
+        String memberValue = String.valueOf(value);
         String fixedDescription = replaceSpace(description);
         try {
-            HttpRequest request = HttpRequest.newBuilder(beerMainPath(
-                      "payPunishmen?member=" +  member +
-                            "&description=" + fixedDescription +
-                            "&value=" + value))
+            HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve(
+                    putMappingPath + key1 + member + descriptionPath + fixedDescription
+                    + valuePath + memberValue))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .DELETE()
                     .build();

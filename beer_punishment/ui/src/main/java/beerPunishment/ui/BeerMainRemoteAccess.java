@@ -64,7 +64,7 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
 
     public BeerMain getBeermain() {
         Gson gson = new Gson();
-        HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve("beerMain"))
+        HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve("/beerMain"))
                 .header(ACCEPT_HEADER, APPLICATION_JSON)
                 .GET()
                 .build();
@@ -74,9 +74,6 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
             //DEBUG
             final String responsebody = response.body();
             System.out.println(response.body());
-            System.out.println("Hallo!!");
-
-
             BeerMain bm = gson.fromJson(responsebody, BeerMain.class);
             return bm;
         } catch (IOException | InterruptedException e) {
@@ -99,18 +96,16 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
      */
     public BeerMain addRule(BeerMain beerMain, String description, int value) {
         try {
-            HttpRequest request = HttpRequest.newBuilder(
-                            beerMainPath("rules"))
+            HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve("/rules"))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .header(CONTENT_TYPE_HEADER, APPLICATION_FORM_URLENCODED)
-                    .POST(HttpRequest.BodyPublishers.ofString("?description=" + description + "&value=" + value))
+                    .POST(HttpRequest.BodyPublishers.ofString("description=" + description + "&value=" + value))
                     .build();
             final HttpResponse<String> response =
                     HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
             System.out.println(response.body());
             if (response.body() != null) {
                 BeerMain beerMain2 = getBeermain();
-                beerMain2.addRule(new Rule(description, value));
                 return beerMain2;
             } else {
                 return beerMain;
@@ -122,18 +117,16 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
 
     public BeerMain addMember(BeerMain beerMain, String name) {
         try {
-            HttpRequest request = HttpRequest.newBuilder(
-                            beerMainPath("members"))
+            HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve("/members"))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .header(CONTENT_TYPE_HEADER, APPLICATION_FORM_URLENCODED)
-                    .POST(HttpRequest.BodyPublishers.ofString("?name=" + name))
+                    .POST(HttpRequest.BodyPublishers.ofString("name=" + name))
                     .build();
             final HttpResponse<String> response =
                     HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
             System.out.println(response.body());
             if (response.body() != null) {
                 BeerMain beerMain2 = getBeermain();
-                beerMain2.addMember(name);
                 return beerMain2;
             } else {
                 return beerMain;
@@ -150,19 +143,19 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
      */
     public BeerMain punishMember(BeerMain beerMain, String member, String description, int value) {
         try {
-            HttpRequest request = HttpRequest.newBuilder(beerMainPath("punishMember"))
+            HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve("/punishMember"))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .header(CONTENT_TYPE_HEADER, APPLICATION_JSON)
-                    .PUT(BodyPublishers.ofString("?member=" + member +
-                            "&description="+description + "&value=" + value))
+                    .PUT(HttpRequest.BodyPublishers.ofString(
+                            "member=" + member +
+                                    "&description=" + description +
+                                    "&value=" + value))
                     .build();
             final HttpResponse<String> response =
                     HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
             System.out.println(response.body());
             if (response.body() != null) {
-                Rule rule = new Rule(description, value);
                 BeerMain beerMain2 = getBeermain();
-                beerMain2.punishMember(member, rule);
                 return beerMain2;
             } else {
                 return beerMain;
@@ -181,7 +174,7 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
      */
     public BeerMain removeRule(BeerMain beerMain, String ruleDescription) {
         try {
-            HttpRequest request = HttpRequest.newBuilder(beerMainPath("rules"))
+            HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve("/rules?rule=" + ruleDescription))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .DELETE()
                     .build();
@@ -190,7 +183,6 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
             System.out.println(response.body());
             if (response.body() != null) {
                 BeerMain beerMain2 = getBeermain();
-                beerMain2.removeRuleUsingDescription(ruleDescription);
                 return beerMain2;
             } else {
                 return beerMain;
@@ -205,7 +197,7 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
     public BeerMain deleteMember(BeerMain beerMain, String member) {
 
         try {
-            HttpRequest request = HttpRequest.newBuilder(beerMainPath("members"))
+            HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve("/members?member=" + member))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .DELETE()
                     .build();
@@ -215,7 +207,6 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
             System.out.println(response.body());
             if (response.body() != null) {
                 BeerMain beerMain2 = getBeermain();
-                beerMain2.deleteMember(member);
                 return beerMain2;
             } else {
                 return beerMain;
@@ -229,7 +220,10 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
     public BeerMain payPunishment(BeerMain beerMain, String member, String description, int value) {
         Rule rule = new Rule(description,value);
         try {
-            HttpRequest request = HttpRequest.newBuilder(beerMainPath("payPunishment"))
+            HttpRequest request = HttpRequest.newBuilder(beerMainPath(
+                      "payPunishmen?member=" +  member +
+                            "&description=" + description +
+                            "&value=" + value))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .DELETE()
                     .build();
@@ -239,7 +233,6 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
             System.out.println(response.body());
             if (response.body() != null) {
                 BeerMain beerMain2 = getBeermain();
-                beerMain2.removePunishment(member, rule);
                 return beerMain2;
             } else {
                 return beerMain;

@@ -147,8 +147,8 @@
             </GridPane>
             <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="111.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="127.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="119.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="119.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="146.0" minWidth="10.0" prefWidth="62.0" />
               </columnConstraints>
               <rowConstraints>
@@ -158,15 +158,15 @@
                 <RowConstraints maxHeight="171.0" minHeight="10.0" prefHeight="123.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ChoiceBox fx:id="paymentRuleChoiceBox" prefWidth="150.0" GridPane.rowIndex="2" />
-                  <ChoiceBox fx:id="paymentMemberChoiceBox" onAction="#updatePaymentRuleChoicebox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ChoiceBox fx:id="paymentRuleChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ChoiceBox fx:id="paymentMemberChoiceBox" onAction="#updatePaymentRuleChoicebox" prefWidth="150.0" GridPane.rowIndex="2" />
                   <Button fx:id="payButton" mnemonicParsing="false" onAction="#payViolation" text="Betal" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Straff" wrappingWidth="109.21630859375" GridPane.rowIndex="1">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Medlem" wrappingWidth="109.21630859375" GridPane.rowIndex="1">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Medlem" wrappingWidth="127.21630859375" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Straff" wrappingWidth="127.21630859375" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font name="Arial" size="15.0" />
                      </font>

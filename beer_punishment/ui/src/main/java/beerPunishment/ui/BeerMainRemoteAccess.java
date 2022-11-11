@@ -3,9 +3,6 @@ import beerPunishment.core.BeerMain;
 import beerPunishment.json.JsonHandler;
 import com.google.gson.Gson;
 import beerPunishment.core.Rule;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpRequest;
@@ -13,12 +10,13 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpClient;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.security.URIParameter;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.net.http.HttpRequest.BodyPublishers;
-import static org.springframework.http.MediaType.APPLICATION_JSON;
+
+
+
+
+
+
 
 
 public class BeerMainRemoteAccess implements IBeerMainAccess {
@@ -42,6 +40,8 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
 
     private JsonHandler jsh;
 
+    private static final URI defaultURI = URI.create("http://localhost:8080");
+
     public static Boolean pingServer(URI baseURI ) {
 
         HttpRequest request = HttpRequest.newBuilder( baseURI.resolve("ping"))
@@ -64,7 +64,7 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
 
     public BeerMain getBeermain() {
         Gson gson = new Gson();
-        HttpRequest request = HttpRequest.newBuilder(path.resolve("beerMain"))
+        HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve("beerMain"))
                 .header(ACCEPT_HEADER, APPLICATION_JSON)
                 .GET()
                 .build();
@@ -72,8 +72,12 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
             final HttpResponse<String> response =
                     HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
             //DEBUG
+            final String responsebody = response.body();
             System.out.println(response.body());
-            BeerMain bm = gson.fromJson(response.body(), BeerMain.class);
+            System.out.println("Hallo!!");
+
+
+            BeerMain bm = gson.fromJson(responsebody, BeerMain.class);
             return bm;
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
@@ -119,7 +123,7 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
     public BeerMain addMember(BeerMain beerMain, String name) {
         try {
             HttpRequest request = HttpRequest.newBuilder(
-                            beerMainPath("addMember"))
+                            beerMainPath("members"))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .header(CONTENT_TYPE_HEADER, APPLICATION_FORM_URLENCODED)
                     .POST(HttpRequest.BodyPublishers.ofString("?name=" + name))
@@ -177,7 +181,7 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
      */
     public BeerMain removeRule(BeerMain beerMain, String ruleDescription) {
         try {
-            HttpRequest request = HttpRequest.newBuilder(beerMainPath("removeRule"))
+            HttpRequest request = HttpRequest.newBuilder(beerMainPath("rules"))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .DELETE()
                     .build();
@@ -201,7 +205,7 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
     public BeerMain deleteMember(BeerMain beerMain, String member) {
 
         try {
-            HttpRequest request = HttpRequest.newBuilder(beerMainPath("deleteMember"))
+            HttpRequest request = HttpRequest.newBuilder(beerMainPath("members"))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .DELETE()
                     .build();

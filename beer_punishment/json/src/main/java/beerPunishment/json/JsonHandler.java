@@ -3,7 +3,6 @@ package beerPunishment.json;
 import beerPunishment.core.BeerMain;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
@@ -37,8 +36,7 @@ public class JsonHandler {
             gson.toJson(beerMain, fw);
         } catch (IOException io) {
             throw new IOException("Feil ved skriving til fil");
-        }
-        finally { //to secure against potential leak
+        } finally {
             if (fw != null) {
                 try {
                     fw.flush();
@@ -66,10 +64,9 @@ public class JsonHandler {
             isr = new InputStreamReader(fis, StandardCharsets.UTF_8); //reliance on default encoding
             BeerMain beerMain = gson.fromJson(isr, BeerMain.class);
             return beerMain;
-        } catch (IOException IOe) {
-            //IOe.printStackTrace();
+        } catch (IOException ioe) {
             throw new IOException("Feil ved lesing fra fil");
-        } finally { //to secure against potential leak
+        } finally {
             if (isr != null) {
                 try {
                     isr.close();

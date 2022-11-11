@@ -243,7 +243,18 @@ public class BeerController {
         return beerMainCopy;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
+    public void changeFileName(String fileName) {
+        if (iBeerMainAccess instanceof BeerMainLocalAccess) {
+            ((BeerMainLocalAccess) iBeerMainAccess).changeFilename(fileName);
+            this.beermain = iBeerMainAccess.getBeermain();
+            updateMemberView();
+            updateListView();
+            updatePersonChoicebox();
+            updateRuleChoicebox();
+            updatePaymentRuleChoicebox();
+            updatePaymentPersonChoicebox();
+        } else {
+            System.out.println("Not instance of LocalAccess, can therfore not change filename.");
+        }
     }
 }

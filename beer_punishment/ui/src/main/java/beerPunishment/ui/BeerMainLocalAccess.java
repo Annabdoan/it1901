@@ -17,6 +17,10 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     private Rule rule;
     private String filename = "/beerPunishment.json";
 
+    public void changeFilename(String newName) {
+        this.filename = newName;
+    }
+
     private void writeBeerMainToJson(BeerMain beerMain) throws IOException {
         try {
             jsh.writeToJson(beerMain, filename);

@@ -234,11 +234,11 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
 
 
     public BeerMain payPunishment(BeerMain beerMain, String member, String description, int value) {
-        Rule rule = new Rule(description,value);
+        String fixedDescription = replaceSpace(description);
         try {
             HttpRequest request = HttpRequest.newBuilder(beerMainPath(
                       "payPunishmen?member=" +  member +
-                            "&description=" + description +
+                            "&description=" + fixedDescription +
                             "&value=" + value))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .DELETE()

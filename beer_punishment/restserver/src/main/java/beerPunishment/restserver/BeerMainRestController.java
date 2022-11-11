@@ -8,14 +8,10 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.HashMap;
 
-
-//Controller makes it possible for the server to listen to HTTP-requests and process them.
 
 @RestController
-//@RequestMapping(TestController.BEER_PUNISHMENT_SERVICE_PATH)
+
 public class BeerMainRestController {
     private BeerMain beerMain = BeerMainService.createBeerMain();
     private Rule rule = new Rule();

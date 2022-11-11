@@ -3,11 +3,7 @@ package beerPunishment.ui;
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
 import beerPunishment.json.JsonHandler;
-import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

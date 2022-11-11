@@ -18,7 +18,7 @@ public class BeerMainRestController {
 
     private JsonHandler jsh = new JsonHandler();
 
-    private void writeToJson() {
+    public void writeToJson() { //Trenger i test derfor public
         try {
             jsh.writeToJson(this.beerMain, "/beerPunishmentRemote.json");
         }catch (IOException IOE) {

@@ -42,6 +42,12 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
 
     private static final URI defaultURI = URI.create("http://localhost:8080");
 
+
+    private String replaceSpace(String input){
+        String fixedInput = input.replaceAll("\\s","%20");
+        return fixedInput;
+    }
+
     public static Boolean pingServer(URI baseURI ) {
 
         HttpRequest request = HttpRequest.newBuilder( baseURI.resolve("ping"))
@@ -142,14 +148,23 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
      * @param member the member to punish,................
      */
     public BeerMain punishMember(BeerMain beerMain, String member, String description, int value) {
+        String putMappingPath = "/punishMember?";
+        String key1 = "member=";
+        String descriptionPath = "&description=";
+        String valuePath = "&value=";
+        String memberValue = String.valueOf(value);
+        String fixedDescription = replaceSpace(description);
+        System.out.println(fixedDescription);
+        Gson gson = new Gson();
         try {
-            HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve("/punishMember"))
+            String json = gson.toJson(beerMain, BeerMain.class);
+            HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve(
+                            putMappingPath + key1 + member
+                                    + descriptionPath + fixedDescription + valuePath + memberValue
+                    ))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .header(CONTENT_TYPE_HEADER, APPLICATION_JSON)
-                    .PUT(HttpRequest.BodyPublishers.ofString(
-                            "member=" + member +
-                                    "&description=" + description +
-                                    "&value=" + value))
+                    .PUT(HttpRequest.BodyPublishers.ofString(json))
                     .build();
             final HttpResponse<String> response =
                     HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());

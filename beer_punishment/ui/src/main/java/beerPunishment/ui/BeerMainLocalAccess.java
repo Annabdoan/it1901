@@ -15,10 +15,11 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     private BeerMain beerMain;
     private JsonHandler jsh;
     private Rule rule;
+    private String filename = "/beerPunishment.json";
 
     private void writeBeerMainToJson(BeerMain beerMain) throws IOException {
         try {
-            jsh.writeToJson(beerMain, "/beerPunishment.json");
+            jsh.writeToJson(beerMain, filename);
 
         }catch (IOException ioe){
             throw new IOException("Feil ved skriving til fil.");
@@ -29,7 +30,7 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     public BeerMain getBeermain() {
         jsh = new JsonHandler();
         try {
-            beerMain = jsh.readFromJson("/beerPunishment.json");
+            beerMain = jsh.readFromJson(filename);
             return beerMain;
         }catch (IOException ioe){
             return new BeerMain();

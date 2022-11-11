@@ -5,10 +5,7 @@ import beerPunishment.core.Rule;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.reactive.server.WebTestClient;
@@ -16,6 +13,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import static beerPunishment.ui.BeerController.defaultURI;
 import static org.junit.Assert.assertTrue;
 
 public class BeerMainRemoteAccessTest {
@@ -40,9 +38,9 @@ public class BeerMainRemoteAccessTest {
         beerMain.addMember("Sara");
     }
 
-    @Test
+    @Test //Når ikke getBeerMain!
     public void testGetBeerMain() {
-        WireMock.stubFor(WireMock.get(WireMock.urlEqualTo(getUrl()))
+        WireMock.stubFor(WireMock.get(WireMock.urlEqualTo("http://localhost:8080/beerMain"))
                 .withHeader("Accept", WireMock.equalTo("application/json"))
                 .willReturn(WireMock.aResponse()
                         .withStatus(200)
@@ -52,7 +50,18 @@ public class BeerMainRemoteAccessTest {
 
     }
 
-    private String getUrl(String... segments) {
+    @Test
+    public void testAddMember() {
+        WireMock.stubFor(WireMock.get(WireMock.urlEqualTo("/members/name?name={name}"))
+                .withHeader("Accept", WireMock.equalTo("application/json"))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json"))
+
+        );
+    }
+
+   private String getUrl(String... segments) {
         String url = "/beerMain";
         for (String segment : segments) {
             url = url + "/" + segment;
@@ -60,5 +69,9 @@ public class BeerMainRemoteAccessTest {
         return url;
     }
 
+    @AfterEach
+    public void stopWireMockServer() {
+        wmServer.stop();
+    }
 
 }

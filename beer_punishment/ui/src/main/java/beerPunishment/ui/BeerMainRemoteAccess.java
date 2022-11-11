@@ -188,8 +188,9 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
      * @param ruleDescription the rule to remove
      */
     public BeerMain removeRule(BeerMain beerMain, String ruleDescription) {
+        String fixedRuleDescription = replaceSpace(ruleDescription);
         try {
-            HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve("/rules?rule=" + ruleDescription))
+            HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve("/rules?rule=" + fixedRuleDescription))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .DELETE()
                     .build();

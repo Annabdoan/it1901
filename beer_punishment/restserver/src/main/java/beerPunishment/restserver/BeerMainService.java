@@ -4,11 +4,8 @@ import beerPunishment.core.BeerMain;
 import beerPunishment.json.JsonHandler;
 
 import java.io.IOException;
-import java.net.URL;
 
 public class BeerMainService {
-
-    private BeerMain beerMain;
 
     public static BeerMain createBeerMain() {
         JsonHandler jsh = new JsonHandler();
@@ -21,7 +18,7 @@ public class BeerMainService {
         BeerMain bm = new BeerMain();
         try {
             jsh.writeToJson(bm, "/beerPunishmentRemote.json");
-        } catch (IOException ioe){
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
         return new BeerMain();

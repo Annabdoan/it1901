@@ -1,10 +1,8 @@
 package beerPunishment.ui;
 import beerPunishment.core.BeerMain;
+import beerPunishment.json.JsonHandler;
 import com.google.gson.Gson;
 import beerPunishment.core.Rule;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpRequest;
@@ -12,15 +10,16 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpClient;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.security.URIParameter;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.net.http.HttpRequest.BodyPublishers;
-import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 
-public class BeerMainRemoteAccess {
+
+
+
+
+
+
+public class BeerMainRemoteAccess implements IBeerMainAccess {
 
     private final URI path;
 
@@ -39,66 +38,55 @@ public class BeerMainRemoteAccess {
 
     private BeerMain beerMain = new BeerMain();
 
+    private JsonHandler jsh;
+
+    private static final URI defaultURI = URI.create("http://localhost:8080");
 
 
-    public BeerMain getBeerMain() {
-        Gson gson = new Gson();
-        if (beerMain == null) {
-            HttpRequest request = HttpRequest.newBuilder(path.resolve("beerMain"))
-                    .header(ACCEPT_HEADER, APPLICATION_JSON)
-                    .GET()
-                    .build();
-            try {
-                final HttpResponse<String> response =
-                        HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-                this.beerMain = gson.fromJson(response.body(), BeerMain.class);
-            } catch (IOException | InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-
-        }
-        return beerMain;
+    private String replaceSpace(String input){
+        String fixedInput = input.replaceAll("\\s","%20");
+        return fixedInput;
     }
 
-    public Collection<Rule> getRules() {
-        Gson gson = new Gson();
-        if (beerMain == null) {
-            HttpRequest request = HttpRequest.newBuilder(path.resolve("rules"))
-                    .header(ACCEPT_HEADER, APPLICATION_JSON)
-                    .GET()
-                    .build();
-            try {
-                final HttpResponse<String> response =
-                        HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-                Type rulesCollectionType = new TypeToken<ArrayList<Rule>>(){}.getType();
-                Collection<Rule> rules = gson.fromJson(response.body(), rulesCollectionType);
-                return rules;
-            } catch (IOException | InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+    public static Boolean pingServer(URI baseURI ) {
+
+        HttpRequest request = HttpRequest.newBuilder( baseURI.resolve("ping"))
+                .header(ACCEPT_HEADER, APPLICATION_JSON)
+                .GET()
+                .build();
+        try {
+            final HttpResponse<String> response =
+                    HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println("Successfully pinged server");
+            return response.body().equals("pong");
+        } catch (IOException | InterruptedException e) {
+            System.out.println("Could not find server");
+            return false;
         }
-        return null;
+
     }
 
-    public HashMap<String, Collection<Rule>> getMemberRuleViolations() {
+
+
+    public BeerMain getBeermain() {
         Gson gson = new Gson();
-        if (beerMain == null) {
-            HttpRequest request = HttpRequest.newBuilder(path.resolve("memberRuleViolations"))
-                    .header(ACCEPT_HEADER, APPLICATION_JSON)
-                    .GET()
-                    .build();
-            try {
-                final HttpResponse<String> response =
-                        HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-                Type memberRuleViolationsType = new TypeToken<ArrayList<Rule>>(){}.getType();
-                HashMap<String, Collection<Rule>> memberRuleViolations = gson.fromJson(response.body(), memberRuleViolationsType);
-                return memberRuleViolations;
-            } catch (IOException | InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+        HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve("/beerMain"))
+                .header(ACCEPT_HEADER, APPLICATION_JSON)
+                .GET()
+                .build();
+        try {
+            final HttpResponse<String> response =
+                    HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+            //DEBUG
+            final String responsebody = response.body();
+            System.out.println(response.body());
+            BeerMain bm = gson.fromJson(responsebody, BeerMain.class);
+            return bm;
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
         }
-        return null;
     }
+
 
     private String UriParam(String s) {
         return URLEncoder.encode(s, StandardCharsets.UTF_8);
@@ -108,40 +96,47 @@ public class BeerMainRemoteAccess {
         return path.resolve(UriParam(name));
     }
 
+
     /**
      * Sends a POST-request ....
      */
-    public void addRule(String description, int value) {
-        Gson gson = new Gson();
+    public BeerMain addRule(BeerMain beerMain, String description, int value) {
         try {
-            HttpRequest request = HttpRequest.newBuilder(
-                            beerMainPath("addRule"))
+            HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve("/rules"))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .header(CONTENT_TYPE_HEADER, APPLICATION_FORM_URLENCODED)
-                    .POST(HttpRequest.BodyPublishers.ofString("?description=" + description + "&value=" + value))
+                    .POST(HttpRequest.BodyPublishers.ofString("description=" + description + "&value=" + value))
                     .build();
             final HttpResponse<String> response =
                     HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-            String responseString = response.body();
-            //Skal vi gjøre noe med denne responsen?
+            System.out.println(response.body());
+            if (response.body() != null) {
+                BeerMain beerMain2 = getBeermain();
+                return beerMain2;
+            } else {
+                return beerMain;
+            }
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void addMember(String name) {
-        Gson gson = new Gson();
+    public BeerMain addMember(BeerMain beerMain, String name) {
         try {
-            HttpRequest request = HttpRequest.newBuilder(
-                            beerMainPath("addMember"))
+            HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve("/members"))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .header(CONTENT_TYPE_HEADER, APPLICATION_FORM_URLENCODED)
-                    .POST(HttpRequest.BodyPublishers.ofString("?name=" + name))
+                    .POST(HttpRequest.BodyPublishers.ofString("name=" + name))
                     .build();
             final HttpResponse<String> response =
                     HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-            String responseString = response.body();
-            //Skal vi gjøre noe med denne responsen?
+            System.out.println(response.body());
+            if (response.body() != null) {
+                BeerMain beerMain2 = getBeermain();
+                return beerMain2;
+            } else {
+                return beerMain;
+            }
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -152,20 +147,34 @@ public class BeerMainRemoteAccess {
      *
      * @param member the member to punish,................
      */
-    private void punishMember(String member, String description, int value) {
+    public BeerMain punishMember(BeerMain beerMain, String member, String description, int value) {
+        String putMappingPath = "/punishMember?";
+        String key1 = "member=";
+        String descriptionPath = "&description=";
+        String valuePath = "&value=";
+        String memberValue = String.valueOf(value);
+        String fixedDescription = replaceSpace(description);
+        System.out.println(fixedDescription);
         Gson gson = new Gson();
-        String ruleValue = String.valueOf(value);
         try {
-            HttpRequest request = HttpRequest.newBuilder(beerMainPath("punishMember"))
+            String json = gson.toJson(beerMain, BeerMain.class);
+            HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve(
+                            putMappingPath + key1 + member
+                                    + descriptionPath + fixedDescription + valuePath + memberValue
+                    ))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .header(CONTENT_TYPE_HEADER, APPLICATION_JSON)
-                    .PUT(BodyPublishers.ofString("?member=" + member +
-                            "&description="+description + "&value=" + value))
+                    .PUT(HttpRequest.BodyPublishers.ofString(json))
                     .build();
             final HttpResponse<String> response =
                     HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-            String responseString = response.body(); // SJEKK
-
+            System.out.println(response.body());
+            if (response.body() != null) {
+                BeerMain beerMain2 = getBeermain();
+                return beerMain2;
+            } else {
+                return beerMain;
+            }
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -178,20 +187,21 @@ public class BeerMainRemoteAccess {
      *
      * @param ruleDescription the rule to remove
      */
-    public void removeRule(String ruleDescription) {
-        Gson gson = new Gson();
+    public BeerMain removeRule(BeerMain beerMain, String ruleDescription) {
+        String fixedRuleDescription = replaceSpace(ruleDescription);
         try {
-            HttpRequest request = HttpRequest.newBuilder(beerMainPath("removeRule"))
+            HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve("/rules?rule=" + fixedRuleDescription))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .DELETE()
                     .build();
             final HttpResponse<String> response =
                     HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-            String responseString = response.body();
-
-            Boolean removed = gson.fromJson(responseString, Boolean.class);
-            if (removed != null) {
-                beerMain.removeRuleUsingDescription(ruleDescription);
+            System.out.println(response.body());
+            if (response.body() != null) {
+                BeerMain beerMain2 = getBeermain();
+                return beerMain2;
+            } else {
+                return beerMain;
             }
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
@@ -200,20 +210,22 @@ public class BeerMainRemoteAccess {
 
 
 
-    public void deleteMember(String member) {
-        Gson gson = new Gson();
+    public BeerMain deleteMember(BeerMain beerMain, String member) {
+
         try {
-            HttpRequest request = HttpRequest.newBuilder(beerMainPath("deleteMember"))
+            HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve("/members?member=" + member))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .DELETE()
                     .build();
             final HttpResponse<String> response =
                     HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-            String responseString = response.body();
 
-            Boolean removed = gson.fromJson(responseString, Boolean.class);
-            if (removed != null) {
-                beerMain.deleteMember(member);
+            System.out.println(response.body());
+            if (response.body() != null) {
+                BeerMain beerMain2 = getBeermain();
+                return beerMain2;
+            } else {
+                return beerMain;
             }
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
@@ -221,21 +233,29 @@ public class BeerMainRemoteAccess {
     }
 
 
-    public void payPunishment(String member, String description, int value) {
-        Gson gson = new Gson();
-        Rule rule = new Rule(description,value);
+    public BeerMain payPunishment(BeerMain beerMain, String member, String description, int value) {
+        String putMappingPath = "/payPunishment?";
+        String key1 = "member=";
+        String descriptionPath = "&description=";
+        String valuePath = "&value=";
+        String memberValue = String.valueOf(value);
+        String fixedDescription = replaceSpace(description);
         try {
-            HttpRequest request = HttpRequest.newBuilder(beerMainPath("payPunishment"))
+            HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve(
+                    putMappingPath + key1 + member + descriptionPath + fixedDescription
+                    + valuePath + memberValue))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .DELETE()
                     .build();
             final HttpResponse<String> response =
                     HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-            String responseString = response.body();
 
-            Boolean removed = gson.fromJson(responseString, Boolean.class);
-            if (removed != null) {
-                beerMain.removePunishment(member,rule);
+            System.out.println(response.body());
+            if (response.body() != null) {
+                BeerMain beerMain2 = getBeermain();
+                return beerMain2;
+            } else {
+                return beerMain;
             }
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);

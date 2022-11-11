@@ -3,11 +3,7 @@ package beerPunishment.ui;
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
 import beerPunishment.json.JsonHandler;
-import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -41,47 +37,85 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     }
 
     @Override
-    public void addRule(String description, int value) throws IOException {
-        rule = new Rule(description, value);
-        beerMain = getBeermain();
-        beerMain.addRule(rule);
-        writeBeerMainToJson(beerMain);
+    public BeerMain addRule(BeerMain beerMain, String description, int value) {
+        try {
+            rule = new Rule(description, value);
+            BeerMain beerMain2 = getBeermain();
+            beerMain2.addRule(rule);
+            writeBeerMainToJson(beerMain2);
+            return beerMain2;
+        }catch (IOException ioe) {
+            System.out.println("Could not add rule");
+            return beerMain;
+        }
+
     }
 
     @Override
-    public void addMember(String name) throws IOException {
-        beerMain = getBeermain();
-        beerMain.addMember(name);
-        writeBeerMainToJson(beerMain);
+    public BeerMain addMember(BeerMain beerMain, String name) {
+        try{
+            BeerMain beerMain2 = getBeermain();
+            beerMain2.addMember(name);
+            writeBeerMainToJson(beerMain2);
+            return beerMain2;
+        }catch(IOException ioe){
+            System.out.println("Could not add member");
+            return beerMain;
+        }
     }
 
     @Override
-    public void punishMember(String member, String description, int value) throws IOException {
-        beerMain = getBeermain();
-        Rule rule = new Rule(description, value);
-        beerMain.punishMember(member, rule);
-        writeBeerMainToJson(beerMain);
+    public BeerMain punishMember(BeerMain beerMain, String member, String description, int value) {
+        try{
+            BeerMain beerMain2 = getBeermain();
+            Rule rule = new Rule(description, value);
+            beerMain2.punishMember(member, rule);
+            writeBeerMainToJson(beerMain2);
+            return beerMain2;
+        }catch(IOException ioe){
+            System.out.println("Could not punish member");
+            return beerMain;
+        }
+
     }
 
     @Override
-    public void removeRule(String ruleDescription) throws IOException {
-        beerMain = getBeermain();
-        beerMain.removeRuleUsingDescription(ruleDescription);
-        writeBeerMainToJson(beerMain);
+    public BeerMain removeRule(BeerMain beerMain, String ruleDescription) {
+        try{
+            BeerMain beerMain2 = getBeermain();
+            beerMain2.removeRuleUsingDescription(ruleDescription);
+            writeBeerMainToJson(beerMain2);
+            return beerMain2;
+        }catch (IOException ioe){
+            System.out.println("Could not remove rule");
+            return beerMain;
+        }
     }
 
     @Override
-    public void deleteMember(String member) throws IOException {
-        beerMain = getBeermain();
-        beerMain.deleteMember(member);
-        writeBeerMainToJson(beerMain);
+    public BeerMain deleteMember(BeerMain beerMain, String member) {
+        try {
+            BeerMain beerMain2 = getBeermain();
+            beerMain2.deleteMember(member);
+            writeBeerMainToJson(beerMain2);
+            return beerMain2;
+        }catch(IOException ioe){
+            System.out.println("Could not delete member");
+            return beerMain;
+        }
     }
 
     @Override
-    public void payPunishment(String member, String description, int value) throws IOException {
-        beerMain = getBeermain();
-        Rule rule = new Rule(description, value);
-        beerMain.removePunishment(member, rule);
-        writeBeerMainToJson(beerMain);
+    public BeerMain payPunishment(BeerMain beerMain, String member, String description, int value) {
+        try{
+            BeerMain beerMain2 = getBeermain();
+            Rule rule = new Rule(description, value);
+            beerMain2.removePunishment(member, rule);
+            writeBeerMainToJson(beerMain2);
+            return beerMain2;
+        }catch (IOException ioe){
+            System.out.println("Could not delete punishment");
+            return beerMain;
+        }
     }
 }

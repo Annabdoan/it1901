@@ -3,6 +3,7 @@ package beerPunishment.ui;
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
 import javafx.fxml.FXML;
@@ -18,6 +19,8 @@ import javafx.scene.control.TextField;
 public class BeerController {
 
     private BeerMain beermain;
+
+    public static final URI defaultURI = URI.create("http://localhost:8080");
 
 
     @FXML
@@ -41,9 +44,9 @@ public class BeerController {
      */
     @FXML
     public void initialize() {
-        //Her skal det bestemmes over local access eller remote access.
-        //Tester ut med Local for å sjekke at det funker.
-        iBeerMainAccess = new BeerMainLocalAccess();
+        iBeerMainAccess = BeerMainRemoteAccess.pingServer(defaultURI)
+                ? (IBeerMainAccess) new BeerMainRemoteAccess(defaultURI)
+                : new BeerMainLocalAccess();
         this.beermain = iBeerMainAccess.getBeermain();
         updateMemberView();
         updatePersonChoicebox();
@@ -106,14 +109,13 @@ public class BeerController {
             int value = Integer.parseInt(arrOfNewRuleTextInput[1]);
 
             Rule rule = new Rule(description, value);
-            beermain.addRule(rule);
-            iBeerMainAccess.addRule(description, value);
+            beermain = iBeerMainAccess.addRule(beermain, description, value);
             updateListView();
             updateRuleChoicebox();
         } catch (NumberFormatException ne) {
             showErrorMessage("Feil ved å gjøre om verdi til int.");
-        } catch (IOException | IllegalArgumentException ioe) {
-            showErrorMessage(ioe.getMessage());
+        } catch (IllegalArgumentException iae) {
+            showErrorMessage(iae.getMessage());
         }
     }
 
@@ -124,12 +126,11 @@ public class BeerController {
     public void deleteRule() {
         String description = deleteRuleText.getText();
         try {
-            beermain.removeRuleUsingDescription(description);
-            iBeerMainAccess.removeRule(description);
+            beermain = iBeerMainAccess.removeRule(beermain, description);
             updateRuleChoicebox();
             updateListView();
-        } catch (IllegalArgumentException | IOException e) {
-            showErrorMessage(e.getMessage());
+        } catch (IllegalArgumentException iae) {
+            showErrorMessage(iae.getMessage());
         }
     }
 
@@ -147,12 +148,7 @@ public class BeerController {
         String chosenMember = personChoiceBox.getSelectionModel().getSelectedItem().toString();
         for (Rule rule : beermain.getRules()) {
             if (rule.getDescription().equals(chosenRule)) {
-                beermain.punishMember(chosenMember, rule);
-                try {
-                    iBeerMainAccess.punishMember(chosenMember, rule.getDescription(), rule.getPunishmentValue());
-                } catch (IOException punishMemberioe) {
-                    showErrorMessage("Failed to punish member");
-                }
+                beermain = iBeerMainAccess.punishMember(beermain, chosenMember, rule.getDescription(), rule.getPunishmentValue());
             }
         }
         updateMemberView();
@@ -166,13 +162,12 @@ public class BeerController {
     public void addMember() {
         String username = addMemberText.getText();
         try {
-            beermain.addMember(username);
-            iBeerMainAccess.addMember(username);
+            beermain = iBeerMainAccess.addMember(beermain, username);
             updateMemberView();
             updatePersonChoicebox();
             updatePaymentPersonChoicebox();
-        } catch (IllegalArgumentException | IOException e) {
-            showErrorMessage(e.getMessage());
+        } catch (IllegalArgumentException iae) {
+            showErrorMessage(iae.getMessage());
         }
     }
 
@@ -183,13 +178,12 @@ public class BeerController {
     public void deleteMember() {
         String username = deleteMemberText.getText();
         try {
-            beermain.deleteMember(username);
-            iBeerMainAccess.deleteMember(username);
+            beermain = iBeerMainAccess.deleteMember(beermain, username);
             updateMemberView();
             updatePersonChoicebox();
             updatePaymentPersonChoicebox();
-        } catch (IllegalArgumentException | IOException e) {
-            showErrorMessage(e.getMessage());
+        } catch (IllegalArgumentException iae) {
+            showErrorMessage(iae.getMessage());
         }
     }
 
@@ -202,12 +196,7 @@ public class BeerController {
         String chosenMember = paymentMemberChoiceBox.getSelectionModel().getSelectedItem().toString();
         for (Rule rule : beermain.getRules()) {
             if (rule.getDescription().equals(chosenRule)) {
-                beermain.removePunishment(chosenMember, rule);
-                try {
-                    iBeerMainAccess.payPunishment(chosenMember, rule.getDescription(), rule.getPunishmentValue());
-                } catch (IOException punishMemberioe) {
-                    showErrorMessage("Failed to punish member");
-                }
+                beermain = iBeerMainAccess.payPunishment(beermain, chosenMember, rule.getDescription(), rule.getPunishmentValue());
             }
         }
         updateMemberView();

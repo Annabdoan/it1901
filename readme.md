@@ -4,8 +4,10 @@
 # :beer: Beer Punishment :beer: 
 This is the project in the subject ITP1901 by group 31. 
 
-This repo contains a multi-package, multi-module javafx project for a beer punishment system. This application is primarily meant for people who work in teams or groups.
-The application will provide a clear overview of which rules applies to the group/team, who has broken which rules and how many beers each individual has as punishment.
+This repo contains a multi-package, multimodule javafx project for a beer punishment system. This application is primarily meant for people who work in teams or groups.
+The application will provide a clear overview of which rules apply, who has broken which rules and how many beers each individual has as punishment.
+Functionality revolving adding a new rule, member and punishing a member is provided. 
+The application also offers the possibility to delete rules, members and to pay up for punishments. 
 
 
 ### Building and running the project
@@ -53,16 +55,18 @@ Each module will have its own report. The reports are located in the modules res
 
 
 ### Organization of the code
-* [beer_punishment](/beer_punishment)
-    * [core](/beer_punishment/core)
-      * [domain-logic](/beer_punishment/core/src/main/java/beerPunishment/core)
-    * [json](/beer_punishment/json)
-      * [json-logic](/beer_punishment/json/src/main/java/beerPunishment/json)
-    * [ui](/beer_punishment/ui)
-      * [ui-logic](/beer_punishment/ui/src/main/java/beerPunishment/ui)
-      * [FXML](/beer_punishment/ui/src/main/resources)
+* [beer_punishment](./beer_punishment)
+    * [core](./beer_punishment/core)
+      * [domain-logic](./beer_punishment/core/src/main/java/beerPunishment/core)
+    * [json](./beer_punishment/json)
+      * [json-logic](./beer_punishment/json/src/main/java/beerPunishment/json)
+    * [restserver](./beer_punishment/restserver)
+      * [restserver-logic](./beer_punishment/restserver/src/main/java/beerPunishment/restserver)
+    * [ui](./beer_punishment/ui)
+      * [ui-logic](./beer_punishment/ui/src/main/java/beerPunishment/ui)
+      * [FXML](./beer_punishment/ui/src/main/resources)
 
-[Read more about the modules and the code](/beer_punishment/README.md)
+[Read more about the modules and the code](./beer_punishment/README.md)
 
 
 ### Overall plan

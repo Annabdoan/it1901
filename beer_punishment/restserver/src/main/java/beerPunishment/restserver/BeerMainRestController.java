@@ -2,12 +2,9 @@ package beerPunishment.restserver;
 
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
-
 import beerPunishment.json.JsonHandler;
-import org.springframework.web.bind.annotation.*;
-
-
 import java.io.IOException;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController

@@ -95,18 +95,18 @@ The new classes implemented:
 * BeerMainRemoteAccess.java
 * IBeerMainAccess.java
 
+#### Switch from Jackson to Gson
+The group made a decision to switch how the project write to JSON. It is changed from Jackson to Gson. 
+The group decided this because the group experienced several problems related to the further use of Jackson with parsing data
+after release 2. In addition, GSON provides simpler toJson() and fromJson() methods. 
+
+The **Json** module now only consists of one class:
+
+* ***JsonHandler.java***
 
 #### User stories 
-User stories for this release, are
-all written in source README file.
+User stories for this release, are all written in source README file.
 
-:point_right: LINK TIL USER STORY 1
-
-
-:point_right: LINK TIL 2
-
-
-:point_right: LINK TIL 3
 
 #### Further development
 The group is satisfied with how the application turned out. 
@@ -172,7 +172,7 @@ The group focused on concrete goals, in order for the group to perform better.
 :round_pushpin: ***Roles*** 
 
 Different roles were discussed, however the group decided that all members should have the same role.
-The group did not have a SCRUM master nor a customer, which made all members development team members. 
+The group did not have a SCRUM master nor a product owner, which made all members development team members. 
 However, we discussed the groups weaknesses and strengths in order to have a better understanding of each other. 
 
 :round_pushpin: ***Procedures***

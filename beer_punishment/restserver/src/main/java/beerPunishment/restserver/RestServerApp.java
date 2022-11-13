@@ -11,7 +11,6 @@ import org.springframework.context.annotation.ImportResource;
 //scanBasePackages={"beerPunishment.core.BeerMain"}
 
 @SpringBootApplication(exclude = {JacksonAutoConfiguration.class})
-@ImportResource({"classpath*:applicationContext.xml"})
 public class RestServerApp {
 
 

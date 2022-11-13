@@ -1,69 +1,65 @@
 package beerPunishment.restserver;
 
-import beerPunishment.core.BeerMain;
-import beerPunishment.core.Rule;
-import beerPunishment.json.JsonHandler;
 import beerPunishment.restserver.BeerMainRestController;
-import beerPunishment.restserver.BeerMainService;
-import beerPunishment.restserver.RestServerApp;
-import com.github.tomakehurst.wiremock.WireMockServer;
-import com.github.tomakehurst.wiremock.client.WireMock;
-import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.io.IOException;
+import javax.swing.*;
 
-@AutoConfigureMockMvc
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+import static org.junit.jupiter.api.Assertions.*;
+
+@ExtendWith(SpringExtension.class)
+@WebMvcTest(BeerMainRestController.class)
 @ContextConfiguration(classes ={BeerMainRestController.class, BeerMainService.class, RestServerApp.class })
-//@ContextConfiguration(locations = "classpath:WEB-INF/applicationContext.xml")
-
-
-@WebMvcTest
-public class RestServerTest {
+class BeerMainRestIntControllerTest {
 
     @Autowired
-    private MockMvc mockMvc;
+    private MockMvc mvc;
 
-   /* @MockBean
-    private BeerMainService beerMainService;*/
+    @Test
+    void getBeerMain() throws Exception {
+        RequestBuilder request = MockMvcRequestBuilders.get("/beerMain");
+        MvcResult result = mvc.perform(request).andReturn();
+        assertEquals("{\"rules\":[{\"description\":\"sutre\",\"punishmentValue\":7}],\"memberRuleViolations\":{\"Oliver\":[]},\"usernames\":[\"Oliver\"]}",
+                result.getResponse().getContentAsString());
+    }
 
-    private JsonHandler jsonHandler;
-   // private BeerMainRestController beerMainRestController = new BeerMainRestController();
+    @Test
+    void addMember() {
 
-   @BeforeAll
-    public void setup() throws IllegalStateException, IOException {
-       jsonHandler = new JsonHandler();
+    }
 
-       final BeerMain beerMain = BeerMainService.createBeerMain();
-       final Rule rule = new Rule("Banne", 3);
-       beerMain.addRule(rule);
-       beerMain.addMember("Sara");
+    @Test
+    void deleteMember() {
+    }
 
-       //beerMainRestController.writeToJson();
+    @Test
+    void addRule() {
+    }
 
-   }
+    @Test
+    void removeRule() {
+    }
 
-   @Test
-    public void testGetBeerMain() throws Exception {
-       mockMvc.perform(MockMvcRequestBuilders.get("/beerMain")
-               .accept(MediaType.APPLICATION_JSON))
-               .andExpect(MockMvcResultMatchers.status().isOk())
-               .andReturn();
-   }
+    @Test
+    void punishMember() {
+    }
 
+    @Test
+    void payPunishment() {
+    }
+
+    @Test
+    void ping() {
+    }
 }

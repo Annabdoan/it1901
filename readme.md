@@ -108,3 +108,5 @@ so that they can delete the rule of no phone use.
 *User story 6:*
 > Over the course of several months, Maurice has been punished with various beer penalties, and is starting to get loads of beers he has to pay for. To make sure that the amount does not get too large towards the end of the year, he wants to pay down his debt. Maurice wants to delete 
 his existing rule breaks in the app after paying them up. 
+
+Read more about it here: [Release 3](./docs/release3/release3.md)

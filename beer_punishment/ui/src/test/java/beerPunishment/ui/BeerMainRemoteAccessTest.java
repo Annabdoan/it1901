@@ -70,7 +70,7 @@ public class BeerMainRemoteAccessTest {
 
     @Test
     public void testAddRule() {
-        WireMock.stubFor(WireMock.get(WireMock.urlEqualTo("/rules?description=TestRule&value=1"))
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo("/rules?description=TestRule&value=1"))
                 .withHeader("Accept", WireMock.equalTo("application/json"))
                 .willReturn(WireMock.aResponse()
                         .withStatus(200)
@@ -81,11 +81,12 @@ public class BeerMainRemoteAccessTest {
 
     @Test
     public void testAddMember() {
-        WireMock.stubFor(WireMock.get(WireMock.urlEqualTo("/members/name?name={name}"))
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo("/members/name?name={name}"))
                 .withHeader("Accept", WireMock.equalTo("application/json"))
                 .willReturn(WireMock.aResponse()
                         .withStatus(200)
-                        .withHeader("Content-Type", "application/json"))
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\"rules\":[],\"memberRuleViolations\":{\"Maurice\":[]},\"usernames\":[\"Maurice\"]}"))
 
         );
     }

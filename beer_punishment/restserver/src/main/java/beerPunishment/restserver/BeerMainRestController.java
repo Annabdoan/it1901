@@ -7,15 +7,20 @@ import java.io.IOException;
 import org.springframework.web.bind.annotation.*;
 
 
+/**
+ * The service implementation.
+ */
 @RestController
-
 public class BeerMainRestController {
     private BeerMain beerMain = BeerMainService.createBeerMain();
     private Rule rule = new Rule();
 
     private JsonHandler jsh = new JsonHandler();
 
-    public void writeToJson() { //Trenger i test derfor public
+    /**
+     * Writes beerMain to Json-file.
+     */
+    public void writeToJson() {
         try {
             jsh.writeToJson(this.beerMain, "/beerPunishmentRemote.json");
         }catch (IOException IOE) {
@@ -23,6 +28,11 @@ public class BeerMainRestController {
         }
     }
 
+    /**
+     * Get the corresponding beerMain.
+     *
+     * @return a copy of the corresponding beerMain object
+     */
     @GetMapping(path = "beerMain")
     public BeerMain getBeerMain() {
         BeerMain beerMainCopy = new BeerMain();
@@ -30,31 +40,59 @@ public class BeerMainRestController {
         return beerMainCopy;
     }
 
-
+    /**
+     * Adds new member.
+     *
+     * @param name
+     */
     @PostMapping(path = "members")
     public void addMember(@RequestParam("name") String name) {
         this.beerMain.addMember(name);
         writeToJson();
     }
 
+    /**
+     * Deletes a member.
+     *
+     * @param member
+     */
     @DeleteMapping(path = "members")
     public void deleteMember(@RequestParam("member") String member) {
         this.beerMain.deleteMember(member);
         writeToJson();
     }
+
+    /**
+     * Adds a rule.
+     *
+     * @param value
+     * @param ruleDescription
+     */
     @PostMapping(path = "rules")
     public void addRule(@RequestParam("description") String ruleDescription, @RequestParam("value") int value) {
         this.rule = new Rule(ruleDescription,value);
         this.beerMain.addRule(rule);
         writeToJson();
     }
+
+    /**
+     * Removes a rule.
+     *
+     * @param ruleDescription
+     */
     @DeleteMapping(path = "rules")
     public void removeRule(@RequestParam("rule") String ruleDescription){
         this.beerMain.removeRuleUsingDescription(ruleDescription);
         writeToJson();
     }
 
-
+    /**
+     * Punishes a member.
+     *
+     * @param member
+     * @param ruleDescription
+     * @param value
+     */
     @PutMapping(path="punishMember")
     public void punishMember(@RequestParam("member") String member,
                              @RequestParam("description") String ruleDescription,
@@ -64,9 +102,13 @@ public class BeerMainRestController {
         writeToJson();
     }
 
-
-
-
+    /**
+     * Deletes a given punishment.
+     *
+     * @param member
+     * @param ruleDescription
+     * @param value
+     */
     @DeleteMapping(path = "payPunishment")
     public void payPunishment(@RequestParam("member") String member,
                               @RequestParam("description") String ruleDescription,

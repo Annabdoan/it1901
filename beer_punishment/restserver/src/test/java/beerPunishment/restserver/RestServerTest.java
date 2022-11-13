@@ -1,4 +1,4 @@
-package beerPunichment.restserver;
+package beerPunishment.restserver;
 
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;

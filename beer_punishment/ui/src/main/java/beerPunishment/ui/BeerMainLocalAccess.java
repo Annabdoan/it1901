@@ -17,7 +17,7 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     private Rule rule;
     private String filename = "/beerPunishment.json";
 
-    public void changeFilename(String newName) {
+    public void changeLocalFilename(String newName) {
         this.filename = newName;
     }
 

@@ -242,7 +242,7 @@ public class BeerController {
 
     public void changeFileName(String fileName) {
         if (iBeerMainAccess instanceof BeerMainLocalAccess) {
-            ((BeerMainLocalAccess) iBeerMainAccess).changeFilename(fileName);
+            ((BeerMainLocalAccess) iBeerMainAccess).changeLocalFilename(fileName);
             this.beermain = iBeerMainAccess.getBeermain();
             updateMemberView();
             updateListView();

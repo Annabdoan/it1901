@@ -30,7 +30,9 @@ class BeerMainRestIntControllerTest {
     void getBeerMain() throws Exception {
         RequestBuilder request = MockMvcRequestBuilders.get("/beerMain");
         MvcResult result = mvc.perform(request).andReturn();
-        assertEquals("{\"rules\":[{\"description\":\"sutre\",\"punishmentValue\":7}],\"memberRuleViolations\":{\"Oliver\":[]},\"usernames\":[\"Oliver\"]}",
+        int status = result.getResponse().getStatus();
+        assertEquals(200, status);
+        assertEquals("{\"rules\":[],\"memberRuleViolations\":{},\"usernames\":[]}",
                 result.getResponse().getContentAsString());
     }
 

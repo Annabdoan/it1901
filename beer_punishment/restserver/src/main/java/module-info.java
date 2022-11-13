@@ -5,6 +5,7 @@ module beerPunishment.restserver {
     requires spring.webmvc;
     requires spring.beans;
     requires spring.data.commons;
+    requires java.desktop;
 
 
 

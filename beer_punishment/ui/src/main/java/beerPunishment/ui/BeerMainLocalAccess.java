@@ -35,7 +35,9 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
         jsh = new JsonHandler();
         try {
             beerMain = jsh.readFromJson(filename);
-            return beerMain;
+            BeerMain beerMainCopy = new BeerMain();
+            beerMainCopy.copy(beerMain);
+            return beerMainCopy;
         }catch (IOException ioe){
             return new BeerMain();
         }

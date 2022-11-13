@@ -2,9 +2,13 @@ package beerPunishment.ui;
 
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
+
+import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import beerPunishment.json.JsonHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
@@ -37,6 +41,8 @@ public class BeerController {
 
 
     private IBeerMainAccess ifBeerMainAccess;
+    private JsonHandler jsh;
+    private String fileName;
 
     /**
      * Initialize.
@@ -126,10 +132,11 @@ public class BeerController {
             beermain = ifBeerMainAccess.removeRule(beermain, description);
             updateRuleChoicebox();
             updateListView();
-        } catch (IllegalArgumentException iae) {
-            showErrorMessage(iae.getMessage());
+        } catch (IllegalArgumentException e) {
+            showErrorMessage(e.getMessage());
         }
     }
+
 
     private void updateMemberView() {
         Collection<String> punishmentStatus = beermain.generatePunishmentStatusToString();

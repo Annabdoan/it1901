@@ -88,12 +88,12 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
     }
 
 
-    private String UriParam(String s) {
+    private String uriParam(String s) {
         return URLEncoder.encode(s, StandardCharsets.UTF_8);
     }
 
     private URI beerMainPath(String name) {
-        return path.resolve(UriParam(name));
+        return path.resolve(uriParam(name));
     }
 
 

@@ -1,32 +1,40 @@
 package beerPunishment.ui;
 
 import beerPunishment.core.BeerMain;
-import beerPunishment.core.Rule;
-import beerPunishment.json.JsonHandler;
-import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-
+/**
+ * Interface for classes that wants to take advantage of a REST APi.
+ */
 public interface IBeerMainAccess {
 
     BeerMain getBeermain();
 
     /**
-     * Make new rule.
+     * Adds a rule to the beerMain.
+     *
+     * @param beerMain    the beerMain
+     * @param description the description of the rule
+     * @param value       the value of the rule
      */
     BeerMain addRule(BeerMain beerMain, String description, int value);
 
 
+
     /**
-     * Add member.
+     * Adds a member to the beerMain.
+     *
+     * @param beerMain the beerMain
+     * @param name     the name of member
      */
     BeerMain addMember(BeerMain beerMain, String name);
 
     /**
-     * Punish a member.
+     * This method is used to punish a member.
+     *
+     * @param beerMain    the beerMain
+     * @param member      the member to punish
+     * @param description the description of the rule
+     * @param value       the value of the rule
      */
     BeerMain punishMember(BeerMain beerMain, String member, String description, int value);
 

@@ -2,6 +2,7 @@ package beerPunishment.restserver;
 
 import beerPunishment.restserver.BeerMainRestController;
 import com.google.gson.Gson;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -30,6 +31,8 @@ class BeerMainRestIntControllerTest {
     @Autowired
     private MockMvc mvc;
 
+
+
     @Test
     void getBeerMain() throws Exception {
         RequestBuilder request = MockMvcRequestBuilders.get("/beerMain");
@@ -56,7 +59,18 @@ class BeerMainRestIntControllerTest {
     }
 
     @Test
-    void deleteMember() {
+    void deleteMember() throws Exception {
+        Gson gson = new Gson();
+        mvc.perform( MockMvcRequestBuilders
+                        .delete("/members?member=Maurice")
+                        .content(gson.toJson("Maurice"))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        RequestBuilder request = MockMvcRequestBuilders.get("/beerMain");
+        MvcResult result = mvc.perform(request).andReturn();
+        assertEquals("{\"rules\":[],\"memberRuleViolations\":{},\"usernames\":[]}",
+                result.getResponse().getContentAsString());
     }
 
     @Test

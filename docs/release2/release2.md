@@ -7,24 +7,31 @@ We use JSON file format to save the user data.
 
 ### Working habits and task management:
 The group has mainly used pair-programming which has been effective.
-We started with splitting the group in two pairs, and assigned issues to each of the pairs.
-As we got further into the programming, we encountered a number of problems related to misunderstanding of communication.
-Therefore, the two pairs were so into the coding and worked on two separate branches, without having control of the other pairs work.
-We realised along the way that we needed to communicate better, and each other when problems occur.
-
-For the next sprint we will work on how we can better the communication through introducing the SCRUM standups in every meeting.
+The group started with splitting in two, and assigned issues to a member of each pair.
+As the group got further into the programming, a number of problems related to misunderstanding of communication encountered.
+The two pairs did not have overview over the other pairs work, which led to merge conflicts and misunderstandings.
+The group realised that daily stand-ups were important, and something that should be implemented.
+Therefore, for the next sprint the group will work on how to better the communication through introducing the SCRUM stand-ups in every meeting.
 This will make it easier for each member to have better control of what the other group members are working on, and will hopefully result in a more agile development.
 
 The group has been striving towards having two group meeting a week, which has been working well.
-We have worked on having more specific issues, and it is easier to have an overview on what needs to be done before the next release.
+The group have worked on having more specific issues, to easier have an overview over problems remaining.
 
-### Methods for qulity ensurance of code:
-We intend to implement tests for all the modules, and use Jacoco for testing coverage above 90%.
-We have also implemented Checkstyle and Spotbugs to check the code quality.
+### Methods for quality ensurance of code:
+The group intend to implement tests for all the modules, and used Jacoco for ensuring testing coverage above 90%.
+A high test coverage have been an important task for the group, due to making sure that each method works the way it was intended to.
+To secure a better code quality the *CheckStyle* and *SpotBugs* plugin were implemented.
+*Checkstyle* had a large impact of the groups overall code standard, and *SpotBugs* is implemented in order for the group 
+to be aware of bugs in the code. 
 
+### Storage
+The group have discussed and reflected on the use of *document metaphor* versus *implicit 
+storage*. 
+After release 2 the project uses *implicit storage*, because the user of BeerPunishment does not have a
+'store' button. 
+The group decided to use *implicit storage* because the group felt it hands out a more agile user experience. 
 
-
-### For release two the project consists of the following classes and resources:
+### For release 2 the project consists of the following classes and resources:
 
 
 #### Core
@@ -32,12 +39,12 @@ We have also implemented Checkstyle and Spotbugs to check the code quality.
 * Rule.java
 
 #### Json
-* \+ BeerMainDeserializer.java
-* \+ BeerMainSerializer.java
-* \+ RuleDeserializer.java
-* \+ RuleSerializer.java
-* \+ RulePersostence.java
-* \+ RuleModule.java
+* BeerMainDeserializer.java
+* BeerMainSerializer.java
+* RuleDeserializer.java
+* RuleSerializer.java
+* RulePersistence.java
+* RuleModule.java
 
 #### UI
 * BeerApp.java
@@ -46,7 +53,9 @@ We have also implemented Checkstyle and Spotbugs to check the code quality.
   ##### Resources:
     * Beer.fxml
 
-#### At release 1 the app will consist of this scene
+
+
+#### At release 2 the app will consist of this scene
 ![alt_text](uirelease2.png)
 
 ### User story for release 2:

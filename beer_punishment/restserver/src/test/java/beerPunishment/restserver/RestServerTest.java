@@ -32,8 +32,17 @@ class BeerMainRestIntControllerTest {
     @Autowired
     private MockMvc mvc;
 
-
     @Order(1)
+    @Test
+    void ping() throws Exception {
+        RequestBuilder request = MockMvcRequestBuilders.get("/ping");
+        MvcResult result = mvc.perform(request).andReturn();
+        int status = result.getResponse().getStatus();
+        assertEquals(200, status);
+        assertEquals("pong",
+                result.getResponse().getContentAsString());
+    }
+    @Order(2)
     @Test
     void getBeerMain() throws Exception {
         RequestBuilder request = MockMvcRequestBuilders.get("/beerMain");
@@ -94,14 +103,14 @@ class BeerMainRestIntControllerTest {
     void payPunishment() throws Exception {
         Gson gson = new Gson();
         mvc.perform( MockMvcRequestBuilders
-                        .delete("/members?member=Maurice&description=Banne&value=2")
+                        .delete("/payPunishment?member=Maurice&description=Banne&value=2")
                         .content(gson.toJson("Maurice;Banne;2"))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
         RequestBuilder request = MockMvcRequestBuilders.get("/beerMain");
         MvcResult result = mvc.perform(request).andReturn();
-        assertEquals("{\"rules\":[{\"description\":\"Banne\",\"punishmentValue\":2}],\"memberRuleViolations\":{},\"usernames\":[\"Maurice\"]}",
+        assertEquals("{\"rules\":[{\"description\":\"Banne\",\"punishmentValue\":2}],\"memberRuleViolations\":{\"Maurice\":[]},\"usernames\":[\"Maurice\"]}",
                 result.getResponse().getContentAsString());
     }
 
@@ -136,7 +145,5 @@ class BeerMainRestIntControllerTest {
                 result.getResponse().getContentAsString());
     }
 
-    @Test
-    void ping() {
-    }
+
 }

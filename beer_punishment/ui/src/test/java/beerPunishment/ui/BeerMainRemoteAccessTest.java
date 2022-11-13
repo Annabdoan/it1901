@@ -32,7 +32,7 @@ public class BeerMainRemoteAccessTest {
         URI defaultURI = URI.create("http://localhost:8080"); //Må lage getter i BeerController!!
         beerMainRemoteAccess = new BeerMainRemoteAccess(defaultURI);
 
-        final BeerMain beerMain = new BeerMain();
+        BeerMain beerMain = new BeerMain();
         final Rule rule = new Rule("Banne", 3);
         beerMain.addRule(rule);
         beerMain.addMember("Sara");
@@ -41,6 +41,18 @@ public class BeerMainRemoteAccessTest {
     @Test
     public void testWireMock() {
         assertTrue(wmServer.isRunning());
+    }
+
+    @Test
+    public void testPingServer() {
+        WireMock.stubFor(WireMock.get(WireMock.urlEqualTo("http://localhost:8080/ping"))
+                .withHeader("Accept", WireMock.equalTo("application/json"))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("pong"))
+
+        );
     }
 
     @Test //Når ikke getBeerMain!

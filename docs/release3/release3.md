@@ -1,4 +1,4 @@
-# Documentation for release 2 - gr2231
+# Documentation for release 3 - gr2231
 
 ### :desktop_computer: Introduction 
 

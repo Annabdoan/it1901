@@ -162,27 +162,27 @@ used header, body and footers better now.
 The project started with the team setting up a team contract. The group contract had a base from the 
 GRPI - model developed by David Kolb et al. 
 
-:round_pushpin: **Goals** 
+:round_pushpin: ***Goals***
 
 The goals discussed in the team contract were both individual and team-wise. 
 The individuals of the group wrote down what they wanted to learn from this process. As a team
 it was written down the goals of the project. 
 The group focused on concrete goals, in order for the group to perform better.
 
-:round_pushpin: **Roles** 
+:round_pushpin: ***Roles*** 
 
 Different roles were discussed, however the group decided that all members should have the same role.
 The group did not have a SCRUM master nor a customer, which made all members development team members. 
 However, we discussed the groups weaknesses and strengths in order to have a better understanding of each other. 
 
-:round_pushpin: **Procedures**
+:round_pushpin: ***Procedures***
 
 This point revolves around securing the practical team work. In the contract we decided on a
 fixed meeting time each week, however the group has reflected over this being over optimistic.
 In reality, the group worked way over this fixed time each week, and this is a point for improvement.
 
 
-:round_pushpin: **Interpersonal relationships**
+:round_pushpin: ***Interpersonal relationships***
 
 The interpersonal relationships rely on the three factors over. This was a point the group had discussed in the team contract.
 However, the group experienced that in real life, not everything works the way the contract says they should.

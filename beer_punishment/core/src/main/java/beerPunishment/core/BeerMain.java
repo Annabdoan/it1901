@@ -43,7 +43,7 @@ public class BeerMain implements Iterable<Rule> {
     /**
      * Removes already existing User.
      */
-    public void removeRule(Rule rule) {
+    public void deleteRule(Rule rule) {
         if (!rules.contains(rule)) {
             throw new IllegalArgumentException("Regelen eksisterer ikke");
         }

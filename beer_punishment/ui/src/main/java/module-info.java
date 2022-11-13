@@ -10,5 +10,6 @@ module beerPunishment.ui {
     requires spring.web;
 
 
+
     opens beerPunishment.ui to javafx.controls, javafx.graphics, javafx.fxml, gson;
 }

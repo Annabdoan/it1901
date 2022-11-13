@@ -1,18 +1,19 @@
 
 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2022/gr2231/gr2231)
 
-# Beer Punishment
+# :beer: Beer Punishment :beer: 
 This is the project in the subject ITP1901 by group 31. 
 
 This repo contains a multi-package, multi-module javafx project for a beer punishment system. This application is primarily meant for people who work in teams or groups.
-This app will provide a clear overview of what rules applies to the group/team, who has broken which rules and how many beers each individual has as punishment.
-You can read more about the project here [Beer Punishment](/beer_punishment/README.md).
+The application will provide a clear overview of which rules applies to the group/team, who has broken which rules and how many beers each individual has as punishment.
+
 
 ### Building and running the project
 Note:
-This project is built up with maven, and if maven is not installed you can use gitpod.
+This project is built up with maven, and if maven is not installed GitPod can be used. Click the 
+GitPod icon and you are started.
 
-#### Runnning application with local access:
+#### Running application with local access:
 
 1. Navigate to beer_punishment directory.
 2. Create JAR files for the project.
@@ -34,9 +35,9 @@ This project is built up with maven, and if maven is not installed you can use g
 This project uses JaCoCo to measure and report test coverage. 
 Each module will have its own report. The reports are located in the modules respective target directories. 
 
-! This is to be done after instructions 1-4 in "Building and running the project" part. 
+! This is to be done after instructions 1-4 in *Building and running the project*. 
 
-#### Getting the JaCoCo-reports 
+#### Access JaCoCo-reports 
 
 1. Run the test.
 2. Navigate to the target directory in each module.
@@ -44,7 +45,8 @@ Each module will have its own report. The reports are located in the modules res
 4. Open the index.html file in your browser. 
 
 >1. mvn verify
->2. mvn jacoco:report
+>2. cd target
+>3. mvn jacoco:report
 >
 
 
@@ -63,23 +65,41 @@ Each module will have its own report. The reports are located in the modules res
 [Read more about the modules and the code](/beer_punishment/README.md)
 
 
-### The plan
-The project is set to three releases.
+### Overall plan
+The project is set to three releases. Each release represents a sprints.
 
-###### Sprint 1
-This sprint contains two user stories. 
 
-User story 1: 
+##### Release 1
+This release contains two user stories:
+
+*User story 1:* 
 >A member of the group wants to keep track of the rules which leeds to punishment.
 
-User story 2: 
->A group wants one persons late comings to be punished. \
-Read more about it here: [Release 1](/docs/release1/release1.md)
+*User story 2:*
+>A group wants one person´s late comings to be punished. 
+> 
+Read more about it here: [Release 1](./docs/release1/release1.md)
 
-###### Sprint 2
-In this sprint we will continue to add more functionality. The goal is to implement most of the wanted logic. 
+##### Release 2
+In this release the group will continue to add more functionality. The goal is to implement most of the wanted logic. 
 
-User story 3: 
+*User story 3:*
 >The group wants to display a list with the group members and how many penalties each member has.
 
-Read more about it here: [Release 2](/docs/release2/release2.md)
+Read more about it here: [Release 2](./docs/release2/release2.md)
+
+
+##### Release 3
+This is the final release, where all the intended logic is to be implemented. 
+
+*User story 4:*
+> Anna wants to punish Sara for one of her several rule breaks. She unfortunately gets Sara´s name entered incorrectly in the application, and wants to remove this new member from the app. She therefore wants to create a function to delete this name, 
+so that only desired members are displayed on the application.
+
+*User story 5:*
+> The group has decided that phone use no longer should be punished, as it has proven to not be particularly problematic. They therefore want to have the option to remove existing rules in the application, 
+so that they can delete the rule of no phone use.
+
+*User story 6:*
+> Over the course of several months, Maurice has been punished with various beer penalties, and is starting to get loads of beers he has to pay for. To make sure that the amount does not get too large towards the end of the year, he wants to pay down his debt. Maurice wants to delete 
+his existing rule breaks in the app after paying them up. 

@@ -58,7 +58,3 @@ The group decided to use *implicit storage* because the group felt it hands out 
 #### At release 2 the app will consist of this scene
 ![alt_text](uirelease2.png)
 
-### User story for release 2:
-User Story 3 
->Now that the group has a set of rules to follow, Sara can finally punish Maurice and give him the penalties he deserves.
-She wants to display a list with the group members and how many penalties each member has.

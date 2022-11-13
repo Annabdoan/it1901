@@ -81,13 +81,24 @@ public class BeerMainRemoteAccessTest {
 
     @Test
     public void testAddMember() {
-        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo("/members/name?name={name}"))
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo("/members/name?name=TestMember"))
                 .withHeader("Accept", WireMock.equalTo("application/json"))
                 .willReturn(WireMock.aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
-                        .withBody("{\"rules\":[],\"memberRuleViolations\":{\"Maurice\":[]},\"usernames\":[\"Maurice\"]}"))
+                        .withBody("{\"rules\":[],\"memberRuleViolations\":{\"TestMember\":[]},\"usernames\":[\"TestMember\"]}"))
 
+        );
+    }
+
+    @Test
+    public void testPunishMember() {
+        WireMock.stubFor(WireMock.put(WireMock.urlEqualTo("/punishMember?member=TestMember&description=TestRule&value=1"))
+                .withHeader("Accept", WireMock.equalTo("application/json"))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\"rules\":[{\"description\":\"TestRule\",\"punishmentValue\":1}],\"memberRuleViolations\":{\"TestMember\":[{\"description\":\"TestRule\",\"punishmentValue\":1}]},\"usernames\":[\"TestMember\"]}"))
         );
     }
 

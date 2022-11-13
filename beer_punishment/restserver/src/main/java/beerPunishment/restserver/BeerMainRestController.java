@@ -23,7 +23,7 @@ public class BeerMainRestController {
     public void writeToJson() {
         try {
             jsh.writeToJson(this.beerMain, "/beerPunishmentRemote.json");
-        } catch (IOException IOE) {
+        } catch (IOException ioe) {
             System.out.println("Error while writing to file");
         }
     }

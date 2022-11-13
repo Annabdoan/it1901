@@ -70,7 +70,7 @@ public class BeerMainRemoteAccessTest {
 
     @Test
     public void testAddRule() {
-        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo("/rules?description=TestRule&value=1"))
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo("http://localhost:8080/rules?description=TestRule&value=1"))
                 .withHeader("Accept", WireMock.equalTo("application/json"))
                 .willReturn(WireMock.aResponse()
                         .withStatus(200)
@@ -81,7 +81,7 @@ public class BeerMainRemoteAccessTest {
 
     @Test
     public void testAddMember() {
-        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo("/members/name?name=TestMember"))
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo("http://localhost:8080/members/name?name=TestMember"))
                 .withHeader("Accept", WireMock.equalTo("application/json"))
                 .willReturn(WireMock.aResponse()
                         .withStatus(200)
@@ -93,7 +93,7 @@ public class BeerMainRemoteAccessTest {
 
     @Test
     public void testPunishMember() {
-        WireMock.stubFor(WireMock.put(WireMock.urlEqualTo("/punishMember?member=TestMember&description=TestRule&value=1"))
+        WireMock.stubFor(WireMock.put(WireMock.urlEqualTo("http://localhost:8080/punishMember?member=TestMember&description=TestRule&value=1"))
                 .withHeader("Accept", WireMock.equalTo("application/json"))
                 .willReturn(WireMock.aResponse()
                         .withStatus(200)
@@ -106,7 +106,7 @@ public class BeerMainRemoteAccessTest {
     public void testRemoveRule() {
 
         //Adding the rule first
-        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo("/rules?description=TestRule&value=1"))
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo("http://localhost:8080/rules?description=TestRule&value=1"))
                 .withHeader("Accept", WireMock.equalTo("application/json"))
                 .willReturn(WireMock.aResponse()
                         .withStatus(200)
@@ -115,7 +115,7 @@ public class BeerMainRemoteAccessTest {
         );
 
         //Deleting the rule that was just created
-        WireMock.stubFor(WireMock.delete(WireMock.urlEqualTo("/rules?description=TestRule"))
+        WireMock.stubFor(WireMock.delete(WireMock.urlEqualTo("http://localhost:8080/rules?description=TestRule"))
                 .withHeader("Accept", WireMock.equalTo("application/json"))
                 .willReturn(WireMock.aResponse()
                         .withStatus(200)
@@ -123,6 +123,31 @@ public class BeerMainRemoteAccessTest {
                         .withBody("{\"rules\":[],\"memberRuleViolations\":{}}"))
         );
     }
+
+    @Test
+    public void testDeleteMember() {
+
+        //Adding the member first
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo("http://localhost:8080/members/name?name=TestMember"))
+                .withHeader("Accept", WireMock.equalTo("application/json"))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\"rules\":[],\"memberRuleViolations\":{\"TestMember\":[]},\"usernames\":[\"TestMember\"]}"))
+
+        );
+
+        //Deleting the member that was just added
+        WireMock.stubFor(WireMock.delete(WireMock.urlEqualTo("http://localhost:8080/rules?description=TestRule"))
+                .withHeader("Accept", WireMock.equalTo("application/json"))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\"rules\":[],\"memberRuleViolations\":{}}"))
+        );
+    }
+
+
 
 
    private String getUrl(String... segments) {

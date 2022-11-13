@@ -23,7 +23,7 @@ public class BeerMainRestController {
     public void writeToJson() {
         try {
             jsh.writeToJson(this.beerMain, "/beerPunishmentRemote.json");
-        }catch (IOException IOE) {
+        } catch (IOException IOE) {
             System.out.println("Error while writing to file");
         }
     }
@@ -81,7 +81,7 @@ public class BeerMainRestController {
      * @param ruleDescription description of rule to delete
      */
     @DeleteMapping(path = "rules")
-    public void removeRule(@RequestParam("rule") String ruleDescription){
+    public void removeRule(@RequestParam("rule") String ruleDescription) {
         this.beerMain.removeRuleUsingDescription(ruleDescription);
         writeToJson();
     }
@@ -93,10 +93,10 @@ public class BeerMainRestController {
      * @param ruleDescription description of rule violated
      * @param value number of beers in punishment
      */
-    @PutMapping(path="punishMember")
+    @PutMapping(path = "punishMember")
     public void punishMember(@RequestParam("member") String member,
                              @RequestParam("description") String ruleDescription,
-                             @RequestParam("value") int value){
+                             @RequestParam("value") int value) {
         this.rule = new Rule(ruleDescription,value);
         this.beerMain.punishMember(member,this.rule);
         writeToJson();

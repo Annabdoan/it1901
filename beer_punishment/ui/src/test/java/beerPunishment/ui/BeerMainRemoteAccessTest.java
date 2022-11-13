@@ -61,7 +61,8 @@ public class BeerMainRemoteAccessTest {
                 .withHeader("Accept", WireMock.equalTo("application/json"))
                 .willReturn(WireMock.aResponse()
                         .withStatus(200)
-                        .withHeader("Content-Type", "application/json"))
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\"rules\":[],\"memberRuleViolations\":{}}"))
 
         );
 

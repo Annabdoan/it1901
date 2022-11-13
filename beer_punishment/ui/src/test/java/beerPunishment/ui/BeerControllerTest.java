@@ -41,11 +41,11 @@ public class BeerControllerTest extends ApplicationTest {
         this.controller = loader.getController();
         stage.setScene(new Scene(root));
         stage.show();
+        this.controller.changeFileName("/beerPunishmentTest.json");
     }
     @Order(1)
     @Test
     public void testAddRule() {
-        File file = new File(System.getProperty("user.home"),"Rulelist.json");
         clickOn("#newRuleTextInput").write("Komme for sent;5");
         clickOn("#newRuleButton");
         Collection<Rule> expectedList = new ArrayList<>(List.of(new Rule("Komme for sent", 5)));
@@ -130,7 +130,7 @@ public class BeerControllerTest extends ApplicationTest {
     }
     @AfterAll
     public static void reset() {
-        File file = new File(System.getProperty("user.home"),"/beerPunishment.json");
+        File file = new File(System.getProperty("user.home"),"/beerPunishmentTest.json");
         file.delete();
     }
 }

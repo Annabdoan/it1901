@@ -102,6 +102,29 @@ public class BeerMainRemoteAccessTest {
         );
     }
 
+    @Test
+    public void testRemoveRule() {
+
+        //Adding the rule first
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo("/rules?description=TestRule&value=1"))
+                .withHeader("Accept", WireMock.equalTo("application/json"))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\"rules\":[\"description\": \"TestRule\",\"punishmentValue\": 1],\"memberRuleViolations\":{}}"))
+        );
+
+        //Deleting the rule that was just created
+        WireMock.stubFor(WireMock.delete(WireMock.urlEqualTo("/rules?description=TestRule"))
+                .withHeader("Accept", WireMock.equalTo("application/json"))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\"rules\":[],\"memberRuleViolations\":{}}"))
+        );
+    }
+
+
    private String getUrl(String... segments) {
         String url = "/beerMain";
         for (String segment : segments) {

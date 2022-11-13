@@ -182,7 +182,7 @@ fixed meeting time each week, however the group has reflected over this being ov
 In reality, the group worked way over this fixed time each week, and this is a point for improvement.
 
 
-:round_pushpin: Interpersonal relationships
+:round_pushpin: **Interpersonal relationships**
 
 The interpersonal relationships rely on the three factors over. This was a point the group had discussed in the team contract.
 However, the group experienced that in real life, not everything works the way the contract says they should.

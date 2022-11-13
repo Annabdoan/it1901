@@ -29,32 +29,33 @@ import java.io.IOException;
 
 @AutoConfigureMockMvc
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-//@ContextConfiguration(classes ={BeerMainRestController.class, BeerMainService.class, RestServerApp.class })
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:applicationContext.xml")
+@ContextConfiguration(classes ={BeerMainRestController.class, BeerMainService.class, RestServerApp.class })
+//@ContextConfiguration(locations = "classpath:WEB-INF/applicationContext.xml")
+
+
 @WebMvcTest
 public class RestServerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
-    private BeerMainService beerMainService;
+   /* @MockBean
+    private BeerMainService beerMainService;*/
 
     private JsonHandler jsonHandler;
-    private BeerMainRestController beerMainRestController = new BeerMainRestController();
+   // private BeerMainRestController beerMainRestController = new BeerMainRestController();
 
    @BeforeAll
     public void setup() throws IllegalStateException, IOException {
        jsonHandler = new JsonHandler();
 
-       final BeerMain beerMain = new BeerMain();
+       final BeerMain beerMain = BeerMainService.createBeerMain();
        final Rule rule = new Rule("Banne", 3);
        beerMain.addRule(rule);
        beerMain.addMember("Sara");
 
        //beerMainRestController.writeToJson();
-       BeerMainService.createBeerMain();
+
    }
 
    @Test

@@ -32,10 +32,27 @@ public class BeerMainRemoteAccessTest {
         URI defaultURI = URI.create("http://localhost:8080"); //Må lage getter i BeerController!!
         beerMainRemoteAccess = new BeerMainRemoteAccess();
 
-        final BeerMain beerMain = new BeerMain();
+        BeerMain beerMain = new BeerMain();
         final Rule rule = new Rule("Banne", 3);
         beerMain.addRule(rule);
         beerMain.addMember("Sara");
+    }
+
+    @Test
+    public void testWireMock() {
+        assertTrue(wmServer.isRunning());
+    }
+
+    @Test
+    public void testPingServer() {
+        WireMock.stubFor(WireMock.get(WireMock.urlEqualTo("http://localhost:8080/ping"))
+                .withHeader("Accept", WireMock.equalTo("application/json"))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("pong"))
+
+        );
     }
 
     @Test //Når ikke getBeerMain!
@@ -44,29 +61,131 @@ public class BeerMainRemoteAccessTest {
                 .withHeader("Accept", WireMock.equalTo("application/json"))
                 .willReturn(WireMock.aResponse()
                         .withStatus(200)
-                        .withHeader("Content-Type", "application/json"))
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\"rules\":[],\"memberRuleViolations\":{}}"))
 
         );
 
     }
 
     @Test
-    public void testAddMember() {
-        WireMock.stubFor(WireMock.get(WireMock.urlEqualTo("/members/name?name={name}"))
+    public void testAddRule() {
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo("http://localhost:8080/rules?description=TestRule&value=1"))
                 .withHeader("Accept", WireMock.equalTo("application/json"))
                 .willReturn(WireMock.aResponse()
                         .withStatus(200)
-                        .withHeader("Content-Type", "application/json"))
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\"rules\":[\"description\": \"TestRule\",\"punishmentValue\": 1],\"memberRuleViolations\":{}}"))
+        );
+    }
+
+    @Test
+    public void testAddMember() {
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo("http://localhost:8080/members/name?name=TestMember"))
+                .withHeader("Accept", WireMock.equalTo("application/json"))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\"rules\":[],\"memberRuleViolations\":{\"TestMember\":[]},\"usernames\":[\"TestMember\"]}"))
 
         );
     }
 
-   private String getUrl(String... segments) {
-        String url = "/beerMain";
-        for (String segment : segments) {
-            url = url + "/" + segment;
-        }
-        return url;
+    @Test
+    public void testPunishMember() {
+        WireMock.stubFor(WireMock.put(WireMock.urlEqualTo("http://localhost:8080/punishMember?member=TestMember&description=TestRule&value=1"))
+                .withHeader("Accept", WireMock.equalTo("application/json"))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\"rules\":[{\"description\":\"TestRule\",\"punishmentValue\":1}],\"memberRuleViolations\":{\"TestMember\":[{\"description\":\"TestRule\",\"punishmentValue\":1}]},\"usernames\":[\"TestMember\"]}"))
+        );
+    }
+
+    @Test
+    public void testRemoveRule() {
+
+        //Adding the rule first
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo("http://localhost:8080/rules?description=TestRule&value=1"))
+                .withHeader("Accept", WireMock.equalTo("application/json"))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\"rules\":[\"description\": \"TestRule\",\"punishmentValue\": 1],\"memberRuleViolations\":{}}"))
+        );
+
+        //Deleting the rule that was just created
+        WireMock.stubFor(WireMock.delete(WireMock.urlEqualTo("http://localhost:8080/rules?description=TestRule"))
+                .withHeader("Accept", WireMock.equalTo("application/json"))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\"rules\":[],\"memberRuleViolations\":{}}"))
+        );
+    }
+
+    @Test
+    public void testDeleteMember() {
+
+        //Adding the member first
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo("http://localhost:8080/members/name?name=TestMember"))
+                .withHeader("Accept", WireMock.equalTo("application/json"))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\"rules\":[],\"memberRuleViolations\":{\"TestMember\":[]},\"usernames\":[\"TestMember\"]}"))
+
+        );
+
+        //Deleting the member that was just added
+        WireMock.stubFor(WireMock.delete(WireMock.urlEqualTo("http://localhost:8080/rules?description=TestRule"))
+                .withHeader("Accept", WireMock.equalTo("application/json"))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\"rules\":[],\"memberRuleViolations\":{}}"))
+        );
+    }
+
+    @Test
+    public void testPayPunishment() {
+
+        //Adding the member first
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo("http://localhost:8080/members/name?name=TestMember"))
+                .withHeader("Accept", WireMock.equalTo("application/json"))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\"rules\":[],\"memberRuleViolations\":{\"TestMember\":[]},\"usernames\":[\"TestMember\"]}"))
+
+        );
+
+        //Adding the rule
+        WireMock.stubFor(WireMock.post(WireMock.urlEqualTo("http://localhost:8080/rules?description=TestRule&value=1"))
+                .withHeader("Accept", WireMock.equalTo("application/json"))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\"rules\":[\"description\": \"TestRule\",\"punishmentValue\": 1],\"memberRuleViolations\":{\"TestMember\":[]},\"usernames\":[\"TestMember\"]}"))
+        );
+
+        //Punishing the member
+        WireMock.stubFor(WireMock.put(WireMock.urlEqualTo("http://localhost:8080/punishMember?member=TestMember&description=TestRule&value=1"))
+                .withHeader("Accept", WireMock.equalTo("application/json"))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\"rules\":[{\"description\":\"TestRule\",\"punishmentValue\":1}],\"memberRuleViolations\":{\"TestMember\":[{\"description\":\"TestRule\",\"punishmentValue\":1}]},\"usernames\":[\"TestMember\"]}"))
+        );
+
+        //Deleting the punishment that was just given
+        WireMock.stubFor(WireMock.delete(WireMock.urlEqualTo("http://localhost:8080/payPunishment?member=TestMember&description=TestRule&value=1"))
+                .withHeader("Accept", WireMock.equalTo("application/json"))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\"rules\":[\"description\": \"TestRule\",\"punishmentValue\": 1],\"memberRuleViolations\":{\"TestMember\":[]},\"usernames\":[\"TestMember\"]}"))
+        );
     }
 
     @AfterEach

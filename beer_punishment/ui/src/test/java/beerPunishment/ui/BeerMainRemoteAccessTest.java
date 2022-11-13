@@ -188,17 +188,6 @@ public class BeerMainRemoteAccessTest {
         );
     }
 
-
-
-
-   private String getUrl(String... segments) {
-        String url = "/beerMain";
-        for (String segment : segments) {
-            url = url + "/" + segment;
-        }
-        return url;
-    }
-
     @AfterEach
     public void stopWireMockServer() {
         wmServer.stop();

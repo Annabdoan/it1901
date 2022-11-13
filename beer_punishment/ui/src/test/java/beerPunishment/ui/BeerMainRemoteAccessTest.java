@@ -38,6 +38,11 @@ public class BeerMainRemoteAccessTest {
         beerMain.addMember("Sara");
     }
 
+    @Test
+    public void testWireMock() {
+        assertTrue(wmServer.isRunning());
+    }
+
     @Test //Når ikke getBeerMain!
     public void testGetBeerMain() {
         WireMock.stubFor(WireMock.get(WireMock.urlEqualTo("http://localhost:8080/beerMain"))

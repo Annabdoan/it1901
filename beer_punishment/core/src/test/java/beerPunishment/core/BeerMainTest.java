@@ -99,10 +99,10 @@ public class BeerMainTest {
 
     @Test
     public void testRemoveRuleUsingDescription() {
-       beermain.removeRuleUsingDescription("Kommer sent");
+       beermain.deleteRuleUsingDescription("Kommer sent");
        Collection<Rule> expectedRules = new ArrayList<>(List.of());
        assertEquals(expectedRules, beermain.getRules(), "Rulelist should now be empty");
-       Exception exception = assertThrows(Exception.class, () -> beermain.removeRuleUsingDescription("Banne"));
+       Exception exception = assertThrows(Exception.class, () -> beermain.deleteRuleUsingDescription("Banne"));
        assertEquals("Regel eksisterer ikke", exception.getMessage());
     }
 

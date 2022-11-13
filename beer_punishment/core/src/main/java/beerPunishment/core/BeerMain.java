@@ -55,7 +55,7 @@ public class BeerMain implements Iterable<Rule> {
      *
      * @param description of the rule being deleted
      */
-    public void removeRuleUsingDescription(String description) {
+    public void deleteRuleUsingDescription(String description) {
         Rule empty = null;
         for (Rule rule : rules) {
             if (rule.getDescription().equals(description)) {

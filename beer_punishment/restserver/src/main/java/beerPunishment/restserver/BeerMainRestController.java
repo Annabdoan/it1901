@@ -43,7 +43,7 @@ public class BeerMainRestController {
     /**
      * Adds new member.
      *
-     * @param name
+     * @param name name of new member
      */
     @PostMapping(path = "members")
     public void addMember(@RequestParam("name") String name) {
@@ -54,7 +54,7 @@ public class BeerMainRestController {
     /**
      * Deletes a member.
      *
-     * @param member
+     * @param member member to delete
      */
     @DeleteMapping(path = "members")
     public void deleteMember(@RequestParam("member") String member) {
@@ -65,8 +65,8 @@ public class BeerMainRestController {
     /**
      * Adds a rule.
      *
-     * @param value
-     * @param ruleDescription
+     * @param value number of beers
+     * @param ruleDescription description of new rule
      */
     @PostMapping(path = "rules")
     public void addRule(@RequestParam("description") String ruleDescription, @RequestParam("value") int value) {
@@ -78,7 +78,7 @@ public class BeerMainRestController {
     /**
      * Removes a rule.
      *
-     * @param ruleDescription
+     * @param ruleDescription description of rule to delete
      */
     @DeleteMapping(path = "rules")
     public void removeRule(@RequestParam("rule") String ruleDescription){
@@ -89,9 +89,9 @@ public class BeerMainRestController {
     /**
      * Punishes a member.
      *
-     * @param member
-     * @param ruleDescription
-     * @param value
+     * @param member member to punish
+     * @param ruleDescription description of rule violated
+     * @param value number of beers in punishment
      */
     @PutMapping(path="punishMember")
     public void punishMember(@RequestParam("member") String member,
@@ -105,9 +105,9 @@ public class BeerMainRestController {
     /**
      * Deletes a given punishment.
      *
-     * @param member
-     * @param ruleDescription
-     * @param value
+     * @param member member paying punishment
+     * @param ruleDescription description of rule to be paid
+     * @param value number of beers being paid
      */
     @DeleteMapping(path = "payPunishment")
     public void payPunishment(@RequestParam("member") String member,

@@ -58,21 +58,6 @@ class BeerMainRestIntControllerTest {
         assertEquals("{\"rules\":[],\"memberRuleViolations\":{\"Maurice\":[]},\"usernames\":[\"Maurice\"]}",
                 result.getResponse().getContentAsString());
     }
-    @Order(6)
-    @Test
-    void deleteMember() throws Exception {
-        Gson gson = new Gson();
-        mvc.perform( MockMvcRequestBuilders
-                        .delete("/members?member=Maurice")
-                        .content(gson.toJson("Maurice"))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-        RequestBuilder request = MockMvcRequestBuilders.get("/beerMain");
-        MvcResult result = mvc.perform(request).andReturn();
-        assertEquals("{\"rules\":[{\"description\":\"Banne\",\"punishmentValue\":2}],\"memberRuleViolations\":{},\"usernames\":[]}",
-                result.getResponse().getContentAsString());
-    }
     @Order(3)
     @Test
     void addRule() throws Exception {
@@ -87,10 +72,6 @@ class BeerMainRestIntControllerTest {
         MvcResult result = mvc.perform(request).andReturn();
         assertEquals("{\"rules\":[{\"description\":\"Banne\",\"punishmentValue\":2}],\"memberRuleViolations\":{\"Maurice\":[]},\"usernames\":[\"Maurice\"]}",
                 result.getResponse().getContentAsString());
-    }
-
-    @Test
-    void removeRule() {
     }
     @Order(4)
     @Test
@@ -110,7 +91,49 @@ class BeerMainRestIntControllerTest {
 
     @Order(5)
     @Test
-    void payPunishment() {
+    void payPunishment() throws Exception {
+        Gson gson = new Gson();
+        mvc.perform( MockMvcRequestBuilders
+                        .delete("/members?member=Maurice&description=Banne&value=2")
+                        .content(gson.toJson("Maurice;Banne;2"))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        RequestBuilder request = MockMvcRequestBuilders.get("/beerMain");
+        MvcResult result = mvc.perform(request).andReturn();
+        assertEquals("{\"rules\":[{\"description\":\"Banne\",\"punishmentValue\":2}],\"memberRuleViolations\":{},\"usernames\":[\"Maurice\"]}",
+                result.getResponse().getContentAsString());
+    }
+
+    @Order(6)
+    @Test
+    void deleteMember() throws Exception {
+        Gson gson = new Gson();
+        mvc.perform( MockMvcRequestBuilders
+                        .delete("/members?member=Maurice")
+                        .content(gson.toJson("Maurice"))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        RequestBuilder request = MockMvcRequestBuilders.get("/beerMain");
+        MvcResult result = mvc.perform(request).andReturn();
+        assertEquals("{\"rules\":[{\"description\":\"Banne\",\"punishmentValue\":2}],\"memberRuleViolations\":{},\"usernames\":[]}",
+                result.getResponse().getContentAsString());
+    }
+    @Order(7)
+    @Test
+    void removeRule() throws Exception {
+        Gson gson = new Gson();
+        mvc.perform( MockMvcRequestBuilders
+                        .delete("/rules?rule=Banne")
+                        .content(gson.toJson("Banne"))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        RequestBuilder request = MockMvcRequestBuilders.get("/beerMain");
+        MvcResult result = mvc.perform(request).andReturn();
+        assertEquals("{\"rules\":[],\"memberRuleViolations\":{},\"usernames\":[]}",
+                result.getResponse().getContentAsString());
     }
 
     @Test

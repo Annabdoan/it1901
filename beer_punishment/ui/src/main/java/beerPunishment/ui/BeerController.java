@@ -2,15 +2,15 @@ package beerPunishment.ui;
 
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
-import java.io.IOException;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.Collection;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.Collection;
 
 
 /**
@@ -34,7 +34,6 @@ public class BeerController {
     public TextField addMemberText;
     public TextField deleteMemberText;
     public TextField deleteRuleText;
-    private String fileName;
 
 
     private IBeerMainAccess iBeerMainAccess;
@@ -107,8 +106,6 @@ public class BeerController {
             String[] arrOfNewRuleTextInput = newRuleTextInput.getText().split(";");
             String description = arrOfNewRuleTextInput[0];
             int value = Integer.parseInt(arrOfNewRuleTextInput[1]);
-
-            Rule rule = new Rule(description, value);
             beermain = iBeerMainAccess.addRule(beermain, description, value);
             updateListView();
             updateRuleChoicebox();

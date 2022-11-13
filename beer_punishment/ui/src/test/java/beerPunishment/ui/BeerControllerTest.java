@@ -51,6 +51,7 @@ public class BeerControllerTest extends ApplicationTest {
         Collection<Rule> expectedList = new ArrayList<>(List.of(new Rule("Komme for sent", 5)));
         Collection<Rule> actualList = this.controller.getBeermain().getRules();
         assertEquals(expectedList.toString(), actualList.toString());
+        clickOn("#newRuleTextInput").eraseText(16);
         clickOn("#newRuleTextInput").write("Komme for sent;-5");
         clickOn("#newRuleButton");
         clickOn(LabeledMatchers.hasText("OK"));
@@ -108,6 +109,7 @@ public class BeerControllerTest extends ApplicationTest {
         Collection<String> expectedMembers =new ArrayList<>(List.of());
         Collection<String> actualMemberList = this.controller.getBeermain().getUsernames();
         assertEquals(expectedMembers, actualMemberList);
+        clickOn("#deleteMemberText").eraseText(7);
         String deleteFalseMemberText = "Sara";
         clickOn("#deleteMemberText").write(deleteFalseMemberText);
         clickOn("#deleteMemberButton");

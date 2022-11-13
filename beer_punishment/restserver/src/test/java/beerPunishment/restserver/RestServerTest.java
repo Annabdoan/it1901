@@ -2,8 +2,7 @@ package beerPunishment.restserver;
 
 import beerPunishment.restserver.BeerMainRestController;
 import com.google.gson.Gson;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +22,8 @@ import javax.swing.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(BeerMainRestController.class)
 @ContextConfiguration(classes ={BeerMainRestController.class, BeerMainService.class, RestServerApp.class })
@@ -32,7 +33,7 @@ class BeerMainRestIntControllerTest {
     private MockMvc mvc;
 
 
-
+    @Order(1)
     @Test
     void getBeerMain() throws Exception {
         RequestBuilder request = MockMvcRequestBuilders.get("/beerMain");
@@ -42,7 +43,7 @@ class BeerMainRestIntControllerTest {
         assertEquals("{\"rules\":[],\"memberRuleViolations\":{},\"usernames\":[]}",
                 result.getResponse().getContentAsString());
     }
-
+    @Order(2)
     @Test
     void addMember() throws Exception{
         Gson gson = new Gson();
@@ -57,7 +58,7 @@ class BeerMainRestIntControllerTest {
         assertEquals("{\"rules\":[],\"memberRuleViolations\":{\"Maurice\":[]},\"usernames\":[\"Maurice\"]}",
                 result.getResponse().getContentAsString());
     }
-
+    @Order(6)
     @Test
     void deleteMember() throws Exception {
         Gson gson = new Gson();
@@ -69,10 +70,10 @@ class BeerMainRestIntControllerTest {
                 .andExpect(status().isOk());
         RequestBuilder request = MockMvcRequestBuilders.get("/beerMain");
         MvcResult result = mvc.perform(request).andReturn();
-        assertEquals("{\"rules\":[],\"memberRuleViolations\":{},\"usernames\":[]}",
+        assertEquals("{\"rules\":[{\"description\":\"Banne\",\"punishmentValue\":2}],\"memberRuleViolations\":{},\"usernames\":[]}",
                 result.getResponse().getContentAsString());
     }
-
+    @Order(3)
     @Test
     void addRule() throws Exception {
         Gson gson = new Gson();
@@ -84,30 +85,30 @@ class BeerMainRestIntControllerTest {
                 .andExpect(status().isOk());
         RequestBuilder request = MockMvcRequestBuilders.get("/beerMain");
         MvcResult result = mvc.perform(request).andReturn();
-        assertEquals("{\"rules\":[{\"description\":\"Banne\",\"punishmentValue\":2}],\"memberRuleViolations\":{},\"usernames\":[]}",
+        assertEquals("{\"rules\":[{\"description\":\"Banne\",\"punishmentValue\":2}],\"memberRuleViolations\":{\"Maurice\":[]},\"usernames\":[\"Maurice\"]}",
                 result.getResponse().getContentAsString());
     }
 
     @Test
     void removeRule() {
     }
-
+    @Order(4)
     @Test
     void punishMember() throws Exception {
         Gson gson = new Gson();
         mvc.perform( MockMvcRequestBuilders
-                        .delete("/punishMember?member=Maurice&description=Banne&value=2")
-                        .content(gson.toJson("Maurice"))
+                        .put("/punishMember?member=Maurice&description=Banne&value=2")
+                        .content(gson.toJson("Maurice;Banne;2"))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
         RequestBuilder request = MockMvcRequestBuilders.get("/beerMain");
         MvcResult result = mvc.perform(request).andReturn();
-        assertEquals("{\"rules\":[],\"memberRuleViolations\":{},\"usernames\":[]}",
+        assertEquals("{\"rules\":[{\"description\":\"Banne\",\"punishmentValue\":2}],\"memberRuleViolations\":{\"Maurice\":[{\"description\":\"Banne\",\"punishmentValue\":2}]},\"usernames\":[\"Maurice\"]}",
                 result.getResponse().getContentAsString());
     }
 
-
+    @Order(5)
     @Test
     void payPunishment() {
     }

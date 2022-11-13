@@ -44,7 +44,7 @@ public class BeerController {
     @FXML
     public void initialize() {
         iBeerMainAccess = BeerMainRemoteAccess.pingServer(defaultURI)
-                ? (IBeerMainAccess) new BeerMainRemoteAccess(defaultURI)
+                ? (IBeerMainAccess) new BeerMainRemoteAccess()
                 : new BeerMainLocalAccess();
         this.beermain = iBeerMainAccess.getBeermain();
         updateMemberView();

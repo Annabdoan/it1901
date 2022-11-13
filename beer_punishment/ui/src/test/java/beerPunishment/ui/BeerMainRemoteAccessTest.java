@@ -30,7 +30,7 @@ public class BeerMainRemoteAccessTest {
         WireMock.configureFor("localhost", wmConfig.portNumber());
         BeerController beerController = new BeerController();
         URI defaultURI = URI.create("http://localhost:8080"); //Må lage getter i BeerController!!
-        beerMainRemoteAccess = new BeerMainRemoteAccess(defaultURI);
+        beerMainRemoteAccess = new BeerMainRemoteAccess();
 
         final BeerMain beerMain = new BeerMain();
         final Rule rule = new Rule("Banne", 3);

@@ -1,27 +1,16 @@
 package beerPunishment.ui;
+
 import beerPunishment.core.BeerMain;
-import beerPunishment.json.JsonHandler;
 import com.google.gson.Gson;
-import beerPunishment.core.Rule;
+
 import java.net.URI;
-import java.net.URLEncoder;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpClient;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.net.http.HttpRequest.BodyPublishers;
-
-
-
-
-
-
 
 
 public class BeerMainRemoteAccess implements IBeerMainAccess {
-
-    private final URI path;
 
     private static final String APPLICATION_JSON = "application/json";
 
@@ -31,26 +20,24 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
 
     private static final String CONTENT_TYPE_HEADER = "Content-Type";
 
+
     //denne må være localhost:8080/
-    public BeerMainRemoteAccess(URI path){
-        this.path = path;
+    public BeerMainRemoteAccess() {
+
     }
 
-    private BeerMain beerMain = new BeerMain();
-
-    private JsonHandler jsh;
 
     private static final URI defaultURI = URI.create("http://localhost:8080");
 
 
-    private String replaceSpace(String input){
-        String fixedInput = input.replaceAll("\\s","%20");
+    private String replaceSpace(String input) {
+        String fixedInput = input.replaceAll("\\s", "%20");
         return fixedInput;
     }
 
-    public static Boolean pingServer(URI baseURI ) {
+    public static Boolean pingServer(URI baseURI) {
 
-        HttpRequest request = HttpRequest.newBuilder( baseURI.resolve("ping"))
+        HttpRequest request = HttpRequest.newBuilder(baseURI.resolve("ping"))
                 .header(ACCEPT_HEADER, APPLICATION_JSON)
                 .GET()
                 .build();
@@ -65,7 +52,6 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
         }
 
     }
-
 
 
     public BeerMain getBeermain() {
@@ -85,15 +71,6 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
-    }
-
-
-    private String uriParam(String s) {
-        return URLEncoder.encode(s, StandardCharsets.UTF_8);
-    }
-
-    private URI beerMainPath(String name) {
-        return path.resolve(uriParam(name));
     }
 
 
@@ -181,7 +158,6 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
     }
 
 
-
     /**
      * Removes the TodoList with the given name from the underlying TodoModel. ENDRE DENNE!!!!!
      *
@@ -207,7 +183,6 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
             throw new RuntimeException(e);
         }
     }
-
 
 
     public BeerMain deleteMember(BeerMain beerMain, String member) {
@@ -242,8 +217,8 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
         String fixedDescription = replaceSpace(description);
         try {
             HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve(
-                    putMappingPath + key1 + member + descriptionPath + fixedDescription
-                    + valuePath + memberValue))
+                            putMappingPath + key1 + member + descriptionPath + fixedDescription
+                                    + valuePath + memberValue))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .DELETE()
                     .build();

@@ -4,11 +4,7 @@ import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
 import beerPunishment.json.JsonHandler;
 
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 
 public class BeerMainLocalAccess implements IBeerMainAccess {
 
@@ -17,6 +13,10 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     private Rule rule;
     private String filename = "/beerPunishment.json";
 
+    public BeerMainLocalAccess() {
+        this.jsh = new JsonHandler();
+
+    }
 
     public void changeLocalFilename(String newName) {
         this.filename = newName;
@@ -26,7 +26,7 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
         try {
             jsh.writeToJson(beerMain, filename);
 
-        }catch (IOException ioe){
+        } catch (IOException ioe) {
             throw new IOException("Feil ved skriving til fil.");
         }
     }
@@ -39,7 +39,7 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
             BeerMain beerMainCopy = new BeerMain();
             beerMainCopy.copy(beerMain);
             return beerMainCopy;
-        }catch (IOException ioe){
+        } catch (IOException ioe) {
             return new BeerMain();
         }
     }
@@ -52,7 +52,7 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
             beerMain2.addRule(rule);
             writeBeerMainToJson(beerMain2);
             return beerMain2;
-        }catch (IOException ioe) {
+        } catch (IOException ioe) {
             System.out.println("Could not add rule");
             return beerMain;
         }
@@ -61,12 +61,12 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
 
     @Override
     public BeerMain addMember(BeerMain beerMain, String name) {
-        try{
+        try {
             BeerMain beerMain2 = getBeermain();
             beerMain2.addMember(name);
             writeBeerMainToJson(beerMain2);
             return beerMain2;
-        }catch(IOException ioe){
+        } catch (IOException ioe) {
             System.out.println("Could not add member");
             return beerMain;
         }
@@ -74,13 +74,13 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
 
     @Override
     public BeerMain punishMember(BeerMain beerMain, String member, String description, int value) {
-        try{
+        try {
             BeerMain beerMain2 = getBeermain();
             Rule rule = new Rule(description, value);
             beerMain2.punishMember(member, rule);
             writeBeerMainToJson(beerMain2);
             return beerMain2;
-        }catch(IOException ioe){
+        } catch (IOException ioe) {
             System.out.println("Could not punish member");
             return beerMain;
         }
@@ -89,12 +89,12 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
 
     @Override
     public BeerMain removeRule(BeerMain beerMain, String ruleDescription) {
-        try{
+        try {
             BeerMain beerMain2 = getBeermain();
             beerMain2.removeRuleUsingDescription(ruleDescription);
             writeBeerMainToJson(beerMain2);
             return beerMain2;
-        }catch (IOException ioe){
+        } catch (IOException ioe) {
             System.out.println("Could not remove rule");
             return beerMain;
         }
@@ -107,7 +107,7 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
             beerMain2.deleteMember(member);
             writeBeerMainToJson(beerMain2);
             return beerMain2;
-        }catch(IOException ioe){
+        } catch (IOException ioe) {
             System.out.println("Could not delete member");
             return beerMain;
         }
@@ -115,13 +115,13 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
 
     @Override
     public BeerMain payPunishment(BeerMain beerMain, String member, String description, int value) {
-        try{
+        try {
             BeerMain beerMain2 = getBeermain();
             Rule rule = new Rule(description, value);
             beerMain2.removePunishment(member, rule);
             writeBeerMainToJson(beerMain2);
             return beerMain2;
-        }catch (IOException ioe){
+        } catch (IOException ioe) {
             System.out.println("Could not delete punishment");
             return beerMain;
         }

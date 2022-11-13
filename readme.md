@@ -74,7 +74,7 @@ User story 1:
 
 User story 2: 
 >A group wants one persons late comings to be punished. \
-Read more about it here: [Release 1](/docs/release1.md)
+Read more about it here: [Release 1](/docs/release1/release1.md)
 
 ###### Sprint 2
 In this sprint we will continue to add more functionality. The goal is to implement most of the wanted logic. 
@@ -82,4 +82,4 @@ In this sprint we will continue to add more functionality. The goal is to implem
 User story 3: 
 >The group wants to display a list with the group members and how many penalties each member has.
 
-Read more about it here: [Release 2](/docs/release2.md)
+Read more about it here: [Release 2](/docs/release2/release2.md)

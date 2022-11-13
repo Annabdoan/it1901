@@ -9,7 +9,7 @@
 * Rule.java
 
 #### At release 1 the app will consist of this scene
-![alt_text](./uirelease1.png)
+![alt_text](uirelease1.png)
 
 
 ### Intended functionality for release 1:

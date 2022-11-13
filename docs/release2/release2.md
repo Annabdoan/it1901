@@ -47,7 +47,7 @@ We have also implemented Checkstyle and Spotbugs to check the code quality.
     * Beer.fxml
 
 #### At release 1 the app will consist of this scene
-![alt_text](./uirelease2.png)
+![alt_text](uirelease2.png)
 
 ### User story for release 2:
 User Story 3 

@@ -2,11 +2,16 @@ package beerPunishment.restserver;
 
 import beerPunishment.core.BeerMain;
 import beerPunishment.json.JsonHandler;
-
 import java.io.IOException;
 
+/**
+ * Configures the beerMain service.
+ */
 public class BeerMainService {
 
+    /**
+     * Initializes a BeerMain object in RestController.
+     */
     public static BeerMain createBeerMain() {
         JsonHandler jsh = new JsonHandler();
         try {

@@ -32,6 +32,7 @@ class BeerMainRestIntControllerTest {
     @Autowired
     private MockMvc mvc;
 
+
     @Order(1)
     @Test
     void ping() throws Exception {

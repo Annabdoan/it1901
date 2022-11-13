@@ -1,22 +1,26 @@
 package beerPunishment.restserver;
 
 import beerPunishment.restserver.BeerMainRestController;
+import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import javax.swing.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(BeerMainRestController.class)
@@ -37,8 +41,18 @@ class BeerMainRestIntControllerTest {
     }
 
     @Test
-    void addMember() {
-
+    void addMember() throws Exception{
+        Gson gson = new Gson();
+        mvc.perform( MockMvcRequestBuilders
+                        .post("/members?name=Maurice")
+                        .content(gson.toJson("Maurice"))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        RequestBuilder request = MockMvcRequestBuilders.get("/beerMain");
+        MvcResult result = mvc.perform(request).andReturn();
+        assertEquals("{\"rules\":[],\"memberRuleViolations\":{\"Maurice\":[]},\"usernames\":[\"Maurice\"]}",
+                result.getResponse().getContentAsString());
     }
 
     @Test

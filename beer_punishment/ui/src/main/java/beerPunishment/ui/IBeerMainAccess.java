@@ -1,14 +1,7 @@
 package beerPunishment.ui;
 
 import beerPunishment.core.BeerMain;
-import beerPunishment.core.Rule;
-import beerPunishment.json.JsonHandler;
-import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 
 public interface IBeerMainAccess {
 

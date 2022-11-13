@@ -4,13 +4,13 @@ import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import java.net.URI;
+import java.util.Collection;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ListView;
+import java.util.ArrayList;
 import javafx.scene.control.TextField;
 
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.Collection;
 
 
 /**

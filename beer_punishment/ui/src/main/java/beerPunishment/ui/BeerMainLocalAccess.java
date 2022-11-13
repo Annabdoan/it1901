@@ -5,6 +5,11 @@ import beerPunishment.core.Rule;
 import beerPunishment.json.JsonHandler;
 import java.io.IOException;
 
+
+/**
+ * Class that centralizes access to a TodoModel.
+ * Makes it easier to support transparent use of a REST API.
+ */
 public class BeerMainLocalAccess implements IBeerMainAccess {
 
     private BeerMain beerMain;
@@ -17,6 +22,11 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
 
     }
 
+    /**
+     * Sets the name of the local json file.
+     *
+     * @param newName the name to set the local json file
+     */
     public void changeLocalFilename(String newName) {
         this.filename = newName;
     }

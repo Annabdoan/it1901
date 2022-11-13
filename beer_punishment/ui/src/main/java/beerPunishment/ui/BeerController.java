@@ -2,13 +2,13 @@ package beerPunishment.ui;
 
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.Collection;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import java.net.URI;
-import java.util.Collection;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ListView;
-import java.util.ArrayList;
 import javafx.scene.control.TextField;
 
 
@@ -36,17 +36,17 @@ public class BeerController {
     public TextField deleteRuleText;
 
 
-    private IBeerMainAccess iBeerMainAccess;
+    private IBeerMainAccess ifBeerMainAccess;
 
     /**
      * Initialize.
      */
     @FXML
     public void initialize() {
-        iBeerMainAccess = BeerMainRemoteAccess.pingServer(defaultURI)
+        ifBeerMainAccess = BeerMainRemoteAccess.pingServer(defaultURI)
                 ? (IBeerMainAccess) new BeerMainRemoteAccess()
                 : new BeerMainLocalAccess();
-        this.beermain = iBeerMainAccess.getBeermain();
+        this.beermain = ifBeerMainAccess.getBeermain();
         updateMemberView();
         updatePersonChoicebox();
         updateListView();
@@ -106,7 +106,7 @@ public class BeerController {
             String[] arrOfNewRuleTextInput = newRuleTextInput.getText().split(";");
             String description = arrOfNewRuleTextInput[0];
             int value = Integer.parseInt(arrOfNewRuleTextInput[1]);
-            beermain = iBeerMainAccess.addRule(beermain, description, value);
+            beermain = ifBeerMainAccess.addRule(beermain, description, value);
             updateListView();
             updateRuleChoicebox();
         } catch (NumberFormatException ne) {
@@ -123,7 +123,7 @@ public class BeerController {
     public void deleteRule() {
         String description = deleteRuleText.getText();
         try {
-            beermain = iBeerMainAccess.removeRule(beermain, description);
+            beermain = ifBeerMainAccess.removeRule(beermain, description);
             updateRuleChoicebox();
             updateListView();
         } catch (IllegalArgumentException iae) {
@@ -145,7 +145,7 @@ public class BeerController {
         String chosenMember = personChoiceBox.getSelectionModel().getSelectedItem().toString();
         for (Rule rule : beermain.getRules()) {
             if (rule.getDescription().equals(chosenRule)) {
-                beermain = iBeerMainAccess.punishMember(beermain, chosenMember, rule.getDescription(), rule.getPunishmentValue());
+                beermain = ifBeerMainAccess.punishMember(beermain, chosenMember, rule.getDescription(), rule.getPunishmentValue());
             }
         }
         updateMemberView();
@@ -159,7 +159,7 @@ public class BeerController {
     public void addMember() {
         String username = addMemberText.getText();
         try {
-            beermain = iBeerMainAccess.addMember(beermain, username);
+            beermain = ifBeerMainAccess.addMember(beermain, username);
             updateMemberView();
             updatePersonChoicebox();
             updatePaymentPersonChoicebox();
@@ -175,7 +175,7 @@ public class BeerController {
     public void deleteMember() {
         String username = deleteMemberText.getText();
         try {
-            beermain = iBeerMainAccess.deleteMember(beermain, username);
+            beermain = ifBeerMainAccess.deleteMember(beermain, username);
             updateMemberView();
             updatePersonChoicebox();
             updatePaymentPersonChoicebox();
@@ -193,7 +193,7 @@ public class BeerController {
         String chosenMember = paymentMemberChoiceBox.getSelectionModel().getSelectedItem().toString();
         for (Rule rule : beermain.getRules()) {
             if (rule.getDescription().equals(chosenRule)) {
-                beermain = iBeerMainAccess.payPunishment(beermain, chosenMember, rule.getDescription(), rule.getPunishmentValue());
+                beermain = ifBeerMainAccess.payPunishment(beermain, chosenMember, rule.getDescription(), rule.getPunishmentValue());
             }
         }
         updateMemberView();
@@ -240,10 +240,15 @@ public class BeerController {
         return beerMainCopy;
     }
 
+    /**
+     * Sets the name of the local json file.
+     *
+     * @param fileName the name to set the local json file
+     */
     public void changeFileName(String fileName) {
-        if (iBeerMainAccess instanceof BeerMainLocalAccess) {
-            ((BeerMainLocalAccess) iBeerMainAccess).changeLocalFilename(fileName);
-            this.beermain = iBeerMainAccess.getBeermain();
+        if (ifBeerMainAccess instanceof BeerMainLocalAccess) {
+            ((BeerMainLocalAccess) ifBeerMainAccess).changeLocalFilename(fileName);
+            this.beermain = ifBeerMainAccess.getBeermain();
             updateMemberView();
             updateListView();
             updatePersonChoicebox();

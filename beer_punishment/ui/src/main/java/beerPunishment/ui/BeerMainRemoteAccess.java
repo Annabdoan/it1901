@@ -2,14 +2,16 @@ package beerPunishment.ui;
 
 import beerPunishment.core.BeerMain;
 import com.google.gson.Gson;
-
-import java.net.URI;
-import java.net.http.HttpRequest;
-import java.net.http.HttpClient;
 import java.io.IOException;
-
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+/**
+ * Class that centralizes access to a TodoModel.
+ * Makes it easier to support transparent use of a REST API.
+ */
 public class BeerMainRemoteAccess implements IBeerMainAccess {
 
     private static final String APPLICATION_JSON = "application/json";
@@ -30,14 +32,24 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
     private static final URI defaultURI = URI.create("http://localhost:8080");
 
 
+    /**
+     * Method for replacing whitespaces with %20 for URL.
+     *
+     * @param input the input string that need to be fixed
+     */
     private String replaceSpace(String input) {
         String fixedInput = input.replaceAll("\\s", "%20");
         return fixedInput;
     }
 
-    public static Boolean pingServer(URI baseURI) {
+    /**
+     * Gets a connection to the server if it exists.
+     *
+     * @param baseUri the URI of the server to ping.
+     */
+    public static Boolean pingServer(URI baseUri) {
 
-        HttpRequest request = HttpRequest.newBuilder(baseURI.resolve("ping"))
+        HttpRequest request = HttpRequest.newBuilder(baseUri.resolve("ping"))
                 .header(ACCEPT_HEADER, APPLICATION_JSON)
                 .GET()
                 .build();
@@ -53,7 +65,10 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
 
     }
 
-
+    /**
+     * Sends a GET-request to fetch a beerMain object from the
+     * server.
+     */
     public BeerMain getBeermain() {
         Gson gson = new Gson();
         HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve("/beerMain"))
@@ -75,7 +90,11 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
 
 
     /**
-     * Sends a POST-request ....
+     * Sends a POST-request and adds a rule to the beerMain.
+     *
+     * @param beerMain    the beerMain
+     * @param description the description of the rule
+     * @param value       the value of the rule
      */
     public BeerMain addRule(BeerMain beerMain, String description, int value) {
         try {
@@ -98,6 +117,12 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
         }
     }
 
+    /**
+     * Sends a POST-request and adds a member to the beerMain.
+     *
+     * @param beerMain the beerMain
+     * @param name     the name of member
+     */
     public BeerMain addMember(BeerMain beerMain, String name) {
         try {
             HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve("/members"))
@@ -120,9 +145,12 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
     }
 
     /**
-     * Sends a PUT-request and updates the attribute of the user.
+     * Sends a PUT-request and punish the member.
      *
-     * @param member the member to punish,................
+     * @param beerMain    the beerMain
+     * @param member      the member to punish
+     * @param description the description of the rule
+     * @param value       the value of the rule
      */
     public BeerMain punishMember(BeerMain beerMain, String member, String description, int value) {
         String putMappingPath = "/punishMember?";
@@ -159,9 +187,10 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
 
 
     /**
-     * Removes the TodoList with the given name from the underlying TodoModel. ENDRE DENNE!!!!!
+     * Sends a DELETE-request and removes the rule with the given description from the underlying beerMain.
      *
-     * @param ruleDescription the rule to remove
+     * @param beerMain the beerMain
+     * @param ruleDescription the description of the rule to remove
      */
     public BeerMain removeRule(BeerMain beerMain, String ruleDescription) {
         String fixedRuleDescription = replaceSpace(ruleDescription);
@@ -184,7 +213,12 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
         }
     }
 
-
+    /**
+     * Sends a DELETE-request and removes a member from the underlying beerMain.
+     *
+     * @param beerMain the beerMain
+     * @param member the member
+     */
     public BeerMain deleteMember(BeerMain beerMain, String member) {
 
         try {
@@ -207,7 +241,14 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
         }
     }
 
-
+    /**
+     * Sends a DELETE-request and removes a punishment from a member.
+     *
+     * @param beerMain    the beerMain
+     * @param member      the member
+     * @param description the description of the rule
+     * @param value       the value of the rule
+     */
     public BeerMain payPunishment(BeerMain beerMain, String member, String description, int value) {
         String putMappingPath = "/payPunishment?";
         String key1 = "member=";

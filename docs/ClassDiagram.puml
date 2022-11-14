@@ -6,7 +6,6 @@ skinparam componentStyle uml2
      -ArrayList rules
      -Hashmap memberRuleViolations
      -- Methods --
-     +BeerMain()
      +Collection<Rule> getRules()
      +addRule(Rule rule)
      +deleteRule(Rule rule)
@@ -32,6 +31,12 @@ skinparam componentStyle uml2
    -int punishmentValue
    -- Methods --
    +Rule(String description, int punishmentValue)
+   -{static}isValidPunishmentValue(int punishmentValue)
+   -{static}isValidDescription(String description)
+   +setDescription(String description)
+   +setPunishmentValue(int value)
+   +getDescription()
+   +getPunishmentValue()
    }
    BeerMain ..> Rule
 }

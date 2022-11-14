@@ -69,15 +69,18 @@ package "ui"{
    All methods from implemented interface
    }
    class BeerMainRemoteAccess {
-   -URI path
-   -String APPLICATION_JSON
-   -String APPLICATION_FORM_URLENCODED
-   -String ACCEPT_HEADER
-   -String CONTENT_TYPE_HEADER
-   -BeerMain beerMain
+   -{static}URI path
+   -{static}String APPLICATION_JSON
+   -{static}String APPLICATION_FORM_URLENCODED
+   -{static}String ACCEPT_HEADER
+   -{static}String CONTENT_TYPE_HEADER
    -- Methods --
+   +{static}Boolean pingServer(URI baseUri)
+   +BeerMain getBeermain()
    +String UriParam(String s)
    +URI beerMainPath(String name)
+   ..
+      All methods from implemented interface
    }
    interface IBeerMainAccess {
    -BeerMain getBeerMain()

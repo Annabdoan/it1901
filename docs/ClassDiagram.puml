@@ -105,15 +105,13 @@ package "restserver"{
     -- Methods --
     +writeToJson()
     +BeerMain getBeerMain()
-    +Collection  getRules()
-    +HashMap getMemberRuleViolations()
-    +Collection getMembers()
-    +addRule(String ruleDescription, int value)
-    +addMember(String name)
-    +punishMember(String member, String ruleDescription, int value)
-    +removeRule(String ruleDescription)
-    +deleteMember(String member)
-    +payPunishment( String member,String ruleDescription,int value)
+    + addMember(String name)
+    + deleteMember(String member)
+    + addRule(String ruleDescription, int value)
+    + removeRule(String ruleDescription)
+    + punishMember(String member, String ruleDescription, int value)
+    + payPunishment(String member, String ruleDescription, int value)
+    +String ping()
    }
    class BeerMainService{
    -BeerMain beerMain

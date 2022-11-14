@@ -82,7 +82,7 @@ public class BeerMainRestController {
      */
     @DeleteMapping(path = "rules")
     public void removeRule(@RequestParam("rule") String ruleDescription) {
-        this.beerMain.removeRuleUsingDescription(ruleDescription);
+        this.beerMain.deleteRuleUsingDescription(ruleDescription);
         writeToJson();
     }
 

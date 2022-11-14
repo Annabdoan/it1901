@@ -1,7 +1,5 @@
 package beerPunishment.core;
 
-import beerPunishment.core.BeerMain;
-import beerPunishment.core.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -34,10 +32,10 @@ public class BeerMainTest {
         Collection<Rule> expectedRules = new ArrayList<>(List.of(rule, tempRule));
         beermain.addRule(tempRule);
         assertEquals(expectedRules, beermain.getRules(), "Rulelist should now consist of rule and tempRule");
-        beermain.removeRule(tempRule);
+        beermain.deleteRule(tempRule);
         expectedRules.remove(tempRule);
         assertEquals(expectedRules, beermain.getRules(), "Rulelist should now consist of only rule and not tempRule");
-        Exception exception = assertThrows(Exception.class, () -> beermain.removeRule(tempRule));
+        Exception exception = assertThrows(Exception.class, () -> beermain.deleteRule(tempRule));
         assertEquals("Regelen eksisterer ikke", exception.getMessage());
         Exception exception2 = assertThrows(Exception.class, () -> beermain.addRule(rule));
         assertEquals("Ikke lov å lage samme regel to ganger", exception2.getMessage());
@@ -101,10 +99,10 @@ public class BeerMainTest {
 
     @Test
     public void testRemoveRuleUsingDescription() {
-       beermain.removeRuleUsingDescription("Kommer sent");
+       beermain.deleteRuleUsingDescription("Kommer sent");
        Collection<Rule> expectedRules = new ArrayList<>(List.of());
        assertEquals(expectedRules, beermain.getRules(), "Rulelist should now be empty");
-       Exception exception = assertThrows(Exception.class, () -> beermain.removeRuleUsingDescription("Banne"));
+       Exception exception = assertThrows(Exception.class, () -> beermain.deleteRuleUsingDescription("Banne"));
        assertEquals("Regel eksisterer ikke", exception.getMessage());
     }
 

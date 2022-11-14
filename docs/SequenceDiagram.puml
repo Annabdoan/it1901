@@ -1,11 +1,22 @@
 @startuml
-'https://plantuml.com/sequence-diagram
 
-autonumber
+'!include plantuml-ae.iuml
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+actor Alice #SaddleBrown
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+Alice -> ui: Input "ny regel;verdi"
+ui -> BeerController: addRule() *click "Legg til" button*
+BeerController -> IBeerMain: addRule()
+IBeerMain -> BeerMainRemoteAccess:
+BeerMainRemoteAccess -> Server: HTTP POST/action/?description="ny regel"&value="verdi"
+Alice -> ui: Input "navn"
+ui -> BeerController: addMember() *click "Legg til" button*
+BeerController -> IBeerMain: addMember()
+IBeerMain -> BeerMainRemoteAccess
+BeerMainRemoteAccess -> Server: HTTP POST/action/?name="navn"
+
+
+
+
+'!include ../../plantuml-styles/ae-copyright-footer.txt
 @enduml

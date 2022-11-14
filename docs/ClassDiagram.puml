@@ -1,11 +1,117 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+skinparam componentStyle uml2
 
-autonumber
+ package "core" {
+   class BeerMain{
+     -ArrayList rules
+     -Hashmap memberRuleViolations
+     -- Methods --
+     +addRule(Rule rule)
+     +addMember(String username)
+     +deleteRule(Rule rule)
+     +deleteMember(String username)
+     +punishMember(String username, Rule rule)
+     +removePunishment(String username, Rule rule)
+   }
+   class Rule{
+   -String description
+   -int punishmentValue
+   -- Methods --
+   +Rule(String description, int punishmentValue)
+   }
+   BeerMain ..> Rule
+}
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+package "ui"{
+    class BeerController{
+    -IBeerMainAccess iBeerMainAccess
+    -BeerMain beermain
+    - ListView<String> ruleView
+    + TextField newRuleTextInput
+    + ChoiceBox ruleChoiceBox
+    + ChoiceBox personChoiceBox
+    + ChoiceBox paymentMemberChoiceBox
+    + ChoiceBox paymentRuleChoiceBox
+    + ListView punishmentStatusOverview
+    + TextField addMemberText
+    + TextField deleteMemberText
+    + TextField deleteRuleText
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+    -- Methods --
+    +initilize()
+    +showErrorMessage(String errorMessage)
+    +addRule() (Gammel MakeNewRule)
+    +addMember()
+    +deleteRule()
+    +deleteRule()
+    +punishMember()
+    +payVoialtion()
+    +changeFileName(String fileName)
+    +getBeermain()
+    -updateListView()
+    -updateRuleChoicebox()
+    -updatePersonChoicebox()
+    -updateMemberView()
+    -updatePaymentRuleChoicebox()
+    -updatePaymentPersonChoicebox()
+   }
+   class BeerMainLocalAccess {
+   -BeerMain beerMain
+   -JsonHandler jsh
+   -Rule rule
+   -- Methods --
+   +writeBeerMainToJson(BeerMain beerMain)
+   +BeerMain getBeermain()
+   }
+   class BeerMainRemoteAccess {
+   -URI path
+   -String APPLICATION_JSON
+   -String APPLICATION_FORM_URLENCODED
+   -String ACCEPT_HEADER
+   -String CONTENT_TYPE_HEADER
+   -BeerMain beerMain
+   -- Methods --
+   +String UriParam(String s)
+   +URI beerMainPath(String name)
+   }
+   interface IBeerMainAccess {
+   -BeerMain getBeerMain()
+   -- Methods --
+   +addRule(BeerMain beerMain, String description, int value)
+   +addMember(BeerMain beerMain, String name)
+   +punishMember(BeerMain beerMain, String member, String description, int value)
+   +removeRule(BeerMain beerMain, String ruleDescription)
+   +deleteMember(BeerMain beerMain, String member)
+   +payPunishment(BeerMain beerMain, String member, String description, int value)
+   }
+   BeerMainLocalAccess ..|> IBeerMainAccess
+   BeerMainRemoteAccess ..|> IBeerMainAccess
+   IBeerMainAccess ..|> BeerController
+}
+
+package "restserver"{
+    class BeerMainRestController {
+    -BeerMain beerMain
+    -Rule rule
+    -JsonHandler jsh
+    -- Methods --
+    +writeToJson()
+    +BeerMain getBeerMain()
+    +Collection  getRules()
+    +HashMap getMemberRuleViolations()
+    +Collection getMembers()
+    +addRule(String ruleDescription, int value)
+    +addMember(String name)
+    +punishMember(String member, String ruleDescription, int value)
+    +removeRule(String ruleDescription)
+    +deleteMember(String member)
+    +payPunishment( String member,String ruleDescription,int value)
+   }
+   class BeerMainService{
+   -BeerMain beerMain
+   -- Methods --
+   +BeerMain createBeerMain()
+   }
+   BeerMainRestController ..> BeerMainService
+}
 @enduml

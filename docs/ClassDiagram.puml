@@ -6,12 +6,26 @@ skinparam componentStyle uml2
      -ArrayList rules
      -Hashmap memberRuleViolations
      -- Methods --
+     +BeerMain()
+     +Collection<Rule> getRules()
      +addRule(Rule rule)
-     +addMember(String username)
      +deleteRule(Rule rule)
+     +deleteRuleUsingDescription(String description)
+     +addMember(String username)
      +deleteMember(String username)
      +punishMember(String username, Rule rule)
      +removePunishment(String username, Rule rule)
+     +Collection<Rule> getMemberViolations(String username)
+     +HashMap<String, Integer> generateMembersPunishments()
+     +Collection<String> getUsernames()
+     +HashMap<String, Collection<Rule>> getMemberRuleViolations()
+     +setMemberRuleViolations(HashMap<String, Collection<Rule>> memberRuleViolations)
+     +setRules(Collection<Rule> rules)
+     +Collection<String> generatePunishmentStatusToString()
+     +Iterator<Rule> iterator()
+     +copy(BeerMain bm)
+     +Iterator<Map.Entry<String, Collection<Rule>>> violationIterator()
+     +String toString()
    }
    class Rule{
    -String description

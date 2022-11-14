@@ -54,6 +54,11 @@ to the person who felt most confident regarding the issue to be solved.
 ### Quality ensurance of code
 The group has continued to use *Jacoco* as a tool to make sure all classes are tested
 to a minimum of 90 %.
+A side note to this, is with the UI-module. The Jacoco report states that test coverage of UI is only 50%
+This is due to the testing of the class *BeerMainRemoteAccess*. The class is tested, however it does not 
+affect the test coverage.
+The other classes, respectively, have over 90 %.
+
 In comparison to release 2, the group has had a larger focus on *Spotbugs*. In release 2, two *SpotBugs* were
 still present in our code, however, the project now no longer contains *Spotbugs*.
 The use of *CheckStyle* has mostly remained the same, with continuing the goal of 
@@ -72,11 +77,12 @@ An example was the inconsistent use of delete/remove which was fixed.
 As mentioned in the introduction, the group continued with JavaFX, and has therefore 
 added in more functionality. Also, the implementation of a RESTful application meant new classes and a new module.
 
-The new functionality is related to the new user stories. LINK TIL USER-STORIES.
+The new functionality is related to the new user stories. Read the user stories here: [source README](/Users/lea/IdeaProjects/gr2231/readme.md)
+
 The new functionality:
-* :x: Being able to remove a member
-* :x: Being able to remove a rule
-* :yen: Members can pay up a punishment
+* :x: **Being able to remove a member** (User story 4)
+* :x: **Being able to remove a rule** (User story 5)
+* :yen: **Members can pay up a punishment** (User story 6)
 
 In the setting up of the API, the group made a new module; 
 * **Restserver**
@@ -105,7 +111,7 @@ The **Json** module now only consists of one class:
 * ***JsonHandler.java***
 
 #### User stories 
-User stories for this release, are all written in source README file.
+User stories for this release, are all written in root README file.
 
 
 #### Further development
@@ -207,8 +213,9 @@ group has learned from.
 
 #### Documentation 
 It was mandatory to have a README - file to each release. The group wrote these 
-as the last thing each release, and had good use of them. The group used the README - files to sum up and collect an overview of the project.
-However, seeing it from retrospect, the group felt that a more constructive take should have been done.
+as the last thing each release, and had good use of them. The group used the README - files to sum up and collect an overview of the project. Some reflection
+were also done.
+However, seeing it from retrospect, the group felt that a more constructive take than before should have been done.
 Therefore, this is tried done with this release documentation for release 3.
 
 #### Conclution

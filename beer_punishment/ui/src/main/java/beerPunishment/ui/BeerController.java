@@ -119,6 +119,8 @@ public class BeerController {
             showErrorMessage("Feil ved å gjøre om verdi til int.");
         } catch (IllegalArgumentException iae) {
             showErrorMessage(iae.getMessage());
+        } catch (ArrayIndexOutOfBoundsException aiobe) {
+            showErrorMessage("Feil form på input");
         }
     }
 

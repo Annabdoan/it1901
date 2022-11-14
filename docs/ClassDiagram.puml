@@ -59,9 +59,14 @@ package "ui"{
    -BeerMain beerMain
    -JsonHandler jsh
    -Rule rule
+   -String filename = "/beerPunishment.json"
    -- Methods --
+   +BeerMainLocalAccess()
+   +changeLocalFilename(String newName)
    +writeBeerMainToJson(BeerMain beerMain)
    +BeerMain getBeermain()
+   ..
+   All methods from implemented interface
    }
    class BeerMainRemoteAccess {
    -URI path

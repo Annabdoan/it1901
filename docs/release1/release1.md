@@ -1,4 +1,17 @@
 # Documentation for release 1 - gr2231
+
+### Introduction
+For release 1 we started by discussing what kind of app we wanted to make, and chose to make something we all found usefull 
+in our lives. The application is called "Beer Punishment" and the motivation and purpose is described in the
+[source-readme](../../beer_punishment/README.md). We have built the foundation of the project with two domain logic classes, a filehandler,
+a controller-class and an app-class. The project has its code repository on git.
+
+### Working habits and task management:
+We used issues to to divide the submission into issues, and assigned them to the various group members. 
+Gradually we understood that it was better to work in pairs, and that this was more efficient than sitting alone.
+It was somewhat difficult to know in which order we should solve the issues. It took a lot of time and work to 
+understand the pom-file and how to add the maven-dependency.
+
 ### For release one the project consists of the following classes and resources:
 
 #### Beer_punishment
@@ -18,14 +31,5 @@
 * We have implemented the logic to be able to write and read new rules to a file, but have not implemented the controller logic for this.
 
 
-### User story for release 1
-User Story 1
->Anna arrives late to all meetings, and the group wants to punish Anna for this so that she can prepare herself for the future.
-The group needs to create a beer punishment system that punishes people easily for various reasons.
-The group wants the system to keep track of rules for beer penalties. It's nice to keep track of what causes punishment, and thus how to avoid this.
 
-User Story 2
->Sara starts to get annoyed that Maurice is always on his mobile phone during the meetings, and wants mobile phone use to result in a beer penalty.
-Sara needs to create a function that can add new rules to the beer penalty system.
-In this way, she can punish Maurice for his repeated mobile use.
 

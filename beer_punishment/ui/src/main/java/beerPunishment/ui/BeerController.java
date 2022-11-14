@@ -36,17 +36,17 @@ public class BeerController {
     public TextField deleteRuleText;
 
 
-    private IBeerMainAccess ifBeerMainAccess;
+    private IBeerMainAccess iBeerMainAccess;
 
     /**
      * Initialize.
      */
     @FXML
     public void initialize() {
-        ifBeerMainAccess = BeerMainRemoteAccess.pingServer(defaultURI)
+        iBeerMainAccess = BeerMainRemoteAccess.pingServer(defaultURI)
                 ? (IBeerMainAccess) new BeerMainRemoteAccess()
                 : new BeerMainLocalAccess();
-        this.beermain = ifBeerMainAccess.getBeermain();
+        this.beermain = iBeerMainAccess.getBeermain();
         updateMemberView();
         updatePersonChoicebox();
         updateListView();
@@ -106,7 +106,7 @@ public class BeerController {
             String[] arrOfNewRuleTextInput = newRuleTextInput.getText().split(";");
             String description = arrOfNewRuleTextInput[0];
             int value = Integer.parseInt(arrOfNewRuleTextInput[1]);
-            beermain = ifBeerMainAccess.addRule(beermain, description, value);
+            beermain = iBeerMainAccess.addRule(beermain, description, value);
             updateListView();
             updateRuleChoicebox();
         } catch (NumberFormatException ne) {
@@ -123,7 +123,7 @@ public class BeerController {
     public void deleteRule() {
         String description = deleteRuleText.getText();
         try {
-            beermain = ifBeerMainAccess.removeRule(beermain, description);
+            beermain = iBeerMainAccess.removeRule(beermain, description);
             updateRuleChoicebox();
             updateListView();
         } catch (IllegalArgumentException iae) {
@@ -145,7 +145,7 @@ public class BeerController {
         String chosenMember = personChoiceBox.getSelectionModel().getSelectedItem().toString();
         for (Rule rule : beermain.getRules()) {
             if (rule.getDescription().equals(chosenRule)) {
-                beermain = ifBeerMainAccess.punishMember(beermain, chosenMember, rule.getDescription(), rule.getPunishmentValue());
+                beermain = iBeerMainAccess.punishMember(beermain, chosenMember, rule.getDescription(), rule.getPunishmentValue());
             }
         }
         updateMemberView();
@@ -159,7 +159,7 @@ public class BeerController {
     public void addMember() {
         String username = addMemberText.getText();
         try {
-            beermain = ifBeerMainAccess.addMember(beermain, username);
+            beermain = iBeerMainAccess.addMember(beermain, username);
             updateMemberView();
             updatePersonChoicebox();
             updatePaymentPersonChoicebox();
@@ -175,7 +175,7 @@ public class BeerController {
     public void deleteMember() {
         String username = deleteMemberText.getText();
         try {
-            beermain = ifBeerMainAccess.deleteMember(beermain, username);
+            beermain = iBeerMainAccess.deleteMember(beermain, username);
             updateMemberView();
             updatePersonChoicebox();
             updatePaymentPersonChoicebox();
@@ -193,7 +193,7 @@ public class BeerController {
         String chosenMember = paymentMemberChoiceBox.getSelectionModel().getSelectedItem().toString();
         for (Rule rule : beermain.getRules()) {
             if (rule.getDescription().equals(chosenRule)) {
-                beermain = ifBeerMainAccess.payPunishment(beermain, chosenMember, rule.getDescription(), rule.getPunishmentValue());
+                beermain = iBeerMainAccess.payPunishment(beermain, chosenMember, rule.getDescription(), rule.getPunishmentValue());
             }
         }
         updateMemberView();
@@ -246,9 +246,9 @@ public class BeerController {
      * @param fileName the name to set the local json file
      */
     public void changeFileName(String fileName) {
-        if (ifBeerMainAccess instanceof BeerMainLocalAccess) {
-            ((BeerMainLocalAccess) ifBeerMainAccess).changeLocalFilename(fileName);
-            this.beermain = ifBeerMainAccess.getBeermain();
+        if (iBeerMainAccess instanceof BeerMainLocalAccess) {
+            ((BeerMainLocalAccess) iBeerMainAccess).changeLocalFilename(fileName);
+            this.beermain = iBeerMainAccess.getBeermain();
             updateMemberView();
             updateListView();
             updatePersonChoicebox();

@@ -49,7 +49,7 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
      */
     public static Boolean pingServer(URI baseUri) {
 
-        HttpRequest request = HttpRequest.newBuilder(baseUri.resolve("ping"))
+        HttpRequest request = HttpRequest.newBuilder(baseUri.resolve("/ping"))
                 .header(ACCEPT_HEADER, APPLICATION_JSON)
                 .GET()
                 .build();

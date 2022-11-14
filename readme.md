@@ -33,6 +33,7 @@ GitPod icon and you are ready to run the project.
 >4. cd ui
 >5. mvn javafx:run
 
+
 ### JaCoCo-report for test coverage
 
 This project uses JaCoCo to measure and report test coverage. 
@@ -40,16 +41,18 @@ Each module will have its own report. The reports are located in the modules res
 
 ! This is to be done after instructions 1-4 in *Building and running the project*. 
 
-#### Access JaCoCo-reports 
+#### Access JaCoCo-reports / Tests
 
-1. Run the test.
-2. Navigate to the target directory in each module.
-3. Open the site folder.
-4. Open the index.html file in your browser. 
+1. Delete JSON-file
+2. Run the test.
+3. Navigate to the target directory in each module.
+4. Open the site folder.
+5. Open the index.html file in your browser. 
 
->1. mvn verify
->2. cd target
->3. mvn jacoco:report
+>1. rm -r ~/beerPunishmentRemote.json
+>2. mvn verify
+>3. cd target
+>4. mvn jacoco:report
 >
 
 

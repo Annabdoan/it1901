@@ -68,6 +68,8 @@ public class BeerMain implements Iterable<Rule> {
         rules.remove(empty);
     }
 
+
+
     /**
      * Method for adding members.
      *
@@ -115,7 +117,7 @@ public class BeerMain implements Iterable<Rule> {
      */
     public void removePunishment(String username, Rule rule) {
         if (!memberRuleViolations.containsKey(username)) {
-            throw new IllegalArgumentException("Brukernavnet eksisterer ikke");
+            throw new IllegalArgumentException(username);
         }
         int sizeBefore = memberRuleViolations.get(username).size();
         for (Rule tempRule : memberRuleViolations.get(username)) {

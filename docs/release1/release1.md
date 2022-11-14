@@ -7,10 +7,10 @@ in our lives. The application is called "Beer Punishment" and the motivation and
 a controller-class and an app-class. The project has its code repository on git.
 
 ### Working habits and task management:
-TODO
-
-### Methods for quality ensurance of code:
-TODO
+We used issues to to divide the submission into issues, and assigned them to the various group members. 
+Gradually we understood that it was better to work in pairs, and that this was more efficient than sitting alone.
+It was somewhat difficult to know in which order we should solve the issues. It took a lot of time and work to 
+understand the pom-file and how to add the maven-dependency.
 
 ### For release one the project consists of the following classes and resources:
 

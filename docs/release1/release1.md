@@ -1,4 +1,17 @@
 # Documentation for release 1 - gr2231
+
+### Introduction
+For release 1 we started by discussing what kind of app we wanted to make, and chose to make something we all found usefull 
+in our lives. The application is called "Beer Punishment" and the motivation and purpose is described in the
+[source-readme](../../beer_punishment/README.md). We have built the foundation of the project with two domain logic classes, a filehandler,
+a controller-class and an app-class. The project has its code repository on git.
+
+### Working habits and task management:
+TODO
+
+### Methods for quality ensurance of code:
+TODO
+
 ### For release one the project consists of the following classes and resources:
 
 #### Beer_punishment

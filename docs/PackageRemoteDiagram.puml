@@ -1,11 +1,33 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+skinparam componentStyle uml2
 
-autonumber
+component CORE {
+   package "core" {
+   }
+}
+component JSON {
+   package "json" {
+   }
+}
+component UI {
+   package "ui" {
+   }
+}
+component RESTSERVER {
+   package "restserver" {
+   }
+}
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+component [GSON] #Strategy
+component [JavaFX] #Strategy
+component [SpringBoot] #Strategy
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+UI -[#blue]-> CORE
+UI -[#blue]-> RESTSERVER
+RESTSERVER -[#blue]-> JSON
+
+UI .[#red].> [JavaFX]
+JSON .[#red].> [GSON]
+RESTSERVER .[#red].> [SpringBoot]
+
 @enduml

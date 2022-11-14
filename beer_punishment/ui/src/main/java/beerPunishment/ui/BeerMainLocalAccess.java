@@ -100,8 +100,7 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     public BeerMain removeRule(BeerMain beerMain, String ruleDescription) {
         try {
             BeerMain beerMain2 = getBeermain();
-            System.out.println(beerMain2);
-            beerMain2.removeRuleUsingDescription(ruleDescription);
+            beerMain2.deletePunishmentRule(ruleDescription);
             writeBeerMainToJson(beerMain2);
             return beerMain2;
         } catch (IOException ioe) {

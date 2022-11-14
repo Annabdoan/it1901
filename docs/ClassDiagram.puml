@@ -114,9 +114,8 @@ package "restserver"{
     +String ping()
    }
    class BeerMainService{
-   -BeerMain beerMain
    -- Methods --
-   +BeerMain createBeerMain()
+   +{static}BeerMain createBeerMain()
    }
    BeerMainRestController ..> BeerMainService
 }

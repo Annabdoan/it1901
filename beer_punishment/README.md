@@ -9,7 +9,7 @@ We want to create an app for beer penalties to track penalties given to each mem
 ### Userstories
 Userstories for later releases will be added as functionality improves during later releases. 
 ##### Release 1
-This release contains two user stories:
+This release contains one user stories:
 
 *User story 1:*
 >A member of the group wants to keep track of the rules which leeds to punishment.
@@ -42,8 +42,6 @@ so that they can delete the rule of no phone use.
 *User story 6:*
 > Over the course of several months, Maurice has been punished with various beer penalties, and is starting to get loads of beers he has to pay for. To make sure that the amount does not get too large towards the end of the year, he wants to pay down his debt. Maurice wants to delete
 his existing rule breaks in the app after paying them up.
-
-
 
 
 ### Functionality at final release:

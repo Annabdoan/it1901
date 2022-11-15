@@ -30,6 +30,7 @@ In this release the group will continue to add more functionality. The goal is t
 >The group wants to display a list with the group members and how many penalties each member has.
 
 <ins>Able to see:</ins> An overview of registered rules, An overview of members with belonging penalties
+
 <ins>Able to do:</ins> Register a new member, register a new rule, punish a member
 
 Read more about it here: [Release 2](./docs/release2/release2.md)
@@ -51,6 +52,7 @@ so that they can delete the rule of no phone use.
 his existing rule breaks in the app after paying them up.
 
 <ins>Able to see:</ins> An overview of registered rules, An overview of members with belonging penalties
+
 <ins>Able to do:</ins> Register a new member, register a new rule, punish a member, remove a member, remove a rule, pay a punishment
 
 ### Functionality at final release:

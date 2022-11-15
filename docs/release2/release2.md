@@ -53,6 +53,16 @@ The group decided to use *implicit storage* because the group felt it hands out 
   ##### Resources:
     * Beer.fxml
 
+### Functionality for release 2:
+
+The group have now implemented new methods for increased functionality
+
+* New member can be added in the application, and will be shown in the overview, starting with no punishments.
+* New rule can be added in the application, and will be shown in the rule-overview.
+* An existing member can be chosen in a dropdown menu, as well as an existing rule, to punish a member.
+* The overview of members and their punishment status is updated whenever a member gets punished.
+
+
 
 
 #### At release 2 the app will consist of this scene

@@ -55,6 +55,9 @@ his existing rule breaks in the app after paying them up.
 
 <ins>Able to do:</ins> Register a new member, register a new rule, punish a member, remove a member, remove a rule, pay a punishment
 
+Read more about it here: [Release 3](./docs/release3/release3.md)
+
+
 ### Functionality at final release:
 
 
@@ -89,7 +92,6 @@ his existing rule breaks in the app after paying them up.
 
 #### Sequence diagram
 
-![alt_text](./plantUML.png)
 
 
 

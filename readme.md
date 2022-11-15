@@ -83,13 +83,13 @@ This release contains two user stories:
 *User story 1:* 
 >A member of the group wants to keep track of the rules which leeds to punishment.
 
-*User story 2:*
->A group wants one person´s late comings to be punished. 
-> 
 Read more about it here: [Release 1](./docs/release1/release1.md)
 
 ##### Release 2
 In this release the group will continue to add more functionality. The goal is to implement most of the wanted logic. 
+
+*User story 2:*
+>A group wants one person´s late comings to be punished.
 
 *User story 3:*
 >The group wants to display a list with the group members and how many penalties each member has.

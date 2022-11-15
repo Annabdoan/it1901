@@ -84,9 +84,30 @@ This request will delete an existing member, with name *examplemember*.
 
 ###### Request adding a new rule
 
+> POST /rules?description=ruledescription&value=numberofbeers
+
+This request will add a new rule object, with a decription, *ruledescription*, and 
+a value, *numberofbeers*.
+
+###### Request deleting a rule
+
+> DELETE /rules?rule=ruledescription
+
+This request will delete an existing rule by using a rule description, *ruledescription*.
+
 ###### Request punishing a member
 
+> PUT /punishMember?member=membername&description=ruledescription&value=numberofbeers
+
+This request will punish a member, *membername* for breaking an existing rule with description *ruledescription*
+and value *numberofbeers*.
+
 ###### Request paying up a punishment
+
+> DELETE /payPunishment?member=membername&description=ruledescription&value=numberofbeers
+
+This request will delete a punishment for a member *membername* breaking the rule *ruledescription* with value *numberofbeers*
+
 
 
 

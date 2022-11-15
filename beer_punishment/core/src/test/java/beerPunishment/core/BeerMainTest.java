@@ -94,7 +94,7 @@ public class BeerMainTest {
         Exception exception = assertThrows(Exception.class, () -> beermain.removePunishment("Lea", rule));
         assertEquals("Du har ikke brutt denne regelen", exception.getMessage());
         Exception exception2 = assertThrows(Exception.class, () -> beermain.removePunishment("Sara", rule));
-        assertEquals("Brukernavnet eksisterer ikke", exception2.getMessage());
+        assertEquals("Brukernavnet Sara eksisterer ikke", exception2.getMessage());
     }
 
     @Test

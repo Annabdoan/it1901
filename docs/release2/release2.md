@@ -62,7 +62,8 @@ The group have now implemented new methods for increased functionality
 * An existing member can be chosen in a dropdown menu, as well as an existing rule, to punish a member.
 * The overview of members and their punishment status is updated whenever a member gets punished.
 
-
+### Userstories:
+The userstories are described in the [source readme](../../readme.md). The new functionality for this release will fulfil the needed functionality for userstory 2 and 3.
 
 
 #### At release 2 the app will consist of this scene

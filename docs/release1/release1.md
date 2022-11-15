@@ -21,14 +21,17 @@ understand the pom-file and how to add the maven-dependency.
 * FileHandler.java
 * Rule.java
 
-#### At release 1 the app will consist of this scene
-![alt_text](uirelease1.png)
-
-
-### Intended functionality for release 1:
-* The group have created a beer punishment system that will keep an overview of rules and corresponding penalties for breaking them.
+### Functionality for release 1:
+* The group have created a beer punishment system that will keep an overview of rules with a corresponding value representing the number of beers one gets when breaking the rule.
 * The group have implemented functionality to be able to read from a file. In our case, the file is  an overview of which rules apply and corresponding penalties for breaking them.
 * The group have implemented the logic to be able to write and read new rules to a file, but have not implemented the controller logic for this.
+
+### Userstory:
+The userstories are described in the [root README](../../beer_punishment/README.md). The new functionality for this release will fulfil the needed functionality for userstory 1.
+
+### At release 1 the app consists of this scene
+![alt_text](uirelease1.png)
+
 
 
 

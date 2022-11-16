@@ -193,7 +193,7 @@ public class BeerController {
      * Pay violation.
      */
     @FXML
-    public void payViolation() {
+    public void deleteViolation() {
         String chosenRule = paymentRuleChoiceBox.getSelectionModel().getSelectedItem().toString();
         String chosenMember = paymentMemberChoiceBox.getSelectionModel().getSelectedItem().toString();
         for (Rule rule : beermain.getRules()) {

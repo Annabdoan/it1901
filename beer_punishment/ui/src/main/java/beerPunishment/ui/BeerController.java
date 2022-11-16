@@ -102,7 +102,7 @@ public class BeerController {
      * Make new rule.
      */
     @FXML
-    public void makeNewRule() {
+    public void addRule() {
         try {
             //Split the string in the text input in order to add a new rule.
             String[] arrOfNewRuleTextInput = newRuleTextInput.getText().split(";");

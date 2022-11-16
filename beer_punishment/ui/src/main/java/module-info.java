@@ -5,11 +5,11 @@ module beerPunishment.ui {
     requires javafx.graphics;
     requires javafx.fxml;
     requires javafx.controls;
-    requires gson;
+    requires com.google.gson;
     requires java.net.http;
-    requires spring.web;
+    //requires spring.web;
 
 
 
-    opens beerPunishment.ui to javafx.controls, javafx.graphics, javafx.fxml, gson;
+    opens beerPunishment.ui to javafx.controls, javafx.graphics, javafx.fxml, com.google.gson;
 }

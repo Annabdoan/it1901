@@ -127,7 +127,7 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
         try {
             BeerMain beerMain2 = getBeermain();
             Rule rule = new Rule(description, value);
-            beerMain2.removePunishment(member, rule);
+            beerMain2.deletePunishment(member, rule);
             writeBeerMainToJson(beerMain2);
             return beerMain2;
         } catch (IOException ioe) {

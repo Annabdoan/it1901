@@ -114,7 +114,7 @@ public class BeerMainRestController {
                               @RequestParam("description") String ruleDescription,
                               @RequestParam("value") int value) {
         this.rule = new Rule(ruleDescription, value);
-        this.beerMain.removePunishment(member, rule);
+        this.beerMain.deletePunishment(member, rule);
         writeToJson();
     }
 

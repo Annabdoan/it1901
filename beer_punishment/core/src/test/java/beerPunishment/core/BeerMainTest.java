@@ -83,7 +83,7 @@ public class BeerMainTest {
     }
 
     @Test
-    public void testRemovePunishment() {
+    public void testDeletePunishment() {
         HashMap<String, Collection<Rule>> expectedMap = new HashMap<>();
         expectedMap.put("Test", new ArrayList<>());
         beermain.addMember("Lea");

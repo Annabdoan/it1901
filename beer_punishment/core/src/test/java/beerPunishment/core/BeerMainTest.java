@@ -98,7 +98,7 @@ public class BeerMainTest {
     }
 
     @Test
-    public void testRemoveRuleUsingDescription() {
+    public void testDeleteRuleUsingDescription() {
        beermain.deleteRuleUsingDescription("Kommer sent");
        Collection<Rule> expectedRules = new ArrayList<>(List.of());
        assertEquals(expectedRules, beermain.getRules(), "Rulelist should now be empty");

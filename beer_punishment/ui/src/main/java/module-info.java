@@ -7,7 +7,7 @@ module beerPunishment.ui {
     requires javafx.controls;
     requires gson;
     requires java.net.http;
-    requires spring.web;
+    //requires spring.web;
 
 
 

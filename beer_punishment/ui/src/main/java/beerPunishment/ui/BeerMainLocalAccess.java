@@ -123,7 +123,7 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     }
 
     @Override
-    public BeerMain payPunishment(BeerMain beerMain, String member, String description, int value) {
+    public BeerMain deletePunishment(BeerMain beerMain, String member, String description, int value) {
         try {
             BeerMain beerMain2 = getBeermain();
             Rule rule = new Rule(description, value);

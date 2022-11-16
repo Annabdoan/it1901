@@ -198,7 +198,7 @@ public class BeerController {
         String chosenMember = paymentMemberChoiceBox.getSelectionModel().getSelectedItem().toString();
         for (Rule rule : beermain.getRules()) {
             if (rule.getDescription().equals(chosenRule)) {
-                beermain = iBeerMainAccess.payPunishment(beermain, chosenMember, rule.getDescription(), rule.getPunishmentValue());
+                beermain = iBeerMainAccess.deletePunishment(beermain, chosenMember, rule.getDescription(), rule.getPunishmentValue());
             }
         }
         updateMemberView();

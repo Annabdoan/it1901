@@ -249,7 +249,7 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
      * @param description the description of the rule
      * @param value       the value of the rule
      */
-    public BeerMain payPunishment(BeerMain beerMain, String member, String description, int value) {
+    public BeerMain deletePunishment(BeerMain beerMain, String member, String description, int value) {
         String putMappingPath = "/payPunishment?";
         String key1 = "member=";
         String descriptionPath = "&description=";

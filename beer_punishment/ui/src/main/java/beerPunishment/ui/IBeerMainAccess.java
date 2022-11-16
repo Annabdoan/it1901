@@ -43,7 +43,7 @@ public interface IBeerMainAccess {
 
     BeerMain deleteMember(BeerMain beerMain, String member);
 
-    BeerMain payPunishment(BeerMain beerMain, String member, String description, int value);
+    BeerMain deletePunishment(BeerMain beerMain, String member, String description, int value);
 
 
 }

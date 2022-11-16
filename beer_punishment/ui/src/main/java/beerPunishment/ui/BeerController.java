@@ -3,12 +3,10 @@ package beerPunishment.ui;
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
 
-import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import beerPunishment.json.JsonHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
@@ -129,7 +127,7 @@ public class BeerController {
     public void deleteRule() {
         String description = deleteRuleText.getText();
         try {
-            beermain = iBeerMainAccess.removeRule(beermain, description);
+            beermain = iBeerMainAccess.deleteRule(beermain, description);
             updateRuleChoicebox();
             updateListView();
         } catch (IllegalArgumentException e) {

@@ -97,7 +97,7 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     }
 
     @Override
-    public BeerMain removeRule(BeerMain beerMain, String ruleDescription) {
+    public BeerMain deleteRule(BeerMain beerMain, String ruleDescription) {
         try {
             BeerMain beerMain2 = getBeermain();
             beerMain2.deleteRuleUsingDescription(ruleDescription);

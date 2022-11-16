@@ -192,7 +192,7 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
      * @param beerMain the beerMain
      * @param ruleDescription the description of the rule to remove
      */
-    public BeerMain removeRule(BeerMain beerMain, String ruleDescription) {
+    public BeerMain deleteRule(BeerMain beerMain, String ruleDescription) {
         String fixedRuleDescription = replaceSpace(ruleDescription);
         try {
             HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve("/rules?rule=" + fixedRuleDescription))
@@ -249,7 +249,7 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
      * @param description the description of the rule
      * @param value       the value of the rule
      */
-    public BeerMain payPunishment(BeerMain beerMain, String member, String description, int value) {
+    public BeerMain deletePunishment(BeerMain beerMain, String member, String description, int value) {
         String putMappingPath = "/payPunishment?";
         String key1 = "member=";
         String descriptionPath = "&description=";

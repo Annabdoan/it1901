@@ -6,14 +6,10 @@ import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import org.junit.jupiter.api.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import static beerPunishment.ui.BeerController.defaultURI;
 import static org.junit.Assert.assertTrue;
 
 public class BeerMainRemoteAccessTest {
@@ -103,7 +99,7 @@ public class BeerMainRemoteAccessTest {
     }
 
     @Test
-    public void testRemoveRule() {
+    public void testDeleteRule() {
 
         //Adding the rule first
         WireMock.stubFor(WireMock.post(WireMock.urlEqualTo("http://localhost:8080/rules?description=TestRule&value=1"))

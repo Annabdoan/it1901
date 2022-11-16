@@ -97,7 +97,7 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     }
 
     @Override
-    public BeerMain removeRule(BeerMain beerMain, String ruleDescription) {
+    public BeerMain deleteRule(BeerMain beerMain, String ruleDescription) {
         try {
             BeerMain beerMain2 = getBeermain();
             beerMain2.deleteRuleUsingDescription(ruleDescription);
@@ -123,11 +123,11 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     }
 
     @Override
-    public BeerMain payPunishment(BeerMain beerMain, String member, String description, int value) {
+    public BeerMain deletePunishment(BeerMain beerMain, String member, String description, int value) {
         try {
             BeerMain beerMain2 = getBeermain();
             Rule rule = new Rule(description, value);
-            beerMain2.removePunishment(member, rule);
+            beerMain2.deletePunishment(member, rule);
             writeBeerMainToJson(beerMain2);
             return beerMain2;
         } catch (IOException ioe) {

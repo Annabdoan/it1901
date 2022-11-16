@@ -38,12 +38,12 @@ public interface IBeerMainAccess {
      */
     BeerMain punishMember(BeerMain beerMain, String member, String description, int value);
 
-    BeerMain removeRule(BeerMain beerMain, String ruleDescription);
+    BeerMain deleteRule(BeerMain beerMain, String ruleDescription);
 
 
     BeerMain deleteMember(BeerMain beerMain, String member);
 
-    BeerMain payPunishment(BeerMain beerMain, String member, String description, int value);
+    BeerMain deletePunishment(BeerMain beerMain, String member, String description, int value);
 
 
 }

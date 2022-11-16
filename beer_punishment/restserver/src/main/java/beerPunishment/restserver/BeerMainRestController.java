@@ -81,7 +81,7 @@ public class BeerMainRestController {
      * @param ruleDescription description of rule to delete
      */
     @DeleteMapping(path = "rules")
-    public void removeRule(@RequestParam("rule") String ruleDescription) {
+    public void deleteRule(@RequestParam("rule") String ruleDescription) {
         this.beerMain.deleteRuleUsingDescription(ruleDescription);
         writeToJson();
     }
@@ -114,7 +114,7 @@ public class BeerMainRestController {
                               @RequestParam("description") String ruleDescription,
                               @RequestParam("value") int value) {
         this.rule = new Rule(ruleDescription, value);
-        this.beerMain.removePunishment(member, rule);
+        this.beerMain.deletePunishment(member, rule);
         writeToJson();
     }
 

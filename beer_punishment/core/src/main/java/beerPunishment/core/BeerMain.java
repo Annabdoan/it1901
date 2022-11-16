@@ -115,7 +115,7 @@ public class BeerMain implements Iterable<Rule> {
      * @param username the name the member
      * @param rule     the rule that the member has broken and that is getting removed
      */
-    public void removePunishment(String username, Rule rule) {
+    public void deletePunishment(String username, Rule rule) {
         if (!memberRuleViolations.containsKey(username)) {
             throw new IllegalArgumentException("Brukernavnet " + username + " eksisterer ikke");
         }

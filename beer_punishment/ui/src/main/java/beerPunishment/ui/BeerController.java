@@ -3,12 +3,10 @@ package beerPunishment.ui;
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
 
-import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import beerPunishment.json.JsonHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
@@ -104,7 +102,7 @@ public class BeerController {
      * Make new rule.
      */
     @FXML
-    public void makeNewRule() {
+    public void addRule() {
         try {
             //Split the string in the text input in order to add a new rule.
             String[] arrOfNewRuleTextInput = newRuleTextInput.getText().split(";");
@@ -129,7 +127,7 @@ public class BeerController {
     public void deleteRule() {
         String description = deleteRuleText.getText();
         try {
-            beermain = iBeerMainAccess.removeRule(beermain, description);
+            beermain = iBeerMainAccess.deleteRule(beermain, description);
             updateRuleChoicebox();
             updateListView();
         } catch (IllegalArgumentException e) {
@@ -195,12 +193,12 @@ public class BeerController {
      * Pay violation.
      */
     @FXML
-    public void payViolation() {
+    public void deleteViolation() {
         String chosenRule = paymentRuleChoiceBox.getSelectionModel().getSelectedItem().toString();
         String chosenMember = paymentMemberChoiceBox.getSelectionModel().getSelectedItem().toString();
         for (Rule rule : beermain.getRules()) {
             if (rule.getDescription().equals(chosenRule)) {
-                beermain = iBeerMainAccess.payPunishment(beermain, chosenMember, rule.getDescription(), rule.getPunishmentValue());
+                beermain = iBeerMainAccess.deletePunishment(beermain, chosenMember, rule.getDescription(), rule.getPunishmentValue());
             }
         }
         updateMemberView();

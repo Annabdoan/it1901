@@ -83,22 +83,22 @@ public class BeerMainTest {
     }
 
     @Test
-    public void testRemovePunishment() {
+    public void testDeletePunishment() {
         HashMap<String, Collection<Rule>> expectedMap = new HashMap<>();
         expectedMap.put("Test", new ArrayList<>());
         beermain.addMember("Lea");
         beermain.punishMember("Lea", rule);
-        beermain.removePunishment("Lea", rule);
+        beermain.deletePunishment("Lea", rule);
         ArrayList<String> expected = new ArrayList<String>();
         assertEquals(expected, beermain.getMemberViolations("Lea"));
-        Exception exception = assertThrows(Exception.class, () -> beermain.removePunishment("Lea", rule));
+        Exception exception = assertThrows(Exception.class, () -> beermain.deletePunishment("Lea", rule));
         assertEquals("Du har ikke brutt denne regelen", exception.getMessage());
-        Exception exception2 = assertThrows(Exception.class, () -> beermain.removePunishment("Sara", rule));
+        Exception exception2 = assertThrows(Exception.class, () -> beermain.deletePunishment("Sara", rule));
         assertEquals("Brukernavnet Sara eksisterer ikke", exception2.getMessage());
     }
 
     @Test
-    public void testRemoveRuleUsingDescription() {
+    public void testDeleteRuleUsingDescription() {
        beermain.deleteRuleUsingDescription("Kommer sent");
        Collection<Rule> expectedRules = new ArrayList<>(List.of());
        assertEquals(expectedRules, beermain.getRules(), "Rulelist should now be empty");

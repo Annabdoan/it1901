@@ -12,6 +12,7 @@ module beerPunishment.restserver {
     requires transitive beerPunishment.json;
     requires beerPunishment.core;
     requires spring.context;
+    requires com.google.gson;
 
 
     opens beerPunishment.restserver to spring.web, spring.context, spring.core, spring.beans;

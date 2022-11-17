@@ -64,48 +64,6 @@ public class BeerController {
 
     }
 
-    @FXML
-    private void updateListView() {
-        Collection<Rule> rules = beermain.getRules();
-        Collection<String> rulesToString = new ArrayList<>();
-        for (Rule rule : rules) {
-            rulesToString.add(rule.toStringDisplayFormat());
-        }
-        ruleView.getItems().setAll(rulesToString);
-    }
-
-    @FXML
-    private void updateRuleChoicebox() {
-        Collection<String> ruleDescriptions = new ArrayList<>();
-        for (Rule rule : beermain.getRules()) {
-            ruleDescriptions.add(rule.getDescription());
-        }
-        ruleChoiceBox.getItems().setAll(ruleDescriptions);
-    }
-
-    @FXML
-    private void updatePersonChoicebox() {
-        try {
-            personChoiceBox.getItems().setAll(beermain.getUsernames());
-        } catch (Exception e) {
-            showErrorMessage("Feil ved personChoicebox");
-        }
-    }
-
-    /**
-     * Show error message.
-     *
-     * @param errorMessage The message to show in the error
-     */
-    @FXML
-    private void showErrorMessage(String errorMessage) {
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText("An error has occured");
-        alert.setContentText(errorMessage);
-        alert.showAndWait();
-    }
-
     /**
      * Make new rule.
      */
@@ -143,28 +101,6 @@ public class BeerController {
         }
     }
 
-    @FXML
-    private void updateMemberView() {
-        Collection<String> punishmentStatus = beermain.generatePunishmentStatusToString();
-        punishmentStatusOverview.getItems().setAll(punishmentStatus);
-    }
-
-    /**
-     * Punish a member.
-     */
-    @FXML
-    private void punishMember() {
-        String chosenRule = ruleChoiceBox.getSelectionModel().getSelectedItem().toString();
-        String chosenMember = personChoiceBox.getSelectionModel().getSelectedItem().toString();
-        for (Rule rule : beermain.getRules()) {
-            if (rule.getDescription().equals(chosenRule)) {
-                beermain = iBeerMainAccess.punishMember(beermain, chosenMember, rule.getDescription(), rule.getPunishmentValue());
-            }
-        }
-        updateMemberView();
-        updatePaymentRuleChoicebox();
-    }
-
     /**
      * Add member.
      */
@@ -198,6 +134,22 @@ public class BeerController {
     }
 
     /**
+     * Punish a member.
+     */
+    @FXML
+    private void punishMember() {
+        String chosenRule = ruleChoiceBox.getSelectionModel().getSelectedItem().toString();
+        String chosenMember = personChoiceBox.getSelectionModel().getSelectedItem().toString();
+        for (Rule rule : beermain.getRules()) {
+            if (rule.getDescription().equals(chosenRule)) {
+                beermain = iBeerMainAccess.punishMember(beermain, chosenMember, rule.getDescription(), rule.getPunishmentValue());
+            }
+        }
+        updateMemberView();
+        updatePaymentRuleChoicebox();
+    }
+
+    /**
      * Pay violation.
      */
     @FXML
@@ -211,6 +163,40 @@ public class BeerController {
         }
         updateMemberView();
         updatePaymentRuleChoicebox();
+    }
+
+    @FXML
+    private void updateListView() {
+        Collection<Rule> rules = beermain.getRules();
+        Collection<String> rulesToString = new ArrayList<>();
+        for (Rule rule : rules) {
+            rulesToString.add(rule.toStringDisplayFormat());
+        }
+        ruleView.getItems().setAll(rulesToString);
+    }
+
+    @FXML
+    private void updateMemberView() {
+        Collection<String> punishmentStatus = beermain.generatePunishmentStatusToString();
+        punishmentStatusOverview.getItems().setAll(punishmentStatus);
+    }
+
+    @FXML
+    private void updateRuleChoicebox() {
+        Collection<String> ruleDescriptions = new ArrayList<>();
+        for (Rule rule : beermain.getRules()) {
+            ruleDescriptions.add(rule.getDescription());
+        }
+        ruleChoiceBox.getItems().setAll(ruleDescriptions);
+    }
+
+    @FXML
+    private void updatePersonChoicebox() {
+        try {
+            personChoiceBox.getItems().setAll(beermain.getUsernames());
+        } catch (Exception e) {
+            showErrorMessage("Feil ved personChoicebox");
+        }
     }
 
     /**
@@ -228,7 +214,6 @@ public class BeerController {
             }
             paymentRuleChoiceBox.getItems().setAll(ruleDescriptions);
         }
-
     }
 
     /**
@@ -241,6 +226,20 @@ public class BeerController {
         } catch (Exception e) {
             showErrorMessage("Feil ved personChoicebox");
         }
+    }
+
+    /**
+     * Show error message.
+     *
+     * @param errorMessage The message to show in the error
+     */
+    @FXML
+    private void showErrorMessage(String errorMessage) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("An error has occured");
+        alert.setContentText(errorMessage);
+        alert.showAndWait();
     }
 
     /**

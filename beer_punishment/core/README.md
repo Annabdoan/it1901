@@ -1,21 +1,14 @@
 # Core
-The core module consist of classes that perform the applications intended functionality. 
-The core module also includes tests for functionality classes. 
-The group has focused on testing all classes, and has tried to achieve a test coverage of at least 90% by using the Jacoco-plugin.
- 
+The core module consists of classes containing logic to process inputs from the users.
+
 ### The core module consists of the following classes and test classes:
 
 #### Classes:
-* BeerMain.java &rarr; Keeps track of....
-* Rule.java &rarr; Generates Rule-objects
 
-#### Test classes:
-* BeerMainTest.java &rarr; Test for BeerMain.java
-* RuleTest-java &rarr; TODOOOO
+:point_right: [BeerMain](./src/main/java/beerPunishment/core/BeerMain.java)
 
+Generate BeerMain objects. A BeerMain object consists of existing rules, members and a list of the members violations (rule breaches). 
 
-#### Connections between classes:
-BeerMain uses the Rule class to make a list of rules that applies to the group. 
-Rule.java generates a rule object, which can be added to the list of rules in BeerMain.
+:point_right: [Rule](./src/main/java/beerPunishment/core/Rule.java)
 
-TODO fyll inn
+Generate Rule objects. A rule object consists of a description and a value (amount of beers).

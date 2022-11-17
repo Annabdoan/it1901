@@ -1,18 +1,12 @@
 # Json
-The json module consist of classes that serialize and deserialize java-objects. 
-The applications persistence is located in the json module.
-We have created classes for converting Javacode and object-instances to json format and the other way around.
-This had been done for all classes that need translation to and from json-format.
 
-### The json module consists of the following serializers and deserializers:
-* BeerMainDeserializer.java &rarr; Translates BeerMain from json to java-entities. 
-* BeerMainSerializer.java &rarr; Translates BeerMain from java-entities to json.
-* RuleDeserializer &rarr; Translates Rule from json to java-entities.
-* RuleSerializer &rarr; Translates Rule from java-entities to json.
+The Json module consists of a class that writes a BeerMain object to JSON format in a Json file.
+It also reads a BeerMain object from a Json file.
 
+In order to write and read from Json, the Gson library is used. 
+Read release 3 documentation to understand the reason behind this decision.
 
-### Persistence:
-* RulePersistence &rarr; Stores information needed to write and read to json file. 
+## The Json module consists of the following classes
 
-### Module:
-* RuleModule &rarr; Keeps track of serializers and deserializers
+:point_right:  [JsonHandler](./src/main/java/beerPunishment/json/JsonHandler.java)
+

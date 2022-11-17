@@ -23,14 +23,10 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
     private static final String CONTENT_TYPE_HEADER = "Content-Type";
 
 
-    //denne må være localhost:8080/
     public BeerMainRemoteAccess() {
-
     }
 
-
     private static final URI defaultURI = URI.create("http://localhost:8080");
-
 
     /**
      * Method for replacing whitespaces with %20 for URL.
@@ -48,7 +44,6 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
      * @param baseUri the URI of the server to ping.
      */
     public static Boolean pingServer(URI baseUri) {
-
         HttpRequest request = HttpRequest.newBuilder(baseUri.resolve("/ping"))
                 .header(ACCEPT_HEADER, APPLICATION_JSON)
                 .GET()
@@ -88,7 +83,6 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
         }
     }
 
-
     /**
      * Sends a POST-request and adds a rule to the beerMain.
      *
@@ -102,6 +96,33 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .header(CONTENT_TYPE_HEADER, APPLICATION_FORM_URLENCODED)
                     .POST(HttpRequest.BodyPublishers.ofString("description=" + description + "&value=" + value))
+                    .build();
+            final HttpResponse<String> response =
+                    HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println(response.body());
+            if (response.body() != null) {
+                BeerMain beerMain2 = getBeermain();
+                return beerMain2;
+            } else {
+                return beerMain;
+            }
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Sends a DELETE-request and removes the rule with the given description from the underlying beerMain.
+     *
+     * @param beerMain the beerMain
+     * @param ruleDescription the description of the rule to remove
+     */
+    public BeerMain deleteRule(BeerMain beerMain, String ruleDescription) {
+        String fixedRuleDescription = replaceSpace(ruleDescription);
+        try {
+            HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve("/rules?rule=" + fixedRuleDescription))
+                    .header(ACCEPT_HEADER, APPLICATION_JSON)
+                    .DELETE()
                     .build();
             final HttpResponse<String> response =
                     HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
@@ -132,6 +153,33 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
                     .build();
             final HttpResponse<String> response =
                     HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println(response.body());
+            if (response.body() != null) {
+                BeerMain beerMain2 = getBeermain();
+                return beerMain2;
+            } else {
+                return beerMain;
+            }
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Sends a DELETE-request and removes a member from the underlying beerMain.
+     *
+     * @param beerMain the beerMain
+     * @param member the member
+     */
+    public BeerMain deleteMember(BeerMain beerMain, String member) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve("/members?member=" + member))
+                    .header(ACCEPT_HEADER, APPLICATION_JSON)
+                    .DELETE()
+                    .build();
+            final HttpResponse<String> response =
+                    HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+
             System.out.println(response.body());
             if (response.body() != null) {
                 BeerMain beerMain2 = getBeermain();
@@ -185,62 +233,6 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
         }
     }
 
-
-    /**
-     * Sends a DELETE-request and removes the rule with the given description from the underlying beerMain.
-     *
-     * @param beerMain the beerMain
-     * @param ruleDescription the description of the rule to remove
-     */
-    public BeerMain deleteRule(BeerMain beerMain, String ruleDescription) {
-        String fixedRuleDescription = replaceSpace(ruleDescription);
-        try {
-            HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve("/rules?rule=" + fixedRuleDescription))
-                    .header(ACCEPT_HEADER, APPLICATION_JSON)
-                    .DELETE()
-                    .build();
-            final HttpResponse<String> response =
-                    HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.body());
-            if (response.body() != null) {
-                BeerMain beerMain2 = getBeermain();
-                return beerMain2;
-            } else {
-                return beerMain;
-            }
-        } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Sends a DELETE-request and removes a member from the underlying beerMain.
-     *
-     * @param beerMain the beerMain
-     * @param member the member
-     */
-    public BeerMain deleteMember(BeerMain beerMain, String member) {
-
-        try {
-            HttpRequest request = HttpRequest.newBuilder(defaultURI.resolve("/members?member=" + member))
-                    .header(ACCEPT_HEADER, APPLICATION_JSON)
-                    .DELETE()
-                    .build();
-            final HttpResponse<String> response =
-                    HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-
-            System.out.println(response.body());
-            if (response.body() != null) {
-                BeerMain beerMain2 = getBeermain();
-                return beerMain2;
-            } else {
-                return beerMain;
-            }
-        } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     /**
      * Sends a DELETE-request and removes a punishment from a member.
      *
@@ -277,6 +269,5 @@ public class BeerMainRemoteAccess implements IBeerMainAccess {
             throw new RuntimeException(e);
         }
     }
-
 
 }

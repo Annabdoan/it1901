@@ -230,10 +230,6 @@ public class BeerMain implements Iterable<Rule> {
         this.setRules(bm.getRules());
     }
 
-
-    // Iterator
-    //public Iterator<Map.Entry<String, List<Rule>>> new_Iterator = memberRuleViolations.entrySet().iterator();
-
     /**
      * Iterator to easilly move between objects in list.
      *
@@ -242,7 +238,6 @@ public class BeerMain implements Iterable<Rule> {
     public Iterator<Map.Entry<String, Collection<Rule>>> violationIterator() {
         return memberRuleViolations.entrySet().iterator();
     }
-
 
     @Override
     public String toString() {

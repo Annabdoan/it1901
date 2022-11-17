@@ -83,7 +83,6 @@ public class BeerMain implements Iterable<Rule> {
         if (!memberRuleViolations.containsKey(username)) {
             throw new IllegalArgumentException("Brukernavnet eksisterer ikke");
         }
-        System.out.println("Her skjer noe feil");
     }
 
 
@@ -94,7 +93,6 @@ public class BeerMain implements Iterable<Rule> {
      */
     public void addMember(String username) {
         if (memberRuleViolations.containsKey(username)) {
-            System.out.println("Her skjer noe feil i addMember");
             throw new IllegalArgumentException("Brukernavnet eksisterer allerede");
         }
 

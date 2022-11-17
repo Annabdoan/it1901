@@ -11,11 +11,8 @@ public class BeerMain implements Iterable<Rule> {
     private Collection<Rule> rules = new ArrayList<>();
     private HashMap<String, Collection<Rule>> memberRuleViolations = new HashMap<>();
 
-
     public BeerMain() {
     }
-
-
 
     /**
      * Access method for rules.
@@ -38,6 +35,9 @@ public class BeerMain implements Iterable<Rule> {
             }
         }
         this.rules.add(rule);
+    }
+    private void setRules(Collection<Rule> rules) {
+        this.rules = rules;
     }
 
     /**
@@ -67,8 +67,6 @@ public class BeerMain implements Iterable<Rule> {
         }
         rules.remove(empty);
     }
-
-
 
     /**
      * Method for adding members.
@@ -110,6 +108,15 @@ public class BeerMain implements Iterable<Rule> {
     }
 
     /**
+     * Access method for members.
+     *
+     * @return the members.
+     */
+    public Collection<String> getUsernames() {
+        return new ArrayList<>(memberRuleViolations.keySet());
+    }
+
+    /**
      * Method for removing punishment from a member.
      *
      * @param username the name the member
@@ -132,7 +139,6 @@ public class BeerMain implements Iterable<Rule> {
         if (sizeBefore == sizeAfter) {
             throw new IllegalArgumentException("Du har ikke brutt denne regelen");
         }
-
     }
 
     /**
@@ -167,15 +173,6 @@ public class BeerMain implements Iterable<Rule> {
     }
 
     /**
-     * Access method for members.
-     *
-     * @return the members.
-     */
-    public Collection<String> getUsernames() {
-        return new ArrayList<>(memberRuleViolations.keySet());
-    }
-
-    /**
      * Access method for all the rule violations .
      *
      * @return the hashmap of members and what rules they have broken.
@@ -186,28 +183,6 @@ public class BeerMain implements Iterable<Rule> {
 
     public void setMemberRuleViolations(HashMap<String, Collection<Rule>> memberRuleViolations) {
         this.memberRuleViolations = new HashMap<>(memberRuleViolations);
-    }
-
-    private void setRules(Collection<Rule> rules) {
-        this.rules = rules;
-    }
-
-    /**
-     * Makes a ToString out of the list of given punishment status.
-     *
-     * @return ArrayList of ToSting punishment status.
-     */
-    public Collection<String> generatePunishmentStatusToString() {
-        HashMap<String, Integer> punishmentStatus = generateMembersPunishments();
-        Collection<String> punishmentToString = new ArrayList<>();
-        for (Map.Entry<String, Collection<Rule>> entry : memberRuleViolations.entrySet()) {
-            StringBuilder sb = new StringBuilder();
-            sb.append(entry.getKey());
-            sb.append("\t\t\t\t\t");
-            sb.append(punishmentStatus.get(entry.getKey()));
-            punishmentToString.add(sb.toString());
-        }
-        return new ArrayList<>(punishmentToString);
     }
 
     /**
@@ -228,6 +203,24 @@ public class BeerMain implements Iterable<Rule> {
     public void copy(BeerMain bm) {
         this.setMemberRuleViolations(bm.getMemberRuleViolations());
         this.setRules(bm.getRules());
+    }
+
+    /**
+     * Makes a ToString out of the list of given punishment status.
+     *
+     * @return ArrayList of ToSting punishment status.
+     */
+    public Collection<String> generatePunishmentStatusToString() {
+        HashMap<String, Integer> punishmentStatus = generateMembersPunishments();
+        Collection<String> punishmentToString = new ArrayList<>();
+        for (Map.Entry<String, Collection<Rule>> entry : memberRuleViolations.entrySet()) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(entry.getKey());
+            sb.append("\t\t\t\t\t");
+            sb.append(punishmentStatus.get(entry.getKey()));
+            punishmentToString.add(sb.toString());
+        }
+        return new ArrayList<>(punishmentToString);
     }
 
     @Override

@@ -48,7 +48,6 @@ public class BeerControllerTest extends ApplicationTest {
         clickOn("#newRuleTextInput").write("Komme for sent;-5");
         clickOn("#newRuleButton");
         clickOn(LabeledMatchers.hasText("OK"));
-
     }
 
     @Order(2)
@@ -126,8 +125,8 @@ public class BeerControllerTest extends ApplicationTest {
 
     @Test
     public void testShowErrorMessage() {
-
     }
+
     @AfterAll
     public static void reset() {
         File file = new File(System.getProperty("user.home"),"/beerPunishmentTest.json");

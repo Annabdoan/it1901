@@ -6,10 +6,7 @@ import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import org.junit.jupiter.api.*;
-
-import java.net.URI;
 import java.net.URISyntaxException;
-
 import static org.junit.Assert.assertTrue;
 
 public class BeerMainRemoteAccessTest {
@@ -24,8 +21,6 @@ public class BeerMainRemoteAccessTest {
         wmServer = new WireMockServer(wmConfig.portNumber());
         wmServer.start();
         WireMock.configureFor("localhost", wmConfig.portNumber());
-        BeerController beerController = new BeerController();
-        URI defaultURI = URI.create("http://localhost:8080"); //Må lage getter i BeerController!!
         beerMainRemoteAccess = new BeerMainRemoteAccess();
 
         BeerMain beerMain = new BeerMain();
@@ -51,7 +46,7 @@ public class BeerMainRemoteAccessTest {
         );
     }
 
-    @Test //Når ikke getBeerMain!
+    @Test
     public void testGetBeerMain() {
         WireMock.stubFor(WireMock.get(WireMock.urlEqualTo("http://localhost:8080/beerMain"))
                 .withHeader("Accept", WireMock.equalTo("application/json"))

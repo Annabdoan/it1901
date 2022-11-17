@@ -2,11 +2,9 @@ package beerPunishment.ui;
 
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
-
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;

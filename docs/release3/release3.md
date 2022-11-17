@@ -10,13 +10,13 @@ During this release, the main focus for the group has been setting up an API.
 The group discussed whether to continue with JavaFX or use CSS/JS to improve the user experience, but landed on continuing with JavaFX.
 The decision was based on that none of the group members felt confident enough with using CSS/JS. Another factor to the decision
 was the groups main focus revolving around team work, SCRUM and learning architecture more than learning a new technology and user experience. 
-Due to the decision of continuing with JavaFX, the group has implemented new logic & functionality for
+Due to the decision of continuing with JavaFX, the group has implemented new logic and functionality for
 our application. See paragraph *New classes and modules for release 3* to have a look at the applications new grant. 
 
 ### :open_file_folder: Work habits and task management
 After sprint 2 the group discussed the task management and the groups working habits as a part reflection. The group mainly had a discussion revolving
 our large issues and branch use. The discussion concluded with an agreement that the group needed to
-create smaller issues containing single problems, and not collect several problems in one issues.
+create smaller issues containing single problems, and not collect several problems in one issue.
 
 Another thing concluded after this discussion was the need for a better use of the issue board.
 In the two first sprints, the group forgot to check in on their issues, and mark them 
@@ -48,26 +48,31 @@ The headers have been short and describing, while the body has been longer with 
 The footer 'Co-authored-by' have mainly been used, due to the groups focus on pair-programming. 
 
 On the other side, the groups general task distribution has remained the same as in the previous releases.
-Pair-programming have been used most of the time, and issues have therefore been worked on by two or three, and assigned
+Pair-programming has been used most of the time, and issues have therefore been worked on by two or three, and assigned
 to the person who felt most confident regarding the issue to be solved. 
 
 ### Quality ensurance of code
 The group has continued to use *Jacoco* as a tool to make sure all classes are tested
-to a minimum of 90 %.
+reasonable good.
 A side note to this, is with the UI-module. The Jacoco report states that test coverage of UI is only 50%
 This is due to the testing of the class *BeerMainRemoteAccess*. The class is tested, however it does not 
 affect the test coverage.
-The other classes, respectively, have over 90 %.
+The other classes, respectively, have a reasonable good testing percent.
 
-In comparison to release 2, the group has had a larger focus on *Spotbugs*. In release 2, two *SpotBugs* were
-still present in our code, however, the project now no longer contains *Spotbugs*.
+In comparison to release 2, the group has had a larger focus on *Spotbugs*. In release 2, two high-level *SpotBugs* were
+still present in the code. In release3 some low-level Spotbugs is still present. These are occurring due to the FXML methods being set to private, and therefore SpotBugs sees them as not being called.
+The group has chosen to ignore these bugs, as the methods are being called, and therefore not able to delete. Also, these needs to be private, so changing them will be unacceptable.
+
+
 The use of *CheckStyle* has mostly remained the same, with continuing the goal of 
 having as few CheckStyle warnings as possible. The reason why the group does not have
 a goal of zero CheckStyle warnings, is due to higher prioritizing some conventions.
 The conventions prioritized for release 3 has been:
-* **Our interface starts with capital I.**
 
-CheckStyle hands out warnings due to the interface´s capital I.
+* **Our interface starts with capital I, so that it has 3 capital letters.**
+
+CheckStyle hands out warnings due to the interface name having 3 capital letters.
+
 The days before the project submission were used to go through the project, with intention 
 of ensuring that criteria was met, and feedback from release 1 & 2 regarding code quality
 were taken into consideration. In addition, these days were also used to go through method names and et cetera to ensure consistent use.
@@ -77,7 +82,7 @@ An example was the inconsistent use of delete/remove which was fixed.
 As mentioned in the introduction, the group continued with JavaFX, and has therefore 
 added in more functionality. Also, the implementation of a RESTful application meant new classes and a new module.
 
-The new functionality is related to the new user stories. Read the user stories here: [source README](/Users/lea/IdeaProjects/gr2231/readme.md)
+The new functionality is related to the new user stories. Read the user stories here: [source README](../../readme.md)
 
 The new functionality:
 * :x: **Being able to remove a member** (User story 4)
@@ -108,10 +113,10 @@ The **Json** module now only consists of one class:
 
 * ***JsonHandler.java***
 
-Read more about the module in README for Json.
+Read more about the module in [readme Json module](../../beer_Punishment/json/README.md)
 
 #### User stories 
-User stories for this release, are all written in root README file.
+User stories for this release, are all written in [source README](../../beer_Punishment/README.md)
 
 
 #### Further development
@@ -132,7 +137,7 @@ The two methods to be implemented first, due to them making the application
 more complete:
 
 * **A user should be able to create a group and assign group members.**
-* **A user should be able to see his/hers previous punishment.**
+* **A user should be able to see his/hers previous punishments.**
 
 However, the group did not have enough time to implement this functionality. 
 
@@ -157,7 +162,7 @@ not connected well enough to issues.
 In release 2, the group had a better understanding of how to use issues, and used the user stories as 
 a start for all issues. However, the branch names and commit messages were still not linked to the issue numbers.
 
-In release 3, the group started linking up branches to issues and its number. This made branches more
+In release 3, the group started linking up branches to issues and its numbers. This made branches more
 transparent, and they were easier to keep track of. In addition, this release was were the group
 started linking up commit messages to the issue it was solving. The group consistently used 
 feat/fix to indicate whether a commit was fixing or adding something. As mentioned in *Work habits and task management*, the group also

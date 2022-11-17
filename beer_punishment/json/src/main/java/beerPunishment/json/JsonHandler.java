@@ -31,7 +31,7 @@ public class JsonHandler {
      * @param filename name of the file
      */
     public void writeToJson(BeerMain beerMain, String filename) throws IOException {
-        OutputStreamWriter fw = null; //to ensure reliance on default encoding
+        OutputStreamWriter fw = null;
         try {
             fw = new OutputStreamWriter(new FileOutputStream(getFilePath(filename)), "UTF-8");
             gson.toJson(beerMain, fw);

@@ -18,7 +18,7 @@ public interface IBeerMainAccess {
      */
     BeerMain addRule(BeerMain beerMain, String description, int value);
 
-
+    BeerMain deleteRule(BeerMain beerMain, String ruleDescription);
 
     /**
      * Adds a member to the beerMain.
@@ -27,6 +27,8 @@ public interface IBeerMainAccess {
      * @param name     the name of member
      */
     BeerMain addMember(BeerMain beerMain, String name);
+
+    BeerMain deleteMember(BeerMain beerMain, String member);
 
     /**
      * This method is used to punish a member.
@@ -38,12 +40,6 @@ public interface IBeerMainAccess {
      */
     BeerMain punishMember(BeerMain beerMain, String member, String description, int value);
 
-    BeerMain deleteRule(BeerMain beerMain, String ruleDescription);
-
-
-    BeerMain deleteMember(BeerMain beerMain, String member);
-
     BeerMain deletePunishment(BeerMain beerMain, String member, String description, int value);
-
 
 }

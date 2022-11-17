@@ -101,6 +101,8 @@ Read more about it here: [Release 3](./docs/release3/release3.md)
 
 #### Sequence diagram
 
+![SequenceDiagramPng](SequenceDiagramPng.png)
+
 
 
 

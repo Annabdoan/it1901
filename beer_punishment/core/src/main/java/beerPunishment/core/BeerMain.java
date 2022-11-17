@@ -36,6 +36,12 @@ public class BeerMain implements Iterable<Rule> {
         }
         this.rules.add(rule);
     }
+
+    /**
+     * Sets the list of rules that apply to the BeerMain system
+     *
+     * @param rules the list of rules.
+     */
     private void setRules(Collection<Rule> rules) {
         this.rules = rules;
     }

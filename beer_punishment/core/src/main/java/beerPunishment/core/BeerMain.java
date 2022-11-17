@@ -3,7 +3,7 @@ package beerPunishment.core;
 import java.util.*;
 
 /**
- * A class for rule lists without items and hashmaps without items.
+ * A class that tracks rules that applies to a group.
  * Can be used as placeholder for real beer app instances.
  */
 public class BeerMain implements Iterable<Rule> {
@@ -75,6 +75,18 @@ public class BeerMain implements Iterable<Rule> {
     }
 
     /**
+     * Method for checking if a member does not exist.
+     *
+     * @param username the name the member
+     */
+    public void checkValidUser(String username){
+        if (!memberRuleViolations.containsKey(username)) {
+            throw new IllegalArgumentException("Brukernavnet eksisterer ikke");
+        }
+    }
+
+
+    /**
      * Method for adding members.
      *
      * @param username of the member to add
@@ -83,6 +95,7 @@ public class BeerMain implements Iterable<Rule> {
         if (memberRuleViolations.containsKey(username)) {
             throw new IllegalArgumentException("Brukernavnet eksisterer allerede");
         }
+
         memberRuleViolations.put(username, new ArrayList<>());
     }
 
@@ -92,9 +105,7 @@ public class BeerMain implements Iterable<Rule> {
      * @param username of the member to delete
      */
     public void deleteMember(String username) {
-        if (!memberRuleViolations.containsKey(username)) {
-            throw new IllegalArgumentException("Brukernavn eksisterer ikke");
-        }
+        checkValidUser(username);
         memberRuleViolations.remove(username);
     }
 
@@ -105,9 +116,7 @@ public class BeerMain implements Iterable<Rule> {
      * @param rule     the rule that the member has broken
      */
     public void punishMember(String username, Rule rule) {
-        if (!memberRuleViolations.containsKey(username)) {
-            throw new IllegalArgumentException("Brukernavnet eksisterer ikke");
-        }
+        checkValidUser(username);
         Collection<Rule> violations = memberRuleViolations.get(username);
         violations.add(rule);
         memberRuleViolations.put(username, violations);
@@ -129,9 +138,7 @@ public class BeerMain implements Iterable<Rule> {
      * @param rule     the rule that the member has broken and that is getting removed
      */
     public void deletePunishment(String username, Rule rule) {
-        if (!memberRuleViolations.containsKey(username)) {
-            throw new IllegalArgumentException("Brukernavnet " + username + " eksisterer ikke");
-        }
+        checkValidUser(username);
         int sizeBefore = memberRuleViolations.get(username).size();
         for (Rule tempRule : memberRuleViolations.get(username)) {
             if (rule.getDescription().equals(tempRule.getDescription())) {
@@ -154,9 +161,7 @@ public class BeerMain implements Iterable<Rule> {
      * @return ArrayList of the given members violations
      */
     public Collection<Rule> getMemberViolations(String username) {
-        if (!memberRuleViolations.containsKey(username)) {
-            throw new IllegalArgumentException("Brukernavn finnes ikke");
-        }
+        checkValidUser(username);
         return new ArrayList<>(memberRuleViolations.get(username));
     }
 

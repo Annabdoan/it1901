@@ -67,9 +67,13 @@ public class BeerMainTest {
         assertEquals(usernames, beermain.getUsernames(), "The usernames should be Test and Test2");
         String expectedToString = "BeerMain{rules=[[Rule rule=Kommer sent value=1]], memberRuleViolations={Test=[[Rule rule=Kommer sent value=1]], Test2=[]}}";
         assertEquals(expectedToString, beermain.toString(), "toString should match expected toString");
+        assertThrows(IllegalArgumentException.class, () -> {
+            beermain.addMember("Test2");});
         beermain.deleteMember("Test");
         Collection<String> usernames2 = new ArrayList<>(List.of("Test2"));
         assertEquals(usernames2, beermain.getUsernames(), "The usernames should be Test2");
+
+
     }
 
     @Test
@@ -94,7 +98,7 @@ public class BeerMainTest {
         Exception exception = assertThrows(Exception.class, () -> beermain.deletePunishment("Lea", rule));
         assertEquals("Du har ikke brutt denne regelen", exception.getMessage());
         Exception exception2 = assertThrows(Exception.class, () -> beermain.deletePunishment("Sara", rule));
-        assertEquals("Brukernavnet Sara eksisterer ikke", exception2.getMessage());
+        assertEquals("Brukernavnet eksisterer ikke", exception2.getMessage());
     }
 
     @Test

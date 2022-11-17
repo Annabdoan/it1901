@@ -2,7 +2,6 @@ package beerPunishment.json;
 
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
-import org.json.JSONObject;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,16 +9,13 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 
-import static junit.framework.Assert.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class JsonHandlerTest {
 
     private JsonHandler jsonHandler = new JsonHandler();
     private BeerMain beerMain;
     Rule rule1;
-    Rule rule2;
 
     @BeforeEach
     public void setup() {
@@ -33,36 +29,29 @@ public class JsonHandlerTest {
         jsonHandler.getFilePath("/Test.json");
     }
 
+
     @Test
     public void testWriteToJson() {
-        try {
-            jsonHandler.writeToJson(beerMain,"/Test.json" );
-        }catch (IOException e) {
-            fail(e.getMessage());
-        }
+        assertDoesNotThrow(() -> jsonHandler.readFromJson("/Test.json"));
     }
-/*
+
+
     @Test
     public void testReadFromJson() {
-        try {
-            jsonHandler.readFromJson("/Test.json" );
-        }catch (IOException e) {
-            fail(e.getMessage());
-        }
+        assertDoesNotThrow(() -> jsonHandler.readFromJson("/Test.json"));
     }
 
- */
 
     @Test
-    public void testEditJsonFile () {
+    public void testEditJsonFile() {
         try {
-            jsonHandler.readFromJson("/Test.json" );
+            jsonHandler.readFromJson("/Test.json");
             assertTrue(beerMain.getUsernames().contains("Lea"));
             beerMain.punishMember("Lea", rule1);
-            jsonHandler.writeToJson(beerMain,"/Test.json" );
-            BeerMain beermain1 =  jsonHandler.readFromJson("/Test.json" );
-            assertTrue( beermain1.getMemberRuleViolations().containsKey("Lea"));
-        }catch (IOException e) {
+            jsonHandler.writeToJson(beerMain, "/Test.json");
+            BeerMain beermain1 = jsonHandler.readFromJson("/Test.json");
+            assertTrue(beermain1.getMemberRuleViolations().containsKey("Lea"));
+        } catch (IOException e) {
             fail(e.getMessage());
         }
     }

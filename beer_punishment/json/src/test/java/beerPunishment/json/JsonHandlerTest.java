@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JsonHandlerTest {
@@ -33,6 +34,10 @@ public class JsonHandlerTest {
     @Test
     public void testWriteToJson() {
         assertDoesNotThrow(() -> jsonHandler.readFromJson("/Test.json"));
+        assertThrows(IOException.class, () -> {
+            BeerMain bm = null;
+            jsonHandler.writeToJson(bm, null);
+        });
     }
 
 
@@ -60,4 +65,6 @@ public class JsonHandlerTest {
     public void reset() {
         new File("Test.json").delete();
     }
+
+
 }

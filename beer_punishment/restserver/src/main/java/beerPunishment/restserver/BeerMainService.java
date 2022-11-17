@@ -28,6 +28,4 @@ public class BeerMainService {
         }
         return new BeerMain();
     }
-
-
 }

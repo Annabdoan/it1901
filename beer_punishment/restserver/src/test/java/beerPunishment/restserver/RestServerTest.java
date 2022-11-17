@@ -12,12 +12,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(BeerMainRestController.class)
 @ContextConfiguration(classes ={BeerMainRestController.class, BeerMainService.class, RestServerApp.class })
@@ -25,7 +23,6 @@ class BeerMainRestIntControllerTest {
 
     @Autowired
     private MockMvc mvc;
-
 
     @Order(1)
     @Test
@@ -37,6 +34,7 @@ class BeerMainRestIntControllerTest {
         assertEquals("pong",
                 result.getResponse().getContentAsString());
     }
+
     @Order(2)
     @Test
     void getBeerMain() throws Exception {
@@ -47,6 +45,7 @@ class BeerMainRestIntControllerTest {
         assertEquals("{\"rules\":[],\"memberRuleViolations\":{},\"usernames\":[]}",
                 result.getResponse().getContentAsString());
     }
+
     @Order(2)
     @Test
     void addMember() throws Exception{
@@ -62,6 +61,7 @@ class BeerMainRestIntControllerTest {
         assertEquals("{\"rules\":[],\"memberRuleViolations\":{\"Maurice\":[]},\"usernames\":[\"Maurice\"]}",
                 result.getResponse().getContentAsString());
     }
+
     @Order(3)
     @Test
     void addRule() throws Exception {
@@ -77,6 +77,7 @@ class BeerMainRestIntControllerTest {
         assertEquals("{\"rules\":[{\"description\":\"Banne\",\"punishmentValue\":2}],\"memberRuleViolations\":{\"Maurice\":[]},\"usernames\":[\"Maurice\"]}",
                 result.getResponse().getContentAsString());
     }
+
     @Order(4)
     @Test
     void punishMember() throws Exception {
@@ -124,6 +125,7 @@ class BeerMainRestIntControllerTest {
         assertEquals("{\"rules\":[{\"description\":\"Banne\",\"punishmentValue\":2}],\"memberRuleViolations\":{},\"usernames\":[]}",
                 result.getResponse().getContentAsString());
     }
+
     @Order(7)
     @Test
     void deleteRule() throws Exception {
@@ -139,6 +141,4 @@ class BeerMainRestIntControllerTest {
         assertEquals("{\"rules\":[],\"memberRuleViolations\":{},\"usernames\":[]}",
                 result.getResponse().getContentAsString());
     }
-
-
 }

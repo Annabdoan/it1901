@@ -9,14 +9,12 @@ Some of SpringBoots advantages that led to the groups decision were:
 :round_pushpin: ***Faster development***
 
 
-:round_pushpin: ***Its starters.*** 
+:round_pushpin: ***Its starters***
+- SpringBoot offers starter dependencies we can implement in our Maven project.
 
-SpringBoot offers starter dependencies we can implement in our Maven project.
 
-
-:round_pushpin: ***Its learning curve.*** 
-
-The framework is easy to understand, due to detailed examples in the documentation.
+:round_pushpin: ***Its learning curve***
+- The framework is easy to understand, due to detailed examples in the documentation.
 
 ### Classes in the restserver module
 
@@ -64,49 +62,49 @@ The requests also have the same content-type throughout all HTTP methods:
 >Content-Type: application/json
 
 
-###### Request get BeerMain object
+###### :round_pushpin: Request get BeerMain object
 
 > GET /beerMain
 
 This request will give out a response with the BeerMain object as type JSON.
 
-###### Request add a new member
+###### :round_pushpin: Request add a new member
 
 > POST /members?name=examplemember
 
 This request will add a new member, here with name *examplemember*.
 
-###### Request delete an existing member
+###### :round_pushpin: Request delete an existing member
 
 > DELETE /members?member=examplemember
 
 This request will delete an existing member, with name *examplemember*.
 
-###### Request adding a new rule
+###### :round_pushpin: Request adding a new rule
 
 > POST /rules?description=ruledescription&value=numberofbeers
 
-This request will add a new rule object, with a decription, *ruledescription*, and 
+This request will add a new rule object, with a description, *ruledescription*, and 
 a value, *numberofbeers*.
 
-###### Request deleting a rule
+###### :round_pushpin: Request deleting a rule
 
 > DELETE /rules?rule=ruledescription
 
 This request will delete an existing rule by using a rule description, *ruledescription*.
 
-###### Request punishing a member
+###### :round_pushpin: Request punishing a member
 
 > PUT /punishMember?member=membername&description=ruledescription&value=numberofbeers
 
 This request will punish a member, *membername* for breaking an existing rule with description *ruledescription*
 and value *numberofbeers*.
 
-###### Request paying up a punishment
+###### :round_pushpin: Request paying up a punishment
 
 > DELETE /payPunishment?member=membername&description=ruledescription&value=numberofbeers
 
-This request will delete a punishment for a member *membername* breaking the rule *ruledescription* with value *numberofbeers*
+This request will delete a punishment for a member *membername* breaking the rule *ruledescription* with value *numberofbeers*.
 
 
 

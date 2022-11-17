@@ -11,32 +11,81 @@ Functionality revolving adding a new rule, member and punishing a member is prov
 The application also offers the possibility to delete rules, members and to pay up for punishments. 
 
 
-### Building and running the project
+### Building and running the project:
 Note:
-This project is built up with maven, and if maven is not installed GitPod can be used. Click the 
-GitPod icon and you are ready to run the project.
+This project is built up with maven. If maven is not installed, GitPod can be used. Click the 
+GitPod icon on top and you are ready to run the project.
+
+
 
 #### Running application with local access:
 
 1. Navigate to beer_punishment directory.
-2. Create JAR files for the project.
-3. Deploy the packaged JAR file to the local repository. 
-4. Compile source code.
+2. Create JAR and WAR files for the project.
+3. Deploy the packaged JAR file to the local repository.
 4. Navigate to UI-module.
-5. Launch the application.
+5. Run the application.
 
 >1. cd beer_punishment
 >2. mvn package
 >3. mvn clean install \
+##If application has been run with remote access prior to remote, this step can be skipped.
 #Tests can be skipped by using "mvn clean install -DskipTests"
->4. mvn compile
 >4. cd ui
 >5. mvn javafx:run
+
+#### Running application with remote access:
+
+1. Navigate to beer_punishment directory.
+2. Create JAR and WAR files for the project.
+3. Deploy the packaged JAR file to the local repository.
+4. Start server (this needs to be done in a new terminal).
+5. Navigate to the UI folder
+5. Run the application 
+
+>1. cd beer_punishment
+>2. mvn package
+>3. mvn clean install \
+    #If application has been run with local access prior to remote, this step can be skipped.
+    #Tests can be skipped by using "mvn clean install -DskipTests"
+>4. mvn spring:boot-run
+>5. cd ui
+>6. mvn javafx:run
+
+
+### :postbox:  Generate shippable product
+Wix Tools
+
+This product can be conducted into a shippable product with the help of ***Jlink*** and ***Jpackage***.
+Jlink and Jpackage makes it possible to run the project on local machines desktop, from launiching from the application folder. 
+
+#### Package project to a desktop application
+
+!NOTE 
+:round_pushpin: Point three is only needed if this is done using GitPod.
+:round_pushpin: The application can only be made to the operating system that the user is on.
+GitPod is run using Linux. 
+
+1. Navigate to the UI module (if not already there).
+2. Run Jlink 
+3. Install Fakeroot
+4. Run Jpackage
+5. Navigate to target folder.
+6. Navigate to dist folder.
+7. Open the file in dist folder. 
+
+> 1. cd UI 
+> 2. mvn javafx:jlink
+> 3A. sudo apt-get update
+> 3B. sudo apt-get install fakeroot
+> 4. mvn jpackage:jpackage
 
 
 ### JaCoCo-report for test coverage
 
-This project uses JaCoCo to measure and report test coverage. 
+This project uses JaCoCo to measure and report test coverage. More about how and why the group used Jacoco is described
+in [Release 3](./docs/release3/release3.md).
+
 Each module will have its own report. The reports are located in the modules respective target directories. 
 
 ! This is to be done after instructions 1-4 in *Building and running the project*. 
@@ -45,15 +94,17 @@ Each module will have its own report. The reports are located in the modules res
 
 1. Delete JSON-file
 2. Run the test.
-3. Navigate to the target directory in each module.
-4. Open the site folder.
-5. Open the index.html file in your browser. 
+3. Create Jacoco report. 
+4. Navigate to the target directory in each module.
+5. Open the site folder.
+6. Open the index.html file in your browser. 
 
 >1. rm -r ~/beerPunishmentRemote.json
 >2. mvn verify
->3. cd target
->4. mvn jacoco:report
->
+>3. mvn jacoco:report
+>4. cd *module*/target
+
+
 
 
 

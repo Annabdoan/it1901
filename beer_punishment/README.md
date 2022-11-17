@@ -1,13 +1,14 @@
 # Beer Punishment
 ### Motivation and purpose for the project
-Many people struggle with group projects and working in teams, and find it difficult to follow the rules the group have agreed on.
-The purpose of this app is to motivate group members to follow the agreed upon rules. 
-The whole group benefits of the total punishments, by gathering the total of penalities for a social gathering.
-We want to create an app for beer penalties to track penalties given to each member when they break a rule.  
+Group projects has a history of being a struggle. Working in teams can be found difficult, and therefore a set of rules is often created to secure a good experience. 
+However, rules are often broken and punishments in forms of beers is assigned. 
+The purpose of this application is to be a platform that has an overview of the rules to follow, and where punishments are tracked.
+The group felt that this was something that was missing, and therefore decided to take manners into own hands. 
+
 
 
 ### Userstories
-Userstories for later releases will be added as functionality improves during later releases. 
+
 ##### Release 1
 This release contains one user stories:
 
@@ -66,23 +67,25 @@ Read more about it here: [Release 3](./docs/release3/release3.md)
 * Rules regarding violations that provide penalties.
 
 #### Functionality
-* Register a new rule violation
-  * Which rule broken.
-  * Which person who broke the rule.
-  
-* Create a new rule.
-  * Description of rule.
-  * Punishment value; amount of beers. 
-  
-* Add new member.
 
-* Delete-functionality 
+:round_pushpin: Create a new rule.
+  * Description of rule.
+  * Punishment value; amount of beers.
+
+:round_pushpin: Add new member.
+
+:round_pushpin: Register a new rule violation
+  * The rule broken - included description of rule and value of punishment.
+  * The member who broke the rule.
+
+:round_pushpin: Delete-functionality 
   * Delete members.
   * Delete rules, using only description.
-  * Functionality to delete your punishments by paying them.
+  * Delete punishments by paying up for rules broken..
 
 
 ###  Project Structure
+
 
 #### Class diagram
 

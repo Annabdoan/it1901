@@ -97,6 +97,8 @@ Read more about it here: [Release 3](./docs/release3/release3.md)
 
 #### Package diagram - Remote Access
 
+![PackageLocalDiagramPng](PackageRemoteDiagramPng.png)
+
 #### Sequence diagram
 
 

@@ -1,0 +1,27 @@
+@startuml
+skinparam componentStyle uml2
+component CORE {
+   package "core" {
+   }
+}
+component JSON {
+   package "json" {
+   }
+}
+component UI {
+   package "ui" {
+   }
+}
+
+component [GSON] #Strategy
+component [JavaFX] #Strategy
+
+UI -[#blue]-> CORE
+UI -[#blue]-> JSON
+JSON -[#red]-> CORE
+
+UI .[#red].> [JavaFX]
+JSON .[#red].> [GSON]
+
+
+@enduml

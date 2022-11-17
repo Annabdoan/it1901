@@ -1,0 +1,141 @@
+@startuml
+skinparam componentStyle uml2
+
+ package "core" {
+   class BeerMain{
+     -ArrayList rules
+     -Hashmap memberRuleViolations
+     -- Methods --
+     +Collection<Rule> getRules()
+     +addRule(Rule rule)
+     +deleteRule(Rule rule)
+     +deleteRuleUsingDescription(String description)
+     +addMember(String username)
+     +deleteMember(String username)
+     +punishMember(String username, Rule rule)
+     +removePunishment(String username, Rule rule)
+     +Collection<Rule> getMemberViolations(String username)
+     +HashMap<String, Integer> generateMembersPunishments()
+     +Collection<String> getUsernames()
+     +HashMap<String, Collection<Rule>> getMemberRuleViolations()
+     +setMemberRuleViolations(HashMap<String, Collection<Rule>> memberRuleViolations)
+     +setRules(Collection<Rule> rules)
+     +Collection<String> generatePunishmentStatusToString()
+     +Iterator<Rule> iterator()
+     +copy(BeerMain bm)
+     +Iterator<Map.Entry<String, Collection<Rule>>> violationIterator()
+     +String toString()
+   }
+   class Rule{
+   -String description
+   -int punishmentValue
+   -- Methods --
+   +Rule(String description, int punishmentValue)
+   -{static}isValidPunishmentValue(int punishmentValue)
+   -{static}isValidDescription(String description)
+   +setDescription(String description)
+   +setPunishmentValue(int value)
+   +getDescription()
+   +getPunishmentValue()
+   }
+   BeerMain ..> Rule
+}
+
+package "ui"{
+    class BeerController{
+    -IBeerMainAccess iBeerMainAccess
+    -BeerMain beermain
+    - ListView<String> ruleView
+    + TextField newRuleTextInput
+    + ChoiceBox ruleChoiceBox
+    + ChoiceBox personChoiceBox
+    + ChoiceBox paymentMemberChoiceBox
+    + ChoiceBox paymentRuleChoiceBox
+    + ListView punishmentStatusOverview
+    + TextField addMemberText
+    + TextField deleteMemberText
+    + TextField deleteRuleText
+
+    -- Methods --
+    +initilize()
+    +showErrorMessage(String errorMessage)
+    +addRule() (Gammel MakeNewRule)
+    +addMember()
+    +deleteRule()
+    +deleteRule()
+    +punishMember()
+    +payVoialtion()
+    +changeFileName(String fileName)
+    +getBeermain()
+    -updateListView()
+    -updateRuleChoicebox()
+    -updatePersonChoicebox()
+    -updateMemberView()
+    -updatePaymentRuleChoicebox()
+    -updatePaymentPersonChoicebox()
+   }
+   class BeerMainLocalAccess {
+   -BeerMain beerMain
+   -JsonHandler jsh
+   -Rule rule
+   -String filename = "/beerPunishment.json"
+   -- Methods --
+   +BeerMainLocalAccess()
+   +changeLocalFilename(String newName)
+   +writeBeerMainToJson(BeerMain beerMain)
+   +BeerMain getBeermain()
+   ..
+   All methods from implemented interface
+   }
+   class BeerMainRemoteAccess {
+   -{static}URI path
+   -{static}String APPLICATION_JSON
+   -{static}String APPLICATION_FORM_URLENCODED
+   -{static}String ACCEPT_HEADER
+   -{static}String CONTENT_TYPE_HEADER
+   -- Methods --
+   +{static}Boolean pingServer(URI baseUri)
+   +BeerMain getBeermain()
+   +String UriParam(String s)
+   +URI beerMainPath(String name)
+   ..
+      All methods from implemented interface
+   }
+   interface IBeerMainAccess {
+   -BeerMain getBeerMain()
+   -- Methods --
+   +addRule(BeerMain beerMain, String description, int value)
+   +addMember(BeerMain beerMain, String name)
+   +punishMember(BeerMain beerMain, String member, String description, int value)
+   +removeRule(BeerMain beerMain, String ruleDescription)
+   +deleteMember(BeerMain beerMain, String member)
+   +payPunishment(BeerMain beerMain, String member, String description, int value)
+   }
+   BeerMainLocalAccess ..|> IBeerMainAccess
+   BeerMainRemoteAccess ..|> IBeerMainAccess
+   IBeerMainAccess ..|> BeerController
+}
+
+package "restserver"{
+    class BeerMainRestController {
+    -BeerMain beerMain
+    -Rule rule
+    -JsonHandler jsh
+    -- Methods --
+    +writeToJson()
+    +BeerMain getBeerMain()
+    + addMember(String name)
+    + deleteMember(String member)
+    + addRule(String ruleDescription, int value)
+    + removeRule(String ruleDescription)
+    + punishMember(String member, String ruleDescription, int value)
+    + payPunishment(String member, String ruleDescription, int value)
+    +String ping()
+   }
+   class BeerMainService{
+   -- Methods --
+   +{static}BeerMain createBeerMain()
+   }
+   BeerMainRestController ..> BeerMainService
+}
+@enduml

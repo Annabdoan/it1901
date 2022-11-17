@@ -20,16 +20,16 @@ The framework is easy to understand, due to detailed examples in the documentati
 
 ### Classes in the restserver module
 
-:point_right: ***BeerMainRestController.java***
+:point_right: [BeerMainRestController](./src/main/java/beerPunishment/restserver/BeerMainRestController.java)
 
 This controller handles the allowed HTTP-request methods.
 
 
-:point_right: ***BeerMainService.java***
+:point_right: [BeerMainService](./src/main/java/beerPunishment/restserver/BeerMainService.java)
 
 This class offers a method to create a BeerMain object, used in BeerMainRestController.
 
-:point_right: ***RestServerApp.java***
+:point_right: [RestServerApp](./src/main/java/beerPunishment/restserver/RestServerApp.java)
 
 This class contains the start method for the server application.
 

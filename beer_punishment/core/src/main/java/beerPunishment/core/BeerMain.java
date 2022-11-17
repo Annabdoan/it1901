@@ -3,7 +3,7 @@ package beerPunishment.core;
 import java.util.*;
 
 /**
- * A class for rule lists without items and hashmaps without items.
+ * A class that tracks rules that applies to a group.
  * Can be used as placeholder for real beer app instances.
  */
 public class BeerMain implements Iterable<Rule> {

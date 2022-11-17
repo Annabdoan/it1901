@@ -31,7 +31,6 @@ GitPod icon on top, and you are ready to run the project.
 >2. mvn package
 >3. mvn clean install \
   #If application has been run with remote access prior to remote, this step can be skipped.
-
   #Tests can be skipped by using "mvn clean install -DskipTests"
 >4. cd ui
 >5. mvn javafx:run

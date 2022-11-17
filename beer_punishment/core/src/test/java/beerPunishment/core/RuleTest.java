@@ -1,9 +1,5 @@
 package beerPunishment.core;
 
-
-
-
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class RuleTest {
 
     private Rule rule;
-    private Rule rule2;
 
     @BeforeEach
     public void setup() {

@@ -103,6 +103,8 @@ Read more about it here: [Release 3](./docs/release3/release3.md)
 
 ![SequenceDiagramPng](SequenceDiagramPng.png)
 
+The database is simulated using a local JSON-file.
+
 
 
 

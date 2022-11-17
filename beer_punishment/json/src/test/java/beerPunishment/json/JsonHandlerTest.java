@@ -33,10 +33,9 @@ public class JsonHandlerTest {
 
     @Test
     public void testWriteToJson() {
-        assertDoesNotThrow(() -> jsonHandler.readFromJson("/Test.json"));
+        assertDoesNotThrow(() -> jsonHandler.writeToJson(beerMain,"/Test.json" ));
         assertThrows(IOException.class, () -> {
-            BeerMain bm = null;
-            jsonHandler.writeToJson(bm, null);
+            jsonHandler.writeToJson(beerMain, null);
         });
     }
 
@@ -44,6 +43,9 @@ public class JsonHandlerTest {
     @Test
     public void testReadFromJson() {
         assertDoesNotThrow(() -> jsonHandler.readFromJson("/Test.json"));
+        assertThrows(IOException.class, () -> {
+            jsonHandler.readFromJson(null);
+        });
     }
 
 

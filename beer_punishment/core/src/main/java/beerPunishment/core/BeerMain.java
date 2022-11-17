@@ -38,7 +38,7 @@ public class BeerMain implements Iterable<Rule> {
     }
 
     /**
-     * Sets the list of rules that apply to the BeerMain system
+     * Sets the list of rules that apply to the BeerMain system.
      *
      * @param rules the list of rules.
      */
@@ -79,12 +79,11 @@ public class BeerMain implements Iterable<Rule> {
      *
      * @param username the name the member
      */
-    public void checkValidUser(String username){
+    public void checkValidUser(String username) {
         if (!memberRuleViolations.containsKey(username)) {
             throw new IllegalArgumentException("Brukernavnet eksisterer ikke");
         }
     }
-
 
     /**
      * Method for adding members.

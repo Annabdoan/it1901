@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 public class BeerMainRestController {
     private BeerMain beerMain = BeerMainService.createBeerMain();
     private Rule rule = new Rule();
-
     private JsonHandler jsh = new JsonHandler();
 
     /**
@@ -29,6 +28,16 @@ public class BeerMainRestController {
     }
 
     /**
+     * Returns the string "pong" if you ping the server.
+     *
+     * @return String "pong"
+     */
+    @GetMapping(path = "ping")
+    public String ping() {
+        return "pong";
+    }
+
+    /**
      * Get the corresponding beerMain.
      *
      * @return a copy of the corresponding beerMain object
@@ -38,28 +47,6 @@ public class BeerMainRestController {
         BeerMain beerMainCopy = new BeerMain();
         beerMainCopy.copy(this.beerMain);
         return beerMainCopy;
-    }
-
-    /**
-     * Adds new member.
-     *
-     * @param name name of new member
-     */
-    @PostMapping(path = "members")
-    public void addMember(@RequestParam("name") String name) {
-        this.beerMain.addMember(name);
-        writeToJson();
-    }
-
-    /**
-     * Deletes a member.
-     *
-     * @param member member to delete
-     */
-    @DeleteMapping(path = "members")
-    public void deleteMember(@RequestParam("member") String member) {
-        this.beerMain.deleteMember(member);
-        writeToJson();
     }
 
     /**
@@ -83,6 +70,28 @@ public class BeerMainRestController {
     @DeleteMapping(path = "rules")
     public void deleteRule(@RequestParam("rule") String ruleDescription) {
         this.beerMain.deleteRuleUsingDescription(ruleDescription);
+        writeToJson();
+    }
+
+    /**
+     * Adds new member.
+     *
+     * @param name name of new member
+     */
+    @PostMapping(path = "members")
+    public void addMember(@RequestParam("name") String name) {
+        this.beerMain.addMember(name);
+        writeToJson();
+    }
+
+    /**
+     * Deletes a member.
+     *
+     * @param member member to delete
+     */
+    @DeleteMapping(path = "members")
+    public void deleteMember(@RequestParam("member") String member) {
+        this.beerMain.deleteMember(member);
         writeToJson();
     }
 
@@ -117,10 +126,4 @@ public class BeerMainRestController {
         this.beerMain.deletePunishment(member, rule);
         writeToJson();
     }
-
-    @GetMapping(path = "ping")
-    public String ping() {
-        return "pong";
-    }
-
 }

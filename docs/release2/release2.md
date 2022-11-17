@@ -70,7 +70,7 @@ The group have now implemented new methods for increased functionality
 * The overview of members and their punishment status is updated whenever a member gets punished.
 
 ### Userstories:
-The userstories are described in the [source readme](../../readme.md). The new functionality for this release will fulfil the needed functionality for userstory 2 and 3.
+The userstories are described in the [source readme](../../README.md). The new functionality for this release will fulfil the needed functionality for userstory 2 and 3.
 
 
 #### At release 2 the app will consist of this scene

@@ -113,10 +113,10 @@ The **Json** module now only consists of one class:
 
 * ***JsonHandler.java***
 
-Read more about the module in [readme Json module](../../beer_Punishment/json/README.md)
+Read more about the module in [readme Json module](../../beer_Punishemnt/json/README.md)
 
 #### User stories 
-User stories for this release, are all written in [source README](../../beer_Punishment/README.md)
+User stories for this release, are all written in [source readme](../../readme.md)
 
 
 #### Further development

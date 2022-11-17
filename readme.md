@@ -13,8 +13,9 @@ The application also offers the possibility to delete rules, members and to pay 
 
 ### Building and running the project:
 Note:
+
 This project is built up with maven. If maven is not installed, GitPod can be used. Click the 
-GitPod icon on top and you are ready to run the project.
+GitPod icon on top, and you are ready to run the project.
 
 
 
@@ -57,11 +58,11 @@ GitPod icon on top and you are ready to run the project.
 
 
 This product can be conducted into a shippable product with the help of ***Jlink*** and ***Jpackage***.
-Jlink and Jpackage makes it possible to run the project on local machines desktop, from launiching from the application folder. 
+Jlink and Jpackage makes it possible to run the project on local machines desktop, from launching from the application folder. 
 
 #### Package project to a desktop application
 
-!NOTE 
+NOTE 
 
 :round_pushpin: Point three is only needed if this is done using GitPod.
 
@@ -78,8 +79,8 @@ GitPod is run using Linux.
 
 > 1. cd UI 
 > 2. mvn javafx:jlink
-> 3A. sudo apt-get update
-> 3B. sudo apt-get install fakeroot
+> 3. sudo apt-get update
+> 3. sudo apt-get install fakeroot
 > 4. mvn jpackage:jpackage
 
 
@@ -127,7 +128,7 @@ Each module will have its own report. The reports are located in the modules res
 
 
 ### Overall plan
-The project is set to three releases. Each release represents a sprints.
+The project is set to three releases. Each release represents a sprint.
 
 
 ##### Release 1

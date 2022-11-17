@@ -12,7 +12,7 @@ Gradually the group understood that it was better to work in pairs, and that thi
 It was somewhat difficult to know in which order the group should solve the issues. It took a lot of time and work to 
 understand the pom-file and how to add the maven-dependency.
 
-### For release one the project consists of the following classes and resources:
+### For release one the project consists of the following classes:
 
 #### Beer_punishment
 * BeerApp.java

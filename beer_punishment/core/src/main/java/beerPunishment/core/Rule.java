@@ -70,7 +70,6 @@ public class Rule {
 
     public String toString() {
         return String.format("[Rule rule=%s value=%s]", getDescription(), getPunishmentValue());
-        //return description + "\t\t\t" + punishmentValue ;
     }
 
     public String toStringDisplayFormat() {

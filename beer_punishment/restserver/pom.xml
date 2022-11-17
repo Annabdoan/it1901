@@ -7,7 +7,6 @@
     <groupId>it1901</groupId>
     <version>0.0.1-SNAPSHOT</version>
 
-
     <parent>
         <groupId>it1901</groupId>
         <artifactId>beer_punishment</artifactId>
@@ -16,7 +15,6 @@
     </parent>
 
     <packaging>jar</packaging>
-
 
     <properties>
         <maven.compiler.source>18</maven.compiler.source>
@@ -39,6 +37,7 @@
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+
         <dependency>
             <groupId>it1901</groupId>
             <artifactId>beer_punishment_core</artifactId>
@@ -46,6 +45,7 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -57,13 +57,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>4.5.11</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-commons</artifactId>
@@ -74,13 +72,14 @@
             <artifactId>spring-data-rest-core</artifactId>
             <version>3.7.5</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -108,6 +107,8 @@
                     </argLine>
                 </configuration>
             </plugin>
+
+            <!-- Configure jacoco code coverage -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -148,6 +149,4 @@
             </plugin>
         </plugins>
     </reporting>
-
-
 </project>

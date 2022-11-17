@@ -25,16 +25,24 @@ public class BeerController {
 
     @FXML
     private ListView<String> ruleView;
+    @FXML
     public TextField newRuleTextInput;
+    @FXML
     public ChoiceBox ruleChoiceBox;
+    @FXML
     public ChoiceBox personChoiceBox;
+    @FXML
     public ChoiceBox paymentMemberChoiceBox;
+    @FXML
     public ChoiceBox paymentRuleChoiceBox;
+    @FXML
     public ListView punishmentStatusOverview;
+    @FXML
     public TextField addMemberText;
+    @FXML
     public TextField deleteMemberText;
+    @FXML
     public TextField deleteRuleText;
-
 
     private IBeerMainAccess iBeerMainAccess;
 
@@ -42,7 +50,7 @@ public class BeerController {
      * Initialize.
      */
     @FXML
-    public void initialize() {
+    private void initialize() {
         iBeerMainAccess = BeerMainRemoteAccess.pingServer(defaultURI)
                 ? (IBeerMainAccess) new BeerMainRemoteAccess()
                 : new BeerMainLocalAccess();
@@ -66,6 +74,7 @@ public class BeerController {
         ruleView.getItems().setAll(rulesToString);
     }
 
+    @FXML
     private void updateRuleChoicebox() {
         Collection<String> ruleDescriptions = new ArrayList<>();
         for (Rule rule : beermain.getRules()) {
@@ -74,6 +83,7 @@ public class BeerController {
         ruleChoiceBox.getItems().setAll(ruleDescriptions);
     }
 
+    @FXML
     private void updatePersonChoicebox() {
         try {
             personChoiceBox.getItems().setAll(beermain.getUsernames());
@@ -88,7 +98,7 @@ public class BeerController {
      * @param errorMessage The message to show in the error
      */
     @FXML
-    public void showErrorMessage(String errorMessage) {
+    private void showErrorMessage(String errorMessage) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText("An error has occured");
@@ -100,7 +110,7 @@ public class BeerController {
      * Make new rule.
      */
     @FXML
-    public void addRule() {
+    private void addRule() {
         try {
             //Split the string in the text input in order to add a new rule.
             String[] arrOfNewRuleTextInput = newRuleTextInput.getText().split(";");
@@ -122,7 +132,7 @@ public class BeerController {
      * Make delete rule.
      */
     @FXML
-    public void deleteRule() {
+    private void deleteRule() {
         String description = deleteRuleText.getText();
         try {
             beermain = iBeerMainAccess.deleteRule(beermain, description);
@@ -133,7 +143,7 @@ public class BeerController {
         }
     }
 
-
+    @FXML
     private void updateMemberView() {
         Collection<String> punishmentStatus = beermain.generatePunishmentStatusToString();
         punishmentStatusOverview.getItems().setAll(punishmentStatus);
@@ -143,7 +153,7 @@ public class BeerController {
      * Punish a member.
      */
     @FXML
-    public void punishMember() {
+    private void punishMember() {
         String chosenRule = ruleChoiceBox.getSelectionModel().getSelectedItem().toString();
         String chosenMember = personChoiceBox.getSelectionModel().getSelectedItem().toString();
         for (Rule rule : beermain.getRules()) {
@@ -159,7 +169,7 @@ public class BeerController {
      * Add member.
      */
     @FXML
-    public void addMember() {
+    private void addMember() {
         String username = addMemberText.getText();
         try {
             beermain = iBeerMainAccess.addMember(beermain, username);
@@ -175,7 +185,7 @@ public class BeerController {
      * Delete member.
      */
     @FXML
-    public void deleteMember() {
+    private void deleteMember() {
         String username = deleteMemberText.getText();
         try {
             beermain = iBeerMainAccess.deleteMember(beermain, username);
@@ -191,7 +201,7 @@ public class BeerController {
      * Pay violation.
      */
     @FXML
-    public void deleteViolation() {
+    private void deleteViolation() {
         String chosenRule = paymentRuleChoiceBox.getSelectionModel().getSelectedItem().toString();
         String chosenMember = paymentMemberChoiceBox.getSelectionModel().getSelectedItem().toString();
         for (Rule rule : beermain.getRules()) {
@@ -224,6 +234,7 @@ public class BeerController {
     /**
      * Update choicebox for member in pay violation.
      */
+    @FXML
     private void updatePaymentPersonChoicebox() {
         try {
             paymentMemberChoiceBox.getItems().setAll(beermain.getUsernames());

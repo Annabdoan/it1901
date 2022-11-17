@@ -82,7 +82,7 @@ An example was the inconsistent use of delete/remove which was fixed.
 As mentioned in the introduction, the group continued with JavaFX, and has therefore 
 added in more functionality. Also, the implementation of a RESTful application meant new classes and a new module.
 
-The new functionality is related to the new user stories. Read the user stories here: [source README](../../beer_Punishment/README.md)
+The new functionality is related to the new user stories. Read the user stories here: source README
 
 The new functionality:
 * :x: **Being able to remove a member** (User story 4)
@@ -113,10 +113,10 @@ The **Json** module now only consists of one class:
 
 * ***JsonHandler.java***
 
-Read more about the module in [readme Json module](../../beer_Punishemnt/json/README.md)
+Read more about the module in readme Json module
 
 #### User stories 
-User stories for this release, are all written in [source readme](../../readme.md)
+User stories for this release, are all written in source readme
 
 
 #### Further development

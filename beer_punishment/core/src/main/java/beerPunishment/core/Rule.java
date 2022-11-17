@@ -56,18 +56,6 @@ public class Rule {
 
     }
 
-    /**
-     * Set and get methods.
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setPunishmentValue(int value) {
-        this.punishmentValue = value;
-    }
-
-
     public String getDescription() {
         return description;
     }

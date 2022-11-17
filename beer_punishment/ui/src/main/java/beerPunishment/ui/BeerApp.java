@@ -11,7 +11,6 @@ import javafx.stage.Stage;
  */
 public final class BeerApp extends Application {
 
-
     @Override
     public void start(final Stage primaryStage) throws Exception {
         primaryStage.setTitle("Ølstraff");

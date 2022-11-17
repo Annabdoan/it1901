@@ -1,16 +1,15 @@
 package beerPunishment.ui;
+
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
 import org.junit.jupiter.api.*;
 import org.testfx.framework.junit5.ApplicationTest;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
-
 
 
 /**

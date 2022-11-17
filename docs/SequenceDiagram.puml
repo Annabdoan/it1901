@@ -6,16 +6,17 @@ actor Alice #SaddleBrown
 
 Alice -> ui: Input "ny regel;verdi"
 ui -> BeerController: addRule() *click "Legg til" button*
-BeerController -> IBeerMain: addRule()
-IBeerMain -> BeerMainRemoteAccess:
-BeerMainRemoteAccess -> Server: HTTP POST/action/?description="ny regel"&value="verdi"
-Alice -> ui: Input "navn"
-ui -> BeerController: addMember() *click "Legg til" button*
-BeerController -> IBeerMain: addMember()
-IBeerMain -> BeerMainRemoteAccess
-BeerMainRemoteAccess -> Server: HTTP POST/action/?name="navn"
-
-
+BeerController -> BeerMainRemoteAccess: addRule()
+BeerMainRemoteAccess -> RestServer: HTTP POST/action/?description="ny regel"&value="verdi"
+database Database
+RestServer --> Database
+BeerMainRemoteAccess -> RestServer: HTTP GET beerMain
+RestServer --> Database
+Database --> RestServer
+RestServer --> BeerMainRemoteAccess: HTTP Response
+BeerMainRemoteAccess --> BeerController
+BeerController --> ui
+ui --> Alice
 
 
 '!include ../../plantuml-styles/ae-copyright-footer.txt

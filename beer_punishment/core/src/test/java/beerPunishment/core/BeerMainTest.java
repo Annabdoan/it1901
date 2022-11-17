@@ -124,4 +124,9 @@ public class BeerMainTest {
         assertEquals("BeerMain{rules=[[Rule rule=Kommer sent value=1]], memberRuleViolations={Test=[]}}", beermain.toString());
     }
 
+    @Test
+    public void testIterator() {
+       assertTrue(beermain.iterator().hasNext());
+    }
+
 }

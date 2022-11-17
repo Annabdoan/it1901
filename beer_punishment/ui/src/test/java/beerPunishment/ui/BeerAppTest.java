@@ -1,16 +1,15 @@
 package beerPunishment.ui;
+
 import beerPunishment.core.BeerMain;
 import beerPunishment.core.Rule;
 import org.junit.jupiter.api.*;
 import org.testfx.framework.junit5.ApplicationTest;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
-
 
 
 /**
@@ -22,8 +21,6 @@ public class BeerAppTest extends ApplicationTest {
     private Rule rule1;
     private Rule rule2;
 
-
-
     @Override
     public void start(final Stage stage) throws Exception {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource("Beer.fxml"));
@@ -32,7 +29,6 @@ public class BeerAppTest extends ApplicationTest {
         stage.setScene(new Scene(root));
         stage.show();
     }
-
 
     @BeforeEach
     public void setupBeerMain() {
@@ -45,8 +41,6 @@ public class BeerAppTest extends ApplicationTest {
        beerMain.addMember("Anna");
     }
 
-
-
     @Test
     public void testSetUp() {
         assertNotNull(this.controller);
@@ -54,10 +48,5 @@ public class BeerAppTest extends ApplicationTest {
         assertNotNull(this.rule1);
         assertNotNull(this.rule2);
     }
-
-
-
-
-
 
 }

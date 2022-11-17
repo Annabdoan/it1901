@@ -6,8 +6,9 @@ import beerPunishment.json.JsonHandler;
 import java.io.IOException;
 
 
+
 /**
- * Class that centralizes access to a TodoModel.
+ * Class that centralizes access to a BeerMain object.
  * Makes it easier to support transparent use of a REST API.
  */
 public class BeerMainLocalAccess implements IBeerMainAccess {
@@ -68,35 +69,6 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
             System.out.println("Could not add rule");
             return beerMain;
         }
-
-    }
-
-    @Override
-    public BeerMain addMember(BeerMain beerMain, String name) {
-        try {
-            BeerMain beerMain2 = getBeermain();
-            beerMain2.addMember(name);
-            writeBeerMainToJson(beerMain2);
-            return beerMain2;
-        } catch (IOException ioe) {
-            System.out.println("Could not add member");
-            return beerMain;
-        }
-    }
-
-    @Override
-    public BeerMain punishMember(BeerMain beerMain, String member, String description, int value) {
-        try {
-            BeerMain beerMain2 = getBeermain();
-            Rule rule = new Rule(description, value);
-            beerMain2.punishMember(member, rule);
-            writeBeerMainToJson(beerMain2);
-            return beerMain2;
-        } catch (IOException ioe) {
-            System.out.println("Could not punish member");
-            return beerMain;
-        }
-
     }
 
     @Override
@@ -113,6 +85,19 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
     }
 
     @Override
+    public BeerMain addMember(BeerMain beerMain, String name) {
+        try {
+            BeerMain beerMain2 = getBeermain();
+            beerMain2.addMember(name);
+            writeBeerMainToJson(beerMain2);
+            return beerMain2;
+        } catch (IOException ioe) {
+            System.out.println("Could not add member");
+            return beerMain;
+        }
+    }
+
+    @Override
     public BeerMain deleteMember(BeerMain beerMain, String member) {
         try {
             BeerMain beerMain2 = getBeermain();
@@ -121,6 +106,20 @@ public class BeerMainLocalAccess implements IBeerMainAccess {
             return beerMain2;
         } catch (IOException ioe) {
             System.out.println("Could not delete member");
+            return beerMain;
+        }
+    }
+
+    @Override
+    public BeerMain punishMember(BeerMain beerMain, String member, String description, int value) {
+        try {
+            BeerMain beerMain2 = getBeermain();
+            Rule rule = new Rule(description, value);
+            beerMain2.punishMember(member, rule);
+            writeBeerMainToJson(beerMain2);
+            return beerMain2;
+        } catch (IOException ioe) {
+            System.out.println("Could not punish member");
             return beerMain;
         }
     }

@@ -87,8 +87,6 @@ The new functionality:
 In the setting up of the API, the group made a new module; 
 * **Restserver**
 
-Why we implemented a new module, is explained in LINK TIL README RESTSERVER
-
 The new classes implemented:
 
 #### Restserver
@@ -102,13 +100,15 @@ The new classes implemented:
 * IBeerMainAccess.java
 
 #### Switch from Jackson to Gson
-The group made a decision to switch how the project write to JSON. It is changed from Jackson to Gson. 
+The group made a decision to switch how the project writes to JSON. It is changed from the Jackson library to Gson. 
 The group decided this because the group experienced several problems related to the further use of Jackson with parsing data
 after release 2. In addition, GSON provides simpler toJson() and fromJson() methods. 
 
 The **Json** module now only consists of one class:
 
 * ***JsonHandler.java***
+
+Read more about the module in README for Json.
 
 #### User stories 
 User stories for this release, are all written in root README file.

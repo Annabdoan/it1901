@@ -89,6 +89,8 @@ Read more about it here: [Release 3](./docs/release3/release3.md)
 
 #### Class diagram
 
+![ClassDiagramPng](ClassDiagramPng.png)
+
 #### Package diagram - Local Access
 
 #### Package diagram - Remote Access

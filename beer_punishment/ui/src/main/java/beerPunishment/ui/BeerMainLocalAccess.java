@@ -8,7 +8,7 @@ import java.io.IOException;
 
 
 /**
- * Class that centralizes access to a TodoModel.
+ * Class that centralizes access to a BeerMain object.
  * Makes it easier to support transparent use of a REST API.
  */
 public class BeerMainLocalAccess implements IBeerMainAccess {

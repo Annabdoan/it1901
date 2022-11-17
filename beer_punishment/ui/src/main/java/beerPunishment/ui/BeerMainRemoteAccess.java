@@ -9,7 +9,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 /**
- * Class that centralizes access to a TodoModel.
+ * Class that centralizes access to a BeerMain object.
  * Makes it easier to support transparent use of a REST API.
  */
 public class BeerMainRemoteAccess implements IBeerMainAccess {

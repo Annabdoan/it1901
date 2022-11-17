@@ -106,5 +106,22 @@ public class BeerMainTest {
        assertEquals("Regel eksisterer ikke", exception.getMessage());
     }
 
+    @Test
+    public void testSetMemberRuleViolations() {
+        BeerMain beerMain = new BeerMain();
+        HashMap<String, Collection<Rule>> memberRuleViolations = new HashMap<>();
+        Collection<Rule> rules = new ArrayList<>();
+        Rule rule = new Rule("Banne", 2);
+        rules.add(rule);
+        memberRuleViolations.put("Sara", rules);
+        beerMain.setMemberRuleViolations(memberRuleViolations);
+        assertEquals("{Sara=[[Rule rule=Banne value=2]]}", beerMain.getMemberRuleViolations().toString());
+    }
+
+    @Test
+    public void testCopyBeerMain() {
+        beermain.copy(beermain);
+        assertEquals("BeerMain{rules=[[Rule rule=Kommer sent value=1]], memberRuleViolations={Test=[]}}", beermain.toString());
+    }
 
 }

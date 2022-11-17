@@ -41,18 +41,20 @@ GitPod icon on top, and you are ready to run the project.
 1. Navigate to beer_punishment directory.
 2. Create JAR and WAR files for the project.
 3. Deploy the packaged JAR file to the local repository.
-4. Start server (this needs to be done in a new terminal).
-5. Navigate to the UI folder
-5. Run the application 
+4. Navigate to the restserver directory.
+5. Start server (this needs to be done in a new terminal).
+6. Navigate to the UI folder
+7. Run the application 
 
 >1. cd beer_punishment
 >2. mvn package
 >3. mvn clean install \
     #If application has been run with local access prior to remote, this step can be skipped.
     #Tests can be skipped by using "mvn clean install -DskipTests"
->4. mvn spring:boot-run
->5. cd ui
->6. mvn javafx:run
+>4. cd restserver
+>5. mvn spring:boot-run
+>6. cd ui
+>7. mvn javafx:run
 
 
 ### :postbox:  Generate shippable product

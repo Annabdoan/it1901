@@ -38,7 +38,7 @@ public class BeerMain implements Iterable<Rule> {
     }
 
     /**
-     * Sets the list of rules that apply to the BeerMain system
+     * Sets the list of rules that apply to the BeerMain system.
      *
      * @param rules the list of rules.
      */
